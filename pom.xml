@@ -235,7 +235,11 @@
             <artifactId>jetty-server</artifactId>
             <version>9.2.6.v20141205</version>
         </dependency>
-
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -282,15 +286,4 @@
             </plugin>
         </plugins>
     </build>
-    <!-- 新增远程仓库设置 -->
-    <repositories>
-        <repository>
-            <id>shardbaits</id>
-            <name>shardbaits repository</name>
-            <url>http://shardbatis.googlecode.com/svn/trunk/repository</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>

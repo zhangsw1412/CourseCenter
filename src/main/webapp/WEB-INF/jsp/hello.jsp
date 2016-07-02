@@ -5,6 +5,6 @@
     <title>Index</title>
 </head>
 <body>
-${message}
+hello ${message}
 </body>
 </html>
