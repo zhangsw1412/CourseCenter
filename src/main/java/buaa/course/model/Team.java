@@ -8,9 +8,8 @@ public class Team {
 	public Team() {
 		super();
 	}
-	public Team(int id, String name, int leaderId, int maxNum) {
+	public Team(String name, int leaderId, int maxNum) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.leaderId = leaderId;
 		this.maxNum = maxNum;

@@ -7,7 +7,7 @@ public class College {
 	public College() {
 		super();
 	}
-	public College( String collegeCode, String name) {
+	public College(String collegeCode, String name) {
 		super();
 		this.collegeCode = collegeCode;
 		this.name = name;

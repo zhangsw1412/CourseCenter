@@ -10,9 +10,8 @@ public class Semester {
 	public Semester() {
 		super();
 	}
-	public Semester(int id, int schoolYear, int season, int startDate, int endDate, int weeks) {
+	public Semester(int schoolYear, int season, int startDate, int endDate, int weeks) {
 		super();
-		this.id = id;
 		this.schoolYear = schoolYear;
 		this.season = season;
 		this.startDate = startDate;

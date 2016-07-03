@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.TeamStudentMapper">
+	
+	<resultMap id="teamStudentMap" type="buaa.course.model.TeamStudent">
+		<id property="id" column="id" />
+		<result property="studentId" column="student_id" />
+		<result property="teamId" column="team_id" />
+	</resultMap>
+	<select id="getTeamStudent" parameterType="int" resultMap="teamStudentMap">
+	    <![CDATA[
+	    	select * from team_student where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addTeamStudent" parameterType="buaa.course.model.TeamStudent"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into team_student(student_id,team_id) values(#{studentId},#{teamId})
+	    ]]>
+	</insert>
+	<delete id="deleteTeamStudent" parameterType="int">
+		<![CDATA[
+			delete from team_student where id=#{id}
+		]]>
+	</delete>
+	<update id="updateTeamStudent" parameterType="buaa.course.model.TeamStudent">
+	    <![CDATA[
+	    	update team_student set student_id=#{studentId},team_id=#{teamId} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllTeamStudents" resultMap="teamStudentMap">
+	    <![CDATA[
+	    	select * from team_student
+	    ]]>
+	</select>
+	<select id="countTeamStudents" resultType="int">
+	    <![CDATA[
+	    	select count(*) from team_student
+	    ]]>
+	</select>
+	<select id="getTeamStudentsByRange" resultMap="teamStudentMap">
+	    <![CDATA[
+	    	select * from team_student limit #{0},#{1}
+	    ]]>
+	</select>
+</mapper>
