@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.CourseMapper">
+	
+	<resultMap id="courseMap" type="buaa.course.model.Course">
+		<id property="id" column="id" />
+		<result property="courseCode" column="course_code" />
+		<result property="name" column="name" />
+		<result property="collegeId" column="college_id" />
+		<result property="period" column="period" />
+		<result property="credit" column="credit" />
+		<result property="type" column="type" />
+		<result property="teamAvaliable" column="team_avaliable" />
+	</resultMap>
+	<select id="getCourse" parameterType="int" resultMap="courseMap">
+	    <![CDATA[
+	    	select * from course where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addCourse" parameterType="buaa.course.model.Course"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into course(course_code,name,college_id,period,credit,type,team_avaliable) values(#{courseCode},#{name},#{collegeId},#{period},#{credit},#{type},#{teamAvaliable})
+	    ]]>
+	</insert>
+	<delete id="deleteCourse" parameterType="int">
+		<![CDATA[
+			delete from course where id=#{id}
+		]]>
+	</delete>
+	<update id="updateCourse" parameterType="buaa.course.model.Course">
+	    <![CDATA[
+	    	update course set course_code=#{courseCode},name=#{name},college_id=#{collegeId},period=#{period},credit=#{credit},type=#{type},team_avaliable=#{teamAvaliable} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllCourses" resultMap="courseMap">
+	    <![CDATA[
+	    	select * from course
+	    ]]>
+	</select>
+	<select id="countCourses" resultType="int">
+	    <![CDATA[
+	    	select count(*) from course
+	    ]]>
+	</select>
+	<select id="getCoursesByRange" resultMap="courseMap">
+	    <![CDATA[
+	    	select * from course limit #{0},#{1}
+	    ]]>
+	</select>
+</mapper>

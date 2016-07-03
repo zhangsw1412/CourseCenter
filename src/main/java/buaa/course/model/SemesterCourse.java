@@ -8,9 +8,8 @@ public class SemesterCourse {
 	public SemesterCourse() {
 		super();
 	}
-	public SemesterCourse(int id, int semesterId, int courseId, String teacher) {
+	public SemesterCourse(int semesterId, int courseId, String teacher) {
 		super();
-		this.id = id;
 		this.semesterId = semesterId;
 		this.courseId = courseId;
 		this.teacher = teacher;

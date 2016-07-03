@@ -7,9 +7,8 @@ public class TeamStudent {
 	public TeamStudent() {
 		super();
 	}
-	public TeamStudent(int id, int studentId, int teamId) {
+	public TeamStudent(int studentId, int teamId) {
 		super();
-		this.id = id;
 		this.studentId = studentId;
 		this.teamId = teamId;
 	}

@@ -21,4 +21,4 @@ build/
 bin/
 /.settings/
 /.externalToolBuilders/*.launch
-/src/main/resources/log4j.properties
+src/main/resources/jdbc.properties

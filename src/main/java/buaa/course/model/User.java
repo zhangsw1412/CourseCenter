@@ -15,10 +15,9 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(int num, String id, String password, String name, boolean gender, int type, boolean valid,
+	public User(String id, String password, String name, boolean gender, int type, boolean valid,
 			long lastLoginTime, String lastLoginIp) {
 		super();
-		this.num = num;
 		this.id = id;
 		this.password = password;
 		this.name = name;
