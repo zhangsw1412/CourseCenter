@@ -1,4 +1,4 @@
-package buaa.course.logic;
+ package buaa.course.logic;
 
 import buaa.course.mapper.TeamMapper;
 import buaa.course.model.Team;

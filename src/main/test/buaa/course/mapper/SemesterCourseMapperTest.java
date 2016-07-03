@@ -14,12 +14,12 @@ public class SemesterCourseMapperTest {
 	int id;
 	@Test
 	public void test(){
-		SemesterCourse semesterCourse=new SemesterCourse(50,123,"张三;李四");
+		SemesterCourse semesterCourse=new SemesterCourse(50,123);
 		Assert.assertEquals(1, mapper.addSemesterCourse(semesterCourse));
 		id = semesterCourse.getId();
 		Assert.assertEquals(semesterCourse.toString(), mapper.getSemesterCourse(semesterCourse.getId()).toString());
 		int count = mapper.countSemesterCourses();
-		semesterCourse.setTeacher("张三;李四;王二麻子");
+		semesterCourse.setCourseId(234);
 		Assert.assertEquals(1, mapper.updateSemesterCourse(semesterCourse));
 		Assert.assertEquals(semesterCourse.toString(), mapper.getSemesterCourse(semesterCourse.getId()).toString());
 		Assert.assertEquals(count, mapper.getAllSemesterCourses().size());

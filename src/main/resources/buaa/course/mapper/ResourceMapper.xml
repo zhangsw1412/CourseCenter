@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.ResourceMapper">
+	
+	<resultMap id="resourceMap" type="buaa.course.model.Resource">
+		<id property="id" column="id" />
+		<result property="semesterCourseId" column="semester_course_id" />
+		<result property="fileUrl" column="file_url" />
+		<result property="category" column="category" />
+	</resultMap>
+	<select id="getResource" parameterType="int" resultMap="resourceMap">
+	    <![CDATA[
+	    	select * from resource where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addResource" parameterType="buaa.course.model.Resource"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into resource(semester_course_id,file_url,category) values(#{semesterCourseId},#{fileUrl},#{category})
+	    ]]>
+	</insert>
+	<delete id="deleteResource" parameterType="int">
+		<![CDATA[
+			delete from resource where id=#{id}
+		]]>
+	</delete>
+	<update id="updateResource" parameterType="buaa.course.model.Resource">
+	    <![CDATA[
+	    	update resource set semester_course_id=#{semesterCourseId},file_url=#{fileUrl},category=#{category} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllResources" resultMap="resourceMap">
+	    <![CDATA[
+	    	select * from resource
+	    ]]>
+	</select>
+	<select id="countResources" resultType="int">
+	    <![CDATA[
+	    	select count(*) from resource
+	    ]]>
+	</select>
+	<select id="getResourcesByRange" resultMap="resourceMap">
+	    <![CDATA[
+	    	select * from resource limit #{0},#{1}
+	    ]]>
+	</select>
+</mapper>
