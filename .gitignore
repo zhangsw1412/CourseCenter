@@ -21,3 +21,4 @@ build/
 bin/
 /.settings/
 /.externalToolBuilders/*.launch
+src/main/resources/jdbc.properties
