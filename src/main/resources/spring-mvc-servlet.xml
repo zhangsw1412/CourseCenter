@@ -15,14 +15,14 @@
         p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
         
 
-    <!-- 拦截器配置 
+    <!-- 拦截器配置 -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">  
      <property name="interceptors">  
          <list>  
-                <bean class="" />  
+                <bean class="buaa.course.interceptor.LoginInterceptor" />
          </list>  
      </property>  
-    </bean>  -->
+    </bean>
     <!-- 总错误处理 
 	<bean class="com.fly.server.logic.HandlerException" />
 	-->
