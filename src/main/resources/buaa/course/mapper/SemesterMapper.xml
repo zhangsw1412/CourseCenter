@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.SemesterMapper">
+	
+	<resultMap id="semesterMap" type="buaa.course.model.Semester">
+		<id property="id" column="id" />
+		<result property="schoolYear" column="school_year" />
+		<result property="season" column="season" />
+		<result property="startDate" column="start_date" />
+		<result property="endDate" column="end_date" />
+		<result property="weeks" column="weeks" />
+	</resultMap>
+	<select id="getSemester" parameterType="int" resultMap="semesterMap">
+	    <![CDATA[
+	    	select * from semester where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addSemester" parameterType="buaa.course.model.Semester"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into semester (school_year,season,start_date,end_date,weeks) values(#{schoolYear},#{season},#{startDate},#{endDate},#{weeks})
+	    ]]>
+	</insert>
+	<delete id="deleteSemeste" parameterType="int">
+		<![CDATA[
+			delete from semester where id=#{id}
+		]]>
+	</delete>
+	<update id="updateSemester" parameterType="buaa.course.model.Semester">
+	    <![CDATA[
+	    	update semester set school_year=#{schoolYear},season=#{season},start_date=#{startDate},end_date=#{endDate},weeks=#{weeks} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllSemesters" resultMap="semesterMap">
+	    <![CDATA[
+	    	select * from semester
+	    ]]>
+	</select>
+	<select id="countSemesters" resultType="int">
+	    <![CDATA[
+	    	select count(*) from semester
+	    ]]>
+	</select>
+	<select id="getSemestersByRange" resultMap="semesterMap">
+	    <![CDATA[
+	    	select * from semester limit #{0},#{1}
+	    ]]>
+	</select>
+</mapper>
