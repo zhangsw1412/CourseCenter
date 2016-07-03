@@ -7,9 +7,8 @@ public class College {
 	public College() {
 		super();
 	}
-	public College(int id, String collegeCode, String name) {
+	public College( String collegeCode, String name) {
 		super();
-		this.id = id;
 		this.collegeCode = collegeCode;
 		this.name = name;
 	}
