@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.CollegeMapper">
+	
+	<resultMap id="collegeMap" type="buaa.course.model.College">
+		<id property="id" column="id" />
+		<result property="collegeCode" column="college_code" />
+		<result property="name" column="name" />
+	</resultMap>
+	<select id="getCollege" parameterType="int" resultMap="collegeMap">
+	    <![CDATA[
+	    	select * from college where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addCollege" parameterType="buaa.course.model.College"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into college(college_code,name) values(#{collegeCode},#{name})
+	    ]]>
+	</insert>
+	<delete id="deleteCollege" parameterType="int">
+		<![CDATA[
+			delete from college where id=#{id}
+		]]>
+	</delete>
+	<update id="updateCollege" parameterType="buaa.course.model.College">
+	    <![CDATA[
+	    	update college set college_code=#{collegeCode},name=#{name} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllColleges" resultMap="collegeMap">
+	    <![CDATA[
+	    	select * from college
+	    ]]>
+	</select>
+	<select id="countColleges" resultType="int">
+	    <![CDATA[
+	    	select count(*) from college
+	    ]]>
+	</select>
+	<select id="getCollegesByRange" resultMap="collegeMap">
+	    <![CDATA[
+	    	select * from college limit #{0},#{1}
+	    ]]>
+	</select>
+</mapper>
