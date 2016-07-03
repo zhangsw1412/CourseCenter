@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.TeamMapper">
+	
+	<resultMap id="teamMap" type="buaa.course.model.Team">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="leaderId" column="leader_id" />
+		<result property="maxNum" column="max_num" />
+	</resultMap>
+	<select id="getTeam" parameterType="int" resultMap="teamMap">
+	    <![CDATA[
+	    	select * from team where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addTeam" parameterType="buaa.course.model.Team"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into team(name,leader_id,max_num) values(#{name},#{leaderId},#{maxNum})
+	    ]]>
+	</insert>
+	<delete id="deleteTeam" parameterType="int">
+		<![CDATA[
+			delete from team where id=#{id}
+		]]>
+	</delete>
+	<update id="updateTeam" parameterType="buaa.course.model.Team">
+	    <![CDATA[
+	    	update team set name=#{name},leader_id=#{leaderId},max_num=#{maxNum} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllTeams" resultMap="teamMap">
+	    <![CDATA[
+	    	select * from team
+	    ]]>
+	</select>
+	<select id="countTeams" resultType="int">
+	    <![CDATA[
+	    	select count(*) from team
+	    ]]>
+	</select>
+	<select id="getTeamsByRange" resultMap="teamMap">
+	    <![CDATA[
+	    	select * from team limit #{0},#{1}
+	    ]]>
+	</select>
+</mapper>
