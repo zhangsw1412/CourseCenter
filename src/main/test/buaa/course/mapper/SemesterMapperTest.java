@@ -21,20 +21,14 @@ public class SemesterMapperTest
 	{
 		Semester semester = new Semester();
 		Assert.assertEquals(1, semesterMapper.addSemester(semester));
-
 		id = semester.getId();
-		Assert.assertEquals(semester.toString(),
-				semesterMapper.getSemester(id).toString());
-
+		Assert.assertEquals(semester.toString(),semesterMapper.getSemester(id).toString());
 		semester.setSchoolYear(2);
 		Assert.assertEquals(1, semesterMapper.updateSemester(semester));
-		Assert.assertEquals(semester.toString(),
-				semesterMapper.getSemester(id).toString());
-
+		Assert.assertEquals(semester.toString(),semesterMapper.getSemester(id).toString());
 		int count = semesterMapper.countSemesters();
 		Assert.assertEquals(count, semesterMapper.getAllSemesters().size());
-
-		Assert.assertEquals(1, semesterMapper.getSemestersByRange(0, 1));
+		Assert.assertEquals(1, semesterMapper.getSemestersByRange(0, 1).size());
 	}
 
 	@After

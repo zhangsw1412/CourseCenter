@@ -22,7 +22,7 @@
 	    	insert into semester (school_year,season,start_date,end_date,weeks) values(#{schoolYear},#{season},#{startDate},#{endDate},#{weeks})
 	    ]]>
 	</insert>
-	<delete id="deleteSemeste" parameterType="int">
+	<delete id="deleteSemester" parameterType="int">
 		<![CDATA[
 			delete from semester where id=#{id}
 		]]>
