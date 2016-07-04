@@ -16,8 +16,8 @@ public class HomeworkMapperTest {
 	int id;
 	@Test
 	public void test(){
-		Homework homework=new Homework(1,2,"解答","F:\\sample\\sample.txt",99,"无",new Timestamp(System.currentTimeMillis()/1000*1000));
-		Assert.assertEquals(1, mapper.addHomework(homework));
+
+		Homework homework=new Homework(1,2,3,"解答","F:\\sample\\sample.txt",99,"无",new Timestamp(System.currentTimeMillis()/1000*1000));		Assert.assertEquals(1, mapper.addHomework(homework));
 		id = homework.getId();
 		Assert.assertEquals(homework.toString(), mapper.getHomework(homework.getId()).toString());
 		int count = mapper.countHomeworks();
@@ -27,6 +27,7 @@ public class HomeworkMapperTest {
 		Assert.assertEquals(count, mapper.getAllHomeworks().size());
 		Assert.assertEquals(count, mapper.countHomeworks());
 		Assert.assertEquals(1, mapper.getHomeworksByRange(0,1).size());
+		Assert.assertEquals(1, mapper.getHomeworkByIds(homework.getStudentId(),homework.getAssignmentId()).size());
 	}
 	@After
 	public void after()

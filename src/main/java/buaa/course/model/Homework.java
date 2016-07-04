@@ -6,6 +6,7 @@ public class Homework {
 	private int id;
 	private int semesterCourseId;
 	private int studentId;
+	private int assignmentId;
 	private String text;
 	private String fileUrl;
 	private int score;
@@ -14,11 +15,13 @@ public class Homework {
 	public Homework() {
 		super();
 	}
-	public Homework(int semesterCourseId, int studentId, String text, String fileUrl, int score, String comment,
+	public Homework(int semesterCourseId, int studentId, int assignmentId, String text, String fileUrl, int score, String comment,
+		
 					Timestamp submitTime) {
 		super();
 		this.semesterCourseId = semesterCourseId;
 		this.studentId = studentId;
+		this.assignmentId = assignmentId;
 		this.text = text;
 		this.fileUrl = fileUrl;
 		this.score = score;
@@ -42,6 +45,12 @@ public class Homework {
 	}
 	public void setStudentId(int studentId) {
 		this.studentId = studentId;
+	}
+	public int getAssignmentId() {
+		return assignmentId;
+	}
+	public void setAssignmentId(int assignmentId) {
+		this.assignmentId = assignmentId;
 	}
 	public String getText() {
 		return text;
