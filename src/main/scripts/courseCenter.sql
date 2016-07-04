@@ -10,7 +10,7 @@ create table `user`(
 	gender tinyint(1) unsigned not null default 0 comment '性别：男0女1',
 	type tinyint(1) unsigned not null default 0 comment '用户类型：学生0，教师1，教务2',
 	valid tinyint(1) unsigned not null default 0 comment '帐户是否有效：有效1，无效0',
-	last_login_time timestamp comment '上次登录时间',
+	last_login_time datetime comment '上次登录时间',
 	last_login_ip char(15) default null comment '上次登录ip',
 	primary key(num),
 	key(id)
@@ -124,4 +124,4 @@ create table `homework`(
 	comment text comment '评论',
 	submit_time datetime comment '提交时间，以unix时间戳形式存储',
 	primary key(id)
-)engine=InnoDB default charset=utf8 comment='学生作业表';assignment
+)engine=InnoDB default charset=utf8 comment='学生作业表';
