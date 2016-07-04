@@ -117,6 +117,7 @@ create table `homework`(
 	id int not null auto_increment comment '主键',
 	semester_course_id int not null default 1 comment '对应学期-课程中间表中的主键',
 	student_id int not null default 1 comment '对应用户表中学生的主键',
+	assignment_id int not null default 1 comment '对应课程作业表的主键',
 	text text comment '文本',
 	file_url varchar(255) comment '作业附件存储路径',
 	score tinyint(2) not null default 0 comment '分数', 

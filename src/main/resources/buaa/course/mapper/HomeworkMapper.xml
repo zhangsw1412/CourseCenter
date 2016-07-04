@@ -8,6 +8,7 @@
 		<id property="id" column="id" />
 		<result property="semesterCourseId" column="semester_course_id" />
 		<result property="studentId" column="student_id" />
+		<result property="assignmentId" column="assignment_id" />
 		<result property="text" column="text" />
 		<result property="fileUrl" column="file_url" />
 		<result property="score" column="score" />
@@ -21,7 +22,7 @@
 	</select>
 	<insert id="addHomework" parameterType="buaa.course.model.Homework"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
-	    	insert into homework(semester_course_id,student_id,text,file_url,score,comment,submit_time) values(#{semesterCourseId},#{studentId},#{text},#{fileUrl},#{score},#{comment},#{submitTime})
+	    	insert into homework(semester_course_id,student_id,assignment_id,text,file_url,score,comment,submit_time) values(#{semesterCourseId},#{studentId},#{assignmentId},#{text},#{fileUrl},#{score},#{comment},#{submitTime})
 	    ]]>
 	</insert>
 	<delete id="deleteHomework" parameterType="int">
@@ -31,7 +32,7 @@
 	</delete>
 	<update id="updateHomework" parameterType="buaa.course.model.Homework">
 	    <![CDATA[
-	    	update homework set semester_course_id=#{semesterCourseId},student_id=#{studentId},text=#{text},file_url=#{fileUrl},score=#{score},comment=#{comment},submit_time=#{submitTime} where id=#{id}
+	    	update homework set semester_course_id=#{semesterCourseId},student_id=#{studentId},assignment_id=#{assignmentId},text=#{text},file_url=#{fileUrl},score=#{score},comment=#{comment},submit_time=#{submitTime} where id=#{id}
 	    ]]>
 	</update>
 	<select id="getAllHomeworks" resultMap="homeworkMap">
@@ -47,6 +48,11 @@
 	<select id="getHomeworksByRange" resultMap="homeworkMap">
 	    <![CDATA[
 	    	select * from homework limit #{0},#{1}
+	    ]]>
+	</select>
+	<select id="getHomeworkByIds" resultMap="homeworkMap">
+	    <![CDATA[
+	    	select * from homework where student_id=#{0} and assignment_id=#{1}
 	    ]]>
 	</select>
 </mapper>
