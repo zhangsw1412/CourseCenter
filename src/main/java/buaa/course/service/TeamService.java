@@ -1,4 +1,4 @@
- package buaa.course.logic;
+ package buaa.course.service;
 
 import buaa.course.mapper.TeamMapper;
 import buaa.course.model.Team;
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by 熊纪元 on 2016/7/3.
  */
 @Service
-public class TeamLogic {
+public class TeamService {
     @Resource(name = "teamMapper")
     private TeamMapper teamMapper;
 

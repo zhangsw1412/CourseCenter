@@ -1,4 +1,4 @@
-package buaa.course.logic;
+package buaa.course.service;
 
 import buaa.course.mapper.CourseMapper;
 import buaa.course.model.Course;
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by 熊纪元 on 2016/7/3.
  */
 @Service
-public class CourseLogic {
+public class CourseService {
     @Resource(name = "courseMapper")
     private CourseMapper courseMapper;
 

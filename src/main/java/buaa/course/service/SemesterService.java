@@ -1,4 +1,4 @@
-package buaa.course.logic;
+package buaa.course.service;
 
 import buaa.course.mapper.SemesterMapper;
 import buaa.course.model.Semester;
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by 熊纪元 on 2016/7/3.
  */
 @Service
-public class SemesterLogic {
+public class SemesterService {
     @Resource(name = "semesterMapper")
     private SemesterMapper semesterMapper;
 

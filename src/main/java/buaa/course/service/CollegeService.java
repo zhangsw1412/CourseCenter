@@ -1,4 +1,4 @@
-package buaa.course.logic;
+package buaa.course.service;
 
 import buaa.course.mapper.CollegeMapper;
 import buaa.course.model.College;
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by 熊纪元 on 2016/7/3.
  */
 @Service
-public class CollegeLogic {
+public class CollegeService {
     @Resource(name = "collegeMapper")
     private CollegeMapper collegeMapper;
 

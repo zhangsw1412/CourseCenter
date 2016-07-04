@@ -1,11 +1,11 @@
 package buaa.course.mapper;
 
-import java.util.List;
-
 import buaa.course.model.User;
 
+import java.util.List;
+
 public interface UserMapper {
-	User getUser(int id);
+	User getUser(String id);
 	int addUser(User user);
 	int deleteUser(int id);
 	int updateUser(User user);

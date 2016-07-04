@@ -94,7 +94,7 @@ drop table if exists `resource`;
 create table `resource`(
 	id int not null auto_increment comment '主键',
 	semester_course_id int not null default 1 comment '对应学期-课程中间表中的主键',
-	file_url text comment '资源文件存储路径',
+	file_url varchar(255) comment '资源文件存储路径',
 	category varchar(255) not null default '' comment '分类',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='课程资源表';
@@ -104,7 +104,7 @@ create table `assignment`(
 	id int not null auto_increment comment '主键',
 	semester_course_id int not null default 1 comment '对应学期-课程中间表中的主键',
 	basic_requirement text comment '基本要求',
-	file_url text comment '作业要求附件存储路径',
+	file_url varchar(255) comment '作业要求附件存储路径',
 	start_time int(11) unsigned not null default 0 comment '开始时间，以unix时间戳形式存储',
 	deadline int(11) unsigned not null default 0 comment '截止时间，以unix时间戳形式存储',
 	team_avaliable tinyint(1) not null default 0 comment '是否允许团队参加：不允许0/允许1',
@@ -118,7 +118,7 @@ create table `homework`(
 	semester_course_id int not null default 1 comment '对应学期-课程中间表中的主键',
 	student_id int not null default 1 comment '对应用户表中学生的主键',
 	text text comment '文本',
-	file_url text comment '作业附件存储路径',
+	file_url varchar(255) comment '作业附件存储路径',
 	score tinyint(2) not null default 0 comment '分数', 
 	comment text comment '评论',
 	submit_time int(11) unsigned not null default 0 comment '提交时间，以unix时间戳形式存储',
