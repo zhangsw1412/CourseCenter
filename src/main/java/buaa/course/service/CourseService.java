@@ -1,7 +1,9 @@
 package buaa.course.service;
 
 import buaa.course.mapper.CourseMapper;
+import buaa.course.mapper.SemesterCourseMapper;
 import buaa.course.model.Course;
+import buaa.course.model.SemesterCourse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +16,9 @@ import java.util.List;
 public class CourseService {
     @Resource(name = "courseMapper")
     private CourseMapper courseMapper;
+
+    @Resource(name = "semesterCourseMapper")
+    private SemesterCourseMapper semesterCourseMapper;
 
     public Course getCourseById(int id) {
         return courseMapper.getCourse(id);
@@ -41,5 +46,14 @@ public class CourseService {
 
     public int countCourses() {
         return courseMapper.countCourses();
+    }
+
+    public Course getCourseByCourseCode(String courseCode) {
+        return courseMapper.getCourseByCourseCode(courseCode);
+    }
+
+    public Course getCourseBySemesterCourseId(int semester_course_id) {
+        SemesterCourse sc = semesterCourseMapper.getSemesterCourse(semester_course_id);
+        return courseMapper.getCourse(sc.getCourseId());
     }
 }

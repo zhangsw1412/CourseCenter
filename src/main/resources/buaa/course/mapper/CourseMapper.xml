@@ -49,4 +49,9 @@
 	    	select * from course limit #{0},#{1}
 	    ]]>
 	</select>
+	<select id="getCourseByCourseCode" resultMap="courseMap">
+		<![CDATA[
+	    	select * from course where course_code = #{0}
+	    ]]>
+	</select>
 </mapper>

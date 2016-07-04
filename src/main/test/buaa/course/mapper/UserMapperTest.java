@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.sql.Timestamp;
+
 public class UserMapperTest {
 	ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:application-config.xml");
 	UserMapper mapper = context.getBean(UserMapper.class);
@@ -18,7 +20,7 @@ public class UserMapperTest {
 
 	@Test
 	public void test(){
-		User user=new User("asd1","ewoifjoewf","杰克",false,0,true,System.currentTimeMillis()/1000,"192.168.1.1");
+		User user=new User("asd1","ewoifjoewf","杰克",false,0,true,new Timestamp(System.currentTimeMillis()/1000*1000),"192.168.1.1");
 		Assert.assertEquals(1, mapper.addUser(user));
 		num = user.getNum();
 		Assert.assertEquals(user.toString(), mapper.getUser(user.getId()).toString());

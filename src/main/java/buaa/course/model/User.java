@@ -1,6 +1,6 @@
 package buaa.course.model;
 
-import java.util.Arrays;
+import java.sql.Timestamp;
 
 public class User {
 	private int num;
@@ -10,13 +10,13 @@ public class User {
 	private boolean gender;
 	private int type;
 	private boolean valid;
-	private long lastLoginTime;
+	private Timestamp lastLoginTime;
 	private String lastLoginIp;
 	public User() {
 		super();
 	}
 	public User(String id, String password, String name, boolean gender, int type, boolean valid,
-			long lastLoginTime, String lastLoginIp) {
+				Timestamp lastLoginTime, String lastLoginIp) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -69,10 +69,10 @@ public class User {
 	public void setValid(boolean valid) {
 		this.valid = valid;
 	}
-	public long getLastLoginTime() {
+	public Timestamp getLastLoginTime() {
 		return lastLoginTime;
 	}
-	public void setLastLoginTime(long lastLoginTime) {
+	public void setLastLoginTime(Timestamp lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
 	public String getLastLoginIp() {

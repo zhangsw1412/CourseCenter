@@ -1,5 +1,7 @@
 package buaa.course.model;
 
+import java.sql.Timestamp;
+
 public class Homework {
 	private int id;
 	private int semesterCourseId;
@@ -8,12 +10,12 @@ public class Homework {
 	private String fileUrl;
 	private int score;
 	private String comment;
-	private int submitTime;
+	private Timestamp submitTime;
 	public Homework() {
 		super();
 	}
 	public Homework(int semesterCourseId, int studentId, String text, String fileUrl, int score, String comment,
-			int submitTime) {
+					Timestamp submitTime) {
 		super();
 		this.semesterCourseId = semesterCourseId;
 		this.studentId = studentId;
@@ -65,10 +67,10 @@ public class Homework {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public int getSubmitTime() {
+	public Timestamp getSubmitTime() {
 		return submitTime;
 	}
-	public void setSubmitTime(int submitTime) {
+	public void setSubmitTime(Timestamp submitTime) {
 		this.submitTime = submitTime;
 	}
 	@Override

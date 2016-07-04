@@ -8,13 +8,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import buaa.course.model.Homework;
 import junit.framework.Assert;
 
+import java.sql.Timestamp;
+
 public class HomeworkMapperTest {
 	ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:application-config.xml");
 	HomeworkMapper mapper = context.getBean(HomeworkMapper.class);
 	int id;
 	@Test
 	public void test(){
-		Homework homework=new Homework(1,2,"解答","F:\\sample\\sample.txt",99,"无",0);
+		Homework homework=new Homework(1,2,"解答","F:\\sample\\sample.txt",99,"无",new Timestamp(System.currentTimeMillis()/1000*1000));
 		Assert.assertEquals(1, mapper.addHomework(homework));
 		id = homework.getId();
 		Assert.assertEquals(homework.toString(), mapper.getHomework(homework.getId()).toString());

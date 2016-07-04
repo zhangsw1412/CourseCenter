@@ -1,18 +1,20 @@
 package buaa.course.model;
 
+import java.sql.Timestamp;
+
 public class Assignment {
 	private int id;
 	private int semesterCourseId;
 	private String basicRequirement;
 	private String fileUrl;
-	private int startTime;
-	private int deadline;
+	private Timestamp startTime;
+	private Timestamp deadline;
 	private boolean teamAvaliable;
 	private int highestScore;
 	public Assignment() {
 		super();
 	}
-	public Assignment(int semesterCourseId, String basicRequirement, String fileUrl, int startTime, int deadline,
+	public Assignment(int semesterCourseId, String basicRequirement, String fileUrl, Timestamp startTime, Timestamp deadline,
 			boolean teamAvaliable, int highestScore) {
 		super();
 		this.semesterCourseId = semesterCourseId;
@@ -47,16 +49,16 @@ public class Assignment {
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
 	}
-	public int getStartTime() {
+	public Timestamp getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(int startTime) {
+	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
 	}
-	public int getDeadline() {
+	public Timestamp getDeadline() {
 		return deadline;
 	}
-	public void setDeadline(int deadline) {
+	public void setDeadline(Timestamp deadline) {
 		this.deadline = deadline;
 	}
 	public boolean isTeamAvaliable() {
