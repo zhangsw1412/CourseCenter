@@ -13,8 +13,8 @@ var FormWizard = function () {
                 return "<img class='flag' src='assets/img/flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
             }
 
-            $("#country_list").select2({
-                placeholder: "Select",
+            $("#course_list").select2({
+                placeholder: "请选择...",
                 allowClear: true,
                 formatResult: format,
                 formatSelection: format,
@@ -34,69 +34,21 @@ var FormWizard = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
                     //account
-                    username: {
-                        minlength: 5,
+                    course: {
                         required: true
                     },
-                    password: {
-                        minlength: 5,
-                        required: true
-                    },
-                    rpassword: {
-                        minlength: 5,
-                        required: true,
-                        equalTo: "#submit_form_password"
-                    },
-                    //profile
-                    fullname: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    phone: {
-                        required: true
-                    },
-                    gender: {
-                        required: true
-                    },
-                    address: {
-                        required: true
-                    },
-                    city: {
-                        required: true
-                    },
-                    country: {
-                        required: true
-                    },
-                    //payment
-                    card_name: {
-                        required: true
-                    },
-                    card_number: {
-                        minlength: 16,
-                        maxlength: 16,
-                        required: true
-                    },
-                    card_cvc: {
-                        digits: true,
-                        required: true,
-                        minlength: 3,
-                        maxlength: 4
-                    },
-                    card_expiry_mm: {
-                        digits: true,
-                        required: true
-                    },
-                    card_expiry_yyyy: {
-                        digits: true,
-                        required: true
-                    },
-                    'payment[]': {
-                        required: true,
-                        minlength: 1
-                    }
+                    startDate: {
+						required: true
+					},
+					endDate: {
+						required: true
+					},
+					assign_name: {
+						required: true
+					},
+					request: {
+						required: true
+					},
                 },
 
                 messages: { // custom messages for radio buttons and checkboxes
