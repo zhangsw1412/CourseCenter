@@ -50,9 +50,9 @@
 	    	select * from homework limit #{0},#{1}
 	    ]]>
 	</select>
-	<select id="getHomeworkByIds" resultMap="homeworkMap">
+	<select id="getHomeworksByAssignmentId" resultMap="homeworkMap">
 	    <![CDATA[
-	    	select * from homework where student_id=#{0} and assignment_id=#{1}
+	    	select * from homework where assignment_id=#{assignmentId}
 	    ]]>
 	</select>
 </mapper>

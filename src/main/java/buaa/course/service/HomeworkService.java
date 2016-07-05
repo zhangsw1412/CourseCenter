@@ -43,13 +43,12 @@ public class HomeworkService {
     public int countHomeworks() {
         return homeworkMapper.countHomeworks();
     }
-    
-    public List<Homework> getHomeworkByIds(int studentId, int assignmentId)
-    {
-    	return homeworkMapper.getHomeworkByIds(studentId, assignmentId);
-    }
 
 	public int getHighestScore(int homeworkId) {
 		return assignmentMapper.getAssignment(homeworkMapper.getHomework(homeworkId).getAssignmentId()).getHighestScore();
+	}
+
+	public List<Homework> getHomeworksByAssignmentId(int assignmentId) {
+		return homeworkMapper.getHomeworksByAssignmentId(assignmentId);
 	}
 }
