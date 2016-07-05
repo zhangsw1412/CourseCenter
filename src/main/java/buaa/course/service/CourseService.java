@@ -1,19 +1,14 @@
 package buaa.course.service;
 
-import buaa.course.mapper.CourseMapper;
-import buaa.course.mapper.CourseStudentMapper;
-import buaa.course.mapper.CourseTeacherMapper;
-import buaa.course.mapper.SemesterCourseMapper;
-import buaa.course.model.Course;
-import buaa.course.model.CourseStudent;
-import buaa.course.model.CourseTeacher;
-import buaa.course.model.SemesterCourse;
+import buaa.course.mapper.*;
+import buaa.course.model.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 熊纪元 on 2016/7/3.
@@ -31,6 +26,9 @@ public class CourseService {
 
     @Resource(name = "courseStudentMapper")
     private CourseStudentMapper courseStudentMapper;
+
+    @Resource(name = "userMapper")
+    private UserMapper userMapper;
 
     public Course getCourseById(int id) {
         return courseMapper.getCourse(id);
@@ -71,7 +69,14 @@ public class CourseService {
 
     public Course getCourseBySemesterCourseId(int semesterId, int courseId) {
         SemesterCourse sc = semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId);
-        return courseMapper.getCourse(sc.getCourseId());
+        if(sc != null)
+            return courseMapper.getCourse(sc.getCourseId());
+        else return null;
+    }
+
+    public SemesterCourse getSemesterCourseBySemesterCourseId(int semesterId, int courseId) {
+        SemesterCourse sc = semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId);
+        return semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId);
     }
 
     public List<Course> getCoursesBySemesterId(int semesterId) {
@@ -113,5 +118,38 @@ public class CourseService {
         }
 
         return courses;
+    }
+
+    public Map<Long, List<String>> getTeachersName(int semesterId, List<Course> courses) {
+        Map<Long, List<String>> result = new HashMap<>();
+        for(Course course : courses){
+            SemesterCourse semesterCourse = this.getSemesterCourseBySemesterCourseId(semesterId, course.getId());
+            semesterCourse.getId();
+            List<String> names = new ArrayList<>();
+
+            for(User user : getTeachers(semesterCourse.getId())){
+                names.add(user.getName());
+            }
+            result.put(Long.valueOf(course.getId()), names);
+        }
+
+        return result;
+    }
+
+    private List<User> getTeachers(int semesterCourseId) {
+        List<User> users = new ArrayList<>();
+        for(CourseTeacher courseTeacher : courseTeacherMapper.getCourseTeacherBySemesterCourseId(semesterCourseId)){
+            users.add(userMapper.getUserByNum(courseTeacher.getTeacherId()));
+        }
+        return users;
+    }
+
+    public Map<Long, Integer> getSemesterCourseIdMap(int semesterId, List<Course> courses) {
+        Map<Long, Integer> result = new HashMap<>();
+        for(Course course : courses){
+            SemesterCourse semesterCourse = this.getSemesterCourseBySemesterCourseId(semesterId, course.getId());
+            result.put(Long.valueOf(course.getId()), semesterCourse.getId());
+        }
+        return result;
     }
 }

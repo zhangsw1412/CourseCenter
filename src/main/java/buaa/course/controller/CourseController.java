@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 熊纪元 on 2016/7/4.
@@ -41,51 +42,46 @@ public class CourseController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{semesterId}/courseList/{pageNo}")
     public ModelAndView courseList(@PathVariable Integer semesterId, @PathVariable Integer pageNo, HttpServletRequest request) {
-//        ModelAndView m = new ModelAndView("course/courseList");
-        ModelAndView m = new ModelAndView("course/teacher_course");
-        if(semesterId != null){
-            User user = (User)request.getSession().getAttribute("user");
-            if(user.getType() == 0){
+        ModelAndView m = null;
+        if (semesterId != null) {
+            User user = (User) request.getSession().getAttribute("user");
+            System.out.println(user);
+            if (user.getType() == 1) {//教师访问课程列表
+                m = new ModelAndView("course/teacher_course");
                 List<Course> courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
-                pagingUtil.setPageRow(10);
-                pagingUtil.setTotalRow(courses.size());
-                pagingUtil.toNewPage(String.valueOf(pageNo));
                 m.addObject("semester", semesterService.getSemesterById(semesterId));
-                m.addObject("teacher", user);
-                m.addObject("courses", courses.subList(pagingUtil.getFirstIndex(), pagingUtil.getLastIndex()+1));
-            }else if(user.getType() == 1){
+                m.addObject("courses", courses);
+                Map<Long, Integer> semesterCourseIds = courseService.getSemesterCourseIdMap(semesterId, courses);
+                m.addObject("semesterCourseIds", semesterCourseIds);
+            } else if (user.getType() == 0) {//学生访问课程列表
+                m = new ModelAndView("course/student_course");
                 List<Course> courses = courseService.getCoursesByStudent(semesterId, user.getNum());
-                pagingUtil.setPageRow(10);
-                pagingUtil.setTotalRow(courses.size());
-                pagingUtil.toNewPage(String.valueOf(pageNo));
                 m.addObject("semester", semesterService.getSemesterById(semesterId));
-                m.addObject("student", user);
-                m.addObject("courses", courses.subList(pagingUtil.getFirstIndex(), pagingUtil.getLastIndex()+1));
+                m.addObject("courses", courses);
+                Map<Long, List<String>> teachers = courseService.getTeachersName(semesterId, courses);
+                m.addObject("teachers", teachers);
+                Map<Long, Integer> semesterCourseIds = courseService.getSemesterCourseIdMap(semesterId, courses);
+                m.addObject("semesterCourseIds", semesterCourseIds);
             }
-            List<Course> courses = courseService.getCoursesBySemesterId(semesterId);
-            pagingUtil.setPageRow(10);
-            pagingUtil.setTotalRow(courses.size());
-            pagingUtil.toNewPage(String.valueOf(pageNo));
-
-            m.addObject("courses", courses.subList(pagingUtil.getFirstIndex(), pagingUtil.getLastIndex()+1));
         }
         return m;
     }
 
     /**
      * 转到资源上传页面
+     *
      * @return
      * @throws IOException
      */
     @RequestMapping(method = RequestMethod.GET, value = "/uploadResource/{semesterId}/{courseId}")
     public ModelAndView uploadResourceGet(@PathVariable Integer semesterId, @PathVariable Integer courseId) {
         ModelAndView m = new ModelAndView("course/uploadResource");
-        if(semesterId != null && courseId != null){
+        if (semesterId != null && courseId != null) {
             Semester semester = semesterService.getSemesterById(semesterId);
             m.addObject("semester", semester);
             Course course = courseService.getCourseBySemesterCourseId(semesterId, courseId);
             m.addObject("course", course);
-        }else{
+        } else {
             m.addObject("message", "找不到课程！");
         }
         return m;
@@ -93,6 +89,7 @@ public class CourseController {
 
     /**
      * 资源上传逻辑
+     *
      * @param files
      * @param request
      * @return
@@ -100,28 +97,28 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.POST, value = "/uploadResource/{semesterId}/{courseId}")
     public ModelAndView uploadResourcePost(@PathVariable Integer semesterId, @PathVariable Integer courseId, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
         ModelAndView m = new ModelAndView("course/uploadResource");
-        if(files.length <= 0 ){
+        if (files.length <= 0) {
             m.addObject("message", "未选择文件！");
             return m;
         }
-        if(semesterId == null || courseId == null){
+        if (semesterId == null || courseId == null) {
             m.addObject("message", "未选择课程！");
             return m;
         }
 
-        for(MultipartFile file : files){
-            if(!file.isEmpty()){
+        for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
                 // 文件保存路径
-                String filePath = filePath = getResourcePath(semesterId,courseId,request);
+                String filePath = filePath = getResourcePath(semesterId, courseId, request);
                 File dir = new File(filePath);
-                if(!dir.exists()){
+                if (!dir.exists()) {
                     dir.mkdirs();
                 }
                 // 转存文件
-                try{
-                    File temp = new File(filePath+ File.separator + file.getOriginalFilename());
+                try {
+                    File temp = new File(filePath + File.separator + file.getOriginalFilename());
                     file.transferTo(temp);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     m.addObject("message", e.getMessage());
                     return m;
@@ -142,16 +139,27 @@ public class CourseController {
      */
     @RequestMapping("/{semesterId}/{courseId}/resourceList/{pageNo}")
     public ModelAndView list(@PathVariable Integer semesterId, @PathVariable Integer courseId, @PathVariable Integer pageNo, HttpServletRequest request) {
-        String filePath = getResourcePath(semesterId,courseId,request);
+        String filePath = getResourcePath(semesterId, courseId, request);
         File dir = new File(filePath);
-        if(!dir.exists()){
+        if (!dir.exists()) {
             dir.mkdirs();
         }
-        ModelAndView m = new ModelAndView("course/resourceList");
+        ModelAndView m = null;
+        User user = (User) request.getSession().getAttribute("user");
+        if (user.getType() == 0) {//学生查看资源列表
+            m = new ModelAndView("course/student_resources");
+        }else if(user.getType() == 1){//教师查看资源列表
+            m = new ModelAndView("course/teacher_resources");
+            m.addObject("semester", semesterService.getSemesterById(semesterId));
+            m.addObject("course", courseService.getCourseById(courseId));
+        }
         File uploadDest = new File(filePath);
         String[] list = uploadDest.list();
-        if(list != null){
+        if (list != null) {
             m.addObject("files", Arrays.asList(uploadDest.list()));
+            String dirPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() +
+                    "resource" + "/" + "semester-" + semesterId + "/" + "course-" + courseId + "/";
+            m.addObject("dir", dirPath);
         }
 
         return m;
@@ -159,7 +167,7 @@ public class CourseController {
 
     private String getResourcePath(int semesterId, int courseId, HttpServletRequest request) {
         String filePath = request.getSession().getServletContext().getRealPath("/")
-                + "resource" + File.separator + "semester-"+semesterId + File.separator + "course-" + courseId;
+                + "resource" + File.separator + "semester-" + semesterId + File.separator + "course-" + courseId;
         return filePath;
     }
 }
