@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>提交作业</title>
+<title>批改作业</title>
 </head>
 <body>
-	<form action="/submithomework/${assignmentId}" method="POST">
-	 文本：<input type="text" name="text" /><br/>
+	<form action="/correcthomework/${homeworkId}" method="POST">
+	分数：<input type="text" name="score" /><br/>
+	评论：<input type="text" name="comment" /><br/>
     <input type="submit" value="确认" />
 	</form>${error}
 </body>
