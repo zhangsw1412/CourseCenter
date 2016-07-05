@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-
 @Controller
 public class HomeworkController {
     @Resource(name = "homeworkService")
@@ -34,11 +33,10 @@ public class HomeworkController {
     		return new ModelAndView("login");
     	ModelAndView m= new ModelAndView("homeworks");
     	if(assignmentId!=null){
-    		m.addObject("homeworklist",homeworkService.getHomeworksByAssignmentId(assignmentId);
+    		m.addObject("homeworklist",homeworkService.getHomeworksByAssignmentId(assignmentId));
     	}
     	return m;
     }
-
     
     @RequestMapping(method = RequestMethod.GET, value = "/correcthomework/{homeworkId}")
     public ModelAndView correctHomeworkGet(@PathVariable Integer homeworkId, HttpServletRequest request){
