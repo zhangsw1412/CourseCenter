@@ -12,7 +12,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>Metronic | UI Features - Tiles</title>
+	<title>下载资源</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -30,7 +30,7 @@
 
 	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style2.css" rel="stylesheet" type="text/css"/>
+	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
 
 	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 
@@ -39,6 +39,45 @@
 	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
 	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+    	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/clockface.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/timepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/colorpicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/datetimepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
+
+	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+    
+    <link href="media/css/jquery.fancybox.css" rel="stylesheet" />
+
+	<link href="media/css/jquery.fileupload-ui.css" rel="stylesheet" />
+
+	<!-- END PAGE LEVEL STYLES -->
 
 	<link rel="shortcut icon" href="media/image/favicon.ico" />
 
@@ -50,9 +89,9 @@
 
 <body class="page-header-fixed">
 
-	<!-- BEGIN HEADER -->
+<!-- BEGIN HEADER -->
 
-	<div class="header navbar navbar-inverse navbar-fixed-top">
+<div class="header navbar navbar-inverse navbar-fixed-top">
 
 		<!-- BEGIN TOP NAVIGATION BAR -->
 
@@ -62,7 +101,7 @@
 
 				<!-- BEGIN LOGO -->
 
-				<a class="brand" href="index.html">
+				<a class="brand" href="teacher_homepage.html">
 
 				<img src="media/image/logo.png" alt="logo" />
 
@@ -520,11 +559,11 @@
 
 		<!-- END TOP NAVIGATION BAR -->
 
-	</div>
+</div>
 
-	<!-- END HEADER -->
+<!-- END HEADER -->
 
-	<!-- BEGIN CONTAINER -->   
+	<!-- BEGIN CONTAINER -->
 
 	<div class="page-container row-fluid">
 
@@ -532,7 +571,7 @@
 
 		<div class="page-sidebar nav-collapse collapse">
 
-			<!-- BEGIN SIDEBAR MENU -->        
+			<!-- BEGIN SIDEBAR MENU -->
 
 			<ul class="page-sidebar-menu">
 
@@ -568,32 +607,30 @@
 
 				</li>
 
-				<li class="start ">
+				<li class="">
 
-					<a href="index.html">
+					<a href="student_homepage.html">
 
-					<i class="icon-home"></i> 
+						<i class="icon-home"></i>
 
-					<span class="title">主页</span>
-
-					</a>
-
-				</li>
-                
-                
-                <li class="">
-
-					<a href="index.html">
-
-					<i class="icon-table"></i> 
-
-					<span class="title">学期管理</span>
+						<span class="title">主页</span>
 
 					</a>
 
 				</li>
-                
 
+				<li class="">
+
+					<a href="student_semester.html">
+
+						<i class="icon-table"></i>
+
+						<span class="title">学期列表</span>
+
+					</a>
+
+
+				</li>
 				<li class="active ">
 
 					<a href="javascript:;">
@@ -613,13 +650,13 @@
 
 						<li class="active">
 
-							<a href="#">经济管理</a>
+							<a href="student_course.html">经济管理</a>
 
 						</li>
 
 						<li >
 
-							<a href="#">
+							<a href="student_course.html">
 
 							软件工程</a>
 
@@ -627,7 +664,7 @@
 
 						<li >
 
-							<a href="#">
+							<a href="student_course.html">
 
 							体育</a>
 
@@ -635,7 +672,7 @@
 
 						<li >
 
-							<a href="#">
+							<a href="student_course.html">
 
 							中国传统文化</a>
 
@@ -644,19 +681,22 @@
 					</ul>
 
 				</li>
+				<li class="">
 
+					<a href="">
 
-				<li class="last ">
+						<i class="icon-file-text"></i>
 
-					<a href="#">
+						<span class="title">团队管理</span>
 
-					<i class="icon-bar-chart"></i> 
-
-					<span class="title">团队</span>
+						<span class="selected"></span>
 
 					</a>
 
+
 				</li>
+
+				
 
 			</ul>
 
@@ -692,7 +732,7 @@
 
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-			<!-- BEGIN PAGE CONTAINER-->
+			<!-- BEGIN PAGE CONTAINER-->        
 
 			<div class="container-fluid">
 
@@ -702,101 +742,11 @@
 
 					<div class="span12">
 
-						<!-- BEGIN STYLE CUSTOMIZER -->
-
-						<div class="color-panel hidden-phone">
-
-							<div class="color-mode-icons icon-color"></div>
-
-							<div class="color-mode-icons icon-color-close"></div>
-
-							<div class="color-mode">
-
-								<p>THEME COLOR</p>
-
-								<ul class="inline">
-
-									<li class="color-black current color-default" data-style="default"></li>
-
-									<li class="color-blue" data-style="blue"></li>
-
-									<li class="color-brown" data-style="brown"></li>
-
-									<li class="color-purple" data-style="purple"></li>
-
-									<li class="color-grey" data-style="grey"></li>
-
-									<li class="color-white color-light" data-style="light"></li>
-
-								</ul>
-
-								<label>
-
-									<span>Layout</span>
-
-									<select class="layout-option m-wrap small">
-
-										<option value="fluid" selected>Fluid</option>
-
-										<option value="boxed">Boxed</option>
-
-									</select>
-
-								</label>
-
-								<label>
-
-									<span>Header</span>
-
-									<select class="header-option m-wrap small">
-
-										<option value="fixed" selected>Fixed</option>
-
-										<option value="default">Default</option>
-
-									</select>
-
-								</label>
-
-								<label>
-
-									<span>Sidebar</span>
-
-									<select class="sidebar-option m-wrap small">
-
-										<option value="fixed">Fixed</option>
-
-										<option value="default" selected>Default</option>
-
-									</select>
-
-								</label>
-
-								<label>
-
-									<span>Footer</span>
-
-									<select class="footer-option m-wrap small">
-
-										<option value="fixed">Fixed</option>
-
-										<option value="default" selected>Default</option>
-
-									</select>
-
-								</label>
-
-							</div>
-
-						</div>
-
-						<!-- END BEGIN STYLE CUSTOMIZER --> 
-
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
 						<h3 class="page-title">
 
-							Tiles <small>windows 8 style tiles examples</small>
+							资源管理 
 
 						</h3>
 
@@ -806,7 +756,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="index.html">Home</a> 
+								<a href="teacher_homepage.html">主页</a> 
 
 								<i class="icon-angle-right"></i>
 
@@ -814,14 +764,17 @@
 
 							<li>
 
-								<a href="#">UI Features</a>
+								<a href="teacher_resources.html">资源管理</a>
 
 								<i class="icon-angle-right"></i>
 
 							</li>
 
-							<li><a href="#">Tiles</a></li>
+							<li>
 
+								<a href="teacher_sourceuploading.html">添加资源</a>
+
+							</li>
 						</ul>
 
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -832,115 +785,88 @@
 
 				<!-- END PAGE HEADER-->
 
-				<!-- BEGIN PAGE CONTENT-->
+				<!-- BEGIN PAGE CONTENT--> 
+ 
+ 									<div class="row-fluid">
 
-				<div class="tiles">
-                
-                <div class="tile double bg-blue">
+					<div class="span12">
 
-						<div class="corner"></div>
+						<!-- BEGIN EXTRAS PORTLET-->
 
-						<div class="check"></div>
+						<div class="portlet box blue">
 
-						<div class="tile-body">
+							<div class="portlet-title">
 
-							<div style="margin:20px"></div>
-                            
-                            <h2 style=" font-weight:bolder">经济管理</h2>
-                            
-                            <div style="margin:20px"></div>
+								<div class="caption"><i class="icon-reorder"></i>资源下载</div>
+							</div>
 
-							<h4>学时：32</h4>
-                            
-                            <div style="margin:15px"></div>
-                            
-                            <h4>学分：4</h4>
-                            
-                            <div style="margin:15px"></div>
-                            
-                            <h4>任课老师：xxx</h4>
+							<div class="portlet-body form">
 
-						</div>
+								<!-- BEGIN FORM-->
 
-					</div>
+								<form action="#" class="form-horizontal">
 
-					<div class="tile double-down bg-green">
 
-						<div class="tile-body">
+									<div class="control-group">
+                                    
 
-							<i class="icon-calendar"></i>
+										<label class="control-label">资源名称</label>
 
-						</div>
+										<div class="controls">
+								
+                                <input class="m-wrap medium" readonly type="text"  placeholder="软件工程PPT"  />
 
-						<div class="tile-object">
+															</div>
+									</div>
+									
+                                  
 
-							<div class="name" style="font-size:large">
+									<div class="control-group">
 
-								作业
+										<label class="control-label">备注</label>
+
+										<div class="controls">
+
+											<textarea class="span12 wysihtml5 m-wrap" readonly type="text" rows="6" placeholder="介绍了软件工程过程的基本模型，软件工程原理、软件工程过程、软件工程方法、软件工程模型、软件工程管理、软件工程度量、软件工程环境、软件工程应用、软件工程开发使用。著名软件工程专家B.Boehm综合有关专家和学者的意见并总结了多年来开发软件的经验，于1983年在一篇论文中提出了软件工程的七条基本原理"></textarea>
+
+										</div>
+
+									</div>
+
+									<div class="form-actions">
+
+										<button type="submit" class="btn blue">下载</button>
+
+										<a href="teacher_resources.html"><button type="button" class="btn">取消</button><a>
+
+									</div>
+
+								</form>
+
+								<!-- END FORM-->
 
 							</div>
 
-
 						</div>
 
-					</div>
-                    
-                    <div class="tile double-down bg-purple">
-
-						<div class="tile-body">
-
-							<i class="icon-paste"></i>
-
-						</div>
-
-						<div class="tile-object">
-
-							<div class="name" style="font-size:large">
-
-								资源
-
-							</div>
-
-
-						</div>
-
-					</div>
-                    
-                    
-                    
-                    <div class="tile double-down2 bg-yellow">
-
-						<div class="tile-body" >
-
-							<i class="icon-comments-alt" style=" padding-top:75px"></i>
-
-						</div>
-
-						<div class="tile-object">
-
-							<div class="name" style="font-size:large">
-
-								讨论
-
-							</div>
-
-
-						</div>
+						<!-- END EXTRAS PORTLET-->
 
 					</div>
 
+				</div>
+						<!-- END SAMPLE TABLE PORTLET-->
 
-				<br>
+					</div></div>
 
 				<!-- END PAGE CONTENT-->
 
 			</div>
 
-			<!-- END PAGE CONTAINER--> 
+			<!-- END PAGE CONTAINER-->
 
 		</div>
 
-		<!-- END PAGE -->    
+		<!-- END PAGE -->
 
 	</div>
 
@@ -1015,8 +941,6 @@
 		});
 
 	</script>
-
-	<!-- END JAVASCRIPTS -->
 
 <script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
 
