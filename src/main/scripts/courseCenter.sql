@@ -21,8 +21,8 @@ create table `semester`(
 	id int not null auto_increment comment '主键',
 	school_year int(4) not null default 1900 comment '学年',
 	season tinyint(1) not null default 0 comment '季度：秋季学期0，春季学期1，夏季学期2',
-	start_date datetime comment '开学日期，以时间戳形式存储',
-	end_date datetime comment '学期结束日期，同上',
+	start_date date comment '开学日期，以date形式存储',
+	end_date date comment '学期结束日期，同上',
 	weeks tinyint(2) unsigned not null default 16 comment '周数',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='学期表，记录学期信息';

@@ -12,7 +12,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>添加资源</title>
+	<title>下载资源</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -609,7 +609,7 @@
 
 				<li class="">
 
-					<a href="teacher_homepage.html">
+					<a href="student_homepage.html">
 
 						<i class="icon-home"></i>
 
@@ -621,7 +621,7 @@
 
 				<li class="">
 
-					<a href="teacher_semester.html">
+					<a href="student_semester.html">
 
 						<i class="icon-table"></i>
 
@@ -631,44 +631,72 @@
 
 
 				</li>
-				<li class="">
+				<li class="active ">
 
-					<a href="teacher_course.html">
+					<a href="javascript:;">
 
-						<i class="icon-cogs"></i>
+					<i class="icon-bookmark-empty"></i> 
 
-						<span class="title">课程管理</span>
+					<span class="title">课程管理</span>
+
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
 
 					</a>
 
+					<ul class="sub-menu">
+
+						<li class="active">
+
+							<a href="student_course.html">经济管理</a>
+
+						</li>
+
+						<li >
+
+							<a href="student_course.html">
+
+							软件工程</a>
+
+						</li>
+
+						<li >
+
+							<a href="student_course.html">
+
+							体育</a>
+
+						</li>
+
+						<li >
+
+							<a href="student_course.html">
+
+							中国传统文化</a>
+
+						</li>
+
+					</ul>
 
 				</li>
 				<li class="">
 
-					<a href="teacher_homework.html">
+					<a href="">
 
 						<i class="icon-file-text"></i>
 
-						<span class="title">作业管理</span>
-
-					</a>
-
-
-				</li>
-
-				<li class="start active  ">
-
-					<a href="teacher_resources.html">
-
-						<i class="icon-folder-open"></i>
-
-						<span class="title">资源管理</span>
+						<span class="title">团队管理</span>
 
 						<span class="selected"></span>
 
 					</a>
 
+
 				</li>
+
+				
 
 			</ul>
 
@@ -769,7 +797,7 @@
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-reorder"></i>资源上传</div>
+								<div class="caption"><i class="icon-reorder"></i>资源下载</div>
 							</div>
 
 							<div class="portlet-body form">
@@ -786,30 +814,12 @@
 
 										<div class="controls">
 								
-                                <input type="text" class="m-wrap span12" >
+                                <input class="m-wrap medium" readonly type="text"  placeholder="软件工程PPT"  />
 
 															</div>
 									</div>
 									
-                                    <div class="control-group">
-                                    
-                                    <label class="control-label">选择资源</label>
-
-										<div class="controls">
-								
-                                <span class="btn green fileinput-button">
-
-									<i class="icon-plus icon-white"></i>
-
-									<span>添加资源</span>
-
-									<input type="file" name="files[]" multiple> 
-                                    
-									</span></a>
-
-															</div>
-                                    
-                                    </div>
+                                  
 
 									<div class="control-group">
 
@@ -817,7 +827,7 @@
 
 										<div class="controls">
 
-											<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
+											<textarea class="span12 wysihtml5 m-wrap" readonly type="text" rows="6" placeholder="介绍了软件工程过程的基本模型，软件工程原理、软件工程过程、软件工程方法、软件工程模型、软件工程管理、软件工程度量、软件工程环境、软件工程应用、软件工程开发使用。著名软件工程专家B.Boehm综合有关专家和学者的意见并总结了多年来开发软件的经验，于1983年在一篇论文中提出了软件工程的七条基本原理"></textarea>
 
 										</div>
 
@@ -825,7 +835,7 @@
 
 									<div class="form-actions">
 
-										<button type="submit" class="btn blue">上传</button>
+										<button type="submit" class="btn blue">下载</button>
 
 										<a href="teacher_resources.html"><button type="button" class="btn">取消</button><a>
 

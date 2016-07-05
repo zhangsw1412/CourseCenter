@@ -18,36 +18,21 @@ var FormValidation = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 ignore: "",
                 rules: {
-                    name: {
-                        minlength: 2,
+                    course: {
                         required: true
                     },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    url: {
-                        required: true,
-                        url: true
-                    },
-                    number: {
-                        required: true,
-                        number: true
-                    },
-                    digits: {
-                        required: true,
-                        digits: true
-                    },
-                    creditcard: {
-                        required: true,
-                        creditcard: true
-                    },
-                    occupation: {
-                        minlength: 5,
-                    },
-                    category: {
+                    assign_name: {
                         required: true
-                    }
+                    },
+                    request: {
+                        required: true
+                    },
+                    startDate: {
+                        required: true
+                    },
+                    endDate: {
+                        required: true
+                    },
                 },
 
                 invalidHandler: function (event, validator) { //display error alert on form submit              
