@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface SemesterCourseMapper {
 	SemesterCourse getSemesterCourse(int id);
+	SemesterCourse getSemesterCourseByTwoIds(int semesterId, int courseId);
 	int addSemesterCourse(SemesterCourse semesterCourse);
 	int deleteSemesterCourse(int id);
 	int updateSemesterCourse(SemesterCourse semesterCourse);

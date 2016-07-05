@@ -41,7 +41,7 @@ public class BasicController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public ModelAndView loginPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView loginPost(HttpServletRequest request) throws IOException {
         ModelAndView m = new ModelAndView("login");
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
@@ -59,7 +59,7 @@ public class BasicController {
             user.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
             user.setLastLoginIp(IpUtil.getIpAddr(request));
             userService.updateUser(user);
-            request.setAttribute("user",user);
+            request.getSession().setAttribute("user", user);
             return new ModelAndView("index");
         }else{
             m.addObject("error", "用户名或密码错误");
@@ -71,5 +71,13 @@ public class BasicController {
     public ModelAndView logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return new ModelAndView("login");
+    }
+
+    @RequestMapping("index")
+    private ModelAndView index(HttpServletRequest request) {
+        ModelAndView m = new ModelAndView("index");
+        User user = (User)request.getSession().getAttribute("user");
+        m.addObject("user", user);
+        return m;
     }
 }

@@ -16,8 +16,13 @@
 		<result property="lastLoginIp" column="last_login_ip" />
 	</resultMap>
 	<select id="getUser" parameterType="String" resultMap="userMap">
-	    <![CDATA[
+	<![CDATA[
 	    	select * from user where id = #{0}
+	    ]]>
+	</select>
+	<select id="getUserByNum" parameterType="int" resultMap="userMap">
+		<![CDATA[
+	    	select * from user where num = #{0}
 	    ]]>
 	</select>
 	<insert id="addUser" parameterType="buaa.course.model.User"  useGeneratedKeys="true" keyProperty="num">

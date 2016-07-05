@@ -45,8 +45,13 @@
 	    ]]>
 	</select>
 	<select id="getCourseTeacherByTeacher" parameterType="int" resultMap="courseTeacherMap">
-		<![CDATA[
+	<![CDATA[
 	    	select * from course_teacher where teacher_id=#{0}
+	    ]]>
+	</select>
+	<select id="getCourseTeacherBySemesterCourseId" parameterType="int" resultMap="courseTeacherMap">
+		<![CDATA[
+	    	select * from course_teacher where semester_course_id=#{0}
 	    ]]>
 	</select>
 </mapper>

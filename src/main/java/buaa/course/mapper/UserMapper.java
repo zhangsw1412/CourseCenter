@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface UserMapper {
 	User getUser(String id);
+	User getUserByNum(int num);
 	int addUser(User user);
 	int deleteUser(int id);
 	int updateUser(User user);

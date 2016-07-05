@@ -13,4 +13,5 @@ public interface CourseTeacherMapper {
 	int countCourseTeachers();
 	List<CourseTeacher> getCourseTeachersByRange(int start,int row);
 	List<CourseTeacher> getCourseTeacherByTeacher(int teacherId);
+	List<CourseTeacher> getCourseTeacherBySemesterCourseId(int semesterCourseId);
 }
