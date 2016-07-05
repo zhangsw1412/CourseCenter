@@ -15,7 +15,7 @@ public class AssignmentMapperTest {
 	int id;
 	@Test
 	public void test(){
-		Assignment assignment=new Assignment(1,"无","F:\\sample\\sample.txt",new Timestamp(System.currentTimeMillis()/1000*1000),new Timestamp(System.currentTimeMillis()/1000*1000),false,100);
+		Assignment assignment=new Assignment(1,"作业","无","F:\\sample\\sample.txt",new Timestamp(System.currentTimeMillis()/1000*1000),new Timestamp(System.currentTimeMillis()/1000*1000),false,100);
 		Assert.assertEquals(1, mapper.addAssignment(assignment));
 		id = assignment.getId();
 		Assert.assertEquals(assignment.toString(), mapper.getAssignment(assignment.getId()).toString());

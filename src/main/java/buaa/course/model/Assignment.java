@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class Assignment {
 	private int id;
 	private int semesterCourseId;
+	private String name;
 	private String basicRequirement;
 	private String fileUrl;
 	private Timestamp startTime;
@@ -14,10 +15,11 @@ public class Assignment {
 	public Assignment() {
 		super();
 	}
-	public Assignment(int semesterCourseId, String basicRequirement, String fileUrl, Timestamp startTime, Timestamp deadline,
+	public Assignment(int semesterCourseId, String name, String basicRequirement, String fileUrl, Timestamp startTime, Timestamp deadline,
 			boolean teamAvaliable, int highestScore) {
 		super();
 		this.semesterCourseId = semesterCourseId;
+		this.name = name;
 		this.basicRequirement = basicRequirement;
 		this.fileUrl = fileUrl;
 		this.startTime = startTime;
@@ -36,6 +38,12 @@ public class Assignment {
 	}
 	public void setSemesterCourseId(int semesterCourseId) {
 		this.semesterCourseId = semesterCourseId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getBasicRequirement() {
 		return basicRequirement;
@@ -75,8 +83,9 @@ public class Assignment {
 	}
 	@Override
 	public String toString() {
-		return "Assignment [id=" + id + ", semesterCourseId=" + semesterCourseId + ", basicRequirement="
-				+ basicRequirement + ", fileUrl=" + fileUrl + ", startTime=" + startTime + ", deadline=" + deadline
-				+ ", teamAvaliable=" + teamAvaliable + ", highestScore=" + highestScore + "]";
+		return "Assignment [id=" + id + ", semesterCourseId=" + semesterCourseId + ", name=" + name
+				+ ", basicRequirement=" + basicRequirement + ", fileUrl=" + fileUrl + ", startTime=" + startTime
+				+ ", deadline=" + deadline + ", teamAvaliable=" + teamAvaliable + ", highestScore=" + highestScore
+				+ "]";
 	}
 }

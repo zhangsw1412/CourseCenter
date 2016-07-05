@@ -103,6 +103,7 @@ drop table if exists `assignment`;
 create table `assignment`(
 	id int not null auto_increment comment '主键',
 	semester_course_id int not null default 1 comment '对应学期-课程中间表中的主键',
+	name varchar(255) not null default '' comment '作业名称',
 	basic_requirement text comment '基本要求',
 	file_url varchar(255) comment '作业要求附件存储路径',
 	start_time datetime comment '开始时间，以unix时间戳形式存储',

@@ -41,6 +41,6 @@ public class AssignmentService {
     }
 
 	public List<Assignment> getAssignmentsBySemesterCourseId(int semesterCourseId) {
-		return assignmentMapper.getAssignmentSBySemesterCourseId(semesterCourseId);
+		return assignmentMapper.getAssignmentsBySemesterCourseId(semesterCourseId);
 	}
 }
