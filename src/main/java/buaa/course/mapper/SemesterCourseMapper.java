@@ -1,8 +1,8 @@
 package buaa.course.mapper;
 
-import java.util.List;
-
 import buaa.course.model.SemesterCourse;
+
+import java.util.List;
 
 public interface SemesterCourseMapper {
 	SemesterCourse getSemesterCourse(int id);
@@ -12,4 +12,5 @@ public interface SemesterCourseMapper {
 	List<SemesterCourse> getAllSemesterCourses();
 	int countSemesterCourses();
 	List<SemesterCourse> getSemesterCoursesByRange(int start,int lines);
+	List<SemesterCourse> getSemesterCourseBySemesterId(int semesterId);
 }

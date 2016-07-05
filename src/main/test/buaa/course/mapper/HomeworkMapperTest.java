@@ -27,7 +27,6 @@ public class HomeworkMapperTest {
 		Assert.assertEquals(count, mapper.getAllHomeworks().size());
 		Assert.assertEquals(count, mapper.countHomeworks());
 		Assert.assertEquals(1, mapper.getHomeworksByRange(0,1).size());
-		Assert.assertEquals(1, mapper.getHomeworkByIds(homework.getStudentId(),homework.getAssignmentId()).size());
 	}
 	@After
 	public void after()
