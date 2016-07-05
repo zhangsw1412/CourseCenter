@@ -16,6 +16,8 @@ import com.mysql.jdbc.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.Timestamp;
 
@@ -44,15 +46,22 @@ public class HomeworkController {
     	if(user==null||user.getType()!=1)
     		return new ModelAndView("login");*/
     	ModelAndView m= new ModelAndView("correcthomework");
+    	Homework homework = null;
     	if(homeworkId!=null){
-    		Homework homework = homeworkService.getHomeworkById(homeworkId);
-    		m.addObject("homework",homework);
+    		homework = homeworkService.getHomeworkById(homeworkId);
     	}
-	    return m;
+    	if(homework==null){
+    		return new ModelAndView("index");
+    	}
+    	else{
+    		m.addObject("homeworkId",homeworkId);
+        	m.addObject("homework",homework);
+        	return m;
+    	}
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/correcthomework/{homeworkId}")
-    public ModelAndView correctHomeworkPost(@PathVariable Integer homeworkId, HttpServletRequest request){
+    public ModelAndView correctHomeworkPost(@PathVariable Integer homeworkId, HttpServletRequest request, HttpServletResponse response) throws IOException{
 /*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()!=1)
     		return new ModelAndView("login");*/
@@ -80,7 +89,10 @@ public class HomeworkController {
         homework.setScore(score);
         homework.setComment(comment);
         homeworkService.updateHomework(homework);
-        return new ModelAndView("index");
+        if(true){
+        	response.sendRedirect("/homeworks/"+homework.getAssignmentId());        	
+        }
+        return null;
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "/submithomework/{assignmentId}")
@@ -104,7 +116,7 @@ public class HomeworkController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/submithomework/{assignmentId}")
-    public ModelAndView submitHomeworkPost(@PathVariable Integer assignmentId, HttpServletRequest request) throws IOException {
+    public ModelAndView submitHomeworkPost(@PathVariable Integer assignmentId, HttpServletRequest request, HttpServletResponse response) throws IOException {
 /*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()!=0)
     		return new ModelAndView("login");*/
@@ -128,12 +140,15 @@ public class HomeworkController {
     	Timestamp submitTime = new Timestamp(System.currentTimeMillis());
         Homework homework = new Homework();
         homework.setSemesterCourseId(semesterCourseId);
-        homework.setStudentId(Integer.valueOf(request.getParameter("studentid")));
+        homework.setStudentId(1);
         homework.setAssignmentId(assignmentId);
         homework.setText(text);
         homework.setFileUrl("1");
         homework.setSubmitTime(submitTime);
         homeworkService.createHomework(homework);
-        return new ModelAndView("assignments");
+        if(true){
+        	response.sendRedirect("/assignments/"+semesterCourseId);        	
+        }
+        return null;
     }
 }
