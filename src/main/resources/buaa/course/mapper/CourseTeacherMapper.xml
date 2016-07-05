@@ -44,4 +44,9 @@
 	    	select * from course_teacher limit #{0},#{1}
 	    ]]>
 	</select>
+	<select id="getCourseTeacherByTeacher" parameterType="int" resultMap="courseTeacherMap">
+		<![CDATA[
+	    	select * from course_teacher where teacher_id=#{0}
+	    ]]>
+	</select>
 </mapper>

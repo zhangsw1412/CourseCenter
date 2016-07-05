@@ -66,4 +66,10 @@ public class BasicController {
             return m;
         }
     }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return new ModelAndView("login");
+    }
 }
