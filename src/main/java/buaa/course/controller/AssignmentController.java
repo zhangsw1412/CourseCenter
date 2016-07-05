@@ -29,9 +29,9 @@ public class AssignmentController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/assignments/{semesterCourseId}")
     public ModelAndView assignmentsGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
-    	User user = (User)request.getSession().getAttribute("user");
+/*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
-    		return new ModelAndView("login");
+    		return new ModelAndView("login");*/
     	ModelAndView m= new ModelAndView("assignments");
     	if(semesterCourseId!=null){
     		m.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
@@ -41,27 +41,35 @@ public class AssignmentController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/assign/{semesterCourseId}")
     public ModelAndView assignGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
-    	User user = (User)request.getSession().getAttribute("user");
+/*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==1)
-    		return new ModelAndView("login");
+    		return new ModelAndView("login");*/
     	if(semesterCourseId==null)
     		return new ModelAndView("assignmentlist");
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	ModelAndView m = new ModelAndView("assign");
     	m.addObject("course",course);
+    	m.addObject("semesterCourseId", semesterCourseId);
     	return m;
     }
     
     @RequestMapping(method = RequestMethod.POST, value = "/assign/{semesterCourseId}")
     public ModelAndView assignPost(@PathVariable Integer semesterCourseId, HttpServletRequest request){
-    	User user = (User)request.getSession().getAttribute("user");
+/*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==1)
-    		return new ModelAndView("login");
+    		return new ModelAndView("login");*/
     	if(semesterCourseId==null)
     		return new ModelAndView("assignmentlist");
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	ModelAndView m = new ModelAndView("assign");
     	m.addObject("course",course);
+    	
+    	String name = request.getParameter("name");
+    	if(name==null){
+        	m.addObject("error", "作业名称不能为空");
+        	return m;
+        }
+    	
     	String basicRequirement = request.getParameter("basicrequirement");
     	if(basicRequirement==null){
         	m.addObject("error", "请填写作业基本要求");
@@ -82,7 +90,7 @@ public class AssignmentController {
         	return m;
     	}
     	
-    	String deadline_s = request.getParameter("deadine");
+    	String deadline_s = request.getParameter("deadline");
     	if(deadline_s==null){
         	m.addObject("error", "截止时间不能为空");
         	return m;
@@ -130,7 +138,9 @@ public class AssignmentController {
     	
     	Assignment assignment = new Assignment();
     	assignment.setSemesterCourseId(semesterCourseId);
-    	assignment.setBasicRequirement(basicRequirement);;
+    	assignment.setName(name);
+    	assignment.setBasicRequirement(basicRequirement);
+    	assignment.setFileUrl("1");
     	assignment.setStartTime(startTime);
     	assignment.setDeadline(deadline);
     	assignment.setTeamAvaliable(teamAvaliable);
