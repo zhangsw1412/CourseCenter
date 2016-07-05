@@ -1,13 +1,18 @@
 package buaa.course.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class User {
+public class User implements Serializable{
+	private static final long serialVersionUID = 4545526984155472015L;
 	private int num;
 	private String id;
 	private String password;
 	private String name;
 	private boolean gender;
+	/**
+	 * 用户类型：学生0，教师1，教务2
+	 */
 	private int type;
 	private boolean valid;
 	private Timestamp lastLoginTime;

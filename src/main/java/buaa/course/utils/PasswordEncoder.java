@@ -22,6 +22,8 @@ public class PasswordEncoder {
 
     public boolean isPasswordValid(String userId, String password) {
         User user = userService.getUser(userId);
+        if(user == null || !user.isValid())
+            return false;
         return user.getPassword().equals(encode(password));
     }
 }

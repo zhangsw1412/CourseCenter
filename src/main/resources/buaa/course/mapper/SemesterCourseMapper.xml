@@ -44,4 +44,9 @@
 	    	select * from semester_course limit #{0},#{1}
 	    ]]>
 	</select>
+	<select id="getSemesterCourseBySemesterId" parameterType="int" resultMap="SemesterCourseMap">
+		<![CDATA[
+	    	select * from semester_course where semester_id = #{0}
+	    ]]>
+	</select>
 </mapper>
