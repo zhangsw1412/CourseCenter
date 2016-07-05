@@ -10,7 +10,7 @@ create table `user`(
 	gender tinyint(1) unsigned not null default 0 comment '性别：男0女1',
 	type tinyint(1) unsigned not null default 0 comment '用户类型：学生0，教师1，教务2',
 	valid tinyint(1) unsigned not null default 0 comment '帐户是否有效：有效1，无效0',
-	last_login_time int(11) unsigned default null comment '上次登录时间',
+	last_login_time datetime comment '上次登录时间',
 	last_login_ip char(15) default null comment '上次登录ip',
 	primary key(num),
 	key(id)
@@ -21,8 +21,8 @@ create table `semester`(
 	id int not null auto_increment comment '主键',
 	school_year int(4) not null default 1900 comment '学年',
 	season tinyint(1) not null default 0 comment '季度：秋季学期0，春季学期1，夏季学期2',
-	start_date int(11) unsigned not null default 0 comment '开学日期，以unix时间戳形式存储',
-	end_date int unsigned not null default 0 comment '学期结束日期，同上',
+	start_date datetime comment '开学日期，以时间戳形式存储',
+	end_date datetime comment '学期结束日期，同上',
 	weeks tinyint(2) unsigned not null default 16 comment '周数',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='学期表，记录学期信息';
@@ -105,10 +105,10 @@ create table `assignment`(
 	semester_course_id int not null default 1 comment '对应学期-课程中间表中的主键',
 	basic_requirement text comment '基本要求',
 	file_url varchar(255) comment '作业要求附件存储路径',
-	start_time int(11) unsigned not null default 0 comment '开始时间，以unix时间戳形式存储',
-	deadline int(11) unsigned not null default 0 comment '截止时间，以unix时间戳形式存储',
+	start_time datetime comment '开始时间，以unix时间戳形式存储',
+	deadline datetime comment '截止时间，以unix时间戳形式存储',
 	team_avaliable tinyint(1) not null default 0 comment '是否允许团队参加：不允许0/允许1',
-	highest_score tinyint(2) not null default 0 comment '分数上限', 
+	highest_score tinyint(2) not null default 0 comment '分数上限',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='课程作业表';
 
@@ -117,10 +117,11 @@ create table `homework`(
 	id int not null auto_increment comment '主键',
 	semester_course_id int not null default 1 comment '对应学期-课程中间表中的主键',
 	student_id int not null default 1 comment '对应用户表中学生的主键',
+	assignment_id int not null default 1 comment '对应课程作业表的主键',
 	text text comment '文本',
 	file_url varchar(255) comment '作业附件存储路径',
-	score tinyint(2) not null default 0 comment '分数', 
+	score tinyint(2) not null default 0 comment '分数',
 	comment text comment '评论',
-	submit_time int(11) unsigned not null default 0 comment '提交时间，以unix时间戳形式存储',
+	submit_time datetime comment '提交时间，以unix时间戳形式存储',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='学生作业表';

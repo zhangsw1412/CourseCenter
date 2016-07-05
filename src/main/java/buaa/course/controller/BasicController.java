@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 /**
  * Created by 熊纪元 on 2016/7/2.
@@ -55,7 +56,7 @@ public class BasicController {
                 m.addObject("error", "用户已被禁用");
                 return m;
             }
-            user.setLastLoginTime(System.currentTimeMillis()/1000);
+            user.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
             user.setLastLoginIp(IpUtil.getIpAddr(request));
             userService.updateUser(user);
             request.setAttribute("user",user);

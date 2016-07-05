@@ -1,16 +1,18 @@
 package buaa.course.model;
 
+import java.sql.Timestamp;
+
 public class Semester {
 	private int id;
 	private int schoolYear;
 	private int season;
-	private int startDate;
-	private int endDate;
+	private Timestamp startDate;
+	private Timestamp endDate;
 	private int weeks;
 	public Semester() {
 		super();
 	}
-	public Semester(int schoolYear, int season, int startDate, int endDate, int weeks) {
+	public Semester(int schoolYear, int season, Timestamp startDate, Timestamp endDate, int weeks) {
 		super();
 		this.schoolYear = schoolYear;
 		this.season = season;
@@ -36,16 +38,16 @@ public class Semester {
 	public void setSeason(int season) {
 		this.season = season;
 	}
-	public int getStartDate() {
+	public Timestamp getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(int startDate) {
+	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
 	}
-	public int getEndDate() {
+	public Timestamp getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(int endDate) {
+	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
 	}
 	public int getWeeks() {
