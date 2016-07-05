@@ -1,14 +1,17 @@
 package buaa.course.service;
 
 import buaa.course.mapper.CourseMapper;
+import buaa.course.mapper.CourseStudentMapper;
 import buaa.course.mapper.CourseTeacherMapper;
 import buaa.course.mapper.SemesterCourseMapper;
 import buaa.course.model.Course;
+import buaa.course.model.CourseStudent;
 import buaa.course.model.CourseTeacher;
 import buaa.course.model.SemesterCourse;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class CourseService {
 
     @Resource(name = "courseTeacherMapper")
     private CourseTeacherMapper courseTeacherMapper;
+
+    @Resource(name = "courseStudentMapper")
+    private CourseStudentMapper courseStudentMapper;
 
     public Course getCourseById(int id) {
         return courseMapper.getCourse(id);
@@ -58,8 +64,13 @@ public class CourseService {
         return courseMapper.getCourseByCourseCode(courseCode);
     }
 
-    public Course getCourseBySemesterCourseId(int semester_course_id) {
-        SemesterCourse sc = semesterCourseMapper.getSemesterCourse(semester_course_id);
+    public Course getCourseBySemesterCourseId(int semesterCourseId) {
+        SemesterCourse sc = semesterCourseMapper.getSemesterCourse(semesterCourseId);
+        return courseMapper.getCourse(sc.getCourseId());
+    }
+
+    public Course getCourseBySemesterCourseId(int semesterId, int courseId) {
+        SemesterCourse sc = semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId);
         return courseMapper.getCourse(sc.getCourseId());
     }
 
@@ -81,6 +92,21 @@ public class CourseService {
         for(CourseTeacher courseTeacher : courseTeachers){
             for(SemesterCourse semesterCourse : semesterCourses){
                 if(courseTeacher.getSemesterCourseId() == semesterCourse.getId()){
+                    courses.add(getCourseById(semesterCourse.getCourseId()));
+                }
+            }
+        }
+
+        return courses;
+    }
+
+    public List<Course> getCoursesByStudent(int semesterId, int studentId) {
+        List<CourseStudent> courseStudents = courseStudentMapper.getCourseStudentByStudent(studentId);
+        List<SemesterCourse> semesterCourses = semesterCourseMapper.getSemesterCourseBySemesterId(semesterId);
+        List<Course> courses = new ArrayList<>();
+        for(CourseStudent courseStudent : courseStudents){
+            for(SemesterCourse semesterCourse : semesterCourses){
+                if(courseStudent.getSemesterCourseId() == semesterCourse.getId()){
                     courses.add(getCourseById(semesterCourse.getCourseId()));
                 }
             }

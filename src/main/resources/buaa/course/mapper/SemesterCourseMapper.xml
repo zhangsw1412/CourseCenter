@@ -14,6 +14,11 @@
 	    	select * from semester_course where id = #{0}
 	    ]]>
 	</select>
+	<select id="getSemesterCourseByTwoIds" resultMap="SemesterCourseMap">
+		<![CDATA[
+	    	select * from semester_course where semester_id = #{0} and course_id = #{1}
+	    ]]>
+	</select>
 	<insert id="addSemesterCourse" parameterType="buaa.course.model.SemesterCourse"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
 	    	insert into semester_course(semester_id,course_id) values(#{semesterId},#{courseId})

@@ -1,8 +1,11 @@
 package buaa.course.controller;
 
 import buaa.course.model.Course;
+import buaa.course.model.Semester;
 import buaa.course.model.User;
 import buaa.course.service.CourseService;
+import buaa.course.service.SemesterService;
+import buaa.course.service.UserService;
 import buaa.course.utils.PagingUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,12 +30,19 @@ public class CourseController {
     @Resource(name = "courseService")
     private CourseService courseService;
 
+    @Resource(name = "semesterService")
+    private SemesterService semesterService;
+
+    @Resource(name = "userService")
+    private UserService userService;
+
     @Resource(name = "pagingUtil")
     private PagingUtil pagingUtil;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{semesterId}/courseList/{pageNo}")
     public ModelAndView courseList(@PathVariable Integer semesterId, @PathVariable Integer pageNo, HttpServletRequest request) {
-        ModelAndView m = new ModelAndView("course/courseList");
+//        ModelAndView m = new ModelAndView("course/courseList");
+        ModelAndView m = new ModelAndView("course/teacher_course");
         if(semesterId != null){
             User user = (User)request.getSession().getAttribute("user");
             if(user.getType() == 0){
@@ -40,10 +50,17 @@ public class CourseController {
                 pagingUtil.setPageRow(10);
                 pagingUtil.setTotalRow(courses.size());
                 pagingUtil.toNewPage(String.valueOf(pageNo));
-
+                m.addObject("semester", semesterService.getSemesterById(semesterId));
+                m.addObject("teacher", user);
                 m.addObject("courses", courses.subList(pagingUtil.getFirstIndex(), pagingUtil.getLastIndex()+1));
             }else if(user.getType() == 1){
-
+                List<Course> courses = courseService.getCoursesByStudent(semesterId, user.getNum());
+                pagingUtil.setPageRow(10);
+                pagingUtil.setTotalRow(courses.size());
+                pagingUtil.toNewPage(String.valueOf(pageNo));
+                m.addObject("semester", semesterService.getSemesterById(semesterId));
+                m.addObject("student", user);
+                m.addObject("courses", courses.subList(pagingUtil.getFirstIndex(), pagingUtil.getLastIndex()+1));
             }
             List<Course> courses = courseService.getCoursesBySemesterId(semesterId);
             pagingUtil.setPageRow(10);
@@ -60,11 +77,13 @@ public class CourseController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/uploadResource/{semesterCourseId}")
-    public ModelAndView uploadResourceGet(@PathVariable Integer semesterCourseId) {
+    @RequestMapping(method = RequestMethod.GET, value = "/uploadResource/{semesterId}/{courseId}")
+    public ModelAndView uploadResourceGet(@PathVariable Integer semesterId, @PathVariable Integer courseId) {
         ModelAndView m = new ModelAndView("course/uploadResource");
-        if(semesterCourseId != null){
-            Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
+        if(semesterId != null && courseId != null){
+            Semester semester = semesterService.getSemesterById(semesterId);
+            m.addObject("semester", semester);
+            Course course = courseService.getCourseBySemesterCourseId(semesterId, courseId);
             m.addObject("course", course);
         }else{
             m.addObject("message", "找不到课程！");
@@ -78,15 +97,14 @@ public class CourseController {
      * @param request
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST, value = "/uploadResource/{semesterCourseId}")
-    public ModelAndView uploadResourcePost(@PathVariable Integer semesterCourseId, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
+    @RequestMapping(method = RequestMethod.POST, value = "/uploadResource/{semesterId}/{courseId}")
+    public ModelAndView uploadResourcePost(@PathVariable Integer semesterId, @PathVariable Integer courseId, @RequestParam("files") MultipartFile[] files, HttpServletRequest request) {
         ModelAndView m = new ModelAndView("course/uploadResource");
-
         if(files.length <= 0 ){
             m.addObject("message", "未选择文件！");
             return m;
         }
-        if(semesterCourseId == null){
+        if(semesterId == null || courseId == null){
             m.addObject("message", "未选择课程！");
             return m;
         }
@@ -94,19 +112,24 @@ public class CourseController {
         for(MultipartFile file : files){
             if(!file.isEmpty()){
                 // 文件保存路径
-                String filePath = request.getSession().getServletContext().getRealPath("/") + "resource" + File.separator
-                        + semesterCourseId + File.separator + file.getOriginalFilename();
+                String filePath = filePath = getResourcePath(semesterId,courseId,request);
+                File dir = new File(filePath);
+                if(!dir.exists()){
+                    dir.mkdirs();
+                }
                 // 转存文件
                 try{
-                    file.transferTo(new File(filePath));
+                    File temp = new File(filePath+ File.separator + file.getOriginalFilename());
+                    file.transferTo(temp);
                 }catch (Exception e){
+                    e.printStackTrace();
                     m.addObject("message", e.getMessage());
                     return m;
                 }
             }
         }
 
-        Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
+        Course course = courseService.getCourseBySemesterCourseId(semesterId, courseId);
         m.addObject("course", course);
         m.addObject("message", "上传成功！");
         return m;
@@ -117,24 +140,26 @@ public class CourseController {
      *
      * @return
      */
-    @RequestMapping("/{semesterCourseId}/resourceList/{pageNo}")
-    public ModelAndView list(@PathVariable Integer semesterCourseId, @PathVariable Integer pageNo, HttpServletRequest request) {
-        String filePath = request.getSession().getServletContext().getRealPath("/") + "resource" + File.separator
-                + semesterCourseId;
-
+    @RequestMapping("/{semesterId}/{courseId}/resourceList/{pageNo}")
+    public ModelAndView list(@PathVariable Integer semesterId, @PathVariable Integer courseId, @PathVariable Integer pageNo, HttpServletRequest request) {
+        String filePath = getResourcePath(semesterId,courseId,request);
+        File dir = new File(filePath);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
         ModelAndView m = new ModelAndView("course/resourceList");
         File uploadDest = new File(filePath);
         String[] list = uploadDest.list();
         if(list != null){
-            pagingUtil.setPageRow(1);
-            pagingUtil.setTotalRow(list.length);
-            pagingUtil.toNewPage(String.valueOf(pageNo));
-            int from = pagingUtil.getFirstIndex();
-            int to = pagingUtil.getLastIndex();
-
-            m.addObject("files", Arrays.asList(uploadDest.list()).subList(from, to+1));
+            m.addObject("files", Arrays.asList(uploadDest.list()));
         }
 
         return m;
+    }
+
+    private String getResourcePath(int semesterId, int courseId, HttpServletRequest request) {
+        String filePath = request.getSession().getServletContext().getRealPath("/")
+                + "resource" + File.separator + "semester-"+semesterId + File.separator + "course-" + courseId;
+        return filePath;
     }
 }

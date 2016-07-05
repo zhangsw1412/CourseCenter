@@ -9,6 +9,7 @@ public class Course {
 	private int credit;
 	private boolean type;
 	private boolean teamAvaliable;
+
 	public Course() {
 		super();
 	}
