@@ -12,4 +12,5 @@ public interface AssignmentMapper {
 	List<Assignment> getAllAssignments();
 	int countAssignments();
 	List<Assignment> getAssignmentsByRange(int start,int row);
+	List<Assignment> getAssignmentSBySemesterCourseId(int semesterCourseId);
 }

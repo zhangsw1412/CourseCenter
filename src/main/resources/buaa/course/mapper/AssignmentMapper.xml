@@ -49,4 +49,9 @@
 	    	select * from assignment limit #{0},#{1}
 	    ]]>
 	</select>
+	<select id="getAssignmentsBySemesterCourseId" resultMap="assignmentMap">
+	    <![CDATA[
+	    	select * from assignment where semester_course_id=#{semesterCourseId}
+	    ]]>
+	</select>
 </mapper>

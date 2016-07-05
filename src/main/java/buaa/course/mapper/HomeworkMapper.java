@@ -12,5 +12,5 @@ public interface HomeworkMapper {
 	List<Homework> getAllHomeworks();
 	int countHomeworks();
 	List<Homework> getHomeworksByRange(int start,int row);
-	List<Homework> getHomeworkByIds(int studentId,int assignment);
+	List<Homework> getHomeworksByAssignmentId(int assignmentId);
 }
