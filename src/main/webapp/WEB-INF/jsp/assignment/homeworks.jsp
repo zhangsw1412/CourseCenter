@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -12,7 +14,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>添加资源</title>
+	<title>作业管理</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -22,64 +24,33 @@
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
-	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style-metro.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="/media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 
-	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
-    	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+	
+	<link rel="stylesheet" type="text/css" href="/media/css/select2_metro.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/clockface.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/timepicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/colorpicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/datetimepicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
-
-	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
-
-	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
-    
-    <link href="media/css/jquery.fancybox.css" rel="stylesheet" />
-
-	<link href="media/css/jquery.fileupload-ui.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/media/css/DT_bootstrap.css" />
 
 	<!-- END PAGE LEVEL STYLES -->
 
-	<link rel="shortcut icon" href="media/image/favicon.ico" />
+	<link rel="shortcut icon" href="/media/image/favicon.ico" />
 
 </head>
 
@@ -89,9 +60,9 @@
 
 <body class="page-header-fixed">
 
-<!-- BEGIN HEADER -->
+	<!-- BEGIN HEADER -->
 
-<div class="header navbar navbar-inverse navbar-fixed-top">
+	<div class="header navbar navbar-inverse navbar-fixed-top">
 
 		<!-- BEGIN TOP NAVIGATION BAR -->
 
@@ -103,7 +74,7 @@
 
 				<a class="brand" href="teacher_homepage.html">
 
-				<img src="media/image/logo.png" alt="logo" />
+				<img src="/media/image/logo.png" alt="logo" />
 
 				</a>
 
@@ -113,7 +84,7 @@
 
 				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
-				<img src="media/image/menu-toggler.png" alt="" />
+				<img src="/media/image/menu-toggler.png" alt="" />
 
 				</a>          
 
@@ -263,7 +234,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar2.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar2.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -289,7 +260,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar3.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar3.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -315,7 +286,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar1.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar1.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -519,7 +490,7 @@
 
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-						<img alt="" src="media/image/avatar1_small.jpg" />
+						<img alt="" src="/media/image/avatar1_small.jpg" />
 
 						<span class="username">Bob Nilson</span>
 
@@ -559,9 +530,9 @@
 
 		<!-- END TOP NAVIGATION BAR -->
 
-</div>
+	</div>
 
-<!-- END HEADER -->
+	<!-- END HEADER -->
 
 	<!-- BEGIN CONTAINER -->
 
@@ -574,71 +545,107 @@
 			<!-- BEGIN SIDEBAR MENU -->
 
 			<ul class="page-sidebar-menu">
-					
-                 
-                 <li>
-                 <div style="margin:50px"></div>
-                 </li>
 
-				<li class="active ">
+				<li>
 
-					<a href="javascript:;">
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 
-					<i class="icon-bookmark-empty"></i> 
+					<div class="sidebar-toggler hidden-phone"></div>
 
-					<span class="title">课程管理</span>
-
-
-					<span class="selected"></span>
-
-					<span class="arrow open"></span>
-
-					</a>
-
-					<ul class="sub-menu">
-
-						<li class="active">
-
-							<a href="student_course.html">经济管理</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							软件工程</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							体育</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							中国传统文化</a>
-
-						</li>
-
-					</ul>
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 
 				</li>
 
-				
+				<li>
+
+					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+
+					<form class="sidebar-search">
+
+						<div class="input-box">
+
+							<a href="javascript:;" class="remove"></a>
+
+							<input type="text" placeholder="Search..." />
+
+							<input type="button" class="submit" value=" " />
+
+						</div>
+
+					</form>
+
+					<!-- END RESPONSIVE QUICK SEARCH FORM -->
+
+				</li>
+
+				<li class="">
+
+					<a href="teacher_homepage.html">
+
+						<i class="icon-home"></i>
+
+						<span class="title">主页</span>
+
+					</a>
+
+				</li>
+
+				<li class="">
+
+					<a href="teacher_semester.html">
+
+						<i class="icon-table"></i>
+
+						<span class="title">学期列表</span>
+
+					</a>
+
+
+				</li>
+				<li class="">
+
+					<a href="teacher_course.html">
+
+						<i class="icon-cogs"></i>
+
+						<span class="title">课程管理</span>
+
+					</a>
+
+
+				</li>
+				<li class="start active ">
+
+					<a href="teacher_homework.html">
+
+						<i class="icon-file-text"></i>
+
+						<span class="title">作业管理</span>
+
+						<span class="selected"></span>
+
+					</a>
+
+
+				</li>
+
+				<li class="last ">
+
+					<a href="teacher_reshource.html">
+
+						<i class="icon-folder-open"></i>
+
+						<span class="title">资源管理</span>
+
+					</a>
+
+				</li>
 
 			</ul>
 
 			<!-- END SIDEBAR MENU -->
 
 		</div>
-
 
 		<!-- END SIDEBAR -->
 
@@ -682,8 +689,8 @@
 
 						<h3 class="page-title">
 
-							资源管理 
-
+							作业列表
+								<small>选择要批改、评分的作业</small>
 						</h3>
 
 						<ul class="breadcrumb">
@@ -700,17 +707,14 @@
 
 							<li>
 
-								<a href="teacher_resources.html">资源管理</a>
+								<a href="teacher_homework.html">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
 							</li>
 
-							<li>
+							<li><a href="teacher_homework_check.html">作业列表</a></li>
 
-								<a href="teacher_sourceuploading.html">添加资源</a>
-
-							</li>
 						</ul>
 
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -721,100 +725,88 @@
 
 				<!-- END PAGE HEADER-->
 
-				<!-- BEGIN PAGE CONTENT--> 
- 
- 									<div class="row-fluid">
+				<!-- BEGIN PAGE CONTENT-->          
+
+				<div class="row-fluid">
 
 					<div class="span12">
 
-						<!-- BEGIN EXTRAS PORTLET-->
+						<!-- BEGIN SAMPLE TABLE PORTLET-->
 
 						<div class="portlet box blue">
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-upload"></i>资源上传</div>
+								<div class="caption"><i class="icon-pencil"></i>软件开发实习</div>
+
+								<div class="tools">
+
+									<a href="javascript:;" class="collapse"></a>
+
+									<a href="#portlet-config" data-toggle="modal" class="config"></a>
+
+									<a href="javascript:;" class="reload"></a>
+
+									<a href="javascript:;" class="remove"></a>
+
+								</div>
+
 							</div>
 
-							<div class="portlet-body form">
+							<div class="portlet-body">
 
-								<!-- BEGIN FORM-->
+								<table class="table table-hover table-bordered table-striped" id="sample_2">
 
-								<form action="#" class="form-horizontal">
+									<thead>
 
+										<tr>
+											
+											<th>学号</th>
 
-									<div class="control-group">
-                                    
+											<th>姓名</th>
 
-										<label class="control-label">资源名称</label>
+											<th class="hidden-480">提交日期</th>
 
-										<div class="controls">
-								
-                                <input type="text" class="m-wrap span12" >
+											<th>已阅</th>
 
-															</div>
-									</div>
-									
-                                    <div class="control-group">
-                                    
-                                    <label class="control-label">选择资源</label>
+											<th>操作</th>
 
-										<div class="controls">
-								
-                                <span class="btn green fileinput-button">
+										</tr>
 
-									<i class="icon-plus icon-white"></i>
+									</thead>
 
-									<span>添加资源</span>
+									<tbody>
+										<c:forEach items="${homeworklist }" var="item">
+										
+										<tr>
+											<td>${studentlist[item.studentId+0].id }</td>
 
-									<input type="file" name="files[]" multiple> 
-                                    
-									</span></a>
+											<td>${studentlist[item.studentId+0].name }</td>
 
-															</div>
-                                    
-                                    </div>
+											<td>${item.submitTime }</td>
 
-									<div class="control-group">
+											<td><c:if test="${item.score>0}" ><i class="icon-check"><i></c:if>
+											<c:if test="${item.score<0}" ><i class="icon-remove"><i></c:if></td>
 
-										<label class="control-label">备注</label>
+											<td><a href="#" class="btn mini yellow"><i class="icon-pencil"></i> 批改</a></td>
+										</tr>
+										</c:forEach>
+									</tbody>
 
-										<div class="controls">
-
-											<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
-
-										</div>
-
-									</div>
-
-									<div class="form-actions">
-
-										<button type="submit" class="btn blue">上传</button>
-
-										<a href="teacher_resources.html"><button type="button" class="btn">取消</button><a>
-
-									</div>
-
-								</form>
-
-								<!-- END FORM-->
+								</table>
 
 							</div>
 
 						</div>
 
-						<!-- END EXTRAS PORTLET-->
+						<!-- END SAMPLE TABLE PORTLET-->
 
 					</div>
 
-				</div>
-						<!-- END SAMPLE TABLE PORTLET-->
 
-					</div></div>
+						<!-- END BORDERED TABLE PORTLET-->
 
-				<!-- END PAGE CONTENT-->
-
-			</div>
+					</div>
 
 			<!-- END PAGE CONTAINER-->
 
@@ -854,35 +846,47 @@
 
 	<!-- BEGIN CORE PLUGINS -->
 
-	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 
-	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
 
-	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/media/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--[if lt IE 9]>
 
-	<script src="media/js/excanvas.min.js"></script>
+	<script src="/media/js/excanvas.min.js"></script>
 
-	<script src="media/js/respond.min.js"></script>  
+	<script src="/media/js/respond.min.js"></script>  
 
 	<![endif]-->   
 
-	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="/media/js/jquery.blockui.min.js" type="text/javascript"></script>  
 
-	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery.cookie.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	<script src="/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 
 	<!-- END CORE PLUGINS -->
+	
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-	<script src="media/js/app.js"></script>      
+	<script type="text/javascript" src="/media/js/select2.min.js"></script>
+
+	<script type="text/javascript" src="/media/js/jquery.dataTables.min.js"></script>
+
+	<script type="text/javascript" src="/media/js/DT_bootstrap.js"></script>
+
+	<!-- END PAGE LEVEL PLUGINS -->
+
+	<script src="/media/js/app.js"></script>  
+    
+	<script src="/media/js/table-advanced.js"></script>       
 
 	<script>
 
@@ -891,6 +895,8 @@
 		   // initiate layout and plugins
 
 		   App.init();
+		   
+		   TableAdvanced.init();
 
 		});
 
