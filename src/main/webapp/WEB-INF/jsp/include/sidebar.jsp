@@ -29,12 +29,12 @@
             </a>
 
             <ul class="sub-menu">
-                <c:forEach items="${courses}" var="course">
-                    <li >
+                <c:forEach items="${courses}" var="c">
+                    <li <c:if test="${course.id == c.id}">class="active"</c:if></li>
 
-                        <a href="/semester/${semester.id}/courseDetail/${course.id}">
-
-                            ${course.name}</a>
+                        <a href="/semester/${semester.id}/courseDetail/${c.id}">
+                            ${c.name}
+                        </a>
 
                     </li>
                 </c:forEach>
