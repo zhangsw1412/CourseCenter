@@ -102,7 +102,7 @@
 
 			<!-- BEGIN LOGO -->
 
-			<a class="brand" href="teacher.jsp">
+			<a class="brand" href="/index">
 
 				<img src="/media/image/logo.png" alt="logo"/>
 

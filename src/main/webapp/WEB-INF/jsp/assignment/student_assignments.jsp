@@ -70,7 +70,7 @@
 
 			<!-- BEGIN  -->
 
-			<a class="brand" href="#">
+			<a class="brand" href="/index">
 
 				<img src="/media/image/logo.png" alt="logo"/>
 
@@ -235,17 +235,15 @@
 							</div>
 							<div class="portlet-body">
 								<table class="table table-striped table-bordered table-advance table-hover">
-									<thead>
 									<tr>
 										<th><i class="icon-file-text"></i> 作业名称</th>
 										<th class="hidden-phone"><i class="icon-time"></i> 开始时间</th>
 										<th><i class="icon-bell"></i> 截止时间</th>
-										<th></th>
-										<th></th>
-										<th></th>
+										<th>上次提交时间</th>
+										<th>得分</th>
+										<th>评论</th>
+										<th>操作</th>
 									</tr>
-									</thead>
-									<tbody>
 									<c:forEach items="${assignmentlist }" var="item">
 									<tr>
 										<td class="highlight">
@@ -254,13 +252,30 @@
 										</td>
 										<td class="hidden-phone">${item.startTime }</td>
 										<td>${item.deadline }</td>
-										<td></td>
-										<td></td>
-										<td><a href="/assignment/submit/${item.id}" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
+										<td>${homeworks[item.id+0].submitTime}</td>
+
+										<c:if test="${homeworks[item.id+0].comment == null}">
+											<td>
+												未批改
+											</td>
+											<td>
+												未批改
+											</td>
+										</c:if>
+										<c:if test="${homeworks[item.id+0].comment != null}">
+											<td>
+												${homeworks[item.id+0].score}
+											</td>
+											<td>
+												${homeworks[item.id+0].comment}
+											</td>
+										</c:if>
+										<td>
+											<a href="/assignment/submit/${item.id}" class="btn mini green"><i class="icon-eye-open"></i> 查看</a>
+										</td>
 
 									</tr>
 									</c:forEach>
-									</tbody>
 								</table>
 							</div>
 						</div>

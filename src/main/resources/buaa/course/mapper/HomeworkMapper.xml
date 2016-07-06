@@ -20,6 +20,11 @@
 	    	select * from homework where id = #{0}
 	    ]]>
 	</select>
+	<select id="getHomeworkByAssignment" resultMap="homeworkMap">
+	<![CDATA[
+	    	select * from homework where assignment_id = #{0} and student_id = #{1}
+	    ]]>
+	</select>
 	<insert id="addHomework" parameterType="buaa.course.model.Homework"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
 	    	insert into homework(semester_course_id,student_id,assignment_id,text,file_url,score,comment,submit_time) values(#{semesterCourseId},#{studentId},#{assignmentId},#{text},#{fileUrl},#{score},#{comment},#{submitTime})

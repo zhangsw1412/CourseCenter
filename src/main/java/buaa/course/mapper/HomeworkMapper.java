@@ -1,8 +1,8 @@
 package buaa.course.mapper;
 
-import java.util.List;
-
 import buaa.course.model.Homework;
+
+import java.util.List;
 
 public interface HomeworkMapper {
 	Homework getHomework(int id);
@@ -13,4 +13,5 @@ public interface HomeworkMapper {
 	int countHomeworks();
 	List<Homework> getHomeworksByRange(int start,int row);
 	List<Homework> getHomeworksByAssignmentId(int assignmentId);
+	Homework getHomeworkByAssignment(int assignmentId, int studentId);
 }

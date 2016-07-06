@@ -99,7 +99,7 @@
 
 			<!-- BEGIN  -->
 
-			<a class="brand" href="#">
+			<a class="brand" href="/index">
 
 				<img src="/media/image/logo.png" alt="logo"/>
 
@@ -373,14 +373,16 @@
 
 														<div class="controls">
 
-															<textarea class="span12 wysihtml5 m-wrap" rows="6" name="text"></textarea>
+															<textarea class="span12 wysihtml5 m-wrap" rows="6" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>
+																${homework.text}
+															</textarea>
 
 														</div>${error}
 
 													</div>
 
 														<div class="control-group">
-
+															<%--
 															<label class="control-label" style=" font-weight:bolder">上传</label>
 
 															<div class="controls">
@@ -391,10 +393,10 @@
 
 															<span>添加附件</span>
 
-														<input type="file" name="files[]" multiple> 
-                                    
-																</span>
+														<input type="file" name="files[]" multiple>
 
+																</span>
+--%>
 															</div>
 
 														</div>
@@ -413,13 +415,15 @@
 
 												</div>
 
-												<!--/row-->           
+												<!--/row-->
 
-												<div class="form-actions">
+											<div class="form-actions">
+												<c:if test="${homework == null}">
+													<input type="submit" class="btn blue"/>
+													<input type="reset" class="btn" value="重置">
+												</c:if>
 
-													<input type="submit" class="btn blue">
 
-													<input type="button" class="btn">
 
 												</div>
 

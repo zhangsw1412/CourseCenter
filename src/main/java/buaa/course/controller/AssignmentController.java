@@ -2,9 +2,11 @@ package buaa.course.controller;
 
 import buaa.course.model.Assignment;
 import buaa.course.model.Course;
+import buaa.course.model.Homework;
 import buaa.course.model.User;
 import buaa.course.service.AssignmentService;
 import buaa.course.service.CourseService;
+import buaa.course.service.HomeworkService;
 import buaa.course.service.SemesterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -30,21 +33,35 @@ public class AssignmentController {
 	@Resource(name = "semesterService")
 	private SemesterService semesterService;
 
+	@Resource(name = "homeworkService")
+	private HomeworkService homeworkService;
+
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/assignments/{semesterCourseId}")
     public ModelAndView assignmentsGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
     	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
     		return new ModelAndView("login");
-		List<Course> courses = new ArrayList<>();    	ModelAndView m = new ModelAndView();
+		List<Course> courses = new ArrayList<>();
+		ModelAndView m = new ModelAndView();
+		List<Assignment> assignmentlist = assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId);
     	if(user.getType() == 0){
     		m = new ModelAndView("assignment/student_assignments");
     		courses = courseService.getCoursesByStudent(2, user.getNum());
-    		courses = courseService.getCoursesByTeacher(2, user.getNum());    	}
+			Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
+			m.addObject("homeworks", homeworks);
+		}else if(user.getType() == 1){
+			m = new ModelAndView("assignment/teacher_assignments");
+			courses = courseService.getCoursesByTeacher(2, user.getNum());
+		}
+
     	if(semesterCourseId!=null){
-    		m.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
+    		m.addObject("assignmentlist", assignmentlist);
     	}
 		m.addObject("courses", courses);
+		m.addObject("course", courseService.getCourseBySemesterCourseId(semesterCourseId));
 		m.addObject("semester", semesterService.getSemesterById(2));
+
+
     	return m;
     }
     
