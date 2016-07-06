@@ -34,7 +34,10 @@ var FormWizard = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
                     //account
-                    course: {
+                    _limit: {
+                        required: true
+                    },
+                    _team: {
                         required: true
                     },
                     startDate: {
