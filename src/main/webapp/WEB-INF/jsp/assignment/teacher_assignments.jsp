@@ -70,7 +70,7 @@
 
 			<!-- BEGIN  -->
 
-			<a class="brand" href="#">
+			<a class="brand" href="/index">
 
 				<img src="/media/image/logo.png" alt="logo"/>
 
@@ -189,7 +189,15 @@
 								<i class="icon-angle-right"></i>
 
 							</li>
+							<li>
 
+								<a href="#">${course.name}</a>
+
+								<!-- 数据库获取该课程名 -->
+
+								<i class="icon-angle-right"></i>
+
+							</li>
 							<li>
 
 								<a href="teacher_homework.html">作业管理</a>
@@ -239,19 +247,16 @@
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<tr>
 										<th><i class="icon-file-text"></i> 作业名称</th>
-										<th class="hidden-phone"><i class="icon-time"></i> 发布时间</th>
-										<th><i class="icon-bell"></i> 结束时间</th>
-										<th></th>
-										<th></th>
-										<th></th>
+										<th class="hidden-phone"><i class="icon-time"></i> 开始时间</th>
+										<th><i class="icon-bell"></i> 截止时间</th>
+										<th>操作</th>
 									</tr>
 									<tr>
-										<td></td>
-										<td></td>
-										<td class="highlight" class="btn mini green"><a href="teacher_homework_new.html" class="btn mini green"><i class="icon-plus"></i> 添加</a></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td><a  href="http://localhost:8080/teacher_homework_new.html" class="btn mini green"><i class="icon-plus"></i> 添加</a></td>
+
 									</tr>
 									<c:forEach items="${assignmentlist}" var="item">
 									<tr>
@@ -261,9 +266,8 @@
 										</td>
 										<td class="hidden-phone">${item.startTime}</td>
 										<td>${item.deadline}</td>
-										<td><a href="teacher_homework_edit.html" class="btn mini purple"><i class="icon-edit"></i> 编辑</a></td>
-										<td></td>
-										<td></td>
+										<td><a href="/assignment/homeworks/${item.id}" class="btn mini purple"><i class="icon-edit"></i>查看提交情况</a></td>
+
 									</tr>
 									</c:forEach>
 								</table>

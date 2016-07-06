@@ -1,5 +1,7 @@
 package buaa.course.controller;
 
+import java.io.Reader;
+import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -31,7 +33,7 @@ public class SemesterController
 	public String semestereList(Map<String, Object> map)
 	{
 		map.put("semesterList", semesterService.getAllSemesters());
-		return "semesterList";
+		return "semester/semesterList";
 	}
 
 	/**
@@ -44,7 +46,7 @@ public class SemesterController
 	public String addSemester(Map<String, Object> map)
 	{
 		map.put("semester", new Semester());
-		return "inputSemester";
+		return "semester/inputSemester";
 	}
 
 	/**
@@ -54,9 +56,9 @@ public class SemesterController
 	 * @return
 	 */
 	@RequestMapping(value = "/saveSemester", method = RequestMethod.POST)
-	public String saveSemester(Semester semester)
+	public String saveSemester(@RequestParam(value="schoolYear") Integer schoolYear,@RequestParam(value="season") Integer season,@RequestParam(value="startDate") Date startDate,@RequestParam(value="endDate") Date endDate,@RequestParam(value="weeks") Integer weeks)
 	{
-		semesterService.saveSemester(semester);
+		semesterService.saveSemester(new Semester(schoolYear,season,startDate,endDate,weeks));
 		return "redirect:semesterList";
 	}
 

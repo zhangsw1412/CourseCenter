@@ -17,6 +17,17 @@ public class Semester
 		super();
 	}
 
+	public Semester(int schoolYear, int season, Date startDate, Date endDate,
+			int weeks)
+	{
+		super();
+		this.schoolYear = schoolYear;
+		this.season = season;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.weeks = weeks;
+	}
+
 	public Semester(int id, int schoolYear, int season, Date startDate,
 			Date endDate, int weeks)
 	{

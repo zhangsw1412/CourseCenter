@@ -60,558 +60,81 @@
 
 <body class="page-header-fixed">
 
-	<!-- BEGIN HEADER -->
+<!-- BEGIN HEADER -->
 
-	<div class="header navbar navbar-inverse navbar-fixed-top">
+<div class="header navbar navbar-inverse navbar-fixed-top">
 
-		<!-- BEGIN TOP NAVIGATION BAR -->
+	<!-- BEGIN TOP NAVIGATION BAR -->
 
-		<div class="navbar-inner">
+	<div class="navbar-inner">
 
-			<div class="container-fluid">
+		<div class="container-fluid">
 
-				<!-- BEGIN LOGO -->
+			<!-- BEGIN  -->
 
-				<a class="brand" href="teacher_homepage.html">
+			<a class="brand" href="/index">
 
-				<img src="/media/image/logo.png" alt="logo" />
+				<img src="/media/image/logo.png" alt="logo"/>
 
-				</a>
+			</a>
 
-				<!-- END LOGO -->
+			<!-- END LOGO -->
 
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+			<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+			<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
 				<img src="/media/image/menu-toggler.png" alt="" />
 
-				</a>          
+			</a>
 
-				<!-- END RESPONSIVE MENU TOGGLER -->            
+			<!-- END RESPONSIVE MENU TOGGLER -->
 
-				<!-- BEGIN TOP NAVIGATION MENU -->              
+			<!-- BEGIN TOP NAVIGATION MENU -->
 
-				<ul class="nav pull-right">
+			<ul class="nav pull-right">
 
-					<!-- BEGIN NOTIFICATION DROPDOWN -->   
+				<!-- BEGIN USER LOGIN DROPDOWN -->
 
-					<li class="dropdown" id="header_notification_bar">
+				<li class="dropdown user">
 
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-						<i class="icon-warning-sign"></i>
-
-						<span class="badge">6</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended notification">
-
-							<li>
-
-								<p>You have 14 new notifications</p>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-success"><i class="icon-plus"></i></span>
-
-								New user registered. 
-
-								<span class="time">Just now</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-important"><i class="icon-bolt"></i></span>
-
-								Server #12 overloaded. 
-
-								<span class="time">15 mins</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-warning"><i class="icon-bell"></i></span>
-
-								Server #2 not respoding.
-
-								<span class="time">22 mins</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-info"><i class="icon-bullhorn"></i></span>
-
-								Application error.
-
-								<span class="time">40 mins</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-important"><i class="icon-bolt"></i></span>
-
-								Database overloaded 68%. 
-
-								<span class="time">2 hrs</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-important"><i class="icon-bolt"></i></span>
-
-								2 user IP blocked.
-
-								<span class="time">5 hrs</span>
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="#">See all notifications <i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- END NOTIFICATION DROPDOWN -->
-
-					<!-- BEGIN INBOX DROPDOWN -->
-
-					<li class="dropdown" id="header_inbox_bar">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<i class="icon-envelope"></i>
-
-						<span class="badge">5</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended inbox">
-
-							<li>
-
-								<p>You have 12 new messages</p>
-
-							</li>
-
-							<li>
-
-								<a href="inbox.html?a=view">
-
-								<span class="photo"><img src="/media/image/avatar2.jpg" alt="" /></span>
-
-								<span class="subject">
-
-								<span class="from">Lisa Wong</span>
-
-								<span class="time">Just Now</span>
-
-								</span>
-
-								<span class="message">
-
-								Vivamus sed auctor nibh congue nibh. auctor nibh
-
-								auctor nibh...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="inbox.html?a=view">
-
-								<span class="photo"><img src="/media/image/avatar3.jpg" alt="" /></span>
-
-								<span class="subject">
-
-								<span class="from">Richard Doe</span>
-
-								<span class="time">16 mins</span>
-
-								</span>
-
-								<span class="message">
-
-								Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
-
-								auctor nibh...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="inbox.html?a=view">
-
-								<span class="photo"><img src="/media/image/avatar1.jpg" alt="" /></span>
-
-								<span class="subject">
-
-								<span class="from">Bob Nilson</span>
-
-								<span class="time">2 hrs</span>
-
-								</span>
-
-								<span class="message">
-
-								Vivamus sed nibh auctor nibh congue nibh. auctor nibh
-
-								auctor nibh...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="inbox.html">See all messages <i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- END INBOX DROPDOWN -->
-
-					<!-- BEGIN TODO DROPDOWN -->
-
-					<li class="dropdown" id="header_task_bar">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<i class="icon-tasks"></i>
-
-						<span class="badge">5</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended tasks">
-
-							<li>
-
-								<p>You have 12 pending tasks</p>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">New release v1.2</span>
-
-								<span class="percent">30%</span>
-
-								</span>
-
-								<span class="progress progress-success ">
-
-								<span style="width: 30%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Application deployment</span>
-
-								<span class="percent">65%</span>
-
-								</span>
-
-								<span class="progress progress-danger progress-striped active">
-
-								<span style="width: 65%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Mobile app release</span>
-
-								<span class="percent">98%</span>
-
-								</span>
-
-								<span class="progress progress-success">
-
-								<span style="width: 98%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Database migration</span>
-
-								<span class="percent">10%</span>
-
-								</span>
-
-								<span class="progress progress-warning progress-striped">
-
-								<span style="width: 10%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Web server upgrade</span>
-
-								<span class="percent">58%</span>
-
-								</span>
-
-								<span class="progress progress-info">
-
-								<span style="width: 58%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Mobile development</span>
-
-								<span class="percent">85%</span>
-
-								</span>
-
-								<span class="progress progress-success">
-
-								<span style="width: 85%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="#">See all tasks <i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- END TODO DROPDOWN -->
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-
-					<li class="dropdown user">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<img alt="" src="/media/image/avatar1_small.jpg" />
-
-						<span class="username">Bob Nilson</span>
+						<span class="username">${sessionScope.user.name}</span>
 
 						<i class="icon-angle-down"></i>
 
-						</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
-
-							<li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
-
-							<li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox(3)</a></li>
-
-							<li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
-
-							<li class="divider"></li>
-
-							<li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
-
-							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
-
-						</ul>
-
-					</li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU --> 
-
-			</div>
-
-		</div>
-
-		<!-- END TOP NAVIGATION BAR -->
-
-	</div>
-
-	<!-- END HEADER -->
-
-	<!-- BEGIN CONTAINER -->   
-
-	<div class="page-container row-fluid">
-
-		<!-- BEGIN SIDEBAR -->
-
-		<div class="page-sidebar nav-collapse collapse">
-
-			<!-- BEGIN SIDEBAR MENU -->
-
-			<ul class="page-sidebar-menu">
-					
-                 
-                 <li>
-                 <div style="margin:50px"></div>
-                 </li>
-
-				<li class="active ">
-
-					<a href="javascript:;">
-
-					<i class="icon-bookmark-empty"></i> 
-
-					<span class="title">课程管理</span>
-
-
-					<span class="selected"></span>
-
-					<span class="arrow open"></span>
-
 					</a>
 
-					<ul class="sub-menu">
+					<ul class="dropdown-menu">
 
-						<li class="active">
-
-							<a href="student_course.html">经济管理</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							软件工程</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							体育</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							中国传统文化</a>
-
-						</li>
+						<li><a href="/logout"><i class="icon-key"></i>退出</a></li>
 
 					</ul>
 
 				</li>
 
-				
+				<!-- END USER LOGIN DROPDOWN -->
 
 			</ul>
 
-			<!-- END SIDEBAR MENU -->
+			<!-- END TOP NAVIGATION MENU -->
 
 		</div>
 
+	</div>
 
-		<!-- END SIDEBAR -->
+	<!--END OF NAVIGATION BAR -->
+
+</div>
+
+<!-- END HEADER -->
+
+	<!-- BEGIN CONTAINER -->   
+
+	<div class="page-container row-fluid">
+
+		<jsp:include page="../include/sidebar.jsp"></jsp:include>
 
 
 		<!-- BEGIN PAGE -->
@@ -664,7 +187,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="teacher_homepage.html">主页</a> 
+								<a href="#">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -672,7 +195,7 @@
 
 							<li>
 
-								<a href="teacher_homework.html">作业管理</a>
+								<a href="#">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -680,7 +203,7 @@
 
 							<li>
 
-								<a href="teacher_homework_check.html">作业列表</a>
+								<a href="#">作业列表</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -688,7 +211,7 @@
 
 							<li>
 							
-								<a href="teacher_homework_checking.html">作业批改</a>
+								<a href="#">作业批改</a>
 								
 							</li>
 
@@ -784,9 +307,11 @@
 										
 										<h3><strong>查阅</strong></h3>
 
-											<textarea class="span10 m-wrap" rows="8">${homework.text }</textarea>
+											<textarea readonly="readonly" class="span10 m-wrap" rows="8">${homework.text }</textarea>
 											
-											<div class="row-fluid span10"><a class="btn green pull-right"><i class="icon-download"></i></a></div>
+											<div class="row-fluid">
+												附件：<a href="#">${homework.fileUrl}</a>
+											</div>
 									</div>
 									
 									<br/>
@@ -801,18 +326,22 @@
 
 											<label>
 											
-												<big>分数</big><span class="color-red">*</span>
+												<strong>分数</strong><span class="color-red">*</span>
 												
-												<input type="text" class="span1" name="score">
+												<input type="text" name="score" class="span1" <c:if test="${homework.comment != null}">readonly="readonly" value="${homework.score}"</c:if>>
 											
-												<strong><big><big>/${assignment.highestScore }</big></big></strong>
-											
+												<strong><big><big>/${assignment.highestScore}</big></big></strong>
+												<strong><span style="color:red">${illegalScore}</span></strong>
+												<strong><span style="color:red">${scoreOutOfRange}</span></strong>
 											</label>
 
 
-											<label><big>作业评价<big></label>
+											<label><big>作业评价</big></label>
 
-											<textarea class="span10 m-wrap" rows="8" name="comment"></textarea>
+											<textarea class="span10 m-wrap" rows="8" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>
+												${homework.comment}
+												${noComment}
+											</textarea>
 																<div class="row-fluid">
 
 											<div class="span4">
@@ -820,12 +349,14 @@
 											</div>
 					
 											<div class="span8 invoice-block">
-				
+
 											<br />
 				
-											<input type="submit" value="确认" class="btn green big hidden-print"></input>
-				
-											<a class="btn big hidden-print" href="/assignment/correct">取消</a>
+											<c:if test="${homework.comment == null}">
+												<input type="submit" value="确认" class="btn green big hidden-print"/>
+											</c:if>
+
+											<a class="btn big hidden-print" href="/assignment/assignments/${assignment.semesterCourseId}">返回</a>
 				
 											</div>
 				

@@ -62,9 +62,15 @@ public class User implements Serializable{
 	public void setGender(boolean gender) {
 		this.gender = gender;
 	}
+	/**
+	 * 用户类型：学生0，教师1，教务2
+	 */
 	public int getType() {
 		return type;
 	}
+	/**
+	 * 用户类型：学生0，教师1，教务2
+	 */
 	public void setType(int type) {
 		this.type = type;
 	}
