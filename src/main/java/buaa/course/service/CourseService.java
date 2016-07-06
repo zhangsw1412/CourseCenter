@@ -123,17 +123,21 @@ public class CourseService {
     public Map<Long, List<String>> getTeachersName(int semesterId, List<Course> courses) {
         Map<Long, List<String>> result = new HashMap<>();
         for(Course course : courses){
-            SemesterCourse semesterCourse = this.getSemesterCourseBySemesterCourseId(semesterId, course.getId());
-            semesterCourse.getId();
-            List<String> names = new ArrayList<>();
-
-            for(User user : getTeachers(semesterCourse.getId())){
-                names.add(user.getName());
-            }
-            result.put(Long.valueOf(course.getId()), names);
+            result.put(Long.valueOf(course.getId()), getTeachersName(semesterId, course));
         }
 
         return result;
+    }
+
+    public List<String> getTeachersName(int semesterId, Course course) {
+        SemesterCourse semesterCourse = this.getSemesterCourseBySemesterCourseId(semesterId, course.getId());
+
+        List<String> names = new ArrayList<>();
+        for(User user : getTeachers(semesterCourse.getId())){
+            names.add(user.getName());
+        }
+
+        return names;
     }
 
     private List<User> getTeachers(int semesterCourseId) {
