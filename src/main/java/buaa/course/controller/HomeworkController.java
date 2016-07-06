@@ -106,27 +106,25 @@ public class HomeworkController {
         return null;
     }
     
-    @RequestMapping(method = RequestMethod.GET, value = "/submithomework/{assignmentId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/assignment/submit/{assignmentId}")
     public ModelAndView submitHomeworkGet(@PathVariable Integer assignmentId, HttpServletRequest request){
 /*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()!=0)
     		return new ModelAndView("login");*/
-    	ModelAndView m = new ModelAndView("submithomework");
+    	ModelAndView m = new ModelAndView("assignment/submit");
+    	ModelAndView index = new ModelAndView("index");
     	Assignment assignment = null;
-    	if(assignmentId!=null){
-    		assignment = assignmentService.getAssignmentById(assignmentId);
-    	}
-    	if(assignment==null){
-    		return new ModelAndView("index");
-    	}
-    	else{
-    		m.addObject("assignmentId", assignmentId);
-    		m.addObject("assignment",assignment);
-    		return m;
-    	}
+    	if(assignmentId==null)
+    		return index;
+    	assignment = assignmentService.getAssignmentById(assignmentId);
+    	if(assignment==null)
+    		return index;
+    	m.addObject("assignmentId", assignmentId);
+    	m.addObject("assignment",assignment);
+    	return m;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/submithomework/{assignmentId}")
+    @RequestMapping(method = RequestMethod.POST, value = "/assignment/submit/{assignmentId}")
     public ModelAndView submitHomeworkPost(@PathVariable Integer assignmentId, HttpServletRequest request, HttpServletResponse response) throws IOException {
 /*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()!=0)
@@ -140,7 +138,7 @@ public class HomeworkController {
     	int semesterCourseId = assignment.getSemesterCourseId();
     	if(semesterCourseId==0)
     		return index;
-    	ModelAndView submithomework = new ModelAndView("submithomework");
+    	ModelAndView submithomework = new ModelAndView("assignment/submit");
     	String text = request.getParameter("text");
     	if(StringUtils.isNullOrEmpty(text)){
     		submithomework.addObject("assignment", assignment);
@@ -158,7 +156,7 @@ public class HomeworkController {
         homework.setSubmitTime(submitTime);
         homeworkService.createHomework(homework);
         if(true){
-        	response.sendRedirect("/assignments/"+semesterCourseId);        	
+        	response.sendRedirect("/assignment/assignments/"+semesterCourseId);        	
         }
         return null;
     }
