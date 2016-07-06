@@ -65,43 +65,7 @@
 
 <body class="page-header-fixed">
 
-<!-- BEGIN HEADER -->
-
-<div class="header navbar navbar-inverse navbar-fixed-top">
-
-    <!-- BEGIN TOP NAVIGATION BAR -->
-
-    <div class="navbar-inner">
-
-        <div class="container-fluid">
-
-            <!-- BEGIN LOGO -->
-
-            <a class="brand" href="index.html">
-
-                <img src="media/image/logo.png" alt="logo"/>
-
-            </a>
-
-            <!-- END LOGO -->
-            <ul class="nav pull-right">
-                <li class="user">
-                    <a class="username" href="javascript(0):;"><strong>你好，${user.name}</strong></a>
-
-                </li>
-                <li class="user">
-                    <a href="/logout"><strong>注销</strong></a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-
-    <!-- END TOP NAVIGATION BAR -->
-
-</div>
-
-<!-- END HEADER -->
+<jsp:include page="include/header.jsp"></jsp:include>
 
 <!-- BEGIN CONTAINER -->
 
