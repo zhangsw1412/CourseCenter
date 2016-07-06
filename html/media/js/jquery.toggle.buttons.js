@@ -47,8 +47,8 @@
 
               $(this).data('options', options);
 
-              $spanLeft = $('<span></span>').addClass("labelLeft").text(options.label.enabled === undefined ? "ON" : options.label.enabled);
-              $spanRight = $('<span></span>').addClass("labelRight").text(options.label.disabled === undefined ? "OFF " : options.label.disabled);
+              $spanLeft = $('<span></span>').addClass("labelLeft").text(options.label.enabled === undefined ? "是  " : options.label.enabled);
+              $spanRight = $('<span></span>').addClass("labelRight").text(options.label.disabled === undefined ? "  否" : options.label.disabled);
 
               // html layout
               $div = $element.find('input:checkbox').wrap($('<div></div>')).parent();
