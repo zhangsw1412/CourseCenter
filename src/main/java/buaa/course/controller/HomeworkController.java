@@ -4,10 +4,7 @@ import buaa.course.model.Assignment;
 import buaa.course.model.Course;
 import buaa.course.model.Homework;
 import buaa.course.model.User;
-import buaa.course.service.AssignmentService;
-import buaa.course.service.CourseService;
-import buaa.course.service.HomeworkService;
-import buaa.course.service.UserService;
+import buaa.course.service.*;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +30,8 @@ public class HomeworkController {
     private UserService userService;
     @Resource(name = "courseService")
     private CourseService courseService;
+	@Resource(name = "semesterService")
+	private SemesterService semesterService;
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/homeworks/{assignmentId}")
     public ModelAndView homeworksGet(@PathVariable Integer assignmentId, HttpServletRequest request) {
@@ -52,6 +51,8 @@ public class HomeworkController {
     	homeworks.addObject("homeworklist",homeworklist);
     	homeworks.addObject("studentlist",studentlist);
     	homeworks.addObject("courses", courses);
+		homeworks.addObject("semester", semesterService.getSemesterById(2));
+		homeworks.addObject("course", courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId()));
     	return homeworks;
     }
     
@@ -77,6 +78,7 @@ public class HomeworkController {
         m.addObject("course", course);
         m.addObject("student", student);
         m.addObject("courses", courses);
+		m.addObject("semester", semesterService.getSemesterById(2));
         return m;
     }
 
@@ -99,13 +101,48 @@ public class HomeworkController {
         	score = Integer.valueOf(score_s);
         }
         catch(NumberFormatException e){
-        	m.addObject("error", "分数形式不合法");
+			Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
+			Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
+			User student = userService.getUserByNum(homework.getStudentId());
+			m.addObject("homeworkId",homeworkId);
+			m.addObject("homework",homework);
+			m.addObject("assignment", assignment);
+			m.addObject("course", course);
+			m.addObject("student", student);
+			m.addObject("courses", courseService.getCoursesByTeacher(2, user.getNum()));
+			m.addObject("semester", semesterService.getSemesterById(2));
+        	m.addObject("illegalScore", "分数形式不合法");
         	return m;
         }
         if(score<0||score>homeworkService.getHighestScore(homeworkId)){
-        	m.addObject("error", "分数不在允许区间内");
+        	m.addObject("scoreOutOfRange", "分数不在允许区间内");
+			Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
+			Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
+			User student = userService.getUserByNum(homework.getStudentId());
+			m.addObject("homeworkId",homeworkId);
+			m.addObject("homework",homework);
+			m.addObject("assignment", assignment);
+			m.addObject("course", course);
+			m.addObject("student", student);
+			m.addObject("courses", courseService.getCoursesByTeacher(2, user.getNum()));
+			m.addObject("semester", semesterService.getSemesterById(2));
+
         	return m;
         }
+		if(StringUtils.isNullOrEmpty(comment)){
+			m.addObject("noComment", "评论不能为空!");
+			Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
+			Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
+			User student = userService.getUserByNum(homework.getStudentId());
+			m.addObject("homeworkId",homeworkId);
+			m.addObject("homework",homework);
+			m.addObject("assignment", assignment);
+			m.addObject("course", course);
+			m.addObject("student", student);
+			m.addObject("courses", courseService.getCoursesByTeacher(2, user.getNum()));
+			m.addObject("semester", semesterService.getSemesterById(2));
+			return m;
+		}
         homework.setScore(score);
         homework.setComment(comment);
         homeworkService.updateHomework(homework);
@@ -135,8 +172,10 @@ public class HomeworkController {
     	m.addObject("assignmentId", assignmentId);
     	m.addObject("assignment",assignment);
     	m.addObject("courses", courses);
-    	m.addObject("course",course);
-    	return m;
+		m.addObject("semester", semesterService.getSemesterById(2));
+		m.addObject("homework", homeworkService.getHomeworkByAssignment(assignmentId, user.getNum()));
+		m.addObject("course",course);
+		return m;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/submit/{assignmentId}")

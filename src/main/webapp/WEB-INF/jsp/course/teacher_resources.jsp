@@ -73,7 +73,7 @@
 
 			<!-- BEGIN LOGO -->
 
-			<a class="brand" href="teacher.jsp">
+			<a class="brand" href="/index">
 
 				<img src="/media/image/logo.png" alt="logo"/>
 
@@ -192,7 +192,15 @@
 								<i class="icon-angle-right"></i>
 
 							</li>
+							<li>
 
+								<a href="#">${course.name}</a>
+
+								<!-- 数据库获取该课程名 -->
+
+								<i class="icon-angle-right"></i>
+
+							</li>
 							<li>
 
 								<a href="teacher_resources.html">资源管理</a>

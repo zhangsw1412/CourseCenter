@@ -2,11 +2,14 @@ package buaa.course.service;
 
 import buaa.course.mapper.AssignmentMapper;
 import buaa.course.mapper.HomeworkMapper;
+import buaa.course.model.Assignment;
 import buaa.course.model.Homework;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -51,4 +54,17 @@ public class HomeworkService {
 	public List<Homework> getHomeworksByAssignmentId(int assignmentId) {
 		return homeworkMapper.getHomeworksByAssignmentId(assignmentId);
 	}
+
+    public Map<Long, Homework> getHomeworksByAssignments(List<Assignment> assignmentlist, int studentId) {
+        Map<Long, Homework> result = new HashMap<>();
+        for(Assignment assignment : assignmentlist){
+            Homework homework = getHomeworkByAssignment(assignment.getId(), studentId);
+            result.put(Long.valueOf(assignment.getId()), homework);
+        }
+        return result;
+    }
+
+    public Homework getHomeworkByAssignment(int assignmentId, int num) {
+        return homeworkMapper.getHomeworkByAssignment(assignmentId, num);
+    }
 }

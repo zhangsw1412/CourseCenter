@@ -100,10 +100,10 @@ public class BasicController {
         User user = (User)request.getSession().getAttribute("user");
         if(user.getType() == 0){
             m =  new ModelAndView("student");
-            courses = courseService.getCoursesByTeacher(2, user.getNum());
+            courses = courseService.getCoursesByStudent(2, user.getNum());
         }else if(user.getType() == 1){
             m = new ModelAndView("teacher");
-            courses = courseService.getCoursesByStudent(2, user.getNum());
+            courses = courseService.getCoursesByTeacher(2, user.getNum());
         }
         m.addObject("semester", semesterService.getSemesterById(2));
         m.addObject("courses", courses);

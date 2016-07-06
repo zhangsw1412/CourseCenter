@@ -72,7 +72,7 @@
 
 			<!-- BEGIN  -->
 
-			<a class="brand" href="#">
+			<a class="brand" href="/index">
 
 				<img src="/media/image/logo.png" alt="logo"/>
 
@@ -187,7 +187,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="teacher_homepage.html">主页</a> 
+								<a href="#">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -195,7 +195,7 @@
 
 							<li>
 
-								<a href="teacher_homework.html">作业管理</a>
+								<a href="#">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -203,7 +203,7 @@
 
 							<li>
 
-								<a href="teacher_homework_check.html">作业列表</a>
+								<a href="#">作业列表</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -211,7 +211,7 @@
 
 							<li>
 							
-								<a href="teacher_homework_checking.html">作业批改</a>
+								<a href="#">作业批改</a>
 								
 							</li>
 
@@ -307,9 +307,11 @@
 										
 										<h3><strong>查阅</strong></h3>
 
-											<textarea class="span10 m-wrap" rows="8">${homework.text }</textarea>
+											<textarea readonly="readonly" class="span10 m-wrap" rows="8">${homework.text }</textarea>
 											
-											<div class="row-fluid span10"><a class="btn green pull-right"><i class="icon-download"></i></a></div>
+											<div class="row-fluid">
+												附件：<a href="#">${homework.fileUrl}</a>
+											</div>
 									</div>
 									
 									<br/>
@@ -324,18 +326,22 @@
 
 											<label>
 											
-												<big>分数</big><span class="color-red">*</span>
+												<strong>分数</strong><span class="color-red">*</span>
 												
-												<input type="text" class="span1" name="score">
+												<input type="text" name="score" class="span1" <c:if test="${homework.comment != null}">readonly="readonly" value="${homework.score}"</c:if>>
 											
-												<strong><big><big>/${assignment.highestScore }</big></big></strong>
-											
+												<strong><big><big>/${assignment.highestScore}</big></big></strong>
+												<strong><span style="color:red">${illegalScore}</span></strong>
+												<strong><span style="color:red">${scoreOutOfRange}</span></strong>
 											</label>
 
 
-											<label><big>作业评价<big></label>
+											<label><big>作业评价</big></label>
 
-											<textarea class="span10 m-wrap" rows="8" name="comment"></textarea>
+											<textarea class="span10 m-wrap" rows="8" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>
+												${homework.comment}
+												${noComment}
+											</textarea>
 																<div class="row-fluid">
 
 											<div class="span4">
@@ -343,12 +349,14 @@
 											</div>
 					
 											<div class="span8 invoice-block">
-				
+
 											<br />
 				
-											<input type="submit" value="确认" class="btn green big hidden-print"></input>
-				
-											<a class="btn big hidden-print" href="/assignment/correct">取消</a>
+											<c:if test="${homework.comment == null}">
+												<input type="submit" value="确认" class="btn green big hidden-print"/>
+											</c:if>
+
+											<a class="btn big hidden-print" href="/assignment/assignments/${assignment.semesterCourseId}">返回</a>
 				
 											</div>
 				

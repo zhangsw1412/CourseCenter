@@ -64,7 +64,7 @@
 
             <!-- BEGIN  -->
 
-            <a class="brand" href="#">
+            <a class="brand" href="/index">
 
                 <img src="/media/image/logo.png" alt="logo"/>
 
