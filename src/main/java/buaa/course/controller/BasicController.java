@@ -51,11 +51,18 @@ public class BasicController {
             user.setLastLoginIp(IpUtil.getIpAddr(request));
             userService.updateUser(user);
             request.getSession().setAttribute("user", user);
-            return new ModelAndView("index");
+
+            if(user.getType() == 0){
+                return new ModelAndView("student");
+            }else if(user.getType() == 1){
+                return new ModelAndView("teacher");
+            }else if(user.getType() == 2){
+                return new ModelAndView("admin");
+            }
         }else{
             m.addObject("error", "用户名或密码错误");
-            return m;
         }
+        return m;
     }
 
     @RequestMapping("/logout")

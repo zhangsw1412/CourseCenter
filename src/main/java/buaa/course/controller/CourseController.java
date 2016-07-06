@@ -129,7 +129,7 @@ public class CourseController {
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 // 文件保存路径
-                String filePath = filePath = getResourcePath(semesterId, courseId, request);
+                String filePath = getResourcePath(semesterId, courseId, request);
                 File dir = new File(filePath);
                 if (!dir.exists()) {
                     dir.mkdirs();
