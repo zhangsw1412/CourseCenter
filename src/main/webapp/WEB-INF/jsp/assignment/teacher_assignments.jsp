@@ -261,7 +261,7 @@
 										</td>
 										<td class="hidden-phone">${item.startTime}</td>
 										<td>${item.deadline}</td>
-										<td><a href="teacher_homework_edit.html" class="btn mini purple"><i class="icon-edit"></i> 编辑</a></td>
+										<td><a href="/assignment/homeworks/${item.id}" class="btn mini purple"><i class="icon-edit"></i>查看提交情况</a></td>
 										<td></td>
 										<td></td>
 									</tr>

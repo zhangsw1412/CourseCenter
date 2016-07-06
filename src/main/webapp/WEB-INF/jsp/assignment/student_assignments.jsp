@@ -184,7 +184,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="student_homepage.html">主页</a> 
+								<a href="#">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -194,7 +194,7 @@
 
 							<li>
 
-								<a href="student_course.html">经济管理</a>
+								<a href="#">经济管理</a>
 								
 								<!-- 数据库获取该课程名 -->
 
@@ -204,7 +204,7 @@
 
 							<li>
 
-								<a href="student_homework.html">作业管理</a>
+								<a href="#">作业管理</a>
 
 							</li>
 
@@ -256,8 +256,8 @@
 										<td>${item.deadline }</td>
 										<td></td>
 										<td></td>
-										<td><a href="student_hwview.html" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
-										
+										<td><a href="/assignment/submit/${item.id}" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
+
 									</tr>
 									</c:forEach>
 									</tbody>

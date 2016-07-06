@@ -186,7 +186,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="teacher_homepage.html">主页</a> 
+								<a href="#">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -194,13 +194,13 @@
 
 							<li>
 
-								<a href="teacher_homework.html">作业管理</a>
+								<a href="#">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
 							</li>
 
-							<li><a href="teacher_homework_check.html">作业列表</a></li>
+							<li><a href="#">作业列表</a></li>
 
 						</ul>
 
@@ -272,10 +272,10 @@
 
 											<td>${item.submitTime }</td>
 
-											<td><c:if test="${item.score>0}" ><i class="icon-check"><i></c:if>
-											<c:if test="${item.score<0}" ><i class="icon-remove"><i></c:if></td>
+											<td><c:if test="${item.score>0}" ><i class="icon-check"></i></c:if>
+											<c:if test="${item.score<0}" ><i class="icon-remove"></i></c:if></td>
 
-											<td><a href="#" class="btn mini yellow"><i class="icon-pencil"></i> 批改</a></td>
+											<td><a href="/assignment/correct/${item.id}" class="btn mini yellow"><i class="icon-pencil"></i> 批改</a></td>
 										</tr>
 										</c:forEach>
 									</tbody>
