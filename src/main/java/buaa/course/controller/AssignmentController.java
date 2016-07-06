@@ -31,15 +31,16 @@ public class AssignmentController {
     	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
     		return new ModelAndView("login");
-    	List<Course> courses;
+    	List<Course> courses=null;
     	ModelAndView m = new ModelAndView();
     	if(user.getType() == 0){
     		m = new ModelAndView("assignment/student_assignments");
     		courses = courseService.getCoursesByStudent(2, user.getNum());
     	}
-    	else if(user.getType() == 1)
+    	else if(user.getType() == 1){
     		m = new ModelAndView("assignment/teacher_assignments");
     		courses = courseService.getCoursesByTeacher(2, user.getNum());
+    	}
     	if(semesterCourseId!=null){
     		m.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
     		m.addObject("courses", courses);
@@ -68,9 +69,9 @@ public class AssignmentController {
     
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/assign/{semesterCourseId}")
     public ModelAndView assignPost(@PathVariable Integer semesterCourseId, HttpServletRequest request){
-/*    	User user = (User)request.getSession().getAttribute("user");
+    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==1)
-    		return new ModelAndView("login");*/
+    		return new ModelAndView("login");
     	if(semesterCourseId==null)
     		return new ModelAndView("assignmentlist");
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
