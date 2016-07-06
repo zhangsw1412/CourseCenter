@@ -64,7 +64,10 @@ public class CourseService {
 
     public Course getCourseBySemesterCourseId(int semesterCourseId) {
         SemesterCourse sc = semesterCourseMapper.getSemesterCourse(semesterCourseId);
-        return courseMapper.getCourse(sc.getCourseId());
+        if(sc!=null)
+        	return courseMapper.getCourse(sc.getCourseId());
+        else
+        	return null;
     }
 
     public Course getCourseBySemesterCourseId(int semesterId, int courseId) {
