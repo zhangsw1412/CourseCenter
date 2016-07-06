@@ -27,19 +27,23 @@ public class AssignmentController {
     private CourseService courseService;
 
 
-    @RequestMapping(method = RequestMethod.GET, value = "/assignment/teacher_homework/{semesterCourseId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/assignment/assignments/{semesterCourseId}")
     public ModelAndView assignmentsGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
 /*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
     		return new ModelAndView("login");*/
-    	ModelAndView m= new ModelAndView("assignment/teacher_homework");
+    	ModelAndView m = new ModelAndView();
+    	if(0==0)
+    		m = new ModelAndView("assignment/student_assignments");
+    	else
+    		m = new ModelAndView("assignment/teacher_assignments");
     	if(semesterCourseId!=null){
     		m.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
     	}
     	return m;
     }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/assignment/teacher_assign/{semesterCourseId}")
+    
+    @RequestMapping(method = RequestMethod.GET, value = "/assignment/assign/{semesterCourseId}")
     public ModelAndView assignGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
 /*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==1)
@@ -49,13 +53,13 @@ public class AssignmentController {
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	if(course==null)
     		return new ModelAndView("assignmentlist");
-    	ModelAndView m = new ModelAndView("assignment/teacher_assign");
+    	ModelAndView m = new ModelAndView("assignment/assign");
     	m.addObject("course",course);
     	m.addObject("semesterCourseId", semesterCourseId);
     	return m;
     }
     
-    @RequestMapping(method = RequestMethod.POST, value = "/assignment/teacher_assign/{semesterCourseId}")
+    @RequestMapping(method = RequestMethod.POST, value = "/assignment/assign/{semesterCourseId}")
     public ModelAndView assignPost(@PathVariable Integer semesterCourseId, HttpServletRequest request){
 /*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==1)
@@ -148,7 +152,7 @@ public class AssignmentController {
     	assignment.setTeamAvaliable(teamAvaliable);
     	assignment.setHighestScore(highestScore);
     	assignmentService.createAssignment(assignment);
-    	ModelAndView assignments = new ModelAndView("assignments");
+    	ModelAndView assignments = new ModelAndView("assignment/assignments");
     	assignments.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
     	return assignments;
     }

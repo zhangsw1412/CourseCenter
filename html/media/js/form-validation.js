@@ -18,9 +18,6 @@ var FormValidation = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 ignore: "",
                 rules: {
-                    course: {
-                        required: true
-                    },
                     assign_name: {
                         required: true
                     },
@@ -33,6 +30,9 @@ var FormValidation = function () {
                     endDate: {
                         required: true
                     },
+                    _limit: {
+                        required: true
+                    }
                 },
 
                 invalidHandler: function (event, validator) { //display error alert on form submit              

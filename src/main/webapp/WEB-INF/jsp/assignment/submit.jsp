@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -12,7 +14,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>作业上传</title>
+	<title>提交作业</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -22,60 +24,60 @@
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
-	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style-metro.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style2.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style2.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="/media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 
-	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
 	<!-- END GLOBAL MANDATORY STYLES -->
 
-	<link rel="shortcut icon" href="media/image/favicon.ico" />
-        	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
+	<link rel="shortcut icon" href="/media/image/favicon.ico" />
+        	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-fileupload.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.gritter.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/chosen.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/select2_metro.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.tagsinput.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/clockface.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/clockface.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-wysihtml5.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/datepicker.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/timepicker.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/timepicker.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/colorpicker.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/colorpicker.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-toggle-buttons.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/daterangepicker.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/datetimepicker.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/datetimepicker.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/multi-select-metro.css" />
 
-	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 
-	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
+	<link rel="stylesheet" href="/media/css/DT_bootstrap.css" />
     
-    <link href="media/css/jquery.fancybox.css" rel="stylesheet" />
+    <link href="/media/css/jquery.fancybox.css" rel="stylesheet" />
 
-	<link href="media/css/jquery.fileupload-ui.css" rel="stylesheet" />
+	<link href="/media/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
 </head>
 
@@ -99,7 +101,7 @@
 
 				<a class="brand" href="student_homepage.html">
 
-				<img src="media/image/logo.png" alt="logo" />
+				<img src="/media/image/logo.png" alt="logo" />
 
 				</a>
 
@@ -109,7 +111,7 @@
 
 				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
-				<img src="media/image/menu-toggler.png" alt="" />
+				<img src="/media/image/menu-toggler.png" alt="" />
 
 				</a>          
 
@@ -163,9 +165,67 @@
 
 		<div class="page-sidebar nav-collapse collapse">
 
-			<!-- BEGIN SIDEBAR MENU -->
+			<!-- BEGIN SIDEBAR MENU -->        
 
 			<ul class="page-sidebar-menu">
+
+				<li>
+
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+					<div class="sidebar-toggler hidden-phone"></div>
+
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+				</li>
+
+				<li>
+
+					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+
+					<form class="sidebar-search">
+
+						<div class="input-box">
+
+							<a href="javascript:;" class="remove"></a>
+
+							<input type="text" placeholder="Search..." />
+
+							<input type="button" class="submit" value=" " />
+
+						</div>
+
+					</form>
+
+					<!-- END RESPONSIVE QUICK SEARCH FORM -->
+
+				</li>
+
+				<li class="start ">
+
+					<a href="student_homepage.html">
+
+					<i class="icon-home"></i> 
+
+					<span class="title">主页</span>
+
+					</a>
+
+				</li>
+                
+                
+                <li class="">
+
+					<a href="student_homepage.html">
+
+					<i class="icon-table"></i> 
+
+					<span class="title">学期管理</span>
+
+					</a>
+
+				</li>
+                
 
 				<li class="active ">
 
@@ -218,7 +278,18 @@
 
 				</li>
 
-				
+
+				<li class="last ">
+
+					<a href="#">
+
+					<i class="icon-bar-chart"></i> 
+
+					<span class="title">团队管理</span>
+
+					</a>
+
+				</li>
 
 			</ul>
 
@@ -325,7 +396,7 @@
 											<div class="caption"><i class="icon-reorder"></i>作业详情</div>
 
 										</div>
-
+										<form action="/assignment/submit/${assignmentId}" method="POST">
 										<div class="portlet-body form">
 
 											<!-- BEGIN FORM-->
@@ -346,7 +417,7 @@
 
 															<div class="controls">
 
-																<span class="text">组队申请表</span>
+																<span class="text">${assignment.name}</span>
 
 															</div>
 
@@ -370,7 +441,7 @@
 
 															<div class="controls">
 
-																<span class="text">2016-7-1 下午9:00</span> 
+																<span class="text">${assignment.deadline }</span> 
 
 															</div>
 
@@ -416,7 +487,7 @@
 
 															<div class="controls">
 
-																<span class="text">请大家自行组队，并填写组员信息，Scrum Master，Prouduct Master等角色</span>
+																<span class="text">${assignment.basicRequirement}</span>
 
 															</div>
 
@@ -439,9 +510,9 @@
 
 														<div class="controls">
 
-															<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
+															<textarea class="span12 wysihtml5 m-wrap" rows="6" name="text"></textarea>
 
-														</div>
+														</div>${error}
 
 													</div>
 
@@ -475,8 +546,6 @@
                                                 <div style="margin:20px"></div>
 												<!--/row-->                
 
-
-
 													<!--/span-->
 
 												</div>
@@ -485,19 +554,19 @@
 
 												<div class="form-actions">
 
-													<button type="submit" class="btn blue"><i class="icon-upload-alt"></i> 提交</button>
+													<input type="submit" class="btn blue">
 
-													<button type="button" class="btn">Back</button>
+													<input type="button" class="btn">
 
 												</div>
 
 											</div>
 
 											<!-- END FORM-->  
-
-										</div>
+											</form>
 
 									</div>
+										</div>
 
 								</div>
 
@@ -539,35 +608,35 @@
 
 	<!-- BEGIN CORE PLUGINS -->
 
-	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 
-	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
 
-	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/media/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--[if lt IE 9]>
 
-	<script src="media/js/excanvas.min.js"></script>
+	<script src="/media/js/excanvas.min.js"></script>
 
-	<script src="media/js/respond.min.js"></script>  
+	<script src="/media/js/respond.min.js"></script>  
 
 	<![endif]-->   
 
-	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="/media/js/jquery.blockui.min.js" type="text/javascript"></script>  
 
-	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery.cookie.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	<script src="/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="media/js/app.js"></script>      
+	<script src="/media/js/app.js"></script>      
 
 	<script>
 
