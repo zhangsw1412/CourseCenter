@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -12,7 +14,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>添加新学期</title>
+	<title>作业管理</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -22,35 +24,33 @@
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
-	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" media="screen"/>
 
-	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style-metro.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style-responsive.css" rel="stylesheet" type="text/css" />
 
-	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="/media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 
-	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
 
-	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
+	<link href="/media/css/invoice.css" rel="stylesheet" type="text/css"/>
 
-	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
-	
-	<link rel="stylesheet" type="text/css" href="media/css/jquery-ui-1.10.1.custom.min.css"/>
+	<link href="/media/css/print.css" rel="stylesheet" type="text/css" media="print"/>
 
 	<!-- END PAGE LEVEL STYLES -->
 
-	<link rel="shortcut icon" href="media/image/favicon.ico" />
+	<link rel="shortcut icon" href="/media/image/favicon.ico" />
 
 </head>
 
@@ -74,7 +74,7 @@
 
 				<a class="brand" href="teacher_homepage.html">
 
-				<img src="media/image/logo.png" alt="logo" />
+				<img src="/media/image/logo.png" alt="logo" />
 
 				</a>
 
@@ -84,7 +84,7 @@
 
 				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
-				<img src="media/image/menu-toggler.png" alt="" />
+				<img src="/media/image/menu-toggler.png" alt="" />
 
 				</a>          
 
@@ -234,7 +234,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar2.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar2.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -260,7 +260,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar3.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar3.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -286,7 +286,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar1.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar1.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -490,7 +490,7 @@
 
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-						<img alt="" src="media/image/avatar1_small.jpg" />
+						<img alt="" src="/media/image/avatar1_small.jpg" />
 
 						<span class="username">Bob Nilson</span>
 
@@ -534,101 +534,75 @@
 
 	<!-- END HEADER -->
 
-	<!-- BEGIN CONTAINER -->
+	<!-- BEGIN CONTAINER -->   
 
 	<div class="page-container row-fluid">
 
 		<!-- BEGIN SIDEBAR -->
 
-		
 		<div class="page-sidebar nav-collapse collapse">
 
-			<!-- BEGIN SIDEBAR MENU -->        
+			<!-- BEGIN SIDEBAR MENU -->
 
 			<ul class="page-sidebar-menu">
+					
+                 
+                 <li>
+                 <div style="margin:50px"></div>
+                 </li>
 
-				<li>
+				<li class="active ">
 
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<a href="javascript:;">
 
-					<div class="sidebar-toggler hidden-phone"></div>
+					<i class="icon-bookmark-empty"></i> 
 
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<span class="title">课程管理</span>
 
-				</li>
-
-				<li>
-
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-
-					<form class="sidebar-search">
-
-						<div class="input-box">
-
-							<a href="javascript:;" class="remove"></a>
-
-							<input type="text" placeholder="Search..." />
-
-							<input type="button" class="submit" value=" " />
-
-						</div>
-
-					</form>
-
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-
-				</li>
-
-				<li class=" ">
-
-					<a href="admin_homepage.html">
-
-					<i class="icon-home"></i> 
-
-					<span class="title">主页</span>
-
-					</a>
-
-				</li>
-
-				<li class="start active ">
-
-					<a href="admin_semester.html">
-
-					<i class="icon-table"></i> 
-
-					<span class="title">学期列表</span>
 
 					<span class="selected"></span>
 
-					</a>
-
-
-				</li>
-				<li class="">
-
-					<a href="admin_course.html">
-
-						<i class="icon-cogs"></i>
-
-						<span class="title">课程管理</span>
+					<span class="arrow open"></span>
 
 					</a>
 
+					<ul class="sub-menu">
+
+						<li class="active">
+
+							<a href="student_course.html">经济管理</a>
+
+						</li>
+
+						<li >
+
+							<a href="student_course.html">
+
+							软件工程</a>
+
+						</li>
+
+						<li >
+
+							<a href="student_course.html">
+
+							体育</a>
+
+						</li>
+
+						<li >
+
+							<a href="student_course.html">
+
+							中国传统文化</a>
+
+						</li>
+
+					</ul>
 
 				</li>
-				<li class="">
 
-					<a href="admin_infoManager.html">
-
-						<i class="icon-file"></i>
-
-						<span class="title">基本信息管理</span>
-
-					</a>
-
-
-				</li>
+				
 
 			</ul>
 
@@ -639,7 +613,8 @@
 
 		<!-- END SIDEBAR -->
 
-		<!-- BEGIN PAGE -->  
+
+		<!-- BEGIN PAGE -->
 
 		<div class="page-content">
 
@@ -669,17 +644,17 @@
 
 			<div class="container-fluid">
 
-				<!-- BEGIN PAGE HEADER-->   
+				<!-- BEGIN PAGE HEADER-->
 
-				<div class="row-fluid">
+				<div class="row-fluid hidden-print">
 
 					<div class="span12">
 
+						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
 						<h3 class="page-title">
 
-							添加学期
-
-							 <small>编辑新学期信息</small>
+							作业批改 <small>请为这名学生的作业进行打分与评价</small>
 
 						</h3>
 
@@ -691,21 +666,35 @@
 
 								<a href="teacher_homepage.html">主页</a> 
 
-								<span class="icon-angle-right"></span>
+								<i class="icon-angle-right"></i>
 
 							</li>
 
 							<li>
 
-								<a href="teacher_homework.html">学期管理</a>
+								<a href="teacher_homework.html">作业管理</a>
 
-								<span class="icon-angle-right"></span>
+								<i class="icon-angle-right"></i>
 
 							</li>
 
-							<li><a href="teacher_homework_edit.html">添加学期</a></li>
+							<li>
+
+								<a href="teacher_homework_check.html">作业列表</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+
+							<li>
+							
+								<a href="teacher_homework_checking.html">作业批改</a>
+								
+							</li>
 
 						</ul>
+
+						<!-- END PAGE TITLE & BREADCRUMB-->
 
 					</div>
 
@@ -714,159 +703,157 @@
 				<!-- END PAGE HEADER-->
 
 				<!-- BEGIN PAGE CONTENT-->
-				
 
-				<div class="row-fluid">
+				<div class="row-fluid invoice">
 
-					<div class="span12">
+					<div class="row-fluid">
 
-						<!-- BEGIN VALIDATION STATES-->
+								<div class="span3">
 
-						<div class="portlet box blue">
+									<h4>课程：</h4>
 
-							<div class="portlet-title">
+									<ul class="unstyled">
 
-								<div class="caption"><i class="icon-edit"></i>添加学期</div>
+										<h1>${course.name}<h1>
 
-								<div class="tools">
-
-									<a href="javascript:;" class="collapse"></a>
-
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-
-									<a href="javascript:;" class="reload"></a>
-
-									<a href="javascript:;" class="remove"></a>
+									</ul>
 
 								</div>
 
-							</div>
+								<div class="span4">
 
-							<div class="portlet-body form">
+									<h4>作业信息：</h4>
 
-								<!-- BEGIN FORM-->
+									<ul class="unstyled">
 
-								<form action="#" id="form_sample_1" class="form-horizontal">
+										<li><strong>作业名:</strong> ${assignment.name }</li>
 
-									<div class="alert alert-error hide">
+										<li><strong>开始时间：</strong> ${assignment.startTime }</li>
 
-										<button class="close" data-dismiss="alert"></button>
+										<li><strong>结束时间：</strong> ${assignment.deadline }</li>
 
-										You have some form errors. Please check below.
+										<li><strong>详细需求：</strong>	 ${assignment.basicRequirement }</li>
 
-									</div>
+									</ul>
 
-									<div class="alert alert-success hide">
+								</div>
 
-										<button class="close" data-dismiss="alert"></button>
+								<div class="span4 invoice-payment">
 
-										Your form validation is successful!
+									<h4>个人信息：</h4>
 
-									</div>
+									<ul class="unstyled">
 
-									<div class="control-group">
+										<li><strong>姓名：</strong> ${student.name }</li>
 
-										<label class="control-label">学期：</label>
+										<li><strong>学号：</strong> ${student.id }</li>
 
-										<div class="controls">
+									</ul>
 
-											<input type="text" name="course" class="span6 m-wrap"/>
+								</div>
+					
+					</div>
+					
+					<div class="row-fluid">
+					
+						<div class="span12">
 
-										</div>
+							<div class="portlet box yellow">
 
-									</div>
-                                    
-                                     <div class="control-group">
+								<div class="portlet-title">
 
-													<label class="control-label">季度</label>
+									<div class="caption"><i class="icon-pencil"></i>作业详情</div>
 
-													<div class="controls">
+									<div class="tools">
 
-														<select class="large m-wrap" tabindex="17">
+										<a href="javascript:;" class="collapse"></a>
 
-															<option value="Category 1">春</option>
-															<option value="Category 2">秋</option>
+										<a href="#portlet-config" data-toggle="modal" class="config"></a>
 
+										<a href="javascript:;" class="reload"></a>
 
-														</select>
-
-													</div>
-
-												</div>
-
-									<div class="control-group">
-
-										<label class="control-label">作业名称：</label>
-
-										<div class="controls">
-
-											<input value="软件开发实习" name="assign_name" type="text" class="span6 m-wrap"/>
-
-										</div>
+										<a href="javascript:;" class="remove"></a>
 
 									</div>
 
-									<div class="control-group">
+								</div>
 
-										<label class="control-label">起止日期</label>
+								<div class="portlet-body">
+								
+									<div>
+										
+										<h3><strong>查阅</strong></h3>
 
-										<div class="controls">
+											<textarea class="span10 m-wrap" rows="8">${homework.text }</textarea>
 											
-											<input name="startDate" class="m-wrap small" size="16" type="text" value="07/01/2016" id="ui_date_picker_range_from"/>
-
-											<span class="text-inline">&nbsp;至&nbsp;</span>
-
-											<input name="endDate" class="m-wrap small" size="16" type="text" value="07/12/2016" id="ui_date_picker_range_to"/>
-
-										</div>
-
+											<div class="row-fluid span10"><a class="btn green pull-right"><i class="icon-download"></i></a></div>
 									</div>
+									
+									<br/>
+									
+									<hr/>
+									
+									<div class="post-comment">
 
-									<div class="control-group">
+										<h3><strong>批示</strong></h3>
 
-													<label class="control-label">周数</label>
+										<form action="/assignment/correct/${homeworkId}" method="POST">
 
-													<div class="controls">
+											<label>
+											
+												<big>分数</big><span class="color-red">*</span>
+												
+												<input type="text" class="span1" name="score">
+											
+												<strong><big><big>/${assignment.highestScore }</big></big></strong>
+											
+											</label>
 
-														<input type="text" placeholder="" class="m-wrap large" value="" />
 
-														<span class="help-inline"></span>
+											<label><big>作业评价<big></label>
 
-													</div>
+											<textarea class="span10 m-wrap" rows="8" name="comment"></textarea>
+																<div class="row-fluid">
 
-												</div>
+											<div class="span4">
 
-									<div class="form-actions">
-
-										<button type="submit" class="btn blue">确定</button>
-
-										<a href="teacher_homework.html"><button type="button" class="btn">取消</button><a>
-
+											</div>
+					
+											<div class="span8 invoice-block">
+				
+											<br />
+				
+											<input type="submit" value="确认" class="btn green big hidden-print"></input>
+				
+											<a class="btn big hidden-print" href="/assignment/correct">取消</a>
+				
+											</div>
+				
+											</div>
+										</form>
+										
 									</div>
-
-								</form>
-
-								<!-- END FORM-->
-
+								</div>
+								
 							</div>
-
+						
 						</div>
-
-						<!-- END VALIDATION STATES-->
 
 					</div>
 
+
+
 				</div>
 
-				<!-- END PAGE CONTENT-->         
+				<!-- END PAGE CONTENT-->
 
 			</div>
 
-			<!-- END PAGE CONTAINER-->
+			<!-- END PAGE CONTAINER--> 
 
 		</div>
 
-		<!-- END PAGE -->  
+		<!-- END PAGE -->    
 
 	</div>
 
@@ -900,73 +887,47 @@
 
 	<!-- BEGIN CORE PLUGINS -->
 
-	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 
-	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
 
-	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/media/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--[if lt IE 9]>
 
-	<script src="media/js/excanvas.min.js"></script>
+	<script src="/media/js/excanvas.min.js"></script>
 
-	<script src="media/js/respond.min.js"></script>  
+	<script src="/media/js/respond.min.js"></script>  
 
 	<![endif]-->   
 
-	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="/media/js/jquery.blockui.min.js" type="text/javascript"></script>  
 
-	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery.cookie.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	<script src="/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 
 	<!-- END CORE PLUGINS -->
 
-	<!-- BEGIN PAGE LEVEL PLUGINS -->
-
-	<script type="text/javascript" src="media/js/jquery.validate.min.js"></script>
-
-	<script type="text/javascript" src="media/js/additional-methods.min.js"></script>
-
-	<script type="text/javascript" src="media/js/select2.min.js"></script>
-
-	<script type="text/javascript" src="media/js/chosen.jquery.min.js"></script>
-
-	<!-- END PAGE LEVEL PLUGINS -->
-
-	<!-- BEGIN PAGE LEVEL STYLES -->
-
-	<script src="media/js/app.js"></script>
-
-	<script src="media/js/form-validation.js"></script> 
-	
-	<script src="media/js/ui-jqueryui.js"></script>  
-
-	<!-- END PAGE LEVEL STYLES -->    
+	<script src="/media/js/app.js"></script>      
 
 	<script>
 
-		jQuery(document).ready(function() {   
-
-		   // initiate layout and plugins
+		jQuery(document).ready(function() {    
 
 		   App.init();
-
-		   FormValidation.init();
-		   
-		   UIJQueryUI.init();
 
 		});
 
 	</script>
 
-	<!-- END JAVASCRIPTS -->   
+	<!-- END JAVASCRIPTS -->
 
 <script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
 

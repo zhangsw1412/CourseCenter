@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 
@@ -14,7 +13,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>作业管理</title>
+	<title>添加资源</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -43,10 +42,41 @@
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
-	
+    	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-fileupload.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.gritter.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/chosen.css" />
+
 	<link rel="stylesheet" type="text/css" href="/media/css/select2_metro.css" />
 
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.tagsinput.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/clockface.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-wysihtml5.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/datepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/timepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/colorpicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-toggle-buttons.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/daterangepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/datetimepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/multi-select-metro.css" />
+
+	<link href="/media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+
 	<link rel="stylesheet" href="/media/css/DT_bootstrap.css" />
+    
+    <link href="/media/css/jquery.fancybox.css" rel="stylesheet" />
+
+	<link href="/media/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -70,9 +100,9 @@
 
 		<div class="container-fluid">
 
-			<!-- BEGIN  -->
+			<!-- BEGIN LOGO -->
 
-			<a class="brand" href="#">
+			<a class="brand" href="teacher.jsp">
 
 				<img src="/media/image/logo.png" alt="logo"/>
 
@@ -176,8 +206,8 @@
 
 						<h3 class="page-title">
 
-							作业列表
-								<small>选择要批改、评分的作业</small>
+							资源管理 
+
 						</h3>
 
 						<ul class="breadcrumb">
@@ -194,14 +224,17 @@
 
 							<li>
 
-								<a href="teacher_homework.html">作业管理</a>
+								<a href="teacher_resources.html">资源管理</a>
 
 								<i class="icon-angle-right"></i>
 
 							</li>
 
-							<li><a href="teacher_homework_check.html">作业列表</a></li>
+							<li>
 
+								<a href="teacher_sourceuploading.html">添加资源</a>
+
+							</li>
 						</ul>
 
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -212,88 +245,78 @@
 
 				<!-- END PAGE HEADER-->
 
-				<!-- BEGIN PAGE CONTENT-->          
-
-				<div class="row-fluid">
+				<!-- BEGIN PAGE CONTENT--> 
+ 
+ 									<div class="row-fluid">
 
 					<div class="span12">
 
-						<!-- BEGIN SAMPLE TABLE PORTLET-->
+						<!-- BEGIN EXTRAS PORTLET-->
 
 						<div class="portlet box blue">
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-pencil"></i>软件开发实习</div>
-
-								<div class="tools">
-
-									<a href="javascript:;" class="collapse"></a>
-
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-
-									<a href="javascript:;" class="reload"></a>
-
-									<a href="javascript:;" class="remove"></a>
-
-								</div>
-
+								<div class="caption"><i class="icon-reorder"></i>资源上传</div>
 							</div>
 
-							<div class="portlet-body">
+							<div class="portlet-body form">
 
-								<table class="table table-hover table-bordered table-striped" id="sample_2">
+								<!-- BEGIN FORM-->
 
-									<thead>
+								<form action="/uploadResource/semester/${semester.id}/course/${course.id}" class="form-horizontal" method="post" enctype="multipart/form-data">
 
-										<tr>
-											
-											<th>学号</th>
 
-											<th>姓名</th>
+									<div class="control-group">
+										<label class="control-label">资源名称</label>
+										<div class="controls">
+											<input type="file" name="files"  class="fileupload" />
+											<br/>
+											<span>${message}</span>
+										</div>
+									</div>
 
-											<th class="hidden-480">提交日期</th>
 
-											<th>已阅</th>
+									<div class="control-group">
 
-											<th>操作</th>
+										<label class="control-label">备注</label>
 
-										</tr>
+										<div class="controls">
 
-									</thead>
+											<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
 
-									<tbody>
-										<c:forEach items="${homeworklist }" var="item">
-										
-										<tr>
-											<td>${studentlist[item.studentId+0].id }</td>
+										</div>
 
-											<td>${studentlist[item.studentId+0].name }</td>
+									</div>
 
-											<td>${item.submitTime }</td>
+									<div class="form-actions">
 
-											<td><c:if test="${item.score>0}" ><i class="icon-check"><i></c:if>
-											<c:if test="${item.score<0}" ><i class="icon-remove"><i></c:if></td>
+										<button type="submit" class="btn blue">上传</button>
 
-											<td><a href="#" class="btn mini yellow"><i class="icon-pencil"></i> 批改</a></td>
-										</tr>
-										</c:forEach>
-									</tbody>
+										<a href="teacher_resources.html"><button type="button" class="btn">取消</button><a>
 
-								</table>
+									</div>
+
+								</form>
+
+								<!-- END FORM-->
 
 							</div>
 
 						</div>
 
+						<!-- END EXTRAS PORTLET-->
+
+					</div>
+
+				</div>
 						<!-- END SAMPLE TABLE PORTLET-->
 
-					</div>
+					</div></div>
 
+				<!-- END PAGE CONTENT-->
 
-						<!-- END BORDERED TABLE PORTLET-->
-
-					</div>
+			</div>
 
 			<!-- END PAGE CONTAINER-->
 
@@ -360,31 +383,12 @@
 	<script src="/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 
 	<!-- END CORE PLUGINS -->
-	
-	<!-- BEGIN PAGE LEVEL PLUGINS -->
 
-	<script type="text/javascript" src="/media/js/select2.min.js"></script>
-
-	<script type="text/javascript" src="/media/js/jquery.dataTables.min.js"></script>
-
-	<script type="text/javascript" src="/media/js/DT_bootstrap.js"></script>
-
-	<!-- END PAGE LEVEL PLUGINS -->
-
-	<script src="/media/js/app.js"></script>  
-    
-	<script src="/media/js/table-advanced.js"></script>       
-
+	<script src="/media/js/app.js"></script>
 	<script>
 
-		jQuery(document).ready(function() {       
-
-		   // initiate layout and plugins
-
-		   App.init();
-		   
-		   TableAdvanced.init();
-
+		jQuery(document).ready(function() {
+			App.init();
 		});
 
 	</script>
