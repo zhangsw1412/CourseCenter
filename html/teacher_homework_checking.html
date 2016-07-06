@@ -382,7 +382,8 @@
 
 											<textarea class="span10 m-wrap" rows="8"></textarea>
 											
-											<div class="row-fluid span10"><a class="btn green pull-right"><i class="icon-download"></i></a></div>
+											
+											<div class="row-fluid span10"><a class="btn green pull-right">附件 <i class="icon-download"></i></a></div>
 									</div>
 									
 									<br/>
@@ -408,7 +409,7 @@
 
 											<label><big>作业评价<big></label>
 
-											<textarea class="span10 m-wrap" rows="8"></textarea>
+											<textarea class="span10 m-wrap" rows="8" name="_value"></textarea>
 
 										</form>
 
@@ -511,7 +512,11 @@
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="media/js/app.js"></script>      
+	<script src="media/js/app.js"></script>   
+	
+	<script src="ckeditor/ckeditor.js"></script>   
+	
+	<script> CKEDITOR.replace('_value');</script>
 
 	<script>
 
@@ -525,7 +530,7 @@
 
 	<!-- END JAVASCRIPTS -->
 
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+</body>
 
 <!-- END BODY -->
 
