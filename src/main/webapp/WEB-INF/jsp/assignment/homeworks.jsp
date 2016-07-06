@@ -785,9 +785,8 @@
 
 											<td>${item.submitTime }</td>
 
-											<td><c:if test="${item.score>0}" ><i class="icon-check"><i></c:if>
-											<c:if test="${item.score<0}" ><i class="icon-remove"><i></c:if></td>
-
+											<td><c:if test="${item.comment!=null}" ><i class="icon-check"><i></c:if>
+											<c:if test="${item.comment==null}" ><i class="icon-remove"><i></c:if></td>
 											<td><a href="#" class="btn mini yellow"><i class="icon-pencil"></i> 批改</a></td>
 										</tr>
 										</c:forEach>

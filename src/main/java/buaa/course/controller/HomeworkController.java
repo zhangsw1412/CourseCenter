@@ -40,9 +40,10 @@ public class HomeworkController {
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/homeworks/{assignmentId}")
     public ModelAndView homeworksGet(@PathVariable Integer assignmentId, HttpServletRequest request) {
-/*    	User user = (User)request.getSession().getAttribute("user");
+    	User user = (User)request.getSession().getAttribute("user");
+    	List<Course> courses;
     	if(user==null||user.getType()!=1)
-    		return new ModelAndView("login");*/
+    		return new ModelAndView("login");
     	ModelAndView homeworks = new ModelAndView("assignment/homeworks");
     	ModelAndView index = new ModelAndView("index");
     	if(assignmentId==null)
@@ -51,16 +52,19 @@ public class HomeworkController {
     	if(homeworklist==null)
     		return index;
     	Map<Long,User> studentlist =userService.getUsersMap(homeworklist);
+    	courses = courseService.getCoursesByTeacher(2, user.getNum());
     	homeworks.addObject("homeworklist",homeworklist);
     	homeworks.addObject("studentlist",studentlist);
+    	homeworks.addObject("courses", courses);
     	return homeworks;
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/correct/{homeworkId}")
     public ModelAndView correctHomeworkGet(@PathVariable Integer homeworkId, HttpServletRequest request){
-/*    	User user = (User)request.getSession().getAttribute("user");
+    	User user = (User)request.getSession().getAttribute("user");
+    	List<Course> courses;
     	if(user==null||user.getType()!=1)
-    		return new ModelAndView("login");*/
+    		return new ModelAndView("login");
     	ModelAndView m= new ModelAndView("assignment/correct");
     	Homework homework = null;
     	if(homeworkId!=null)
@@ -70,19 +74,21 @@ public class HomeworkController {
     	Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
     	Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
     	User student = userService.getUserByNum(homework.getStudentId());
+    	courses = courseService.getCoursesByTeacher(2, user.getNum());
     	m.addObject("homeworkId",homeworkId);
         m.addObject("homework",homework);
         m.addObject("assignment", assignment);
         m.addObject("course", course);
         m.addObject("student", student);
+        m.addObject("courses", courses);
         return m;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/correct/{homeworkId}")
     public ModelAndView correctHomeworkPost(@PathVariable Integer homeworkId, HttpServletRequest request, HttpServletResponse response) throws IOException{
-/*    	User user = (User)request.getSession().getAttribute("user");
+    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()!=1)
-    		return new ModelAndView("login");*/
+    		return new ModelAndView("login");
         ModelAndView m = new ModelAndView("assignment/correct");
         String score_s = request.getParameter("score");
         String comment = request.getParameter("comment");
@@ -115,9 +121,10 @@ public class HomeworkController {
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/submit/{assignmentId}")
     public ModelAndView submitHomeworkGet(@PathVariable Integer assignmentId, HttpServletRequest request){
-/*    	User user = (User)request.getSession().getAttribute("user");
+    	User user = (User)request.getSession().getAttribute("user");
+    	List<Course> courses;
     	if(user==null||user.getType()!=0)
-    		return new ModelAndView("login");*/
+    		return new ModelAndView("login");
     	ModelAndView m = new ModelAndView("assignment/submit");
     	ModelAndView index = new ModelAndView("index");
     	Assignment assignment = null;
@@ -126,16 +133,18 @@ public class HomeworkController {
     	assignment = assignmentService.getAssignmentById(assignmentId);
     	if(assignment==null)
     		return index;
+    	courses = courseService.getCoursesByStudent(2, user.getNum());
     	m.addObject("assignmentId", assignmentId);
     	m.addObject("assignment",assignment);
+    	m.addObject("courses", courses);
     	return m;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/submit/{assignmentId}")
     public ModelAndView submitHomeworkPost(@PathVariable Integer assignmentId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-/*    	User user = (User)request.getSession().getAttribute("user");
+    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()!=0)
-    		return new ModelAndView("login");*/
+    		return new ModelAndView("login");
     	ModelAndView index = new ModelAndView("index");
     	if(assignmentId==null)
     		return index;

@@ -58,7 +58,7 @@ public class UserService {
 	public Map<Long, User> getUsersMap(List<Homework> homeworklist) {
 		Map<Long,User> map=new HashMap<>();
 		for(Homework homework:homeworklist){
-			map.put(Long.valueOf(homework.getId()), userMapper.getUserByNum(homework.getStudentId()));
+			map.put(Long.valueOf(homework.getStudentId()), userMapper.getUserByNum(homework.getStudentId()));
 		}
 		return map;
 	}
