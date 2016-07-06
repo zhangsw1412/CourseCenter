@@ -1,6 +1,9 @@
 package buaa.course.controller;
 
+import buaa.course.model.Course;
 import buaa.course.model.User;
+import buaa.course.service.CourseService;
+import buaa.course.service.SemesterService;
 import buaa.course.service.UserService;
 import buaa.course.utils.IpUtil;
 import buaa.course.utils.PasswordEncoder;
@@ -14,6 +17,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 熊纪元 on 2016/7/2.
@@ -22,6 +27,12 @@ import java.sql.Timestamp;
 public class BasicController {
     @Resource(name = "userService")
     private UserService userService;
+
+    @Resource(name = "courseService")
+    private CourseService courseService;
+
+    @Resource(name = "semesterService")
+    private SemesterService semesterService;
 
     @Resource(name = "passwordEncoder")
     private PasswordEncoder passwordEncoder;
@@ -52,10 +63,21 @@ public class BasicController {
             userService.updateUser(user);
             request.getSession().setAttribute("user", user);
 
+            List<Course> courses = new ArrayList<>();
+            if(user.getType() == 1){
+                courses = courseService.getCoursesByTeacher(2, user.getNum());
+            }else{
+                courses = courseService.getCoursesByStudent(2, user.getNum());
+            }
+
             if(user.getType() == 0){
-                return new ModelAndView("student");
+                m =  new ModelAndView("student");
+                m.addObject("semester", semesterService.getSemesterById(2));
+                m.addObject("courses", courses);
             }else if(user.getType() == 1){
-                return new ModelAndView("teacher");
+                m = new ModelAndView("teacher");
+                m.addObject("semester", semesterService.getSemesterById(2));
+                m.addObject("courses", courses);
             }else if(user.getType() == 2){
                 return new ModelAndView("admin");
             }
@@ -71,11 +93,21 @@ public class BasicController {
         return new ModelAndView("login");
     }
 
-    @RequestMapping("index")
-    private ModelAndView index(HttpServletRequest request) {
-        ModelAndView m = new ModelAndView("index");
+    @RequestMapping("/index")
+    public ModelAndView index(HttpServletRequest request) {
+        ModelAndView m = null;
+        List<Course> courses = new ArrayList<>();
         User user = (User)request.getSession().getAttribute("user");
-        m.addObject("user", user);
+        if(user.getType() == 0){
+            m =  new ModelAndView("student");
+            courses = courseService.getCoursesByTeacher(2, user.getNum());
+        }else if(user.getType() == 1){
+            m = new ModelAndView("teacher");
+            courses = courseService.getCoursesByStudent(2, user.getNum());
+        }
+        m.addObject("semester", semesterService.getSemesterById(2));
+        m.addObject("courses", courses);
         return m;
     }
+
 }

@@ -13,7 +13,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>source</title>
+	<title>资源列表</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -75,7 +75,7 @@
 
 			<a class="brand" href="teacher.jsp">
 
-				<img src="media/image/logo.png" alt="logo"/>
+				<img src="/media/image/logo.png" alt="logo"/>
 
 			</a>
 
@@ -85,7 +85,7 @@
 
 			<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
-				<img src="media/image/menu-toggler.png" alt="" />
+				<img src="/media/image/menu-toggler.png" alt="" />
 
 			</a>
 
@@ -135,116 +135,7 @@
 
 	<div class="page-container row-fluid">
 
-		<!-- BEGIN SIDEBAR -->
-
-		<div class="page-sidebar nav-collapse collapse">
-
-			<!-- BEGIN SIDEBAR MENU -->
-
-			<ul class="page-sidebar-menu">
-
-				<li>
-
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
-					<div class="sidebar-toggler hidden-phone"></div>
-
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
-				</li>
-
-				<li>
-
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-
-					<form class="sidebar-search">
-
-						<div class="input-box">
-
-							<a href="javascript:;" class="remove"></a>
-
-							<input type="text" placeholder="Search..." />
-
-							<input type="button" class="submit" value=" " />
-
-						</div>
-
-					</form>
-
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-
-				</li>
-
-				<li class="">
-
-					<a href="teacher_homepage.html">
-
-						<i class="icon-home"></i>
-
-						<span class="title">主页</span>
-
-					</a>
-
-				</li>
-
-				<li class="">
-
-					<a href="teacher_semester.html">
-
-						<i class="icon-table"></i>
-
-						<span class="title">学期列表</span>
-
-					</a>
-
-
-				</li>
-				<li class="">
-
-					<a href="teacher_course.html">
-
-						<i class="icon-cogs"></i>
-
-						<span class="title">课程管理</span>
-
-					</a>
-
-
-				</li>
-				<li class="">
-
-					<a href="teacher_homework.html">
-
-						<i class="icon-file-text"></i>
-
-						<span class="title">作业管理</span>
-
-					</a>
-
-
-				</li>
-
-				<li class="start active  ">
-
-					<a href="teacher_resources.html">
-
-						<i class="icon-folder-open"></i>
-
-						<span class="title">资源管理</span>
-
-						<span class="selected"></span>
-
-					</a>
-
-				</li>
-
-			</ul>
-
-			<!-- END SIDEBAR MENU -->
-
-		</div>
-
-		<!-- END SIDEBAR -->
+		<jsp:include page="../include/sidebar.jsp"></jsp:include>
 
 		<!-- BEGIN PAGE -->
 
@@ -338,15 +229,9 @@
 
 								<div class="span5">
 
-									<a href="/uploadResource/${semester.id}/${course.id}"><span class="btn green fileinput-button">
-
-									<i class="icon-plus icon-white"></i>
-
-									<span>添加资源</span>
-
-									<!--<input type="file" name="files[]" multiple> -->
-
-									</span></a>
+									<a href="/uploadResource/semester/${semester.id}/course/${course.id}">
+										<i class="icon-plus icon-white">添加资源</i>
+									</a>
 
 								</div>
                                 

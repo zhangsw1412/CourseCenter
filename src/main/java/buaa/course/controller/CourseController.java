@@ -5,6 +5,7 @@ import buaa.course.model.Semester;
 import buaa.course.model.SemesterCourse;
 import buaa.course.model.User;
 import buaa.course.service.CourseService;
+import buaa.course.service.ResourceService;
 import buaa.course.service.SemesterService;
 import buaa.course.service.UserService;
 import buaa.course.utils.PagingUtil;
@@ -39,6 +40,9 @@ public class CourseController {
 
     @Resource(name = "userService")
     private UserService userService;
+
+    @Resource(name = "resourceService")
+    private ResourceService resourceService;
 
     @Resource(name = "pagingUtil")
     private PagingUtil pagingUtil;
@@ -76,6 +80,14 @@ public class CourseController {
             response.sendRedirect("index");
         }
         if (user.getType() == 1 || user.getType() == 0){
+            List<Course> courses = new ArrayList<>();
+            if(user.getType() == 1){
+                courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
+            }else{
+                courses = courseService.getCoursesByStudent(semesterId, user.getNum());
+            }
+            m.addObject("semester", semesterService.getSemesterById(semesterId));
+            m.addObject("courses", courses);
             Course course = courseService.getCourseById(courseId);
             m.addObject("semester", semesterService.getSemesterById(semesterId));
             m.addObject("course", course);
@@ -94,7 +106,8 @@ public class CourseController {
      * @throws IOException
      */
     @RequestMapping(method = RequestMethod.GET, value = "/uploadResource/semester/{semesterId}/course/{courseId}")
-    public ModelAndView uploadResourceGet(@PathVariable Integer semesterId, @PathVariable Integer courseId) {
+    public ModelAndView uploadResourceGet(@PathVariable Integer semesterId, @PathVariable Integer courseId,
+                                          HttpServletRequest request) {
         ModelAndView m = new ModelAndView("course/upload");
         if (semesterId != null && courseId != null) {
             Semester semester = semesterService.getSemesterById(semesterId);
@@ -104,6 +117,15 @@ public class CourseController {
         } else {
             m.addObject("message", "找不到课程！");
         }
+        List<Course> courses = new ArrayList<>();
+        User user = (User)request.getSession().getAttribute("user");
+        if(user.getType() == 1){
+            courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
+        }else{
+            courses = courseService.getCoursesByStudent(semesterId, user.getNum());
+        }
+        m.addObject("semester", semesterService.getSemesterById(semesterId));
+        m.addObject("courses", courses);
         return m;
     }
 
@@ -138,6 +160,12 @@ public class CourseController {
                 try {
                     File temp = new File(filePath + File.separator + file.getOriginalFilename());
                     file.transferTo(temp);
+
+                    buaa.course.model.Resource r = new buaa.course.model.Resource();
+                    r.setFileUrl(temp.getAbsolutePath());
+                    r.setSemesterCourseId(courseService.getCourseBySemesterCourseId(semesterId,courseId).getId());
+                    r.setCategory("ppt");
+                    resourceService.createResource(r);
                 } catch (Exception e) {
                     e.printStackTrace();
                     m.addObject("message", e.getMessage());
@@ -149,6 +177,15 @@ public class CourseController {
         Course course = courseService.getCourseBySemesterCourseId(semesterId, courseId);
         m.addObject("course", course);
         m.addObject("message", "上传成功！");
+        List<Course> courses = new ArrayList<>();
+        User user = (User)request.getSession().getAttribute("user");
+        if(user.getType() == 1){
+            courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
+        }else{
+            courses = courseService.getCoursesByStudent(semesterId, user.getNum());
+        }
+        m.addObject("semester", semesterService.getSemesterById(semesterId));
+        m.addObject("courses", courses);
         return m;
     }
 
@@ -181,7 +218,14 @@ public class CourseController {
                     "resource" + "/" + "semester-" + semesterId + "/" + "course-" + courseId + "/";
             m.addObject("dir", dirPath);
         }
-
+        List<Course> courses = new ArrayList<>();
+        if(user.getType() == 1){
+            courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
+        }else{
+            courses = courseService.getCoursesByStudent(semesterId, user.getNum());
+        }
+        m.addObject("semester", semesterService.getSemesterById(semesterId));
+        m.addObject("courses", courses);
         return m;
     }
 

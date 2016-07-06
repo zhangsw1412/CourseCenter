@@ -5,17 +5,15 @@ import buaa.course.model.Course;
 import buaa.course.model.User;
 import buaa.course.service.AssignmentService;
 import buaa.course.service.CourseService;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Timestamp;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
 
 
 @Controller
@@ -29,13 +27,13 @@ public class AssignmentController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/assignments/{semesterCourseId}")
     public ModelAndView assignmentsGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
-/*    	User user = (User)request.getSession().getAttribute("user");
+   	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
-    		return new ModelAndView("login");*/
+    		return new ModelAndView("login");
     	ModelAndView m = new ModelAndView();
-    	if(0==0)
+    	if(user.getType() == 0)
     		m = new ModelAndView("assignment/student_assignments");
-    	else
+    	else if(user.getType() == 1)
     		m = new ModelAndView("assignment/teacher_assignments");
     	if(semesterCourseId!=null){
     		m.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
