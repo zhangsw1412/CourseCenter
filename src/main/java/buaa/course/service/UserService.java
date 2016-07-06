@@ -1,12 +1,16 @@
 package buaa.course.service;
 
 import buaa.course.mapper.UserMapper;
+import buaa.course.model.Homework;
 import buaa.course.model.User;
 import buaa.course.utils.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 熊纪元 on 2016/7/3.
@@ -19,6 +23,11 @@ public class UserService {
     public User getUser(String id) {
         return userMapper.getUser(id);
     }
+    
+    public User getUserByNum(int num) {
+        return userMapper.getUserByNum(num);
+    }
+    
 
     public int createUser(User user) {
         String pwd = PasswordEncoder.encode(user.getPassword());
@@ -45,4 +54,12 @@ public class UserService {
     public int countUsers() {
         return userMapper.countUsers();
     }
+
+	public Map<Long, User> getUsersMap(List<Homework> homeworklist) {
+		Map<Long,User> map=new HashMap<>();
+		for(Homework homework:homeworklist){
+			map.put(Long.valueOf(homework.getId()), userMapper.getUserByNum(homework.getStudentId()));
+		}
+		return map;
+	}
 }

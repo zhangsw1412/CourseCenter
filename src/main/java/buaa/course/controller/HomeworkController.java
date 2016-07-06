@@ -5,6 +5,7 @@ import buaa.course.model.Homework;
 import buaa.course.model.User;
 import buaa.course.service.AssignmentService;
 import buaa.course.service.HomeworkService;
+import buaa.course.service.UserService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeworkController {
@@ -27,17 +30,25 @@ public class HomeworkController {
     private HomeworkService homeworkService;
     @Resource(name = "assignmentService")
     private AssignmentService assignmentService;
+    @Resource(name = "userService")
+    private UserService userService;
     
-    @RequestMapping(method = RequestMethod.GET, value = "/homeworks/{assignmentId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/assignment/homeworks/{assignmentId}")
     public ModelAndView homeworksGet(@PathVariable Integer assignmentId, HttpServletRequest request) {
 /*    	User user = (User)request.getSession().getAttribute("user");
-    	if(user==null||user.getType()==0)
+    	if(user==null||user.getType()!=1)
     		return new ModelAndView("login");*/
-    	ModelAndView m= new ModelAndView("homeworks");
-    	if(assignmentId!=null){
-    		m.addObject("homeworklist",homeworkService.getHomeworksByAssignmentId(assignmentId));
-    	}
-    	return m;
+    	ModelAndView homeworks = new ModelAndView("assignment/homeworks");
+    	ModelAndView index = new ModelAndView("index");
+    	if(assignmentId==null)
+    		return index;
+    	List<Homework> homeworklist = homeworkService.getHomeworksByAssignmentId(assignmentId);
+    	if(homeworklist==null)
+    		return index;
+    	Map<Long,User> studentlist =userService.getUsersMap(homeworklist);
+    	homeworks.addObject("homeworklist",homeworklist);
+    	homeworks.addObject("studentlist",studentlist);
+    	return homeworks;
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "/correcthomework/{homeworkId}")
