@@ -4,10 +4,7 @@ import buaa.course.model.Assignment;
 import buaa.course.model.Course;
 import buaa.course.model.Homework;
 import buaa.course.model.User;
-import buaa.course.service.AssignmentService;
-import buaa.course.service.CourseService;
-import buaa.course.service.HomeworkService;
-import buaa.course.service.UserService;
+import buaa.course.service.*;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +30,8 @@ public class HomeworkController {
     private UserService userService;
     @Resource(name = "courseService")
     private CourseService courseService;
+	@Resource(name = "semesterService")
+	private SemesterService semesterService;
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/homeworks/{assignmentId}")
     public ModelAndView homeworksGet(@PathVariable Integer assignmentId, HttpServletRequest request) {
@@ -52,6 +51,7 @@ public class HomeworkController {
     	homeworks.addObject("homeworklist",homeworklist);
     	homeworks.addObject("studentlist",studentlist);
     	homeworks.addObject("courses", courses);
+		homeworks.addObject("semester", semesterService.getSemesterById(2));
     	return homeworks;
     }
     
@@ -77,6 +77,7 @@ public class HomeworkController {
         m.addObject("course", course);
         m.addObject("student", student);
         m.addObject("courses", courses);
+		m.addObject("semester", semesterService.getSemesterById(2));
         return m;
     }
 
@@ -133,6 +134,7 @@ public class HomeworkController {
     	m.addObject("assignmentId", assignmentId);
     	m.addObject("assignment",assignment);
     	m.addObject("courses", courses);
+		m.addObject("semester", semesterService.getSemesterById(2));
     	return m;
     }
 

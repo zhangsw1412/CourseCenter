@@ -5,6 +5,7 @@ import buaa.course.model.Course;
 import buaa.course.model.User;
 import buaa.course.service.AssignmentService;
 import buaa.course.service.CourseService;
+import buaa.course.service.SemesterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,25 +27,28 @@ public class AssignmentController {
     @Resource(name = "courseService")
     private CourseService courseService;
 
+	@Resource(name = "semesterService")
+	private SemesterService semesterService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/assignments/{semesterCourseId}")
     public ModelAndView assignmentsGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
     	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
     		return new ModelAndView("login");
-    	List<Course> courses;
+    	List<Course> courses = new ArrayList<>();
     	ModelAndView m = new ModelAndView();
     	if(user.getType() == 0){
     		m = new ModelAndView("assignment/student_assignments");
     		courses = courseService.getCoursesByStudent(2, user.getNum());
-    	}
-    	else if(user.getType() == 1)
-    		m = new ModelAndView("assignment/teacher_assignments");
-    		courses = courseService.getCoursesByTeacher(2, user.getNum());
+    	}else if(user.getType() == 1){
+			m = new ModelAndView("assignment/teacher_assignments");
+			courses = courseService.getCoursesByTeacher(2, user.getNum());
+		}
     	if(semesterCourseId!=null){
     		m.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
-    		m.addObject("courses", courses);
     	}
+		m.addObject("courses", courses);
+		m.addObject("semester", semesterService.getSemesterById(2));
     	return m;
     }
     
@@ -61,16 +66,18 @@ public class AssignmentController {
     	courses = courseService.getCoursesByTeacher(2, user.getNum());
     	ModelAndView m = new ModelAndView("assignment/assign");
     	m.addObject("course",course);
-    	m.addObject("courses", courses);
+		m.addObject("courses", courses);
+		m.addObject("semester", semesterService.getSemesterById(2));
+
     	m.addObject("semesterCourseId", semesterCourseId);
     	return m;
     }
     
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/assign/{semesterCourseId}")
     public ModelAndView assignPost(@PathVariable Integer semesterCourseId, HttpServletRequest request){
-/*    	User user = (User)request.getSession().getAttribute("user");
+    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==1)
-    		return new ModelAndView("login");*/
+    		return new ModelAndView("login");
     	if(semesterCourseId==null)
     		return new ModelAndView("assignmentlist");
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
@@ -161,6 +168,7 @@ public class AssignmentController {
     	assignmentService.createAssignment(assignment);
     	ModelAndView assignments = new ModelAndView("assignment/assignments");
     	assignments.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
+		m.addObject("semester", semesterService.getSemesterById(2));
     	return assignments;
     }
 }

@@ -213,7 +213,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="student_homepage.html">主页</a> 
+								<a href="#">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -221,7 +221,7 @@
 
 							<li>
 
-								<a href="student_course.html">经济管理</a>
+								<a href="#">${course.name}</a>
 								
 								<!-- 数据库获取该课程名 -->
 
@@ -231,7 +231,7 @@
 							
 							<li>
 
-								<a href="student_homework.html">作业管理</a>
+								<a href="#">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
