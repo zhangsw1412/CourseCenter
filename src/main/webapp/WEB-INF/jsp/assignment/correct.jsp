@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -12,7 +14,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>添加资源</title>
+	<title>作业管理</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -22,64 +24,33 @@
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
-	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" media="screen"/>
 
-	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style-metro.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style.css" rel="stylesheet" type="text/css"/>
 
-	<link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/style-responsive.css" rel="stylesheet" type="text/css" />
 
-	<link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="/media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 
-	<link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="/media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
-    	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-fileupload.css" />
 
-	<link rel="stylesheet" type="text/css" href="media/css/jquery.gritter.css" />
+	<link href="/media/css/invoice.css" rel="stylesheet" type="text/css"/>
 
-	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/jquery.tagsinput.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/clockface.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-wysihtml5.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/datepicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/timepicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/colorpicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/bootstrap-toggle-buttons.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/daterangepicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/datetimepicker.css" />
-
-	<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
-
-	<link href="media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
-
-	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
-    
-    <link href="media/css/jquery.fancybox.css" rel="stylesheet" />
-
-	<link href="media/css/jquery.fileupload-ui.css" rel="stylesheet" />
+	<link href="/media/css/print.css" rel="stylesheet" type="text/css" media="print"/>
 
 	<!-- END PAGE LEVEL STYLES -->
 
-	<link rel="shortcut icon" href="media/image/favicon.ico" />
+	<link rel="shortcut icon" href="/media/image/favicon.ico" />
 
 </head>
 
@@ -89,9 +60,9 @@
 
 <body class="page-header-fixed">
 
-<!-- BEGIN HEADER -->
+	<!-- BEGIN HEADER -->
 
-<div class="header navbar navbar-inverse navbar-fixed-top">
+	<div class="header navbar navbar-inverse navbar-fixed-top">
 
 		<!-- BEGIN TOP NAVIGATION BAR -->
 
@@ -103,7 +74,7 @@
 
 				<a class="brand" href="teacher_homepage.html">
 
-				<img src="media/image/logo.png" alt="logo" />
+				<img src="/media/image/logo.png" alt="logo" />
 
 				</a>
 
@@ -113,7 +84,7 @@
 
 				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
-				<img src="media/image/menu-toggler.png" alt="" />
+				<img src="/media/image/menu-toggler.png" alt="" />
 
 				</a>          
 
@@ -263,7 +234,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar2.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar2.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -289,7 +260,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar3.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar3.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -315,7 +286,7 @@
 
 								<a href="inbox.html?a=view">
 
-								<span class="photo"><img src="media/image/avatar1.jpg" alt="" /></span>
+								<span class="photo"><img src="/media/image/avatar1.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -519,7 +490,7 @@
 
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-						<img alt="" src="media/image/avatar1_small.jpg" />
+						<img alt="" src="/media/image/avatar1_small.jpg" />
 
 						<span class="username">Bob Nilson</span>
 
@@ -559,11 +530,11 @@
 
 		<!-- END TOP NAVIGATION BAR -->
 
-</div>
+	</div>
 
-<!-- END HEADER -->
+	<!-- END HEADER -->
 
-	<!-- BEGIN CONTAINER -->
+	<!-- BEGIN CONTAINER -->   
 
 	<div class="page-container row-fluid">
 
@@ -599,13 +570,13 @@
 
 						<li class="active">
 
-							<a href="teacher_course.html">经济管理</a>
+							<a href="student_course.html">经济管理</a>
 
 						</li>
 
 						<li >
 
-							<a href="teacher_course.html">
+							<a href="student_course.html">
 
 							软件工程</a>
 
@@ -613,7 +584,7 @@
 
 						<li >
 
-							<a href="teacher_course.html">
+							<a href="student_course.html">
 
 							体育</a>
 
@@ -621,7 +592,7 @@
 
 						<li >
 
-							<a href="teacher_course.html">
+							<a href="student_course.html">
 
 							中国传统文化</a>
 
@@ -641,6 +612,7 @@
 
 
 		<!-- END SIDEBAR -->
+
 
 		<!-- BEGIN PAGE -->
 
@@ -668,13 +640,13 @@
 
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-			<!-- BEGIN PAGE CONTAINER-->        
+			<!-- BEGIN PAGE CONTAINER-->
 
 			<div class="container-fluid">
 
 				<!-- BEGIN PAGE HEADER-->
 
-				<div class="row-fluid">
+				<div class="row-fluid hidden-print">
 
 					<div class="span12">
 
@@ -682,7 +654,7 @@
 
 						<h3 class="page-title">
 
-							资源管理 
+							作业批改 <small>请为这名学生的作业进行打分与评价</small>
 
 						</h3>
 
@@ -700,7 +672,7 @@
 
 							<li>
 
-								<a href="teacher_resources.html">资源管理</a>
+								<a href="teacher_homework.html">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -708,9 +680,18 @@
 
 							<li>
 
-								<a href="teacher_sourceuploading.html">添加资源</a>
+								<a href="teacher_homework_check.html">作业列表</a>
+
+								<i class="icon-angle-right"></i>
 
 							</li>
+
+							<li>
+							
+								<a href="teacher_homework_checking.html">作业批改</a>
+								
+							</li>
+
 						</ul>
 
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -721,106 +702,158 @@
 
 				<!-- END PAGE HEADER-->
 
-				<!-- BEGIN PAGE CONTENT--> 
- 
- 									<div class="row-fluid">
+				<!-- BEGIN PAGE CONTENT-->
 
-					<div class="span12">
+				<div class="row-fluid invoice">
 
-						<!-- BEGIN EXTRAS PORTLET-->
+					<div class="row-fluid">
 
-						<div class="portlet box blue">
+								<div class="span3">
 
-							<div class="portlet-title">
+									<h4>课程：</h4>
 
-								<div class="caption"><i class="icon-upload"></i>资源上传</div>
-							</div>
+									<ul class="unstyled">
 
-							<div class="portlet-body form">
+										<h1>${course.name}<h1>
 
-								<!-- BEGIN FORM-->
+									</ul>
 
-								<form action="#" class="form-horizontal">
+								</div>
 
+								<div class="span4">
 
-									<div class="control-group">
-                                    
+									<h4>作业信息：</h4>
 
-										<label class="control-label">资源名称</label>
+									<ul class="unstyled">
 
-										<div class="controls">
+										<li><strong>作业名:</strong> ${assignment.name }</li>
+
+										<li><strong>开始时间：</strong> ${assignment.startTime }</li>
+
+										<li><strong>结束时间：</strong> ${assignment.deadline }</li>
+
+										<li><strong>详细需求：</strong>	 ${assignment.basicRequirement }</li>
+
+									</ul>
+
+								</div>
+
+								<div class="span4 invoice-payment">
+
+									<h4>个人信息：</h4>
+
+									<ul class="unstyled">
+
+										<li><strong>姓名：</strong> ${student.name }</li>
+
+										<li><strong>学号：</strong> ${student.id }</li>
+
+									</ul>
+
+								</div>
+					
+					</div>
+					
+					<div class="row-fluid">
+					
+						<div class="span12">
+
+							<div class="portlet box yellow">
+
+								<div class="portlet-title">
+
+									<div class="caption"><i class="icon-pencil"></i>作业详情</div>
+
+									<div class="tools">
+
+										<a href="javascript:;" class="collapse"></a>
+
+										<a href="#portlet-config" data-toggle="modal" class="config"></a>
+
+										<a href="javascript:;" class="reload"></a>
+
+										<a href="javascript:;" class="remove"></a>
+
+									</div>
+
+								</div>
+
+								<div class="portlet-body">
 								
-                                <input type="text" class="m-wrap span12" >
+									<div>
+										
+										<h3><strong>查阅</strong></h3>
 
-															</div>
+											<textarea class="span10 m-wrap" rows="8">${homework.text }</textarea>
+											
+											<div class="row-fluid span10"><a class="btn green pull-right"><i class="icon-download"></i></a></div>
 									</div>
 									
-                                    <div class="control-group">
-                                    
-                                    <label class="control-label">选择资源</label>
+									<br/>
+									
+									<hr/>
+									
+									<div class="post-comment">
 
-										<div class="controls">
+										<h3><strong>批示</strong></h3>
+
+										<form action="/assignment/correct/${homeworkId}" method="POST">
+
+											<label>
+											
+												<big>分数</big><span class="color-red">*</span>
+												
+												<input type="text" class="span1" name="score">
+											
+												<strong><big><big>/${assignment.highestScore }</big></big></strong>
+											
+											</label>
+
+
+											<label><big>作业评价<big></label>
+
+											<textarea class="span10 m-wrap" rows="8" name="comment"></textarea>
+																<div class="row-fluid">
+
+											<div class="span4">
+
+											</div>
+					
+											<div class="span8 invoice-block">
+				
+											<br />
+				
+											<input type="submit" value="确认" class="btn green big hidden-print"></input>
+				
+											<a class="btn big hidden-print" href="/assignment/correct">取消</a>
+				
+											</div>
+				
+											</div>
+										</form>
+										
+									</div>
+								</div>
 								
-                                <span class="btn green fileinput-button">
-
-									<i class="icon-plus icon-white"></i>
-
-									<span>添加资源</span>
-
-									<input type="file" name="files[]" multiple> 
-                                    
-									</span></a>
-
-															</div>
-                                    
-                                    </div>
-
-									<div class="control-group">
-
-										<label class="control-label">备注</label>
-
-										<div class="controls">
-
-											<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
-
-										</div>
-
-									</div>
-
-									<div class="form-actions">
-
-										<button type="submit" class="btn blue">上传</button>
-
-										<a href="teacher_resources.html"><button type="button" class="btn">取消</button><a>
-
-									</div>
-
-								</form>
-
-								<!-- END FORM-->
-
 							</div>
-
+						
 						</div>
-
-						<!-- END EXTRAS PORTLET-->
 
 					</div>
 
-				</div>
-						<!-- END SAMPLE TABLE PORTLET-->
 
-					</div></div>
+
+				</div>
 
 				<!-- END PAGE CONTENT-->
 
 			</div>
 
-			<!-- END PAGE CONTAINER-->
+			<!-- END PAGE CONTAINER--> 
 
 		</div>
 
-		<!-- END PAGE -->
+		<!-- END PAGE -->    
 
 	</div>
 
@@ -854,47 +887,47 @@
 
 	<!-- BEGIN CORE PLUGINS -->
 
-	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 
 	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
 
-	<script src="media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="/media/js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
 
-	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/media/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--[if lt IE 9]>
 
-	<script src="media/js/excanvas.min.js"></script>
+	<script src="/media/js/excanvas.min.js"></script>
 
-	<script src="media/js/respond.min.js"></script>  
+	<script src="/media/js/respond.min.js"></script>  
 
 	<![endif]-->   
 
-	<script src="media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery.slimscroll.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="/media/js/jquery.blockui.min.js" type="text/javascript"></script>  
 
-	<script src="media/js/jquery.cookie.min.js" type="text/javascript"></script>
+	<script src="/media/js/jquery.cookie.min.js" type="text/javascript"></script>
 
-	<script src="media/js/jquery.uniform.min.js" type="text/javascript" ></script>
+	<script src="/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="media/js/app.js"></script>      
+	<script src="/media/js/app.js"></script>      
 
 	<script>
 
-		jQuery(document).ready(function() {       
-
-		   // initiate layout and plugins
+		jQuery(document).ready(function() {    
 
 		   App.init();
 
 		});
 
 	</script>
+
+	<!-- END JAVASCRIPTS -->
 
 <script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
 
