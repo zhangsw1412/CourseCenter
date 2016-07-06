@@ -74,7 +74,7 @@ public class SemesterController
 			Map<String, Object> map)
 	{
 		map.put("semester", semesterService.getSemesterById(id));
-		return "inputSemester";
+		return "semester/inputSemester";
 	}
 
 	/**
