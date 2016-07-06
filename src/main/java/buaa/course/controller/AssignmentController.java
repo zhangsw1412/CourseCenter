@@ -32,6 +32,7 @@ public class AssignmentController {
 /*    	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
     		return new ModelAndView("login");*/
+    	
     	ModelAndView m = new ModelAndView();
     	if(0==0)
     		m = new ModelAndView("assignment/student_assignments");
