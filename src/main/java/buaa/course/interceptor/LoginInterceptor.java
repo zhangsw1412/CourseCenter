@@ -1,5 +1,6 @@
 package buaa.course.interceptor;
 
+import buaa.course.model.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        /*//获取url地址
+        //获取url地址
         String reqUrl=request.getRequestURI().replace(request.getContextPath(), "");
         //当url地址为登录的url的时候跳过拦截器
         if(reqUrl.contains("/login")) {
@@ -21,7 +22,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         User user = (User)request.getSession().getAttribute("user");
         if(user == null){
             response.sendRedirect("/login");
-        }*/
+        }
         return true;
     }
 

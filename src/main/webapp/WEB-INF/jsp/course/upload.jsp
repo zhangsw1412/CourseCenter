@@ -13,7 +13,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>source</title>
+	<title>添加资源</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -42,6 +42,35 @@
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
+    	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-fileupload.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.gritter.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/chosen.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/select2_metro.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.tagsinput.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/clockface.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-wysihtml5.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/datepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/timepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/colorpicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-toggle-buttons.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/daterangepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/datetimepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/multi-select-metro.css" />
+
+	<link href="/media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 
 	<link rel="stylesheet" href="/media/css/DT_bootstrap.css" />
     
@@ -530,6 +559,7 @@
 		</div>
 
 		<!-- END TOP NAVIGATION BAR -->
+
 </div>
 
 <!-- END HEADER -->
@@ -709,9 +739,15 @@
 
 								<a href="teacher_resources.html">资源管理</a>
 
+								<i class="icon-angle-right"></i>
+
 							</li>
 
+							<li>
 
+								<a href="teacher_sourceuploading.html">添加资源</a>
+
+							</li>
 						</ul>
 
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -723,59 +759,66 @@
 				<!-- END PAGE HEADER-->
 
 				<!-- BEGIN PAGE CONTENT--> 
-   									<div class="row-fluid">
+ 
+ 									<div class="row-fluid">
 
 					<div class="span12">
 
-						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<!-- BEGIN EXTRAS PORTLET-->
 
 						<div class="portlet box blue">
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-edit"></i>资源列表 </div>
-
+								<div class="caption"><i class="icon-reorder"></i>资源上传</div>
 							</div>
 
-							<div class="portlet-body">
+							<div class="portlet-body form">
 
-								<div class="span5">
+								<!-- BEGIN FORM-->
 
-									<a href="/uploadResource/${semester.id}/${course.id}"><span class="btn green fileinput-button">
+								<form action="/uploadResource/${semester.id}/${course.id}" class="form-horizontal" method="post" enctype="multipart/form-data">
 
-									<i class="icon-plus icon-white"></i>
 
-									<span>添加资源</span>
+									<div class="control-group">
+										<label class="control-label">资源名称</label>
+										<div class="controls">
+											<input type="file" name="files"  class="fileupload" />
+											<br/>
+											<span>${message}</span>
+										</div>
+									</div>
 
-									<!--<input type="file" name="files[]" multiple> -->
 
-									</span></a>
+									<div class="control-group">
 
-								</div>
-                                
-                                <div style="padding:25px"></div>
+										<label class="control-label">备注</label>
 
-								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-									<tr>
-										<th>文件名</th>
-										<th>操作</th>
-									</tr>
-									<c:forEach items="${files}" var="file">
-										<tr>
-											<td>${file}</td>
+										<div class="controls">
 
-											<td><a href="${dir}${file}" class="btn mini green">
-												<i class="icon-download"></i> 下载</a>
-											</td>
-										</tr>
-									</c:forEach>
-								</table>
+											<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
+
+										</div>
+
+									</div>
+
+									<div class="form-actions">
+
+										<button type="submit" class="btn blue">上传</button>
+
+										<a href="teacher_resources.html"><button type="button" class="btn">取消</button><a>
+
+									</div>
+
+								</form>
+
+								<!-- END FORM-->
 
 							</div>
 
 						</div>
 
-						<!-- END EXAMPLE TABLE PORTLET-->
+						<!-- END EXTRAS PORTLET-->
 
 					</div>
 
@@ -854,17 +897,11 @@
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="/media
-	+000/js/app.js"></script>
-
+	<script src="/media/js/app.js"></script>
 	<script>
 
-		jQuery(document).ready(function() {       
-
-		   // initiate layout and plugins
-
-		   App.init();
-
+		jQuery(document).ready(function() {
+			App.init();
 		});
 
 	</script>

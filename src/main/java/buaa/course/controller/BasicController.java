@@ -1,19 +1,17 @@
 package buaa.course.controller;
 
-import buaa.course.service.UserService;
 import buaa.course.model.User;
+import buaa.course.service.UserService;
 import buaa.course.utils.IpUtil;
 import buaa.course.utils.PasswordEncoder;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
 
@@ -27,13 +25,6 @@ public class BasicController {
 
     @Resource(name = "passwordEncoder")
     private PasswordEncoder passwordEncoder;
-
-    @RequestMapping(method = RequestMethod.GET,value = "/hello/{name}")
-    public ModelAndView hello(@PathVariable String name, HttpServletResponse response) throws IOException {
-       ModelAndView m = new ModelAndView("hello");
-        m.addObject("message", name);
-        return m;
-    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/login")
     public ModelAndView loginGet(){

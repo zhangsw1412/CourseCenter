@@ -838,7 +838,6 @@
             <!-- BEGIN PAGE CONTENT-->
 
             <div class="tiles">
-                <c:forEach items="${courses}" var="course">
                     <div class="tile double bg-blue">
                         <div class="corner"></div>
                         <div class="check"></div>
@@ -851,14 +850,14 @@
                             <h4>学分：${course.credit}</h4>
                             <div style="margin:15px"></div>
                             <h4>任课老师：
-                                <c:forEach items="${teachers[course.id+0]}" var="name">
+                                <c:forEach items="${teachers}" var="name">
                                     ${name}&nbsp;
                                 </c:forEach>
                             </h4>
                         </div>
                     </div>
 
-                    <a href="/assignments/${semesterCourseIds[course.id+0]}">
+                    <a href="/assignment/assignments/${semesterCourseId}">
                         <div class="tile double-down bg-green">
                             <div class="tile-body">
                                 <i class="icon-calendar"></i>
@@ -871,7 +870,7 @@
                         </div>
                     </a>
 
-                    <a href="/${semester.id}/${course.id}/resourceList/1">
+                    <a href="/semester/${semester.id}/course/${course.id}/resourceList">
                         <div class="tile double-down bg-purple">
                             <div class="tile-body">
                                 <i class="icon-paste"></i>
@@ -894,7 +893,6 @@
                             </div>
                         </div>
                     </div>
-                </c:forEach>
 
                 <br>
 
