@@ -221,8 +221,7 @@
 
 							<li>
 
-								<a href="#">${course.name}</a>
-								
+								<a href="#">${course.name}</a>								
 								<!-- 数据库获取该课程名 -->
 
 								<i class="icon-angle-right"></i>
@@ -267,7 +266,7 @@
 
 											<div class="form-horizontal form-view">
 
-												<h3> 软件开发实践: 作业</h3>
+												<h3> ${course.name }: 作业</h3>
 
 												<h3 class="form-section"></h3>
 

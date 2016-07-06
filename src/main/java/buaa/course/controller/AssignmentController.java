@@ -35,15 +35,11 @@ public class AssignmentController {
     	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
     		return new ModelAndView("login");
-    	List<Course> courses = new ArrayList<>();
-    	ModelAndView m = new ModelAndView();
+		List<Course> courses = new ArrayList<>();    	ModelAndView m = new ModelAndView();
     	if(user.getType() == 0){
     		m = new ModelAndView("assignment/student_assignments");
     		courses = courseService.getCoursesByStudent(2, user.getNum());
-    	}else if(user.getType() == 1){
-			m = new ModelAndView("assignment/teacher_assignments");
-			courses = courseService.getCoursesByTeacher(2, user.getNum());
-		}
+    		courses = courseService.getCoursesByTeacher(2, user.getNum());    	}
     	if(semesterCourseId!=null){
     		m.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
     	}

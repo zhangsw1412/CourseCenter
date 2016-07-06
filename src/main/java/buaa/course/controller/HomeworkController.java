@@ -120,6 +120,7 @@ public class HomeworkController {
     public ModelAndView submitHomeworkGet(@PathVariable Integer assignmentId, HttpServletRequest request){
     	User user = (User)request.getSession().getAttribute("user");
     	List<Course> courses;
+    	Course course=null;
     	if(user==null||user.getType()!=0)
     		return new ModelAndView("login");
     	ModelAndView m = new ModelAndView("assignment/submit");
@@ -131,11 +132,11 @@ public class HomeworkController {
     	if(assignment==null)
     		return index;
     	courses = courseService.getCoursesByStudent(2, user.getNum());
+    	course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId());
     	m.addObject("assignmentId", assignmentId);
     	m.addObject("assignment",assignment);
     	m.addObject("courses", courses);
-		m.addObject("semester", semesterService.getSemesterById(2));
-    	return m;
+		m.addObject("semester", semesterService.getSemesterById(2));		m.addObject("course",course);    	return m;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/submit/{assignmentId}")
