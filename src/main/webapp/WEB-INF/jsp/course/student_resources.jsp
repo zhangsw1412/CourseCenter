@@ -74,7 +74,7 @@
 
             <!-- BEGIN LOGO -->
 
-            <a class="brand" href="homepage.html">
+            <a class="brand" href="teacher.jsp">
 
                 <img src="/media/image/logo.png" alt="logo"/>
 
@@ -82,11 +82,51 @@
 
             <!-- END LOGO -->
 
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+                <img src="/media/image/menu-toggler.png" alt="" />
+
+            </a>
+
+            <!-- END RESPONSIVE MENU TOGGLER -->
+
+            <!-- BEGIN TOP NAVIGATION MENU -->
+
+            <ul class="nav pull-right">
+
+                <!-- BEGIN USER LOGIN DROPDOWN -->
+
+                <li class="dropdown user">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                        <span class="username">${sessionScope.user.name}</span>
+
+                        <i class="icon-angle-down"></i>
+
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li><a href="/logout"><i class="icon-key"></i>退出</a></li>
+
+                    </ul>
+
+                </li>
+
+                <!-- END USER LOGIN DROPDOWN -->
+
+            </ul>
+
+            <!-- END TOP NAVIGATION MENU -->
+
         </div>
 
     </div>
 
-    <!-- END TOP NAVIGATION BAR -->
+    <!--END OF NAVIGATION BAR -->
 
 </div>
 
@@ -96,144 +136,7 @@
 
 <div class="page-container row-fluid">
 
-    <!-- BEGIN SIDEBAR -->
-
-    <div class="page-sidebar nav-collapse collapse">
-
-        <!-- BEGIN SIDEBAR MENU -->
-
-        <ul class="page-sidebar-menu">
-
-            <li>
-
-                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
-                <div class="sidebar-toggler hidden-phone"></div>
-
-                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
-            </li>
-
-            <li>
-
-                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-
-                <form class="sidebar-search">
-
-                    <div class="input-box">
-
-                        <a href="javascript:;" class="remove"></a>
-
-                        <input type="text" placeholder="Search..."/>
-
-                        <input type="button" class="submit" value=" "/>
-
-                    </div>
-
-                </form>
-
-                <!-- END RESPONSIVE QUICK SEARCH FORM -->
-
-            </li>
-
-            <li class="">
-
-                <a href="student_homepage.html">
-
-                    <i class="icon-home"></i>
-
-                    <span class="title">主页</span>
-
-                </a>
-
-            </li>
-
-            <li class="">
-
-                <a href="student_semester.html">
-
-                    <i class="icon-table"></i>
-
-                    <span class="title">学期列表</span>
-
-                </a>
-
-
-            </li>
-            <li class="active ">
-
-                <a href="javascript:;">
-
-                    <i class="icon-bookmark-empty"></i>
-
-                    <span class="title">课程管理</span>
-
-
-                    <span class="selected"></span>
-
-                    <span class="arrow open"></span>
-
-                </a>
-
-                <ul class="sub-menu">
-
-                    <li class="active">
-
-                        <a href="student_course.html">经济管理</a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="student_course.html">
-
-                            软件工程</a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="student_course.html">
-
-                            体育</a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="student_course.html">
-
-                            中国传统文化</a>
-
-                    </li>
-
-                </ul>
-
-            </li>
-            </li>
-            <li class="">
-
-                <a href="">
-
-                    <i class="icon-file-text"></i>
-
-                    <span class="title">团队管理</span>
-
-                    <span class="selected"></span>
-
-                </a>
-
-
-            </li>
-
-
-        </ul>
-
-        <!-- END SIDEBAR MENU -->
-
-    </div>
-
-    <!-- END SIDEBAR -->
+    <jsp:include page="../include/sidebar.jsp"></jsp:include>
 
     <!-- BEGIN PAGE -->
 

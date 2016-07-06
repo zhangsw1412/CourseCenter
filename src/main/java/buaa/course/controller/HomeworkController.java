@@ -3,25 +3,21 @@ package buaa.course.controller;
 import buaa.course.model.Assignment;
 import buaa.course.model.Course;
 import buaa.course.model.Homework;
-import buaa.course.model.SemesterCourse;
 import buaa.course.model.User;
 import buaa.course.service.AssignmentService;
 import buaa.course.service.CourseService;
 import buaa.course.service.HomeworkService;
 import buaa.course.service.UserService;
-
+import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.mysql.jdbc.StringUtils;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -165,7 +161,7 @@ public class HomeworkController {
     	Timestamp submitTime = new Timestamp(System.currentTimeMillis());
         Homework homework = new Homework();
         homework.setSemesterCourseId(semesterCourseId);
-        homework.setStudentId(1);
+        homework.setStudentId(user.getNum());
         homework.setAssignmentId(assignmentId);
         homework.setText(text);
         homework.setFileUrl("1");

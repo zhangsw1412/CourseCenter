@@ -87,217 +87,81 @@
 
 <body class="page-header-fixed">
 
-	<!-- BEGIN HEADER -->
+<!-- BEGIN HEADER -->
 
-	<div class="header navbar navbar-inverse navbar-fixed-top">
+<div class="header navbar navbar-inverse navbar-fixed-top">
 
-		<!-- BEGIN TOP NAVIGATION BAR -->
+	<!-- BEGIN TOP NAVIGATION BAR -->
 
-		<div class="navbar-inner">
+	<div class="navbar-inner">
 
-			<div class="container-fluid">
+		<div class="container-fluid">
 
-				<!-- BEGIN LOGO -->
+			<!-- BEGIN  -->
 
-				<a class="brand" href="student_homepage.html">
+			<a class="brand" href="#">
 
-				<img src="/media/image/logo.png" alt="logo" />
+				<img src="/media/image/logo.png" alt="logo"/>
 
-				</a>
+			</a>
 
-				<!-- END LOGO -->
+			<!-- END LOGO -->
 
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+			<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+			<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
 				<img src="/media/image/menu-toggler.png" alt="" />
 
-				</a>          
+			</a>
 
-				<!-- END RESPONSIVE MENU TOGGLER -->            
+			<!-- END RESPONSIVE MENU TOGGLER -->
 
-				<!-- BEGIN TOP NAVIGATION MENU -->              
+			<!-- BEGIN TOP NAVIGATION MENU -->
 
-				<ul class="nav pull-right">
+			<ul class="nav pull-right">
 
-					<!-- BEGIN USER LOGIN DROPDOWN -->
+				<!-- BEGIN USER LOGIN DROPDOWN -->
 
-					<li class="dropdown user">
+				<li class="dropdown user">
 
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-						<span class="username">Bob Nilson</span>
+						<span class="username">${sessionScope.user.name}</span>
 
 						<i class="icon-angle-down"></i>
 
-						</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
-
-						</ul>
-
-					</li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU --> 
-
-			</div>
-
-		</div>
-
-		<!-- END TOP NAVIGATION BAR -->
-
-	</div>
-
-	<!-- END HEADER -->
-
-	<!-- BEGIN CONTAINER -->   
-
-	<div class="page-container row-fluid">
-
-		<!-- BEGIN SIDEBAR -->
-
-		<div class="page-sidebar nav-collapse collapse">
-
-			<!-- BEGIN SIDEBAR MENU -->        
-
-			<ul class="page-sidebar-menu">
-
-				<li>
-
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
-					<div class="sidebar-toggler hidden-phone"></div>
-
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
-				</li>
-
-				<li>
-
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-
-					<form class="sidebar-search">
-
-						<div class="input-box">
-
-							<a href="javascript:;" class="remove"></a>
-
-							<input type="text" placeholder="Search..." />
-
-							<input type="button" class="submit" value=" " />
-
-						</div>
-
-					</form>
-
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-
-				</li>
-
-				<li class="start ">
-
-					<a href="student_homepage.html">
-
-					<i class="icon-home"></i> 
-
-					<span class="title">主页</span>
-
 					</a>
 
-				</li>
-                
-                
-                <li class="">
+					<ul class="dropdown-menu">
 
-					<a href="student_homepage.html">
-
-					<i class="icon-table"></i> 
-
-					<span class="title">学期管理</span>
-
-					</a>
-
-				</li>
-                
-
-				<li class="active ">
-
-					<a href="javascript:;">
-
-					<i class="icon-bookmark-empty"></i> 
-
-					<span class="title">课程管理</span>
-
-
-					<span class="selected"></span>
-
-					<span class="arrow open"></span>
-
-					</a>
-
-					<ul class="sub-menu">
-
-						<li class="active">
-
-							<a href="student_course.html">经济管理</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							软件工程</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							体育</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							中国传统文化</a>
-
-						</li>
+						<li><a href="/logout"><i class="icon-key"></i>退出</a></li>
 
 					</ul>
 
 				</li>
 
-
-				<li class="last ">
-
-					<a href="#">
-
-					<i class="icon-bar-chart"></i> 
-
-					<span class="title">团队管理</span>
-
-					</a>
-
-				</li>
+				<!-- END USER LOGIN DROPDOWN -->
 
 			</ul>
 
-			<!-- END SIDEBAR MENU -->
+			<!-- END TOP NAVIGATION MENU -->
 
 		</div>
 
-		<!-- END SIDEBAR -->
+	</div>
+
+	<!--END OF NAVIGATION BAR -->
+
+</div>
+
+<!-- END HEADER -->
+
+	<!-- BEGIN CONTAINER -->   
+
+	<div class="page-container row-fluid">
+
+		<jsp:include page="../include/sidebar.jsp"></jsp:include>
 
 		<!-- BEGIN PAGE -->
 
