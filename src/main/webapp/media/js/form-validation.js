@@ -61,7 +61,6 @@ var FormValidation = function () {
 
                 submitHandler: function (form) {
                     success1.show();
-                    form.submit();
                     error1.hide();
                 }
             });
@@ -165,7 +164,6 @@ var FormValidation = function () {
 
                 submitHandler: function (form) {
                     success2.show();
-                    form.submit();
                     error2.hide();
                 }
 

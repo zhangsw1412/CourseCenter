@@ -733,7 +733,7 @@
 
 									<div class="form-actions">
 
-										<input type="submit" value="Confirm" />
+										<input type="submit" value="确认" class="btn blue" />
 
 										<a href="teacher_homework.html"><button type="button"
 												class="btn">取消</button> <a>
