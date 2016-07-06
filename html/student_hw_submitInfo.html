@@ -12,7 +12,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>作业上传</title>
+	<title>作业提交信息</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -502,13 +502,26 @@
                                                  <div class="row-fluid">
 
 													<div class="span12 ">
+
+													<div class="control-group">
+
+															<label class="control-label" style=" font-weight:bolder">提交详情</label>
+
+															<div class="controls">
+
+																<span class="text" >已经提交</span>
+
+															</div>
+
+													</div>
+
 													<div class="control-group">
 
 														<label class="control-label" style=" font-weight:bolder">作业</label>
 
 														<div class="controls">
 
-															<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
+															<textarea class="span12 wysihtml5 m-wrap" readonly type="text" rows="6" placeholder="有关软件组队的理由：人员组成以及人员分工"></textarea>
 
 														</div>
 
@@ -516,19 +529,12 @@
 
 														<div class="control-group">
 
-															<label class="control-label" style=" font-weight:bolder">上传</label>
+															<label class="control-label" style=" font-weight:bolder">附件列表:</label>
 
 															<div class="controls">
 
-																 <span class="btn green fileinput-button">
-
-																<i class="icon-plus icon-white"></i>
-
-															<span>添加附件</span>
-
-														<input type="file" name="files[]" multiple> 
-                                    
-																</span>
+																<a href="#"><label class="control-label" style=" font-weight:bolder">组队申请表.xls</label></a>
+																
 
 															</div>
 
@@ -554,9 +560,9 @@
 
 												<div class="form-actions">
 
-													<button type="submit" class="btn blue"><i class="icon-upload-alt"></i> 提交</button>
+													<button type="submit" class="btn blue"><i class="icon-upload-alt"></i> 全部下载</button>
 
-													<button type="button" class="btn">Back</button>
+													<a href="student_homework.html"><button type="button" class="btn">返回</button></a>>
 
 												</div>
 
