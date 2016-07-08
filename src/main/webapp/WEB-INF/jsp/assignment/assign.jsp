@@ -50,6 +50,8 @@
 	
 	<link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.10.1.custom.min.css"/>
 
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-toggle-buttons.css" />
+
 	<!-- END PAGE LEVEL STYLES -->
 
 	<link rel="shortcut icon" href="/media/image/favicon.ico" />
@@ -62,16 +64,153 @@
 
 <body class="page-header-fixed">
 
-<jsp:include page="../include/header.jsp"></jsp:include>
+	<!-- BEGIN HEADER -->
+
+	<div class="header navbar navbar-inverse navbar-fixed-top">
+
+		<!-- BEGIN TOP NAVIGATION BAR -->
+
+		<div class="navbar-inner">
+
+			<div class="container-fluid">
+
+				<!-- BEGIN LOGO -->
+
+				<a class="brand" href="teacher_homepage.html">
+
+				<img src="/media/image/logo.png" alt="logo" />
+
+				</a>
+
+				<!-- END LOGO -->
+
+				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+				<img src="/media/image/menu-toggler.png" alt="" />
+
+				</a>          
+
+				<!-- END RESPONSIVE MENU TOGGLER -->            
+
+				<!-- BEGIN TOP NAVIGATION MENU -->              
+
+				<ul class="nav pull-right">
+
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+
+					<li class="dropdown user">
+
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+						<span class="username">Bob Nilson</span>
+
+						<i class="icon-angle-down"></i>
+
+						</a>
+
+						<ul class="dropdown-menu">
+
+							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+
+						</ul>
+
+					</li>
+
+					<!-- END USER LOGIN DROPDOWN -->
+
+				</ul>
+
+				<!-- END TOP NAVIGATION MENU --> 
+
+			</div>
+
+		</div>
+
+		<!-- END TOP NAVIGATION BAR -->
+
+	</div>
+
+	<!-- END HEADER -->
 
 	<!-- BEGIN CONTAINER -->
 
 	<div class="page-container row-fluid">
 
-		<jsp:include page="../include/sidebar.jsp"></jsp:include>
-
 		<!-- BEGIN PAGE -->  
+		
+        <div class="page-sidebar nav-collapse collapse">
 
+			<!-- BEGIN SIDEBAR MENU -->
+
+			<ul class="page-sidebar-menu">
+					
+                 
+                 <li>
+                 <div style="margin:50px"></div>
+                 </li>
+
+				<li class="active ">
+
+					<a href="javascript:;">
+
+					<i class="icon-bookmark-empty"></i> 
+
+					<span class="title">课程管理</span>
+
+
+					<span class="selected"></span>
+
+					<span class="arrow open"></span>
+
+					</a>
+
+					<ul class="sub-menu">
+
+						<li class="active">
+
+							<a href="teacher_course.html">经济管理</a>
+
+						</li>
+
+						<li >
+
+							<a href="teacher_course.html">
+
+							软件工程</a>
+
+						</li>
+
+						<li >
+
+							<a href="teacher_course.html">
+
+							体育</a>
+
+						</li>
+
+						<li >
+
+							<a href="teacher_course.html">
+
+							中国传统文化</a>
+
+						</li>
+
+					</ul>
+
+				</li>
+
+				
+
+			</ul>
+
+			<!-- END SIDEBAR MENU -->
+
+		</div>
+
+        
 		<div class="page-content">
 
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -156,7 +295,7 @@
 
 								<div class="caption">
 
-									<i class="icon-plus"></i> 添加作业 - <span class="step-title">Step 1 of 4</span>
+									<i class="icon-plus"></i> 添加作业 - <span class="step-title">Step 1 of 3</span>
 
 								</div>
 
@@ -186,23 +325,11 @@
 
 												<ul class="row-fluid">
 
-													<li class="span3">
+													<li class="span4">
 
-														<a href="#tab1" data-toggle="tab" class="step active">
+														<a href="#tab1" data-toggle="tab" class="step">
 
 														<span class="number">1</span>
-
-														<span class="desc"><i class="icon-ok"></i> 选择课程</span>   
-
-														</a>
-
-													</li>
-
-													<li class="span3">
-
-														<a href="#tab2" data-toggle="tab" class="step">
-
-														<span class="number">2</span>
 
 														<span class="desc"><i class="icon-ok"></i> 起始时间</span>   
 
@@ -210,11 +337,11 @@
 
 													</li>
 
-													<li class="span3">
+													<li class="span4">
 
-														<a href="#tab3" data-toggle="tab" class="step">
+														<a href="#tab2" data-toggle="tab" class="step">
 
-														<span class="number">3</span>
+														<span class="number">2</span>
 
 														<span class="desc"><i class="icon-ok"></i> 详细要求</span>   
 
@@ -222,11 +349,11 @@
 
 													</li>
 
-													<li class="span3">
+													<li class="span4">
 
-														<a href="#tab4" data-toggle="tab" class="step">
+														<a href="#tab3" data-toggle="tab" class="step">
 
-														<span class="number">4</span>
+														<span class="number">3</span>
 
 														<span class="desc"><i class="icon-ok"></i> 确认信息</span>   
 
@@ -265,36 +392,7 @@
 											</div>
 											
 											<!-- step1 -->
-											<div class="tab-pane active" id="tab1">
-											
-
-												<h3 class="block">请选择你的课程：</h3>
-
-												<div class="control-group">
-
-													<label class="control-label">课程名<span class="required">*</span></label>
-
-													<div class="controls">
-
-														<select class="span6" name="course" id="course_list">
-
-															<option value=""></option>
-															
-															<option value="RKS">软件开发实习</option>
-															
-															<option value="RGG">软件工程过程</option>
-															
-															<option value="XF">系统分析</option>
-
-														</select>
-
-													</div>
-												</div>
-
-											</div>
-											
-											<!-- step2 -->
-											<div class="tab-pane" id="tab2">
+											<div class="tab-pane" id="tab1">
 
 												<h3 class="block">请设置作业时间区域：</h3>
 
@@ -316,14 +414,14 @@
 
 											</div>
 
-											<!-- step3 -->
-											<div class="tab-pane" id="tab3">
+											<!-- step2 -->
+											<div class="tab-pane" id="tab2">
 
 												<h3 class="block">请填写作业要求与详情：</h3>
 
 												<div class="control-group">
 
-													<label class="control-label">作业名称<span class="required">*</span></label>
+													<label class="control-label">作业名称<span class="required"> *</span></label>
 
 													<div class="controls">
 
@@ -335,9 +433,38 @@
 
 												</div>
 												
+
 												<div class="control-group">
 
-													<label class="control-label">详细需求<span class="required">*</span></label>
+													<label class="control-label">团队参与<span class="required"> *</span></label>
+
+													<div class="controls">
+
+														<input type="text" name="_team" />
+
+														<span class="help-inline"></span>
+
+													</div>
+
+												</div>
+
+												<div class="control-group">
+
+													<label class="control-label">分数上限<span class="required"> *</span></label>
+
+													<div class="controls">
+
+														<input type="text" name="_limit" />
+
+														<span class="help-inline"></span>
+
+													</div>
+
+												</div>
+												
+												<div class="control-group">
+
+													<label class="control-label">详细需求<span class="required"> *</span></label>
 
 													<div class="controls">
 
@@ -352,8 +479,8 @@
 
 											</div>
 
-											<!-- step4 -->
-											<div class="tab-pane" id="tab4">
+											<!-- step3 -->
+											<div class="tab-pane" id="tab3">
 
 												<h3 class="block">请确认：</h3>
 
@@ -366,6 +493,7 @@
 													<div class="controls">
 
 														<span class="text display-value" data-display="course"></span>
+														<!-- 获取课程名 course -->
 
 													</div>
 
@@ -378,6 +506,31 @@
 													<div class="controls">
 
 														<span class="text display-value" data-display="assign_name"></span>
+
+													</div>
+
+												</div>
+
+												<div class="control-group">
+
+													<label class="control-label">分数上限；</label>
+
+													<div class="controls">
+
+														<span class="text display-value" data-display="_limit"></span>
+														
+
+													</div>
+
+												</div>
+
+												<div class="control-group">
+
+													<label class="control-label">团队参与：</label>
+
+													<div class="controls">
+
+														<span class="text display-value" data-display="_team"></span>
 
 													</div>
 
@@ -529,6 +682,10 @@
 
 	<script type="text/javascript" src="/media/js/select2.min.js"></script>
 
+	<script type="text/javascript" src="/media/js/jquery.tagsinput.min.js"></script>
+
+	<script type="text/javascript" src="/media/js/jquery.toggle.buttons.js"></script>
+
 	<!-- END PAGE LEVEL PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -539,6 +696,7 @@
 	
 	<script src="/media/js/ui-jqueryui.js"></script>  
 	
+	<script src="/media/js/form-components.js"></script>     
 
 	<!-- END PAGE LEVEL SCRIPTS -->
 
@@ -553,6 +711,8 @@
 		   FormWizard.init();
 		   
 		   UIJQueryUI.init();
+		   
+		   FormComponents.init();
 		   
 		});
 

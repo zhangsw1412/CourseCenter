@@ -185,8 +185,15 @@
 										<td class="hidden-phone">${item.startTime }</td>
 										<td>${item.deadline }</td>
 										<td>${homeworks[item.id+0].submitTime}</td>
-
-										<c:if test="${homeworks[item.id+0].comment == null}">
+										<c:if test="${homeworks[item.id+0] == null}">
+											<td>
+												未提交
+											</td>
+											<td>
+												未提交
+											</td>
+										</c:if>
+										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment == null}">
 											<td>
 												未批改
 											</td>
@@ -194,7 +201,7 @@
 												未批改
 											</td>
 										</c:if>
-										<c:if test="${homeworks[item.id+0].comment != null}">
+										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment != null}">
 											<td>
 												${homeworks[item.id+0].score}
 											</td>
