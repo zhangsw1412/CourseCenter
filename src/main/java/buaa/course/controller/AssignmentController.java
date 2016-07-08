@@ -172,11 +172,21 @@ public class AssignmentController {
         	return m;
     	}
     	
+    	Assignment assignment = new Assignment();
+    	assignment.setSemesterCourseId(semesterCourseId);
+    	assignment.setName(name);
+    	assignment.setBasicRequirement(basicRequirement);
+    	assignment.setStartTime(startTime);
+    	assignment.setDeadline(deadline);
+    	assignment.setTeamAvaliable(teamAvaliable);
+    	assignment.setHighestScore(highestScore);
+    	assignmentService.createAssignment(assignment);
+    	int assignmentId = assignment.getId();
     	String fileUrl = null;
     	for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 // 文件保存路径
-                String filePath = getResourcePath(semesterCourseId, request);
+                String filePath = getResourcePath(semesterCourseId,assignmentId, request);
                 File dir = new File(filePath);
                 if (!dir.exists()) {
                     dir.mkdirs();
@@ -185,7 +195,7 @@ public class AssignmentController {
                 try {
                     File temp = new File(filePath + File.separator + file.getOriginalFilename());
                     file.transferTo(temp);
-                    fileUrl = filePath + File.separator + file.getOriginalFilename();
+                    fileUrl = getServerPath(semesterCourseId,assignmentId,file.getOriginalFilename(),request);
                 } catch (Exception e) {
                     e.printStackTrace();
                     m.addObject("message", e.getMessage());
@@ -193,26 +203,27 @@ public class AssignmentController {
                 }
             }
         }
-    	
-    	Assignment assignment = new Assignment();
-    	assignment.setSemesterCourseId(semesterCourseId);
-    	assignment.setName(name);
-    	assignment.setBasicRequirement(basicRequirement);
     	assignment.setFileUrl(fileUrl);
-    	assignment.setStartTime(startTime);
-    	assignment.setDeadline(deadline);
-    	assignment.setTeamAvaliable(teamAvaliable);
-    	assignment.setHighestScore(highestScore);
-    	assignmentService.createAssignment(assignment);
+    	assignmentService.updateAssignment(assignment);
     	ModelAndView assignments = new ModelAndView("assignment/teacher_assignments");
     	assignments.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
 		m.addObject("semester", semesterService.getSemesterById(2));
     	return assignments;
     }
 
-	private String getResourcePath(Integer semesterCourseId, HttpServletRequest request) {
+	private String getServerPath(Integer semesterCourseId, Integer assignmentId, String originalFilename,HttpServletRequest request) {		
+		String dir = getServerDir(semesterCourseId, assignmentId, request);
+		return dir+originalFilename;
+	}
+
+	private String getServerDir(Integer semesterCourseId, Integer assignmentId, HttpServletRequest request) {
+		return request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()
+		+"/"+request.getContextPath()+"resource/"+ "semestercourse-" + semesterCourseId +"/assignment-" +assignmentId+"/";
+	}
+
+	private String getResourcePath(Integer semesterCourseId, Integer assignmentId, HttpServletRequest request) {
 		String filePath = request.getSession().getServletContext().getRealPath("/")
-                + "resource" + File.separator + "semestercourse-" + semesterCourseId;
+                + "resource" + File.separator + "semestercourse-" + semesterCourseId + File.separator + "assignment-" +assignmentId;
         return filePath;
 	}
 	
@@ -320,11 +331,21 @@ public class AssignmentController {
         	return m;
     	}
     	
+    	Assignment assignment = new Assignment();
+    	assignment.setSemesterCourseId(semesterCourseId);
+    	assignment.setName(name);
+    	assignment.setBasicRequirement(basicRequirement);
+    	assignment.setStartTime(startTime);
+    	assignment.setDeadline(deadline);
+    	assignment.setTeamAvaliable(teamAvaliable);
+    	assignment.setHighestScore(highestScore);
+    	assignmentService.createAssignment(assignment);
+    	int assignmentId=assignment.getId();
     	String fileUrl = null;
     	for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 // 文件保存路径
-                String filePath = getResourcePath(semesterCourseId, request);
+                String filePath = getResourcePath(semesterCourseId, assignmentId, request);
                 File dir = new File(filePath);
                 if (!dir.exists()) {
                     dir.mkdirs();
@@ -333,7 +354,7 @@ public class AssignmentController {
                 try {
                     File temp = new File(filePath + File.separator + file.getOriginalFilename());
                     file.transferTo(temp);
-                    fileUrl = filePath + File.separator + file.getOriginalFilename();
+                    fileUrl = getServerPath(semesterCourseId,assignmentId,file.getOriginalFilename(),request);
                 } catch (Exception e) {
                     e.printStackTrace();
                     m.addObject("message", e.getMessage());
@@ -341,17 +362,8 @@ public class AssignmentController {
                 }
             }
         }
-    	
-    	Assignment assignment = new Assignment();
-    	assignment.setSemesterCourseId(semesterCourseId);
-    	assignment.setName(name);
-    	assignment.setBasicRequirement(basicRequirement);
     	assignment.setFileUrl(fileUrl);
-    	assignment.setStartTime(startTime);
-    	assignment.setDeadline(deadline);
-    	assignment.setTeamAvaliable(teamAvaliable);
-    	assignment.setHighestScore(highestScore);
-    	assignmentService.createAssignment(assignment);
+    	assignmentService.updateAssignment(assignment);
     	ModelAndView assignments = new ModelAndView("assignment/teacher_assignments");
     	assignments.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
 		m.addObject("semester", semesterService.getSemesterById(2));

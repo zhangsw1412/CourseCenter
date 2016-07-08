@@ -191,7 +191,7 @@
 											<div class="caption"><i class="icon-reorder"></i>作业详情</div>
 
 										</div>
-										<form action="/assignment/submit/${assignmentId}" method="POST">
+										<form action="/assignment/submit/${assignmentId}" method="POST" enctype="multipart/form-data">
 										<div class="portlet-body form">
 
 											<!-- BEGIN FORM-->
@@ -310,9 +310,9 @@
 														</div>${error}
 
 													</div>
-
+														<c:if test="${homework == null}">															
 														<div class="control-group">
-															<%--
+														
 															<label class="control-label" style=" font-weight:bolder">上传</label>
 
 															<div class="controls">
@@ -323,14 +323,23 @@
 
 															<span>添加附件</span>
 
-														<input type="file" name="files[]" multiple>
+														<input type="file" name="files" class="fileupload"/>
 
 																</span>
---%>
 															</div>
 
 														</div>
+														</c:if>
+														<c:if test="${homework != null}">
+														<div class="control-group">
+															<label class="control-label" style=" font-weight:bolder">附件</label>
+															<div class="controls">
+															<a href="${homework.fileUrl}" class="btn green fileinput-button">
+                                            				<i class="icon-download"></i><span> ${homework.fileUrl}</span></a>
 
+														</div>
+														</div>
+														</c:if>
 													</div>
 
 													<!--/span-->

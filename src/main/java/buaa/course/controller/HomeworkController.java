@@ -241,9 +241,19 @@ public class HomeworkController {
         return null;
     }
 
-	private String getResourcePath(Integer assignmentId, HttpServletRequest request) {
+	private String getResourcePath(Integer assignmentId, Integer homeworkId, HttpServletRequest request) {
 		String filePath = request.getSession().getServletContext().getRealPath("/")
-                + "resource" + File.separator + "assignment-" + assignmentId;
+                + "resource" + File.separator + "assignment-" + assignmentId + File.separator + "homework-" +homeworkId;
         return filePath;
+	}
+	
+	private String getServerPath(Integer assignmentId, Integer homeworkId, String originalFilename,HttpServletRequest request) {		
+		String dir = getServerDir(assignmentId, homeworkId, request);
+		return dir+originalFilename;
+	}
+
+	private String getServerDir(Integer assignmentId, Integer homeworkId, HttpServletRequest request) {
+		return request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()
+		+"/"+request.getContextPath()+"resource/"+ "assignment-" + assignmentId +"/homework-" +homeworkId+"/";
 	}
 }
