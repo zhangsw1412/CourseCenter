@@ -69,7 +69,6 @@ public class CourseController {
     public ModelAndView courseDetail(@PathVariable Integer semesterId, @PathVariable Integer courseId,
                                      HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User)request.getSession().getAttribute("user");
-        System.out.println(user);
         ModelAndView m = new ModelAndView("course/student_course");
         if(semesterId == null || courseId == null){
             response.sendRedirect("index");

@@ -65,8 +65,7 @@ public class BasicController {
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("semesterId", 2);
             if(user.getType() == 0 ||user.getType() == 1){
-//               response.sendRedirect("/index");
-                return index(request);
+               response.sendRedirect("/index");
             }else if(user.getType() == 2){
                 return new ModelAndView("admin");
             }
