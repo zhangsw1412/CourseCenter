@@ -116,7 +116,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="teacher_homepage.html">主页</a> 
+								<a href="#">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -132,7 +132,7 @@
 							</li>
 							<li>
 
-								<a href="teacher_homework.html">作业管理</a>
+								<a href="#">作业管理</a>
 
 							</li>
 
