@@ -305,7 +305,7 @@
 
 														<div class="controls">
 
-															<textarea class="span12 wysihtml5 m-wrap" rows="6" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>${homework.text}</textarea>
+															<textarea class="span12 wysihtml5 m-wrap" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>${homework.text}</textarea>
 
 														</div>${error}
 
@@ -327,7 +327,6 @@
 
 																</span>
 															</div>
-
 														</div>
 														</c:if>
 														<c:if test="${homework != null}">
@@ -336,7 +335,6 @@
 															<div class="controls">
 															<a href="${homework.fileUrl}" class="btn green fileinput-button">
                                             				<i class="icon-download"></i><span> ${homework.fileUrl}</span></a>
-
 														</div>
 														</div>
 														</c:if>
@@ -361,7 +359,9 @@
 													<input type="submit" class="btn blue"/>
 													<input type="reset" class="btn" value="重置">
 												</c:if>
-
+												<c:if test="${homework != null}">
+													该项作业已提交，不能再次提交
+												</c:if>
 
 
 												</div>
@@ -442,7 +442,9 @@
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="/media/js/app.js"></script>      
+	<script src="/media/js/app.js"></script>
+	<script src="/ckeditor/ckeditor.js"></script>
+	<script> CKEDITOR.replace('text');</script>
 
 	<script>
 
