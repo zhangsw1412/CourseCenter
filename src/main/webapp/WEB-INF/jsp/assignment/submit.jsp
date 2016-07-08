@@ -191,7 +191,7 @@
 											<div class="caption"><i class="icon-reorder"></i>作业详情</div>
 
 										</div>
-										<form action="/assignment/submit/${assignmentId}" method="POST">
+										<form action="/assignment/submit/${assignmentId}" method="POST" enctype="multipart/form-data">
 										<div class="portlet-body form">
 
 											<!-- BEGIN FORM-->
@@ -305,14 +305,14 @@
 
 														<div class="controls">
 
-															<textarea class="span12 wysihtml5 m-wrap" rows="6" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>${homework.text}</textarea>
+															<textarea class="span12 wysihtml5 m-wrap" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>${homework.text}</textarea>
 
 														</div>${error}
 
 													</div>
-
+														<c:if test="${homework == null}">															
 														<div class="control-group">
-															<%--
+														
 															<label class="control-label" style=" font-weight:bolder">上传</label>
 
 															<div class="controls">
@@ -323,14 +323,21 @@
 
 															<span>添加附件</span>
 
-														<input type="file" name="files[]" multiple>
+														<input type="file" name="files" class="fileupload"/>
 
 																</span>
---%>
 															</div>
-
 														</div>
-
+														</c:if>
+														<c:if test="${homework != null}">
+														<div class="control-group">
+															<label class="control-label" style=" font-weight:bolder">附件</label>
+															<div class="controls">
+															<a href="${homework.fileUrl}" class="btn green fileinput-button">
+                                            				<i class="icon-download"></i><span> ${homework.fileUrl}</span></a>
+														</div>
+														</div>
+														</c:if>
 													</div>
 
 													<!--/span-->
@@ -352,7 +359,9 @@
 													<input type="submit" class="btn blue"/>
 													<input type="reset" class="btn" value="重置">
 												</c:if>
-
+												<c:if test="${homework != null}">
+													该项作业已提交，不能再次提交
+												</c:if>
 
 
 												</div>
@@ -433,7 +442,9 @@
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="/media/js/app.js"></script>      
+	<script src="/media/js/app.js"></script>
+	<script src="/ckeditor/ckeditor.js"></script>
+	<script> CKEDITOR.replace('text');</script>
 
 	<script>
 

@@ -239,7 +239,7 @@
 										
 										<h3><strong>查阅</strong></h3>
 
-											<textarea readonly="readonly" class="span10 m-wrap" rows="8">${homework.text }</textarea>
+											<textarea readonly="readonly" class="span10 m-wrap">${homework.text }</textarea>
 											
 											<div class="row-fluid">
 												附件：<a href="#">${homework.fileUrl}</a>
@@ -270,7 +270,7 @@
 
 											<label><big>作业评价</big></label>
 
-											<textarea class="span10 m-wrap" rows="8" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>${homework.comment}${noComment}</textarea>
+											<textarea class="span10 m-wrap" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>${homework.comment}${noComment}</textarea>
 																<div class="row-fluid">
 
 											<div class="span4">
@@ -284,7 +284,9 @@
 											<c:if test="${homework.comment == null}">
 												<input type="submit" value="确认" class="btn green big hidden-print"/>
 											</c:if>
-
+												<c:if test="${homework.comment != null}">
+													该项作业已提交，不能再次提交
+												</c:if>
 											<a class="btn big hidden-print" href="/assignment/assignments/${assignment.semesterCourseId}">返回</a>
 				
 											</div>
@@ -375,7 +377,10 @@
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="/media/js/app.js"></script>      
+	<script src="/media/js/app.js"></script>
+	<script src="ckeditor/ckeditor.js"></script>
+
+	<script> CKEDITOR.replace('comment');</script>
 
 	<script>
 
