@@ -16,7 +16,7 @@ public class SemesterService
 	@Resource(name = "semesterMapper")
 	private SemesterMapper semesterMapper;
 
-	public Semester getSemesterById(int id)
+	public Semester getSemesterById(Integer id)
 	{
 		return semesterMapper.getSemester(id);
 	}

@@ -123,6 +123,20 @@ var FormWizard = function () {
                             payment.push($(this).attr('data-title'));
                         });
                         $(this).html(payment.join("<br>"));
+                    } else if(input.is(":file")) {
+                        var path = input.attr("value");
+                        var pos1 = path.lastIndexOf('/');
+                		var pos2 = path.lastIndexOf('\\');
+                		var pos  = Math.max(pos1, pos2);
+                		if(pos<0)
+                			$(this).html(path);
+                		else
+                			$(this).html(path.substring(pos+1));
+                    } else if(input.is(":checkbox")) {
+                		if(input.attr("checked"))
+                			$(this).html("true");
+                		else
+                			$(this).html("false");
                     }
                 });
             }

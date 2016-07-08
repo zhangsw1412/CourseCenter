@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -77,31 +78,31 @@ public class AssignmentController {
     }
     
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/assign/{semesterCourseId}")
-    public ModelAndView assignPost(@PathVariable Integer semesterCourseId, @RequestParam("files") MultipartFile[] files, HttpServletRequest request){
+    public ModelAndView assignPost(@PathVariable Integer semesterCourseId, @RequestParam("files") MultipartFile[] files, MultipartHttpServletRequest  request){
     	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()!=1)
     		return new ModelAndView("login");
     	if(semesterCourseId==null)
     		return new ModelAndView("assignment/teacher_assignments");
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
-    	ModelAndView m = new ModelAndView("assignment/teacher_assign");
+    	ModelAndView m = new ModelAndView("assignment/assign");
     	m.addObject("course",course);
-    	
+    	m.addObject("semesterCourseId",semesterCourseId);
     	String name = request.getParameter("name");
     	if(name==null){
-        	m.addObject("error", "作业名称不能为空");
+        	m.addObject("error2", "作业名称不能为空");
         	return m;
         }
     	
     	String basicRequirement = request.getParameter("basicrequirement");
     	if(basicRequirement==null){
-        	m.addObject("error", "请填写作业基本要求");
+        	m.addObject("error2", "请填写作业基本要求");
         	return m;
         }
     	
     	String startTime_s = request.getParameter("starttime");
     	if(startTime_s==null){
-        	m.addObject("error", "开始时间不能为空");
+        	m.addObject("error1", "开始时间不能为空");
         	return m;
         }
     	Timestamp startTime;
@@ -109,13 +110,13 @@ public class AssignmentController {
         	startTime = Timestamp.valueOf(startTime_s);
     	}
     	catch(Exception e){
-        	m.addObject("error", "开始时间不合法");
+        	m.addObject("error1", "开始时间不合法");
         	return m;
     	}
     	
     	String deadline_s = request.getParameter("deadline");
     	if(deadline_s==null){
-        	m.addObject("error", "截止时间不能为空");
+        	m.addObject("error1", "截止时间不能为空");
         	return m;
         }
     	Timestamp deadline;
@@ -123,13 +124,13 @@ public class AssignmentController {
         	deadline = Timestamp.valueOf(deadline_s);
     	}
     	catch(Exception e){
-        	m.addObject("error", "截止时间不合法");
+        	m.addObject("error1", "截止时间不合法");
         	return m;
     	}
     	
     	String teamAvaliable_s = request.getParameter("teamavaliable");
     	if(teamAvaliable_s==null){
-        	m.addObject("error", "请选择是否允许团队参与");
+        	m.addObject("error2", "请选择是否允许团队参与");
         	return m;
     	}
     	boolean teamAvaliable;
@@ -137,13 +138,13 @@ public class AssignmentController {
         	teamAvaliable = Boolean.valueOf(teamAvaliable_s);
     	}
     	catch(Exception e){
-        	m.addObject("error", "请选择是否允许团队参与");
+        	m.addObject("error2", "请选择是否允许团队参与");
         	return m;
     	}
     	
     	String highestScore_s = request.getParameter("highestscore");
     	if(highestScore_s==null){
-        	m.addObject("error", "分数上限不能为空");
+        	m.addObject("error2", "分数上限不能为空");
         	return m;
     	}
     	int highestScore;
@@ -151,11 +152,11 @@ public class AssignmentController {
     		highestScore = Integer.valueOf(highestScore_s);
     	}
     	catch(Exception e){
-        	m.addObject("error", "分数上限不合法");
+        	m.addObject("error2", "分数上限不合法");
         	return m;
     	}
     	if(highestScore<=0||highestScore>=100){
-        	m.addObject("error", "分数上限不合法");
+        	m.addObject("error2", "分数上限不合法");
         	return m;
     	}
     	
@@ -241,19 +242,19 @@ public class AssignmentController {
     	
     	String name = request.getParameter("name");
     	if(name==null){
-        	m.addObject("error", "作业名称不能为空");
+        	m.addObject("error2", "作业名称不能为空");
         	return m;
         }
     	
     	String basicRequirement = request.getParameter("basicrequirement");
     	if(basicRequirement==null){
-        	m.addObject("error", "请填写作业基本要求");
+        	m.addObject("error2", "请填写作业基本要求");
         	return m;
         }
     	
     	String startTime_s = request.getParameter("starttime");
     	if(startTime_s==null){
-        	m.addObject("error", "开始时间不能为空");
+        	m.addObject("error1", "开始时间不能为空");
         	return m;
         }
     	Timestamp startTime;
@@ -261,13 +262,13 @@ public class AssignmentController {
         	startTime = Timestamp.valueOf(startTime_s);
     	}
     	catch(Exception e){
-        	m.addObject("error", "开始时间不合法");
+        	m.addObject("error1", "开始时间不合法");
         	return m;
     	}
     	
     	String deadline_s = request.getParameter("deadline");
     	if(deadline_s==null){
-        	m.addObject("error", "截止时间不能为空");
+        	m.addObject("error1", "截止时间不能为空");
         	return m;
         }
     	Timestamp deadline;
@@ -275,13 +276,13 @@ public class AssignmentController {
         	deadline = Timestamp.valueOf(deadline_s);
     	}
     	catch(Exception e){
-        	m.addObject("error", "截止时间不合法");
+        	m.addObject("error1", "截止时间不合法");
         	return m;
     	}
     	
     	String teamAvaliable_s = request.getParameter("teamavaliable");
     	if(teamAvaliable_s==null){
-        	m.addObject("error", "请选择是否允许团队参与");
+        	m.addObject("error2", "请选择是否允许团队参与");
         	return m;
     	}
     	boolean teamAvaliable;
@@ -289,13 +290,13 @@ public class AssignmentController {
         	teamAvaliable = Boolean.valueOf(teamAvaliable_s);
     	}
     	catch(Exception e){
-        	m.addObject("error", "请选择是否允许团队参与");
+        	m.addObject("error2", "请选择是否允许团队参与");
         	return m;
     	}
     	
     	String highestScore_s = request.getParameter("highestscore");
     	if(highestScore_s==null){
-        	m.addObject("error", "分数上限不能为空");
+        	m.addObject("error2", "分数上限不能为空");
         	return m;
     	}
     	int highestScore;
@@ -303,11 +304,11 @@ public class AssignmentController {
     		highestScore = Integer.valueOf(highestScore_s);
     	}
     	catch(Exception e){
-        	m.addObject("error", "分数上限不合法");
+        	m.addObject("error2", "分数上限不合法");
         	return m;
     	}
     	if(highestScore<=0||highestScore>=100){
-        	m.addObject("error", "分数上限不合法");
+        	m.addObject("error2", "分数上限不合法");
         	return m;
     	}
     	

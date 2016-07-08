@@ -63,7 +63,7 @@
 <!-- BEGIN BODY -->
 
 <body class="page-header-fixed">
-
+	
 	<jsp:include page="../include/header.jsp"></jsp:include>
 
 	<!-- BEGIN CONTAINER -->
@@ -183,7 +183,7 @@
 
 							<div class="portlet-body form">
 
-								<form action="/assignment/assign/${semesterCourseId}" class="form-horizontal" id="submit_form" method="POST" enctype="multipart/form-data">
+								<form id="assignForm" action="/assignment/assign/${semesterCourseId}" class="form-horizontal" id="submit_form" method="POST">
 
 									<div class="form-wizard">
 
@@ -262,11 +262,11 @@
 											<!-- step1 -->
 											<div class="tab-pane" id="tab1">
 
-												<h3 class="block">请设置作业时间区域：${error1}</h3>
+												<h3 class="block">请设置作业时间区域：</h3>
 
 												<div class="control-group">
 
-													<label class="control-label">起止日期</label>
+													<label class="control-label">起止日期<span class="required">*</span></label>
 
 													<div class="controls">
 
@@ -285,11 +285,11 @@
 											<!-- step2 -->
 											<div class="tab-pane" id="tab2">
 
-												<h3 class="block">请填写作业要求与详情：${error2}</h3>
+												<h3 class="block">请填写作业要求与详情：</h3>
 
 												<div class="control-group">
 
-													<label class="control-label">作业名称</label>
+													<label class="control-label">作业名称<span class="required"> *</span></label>
 
 													<div class="controls">
 
@@ -300,10 +300,25 @@
 													</div>
 
 												</div>
+												
 
 												<div class="control-group">
 
-													<label class="control-label">分数上限</label>
+													<label class="control-label">团队参与<span class="required"> *</span></label>
+
+													<div class="controls">
+
+														<input type="text" name="teamavaliable" />
+
+														<span class="help-inline"></span>
+
+													</div>
+
+												</div>
+
+												<div class="control-group">
+
+													<label class="control-label">分数上限<span class="required"> *</span></label>
 
 													<div class="controls">
 
@@ -317,21 +332,7 @@
 												
 												<div class="control-group">
 
-													<label class="control-label">团队参与</label>
-
-													<div class="controls">
-
-														<input type="checkbox" name="teamavaliable" />
-
-														<span class="help-inline"></span>
-
-													</div>
-
-												</div>
-												
-												<div class="control-group">
-
-													<label class="control-label">基本要求</label>
+													<label class="control-label">详细需求<span class="required"> *</span></label>
 
 													<div class="controls">
 
@@ -342,21 +343,8 @@
 													</div>
 
 												</div>
-												
-												<div class="control-group">
 
-													<label class="control-label">上传附件</label>
 
-														<div class="control-group">
-														
-															<div class="controls">
-
-														<input type="file" name="files" class="fileupload"/>
-
-															</div>
-														</div>
-
-												</div>
 											</div>
 
 											<!-- step3 -->
@@ -368,11 +356,11 @@
 
 												<div class="control-group">
 
-													<label class="control-label">课程名：</label>
+													<label class="control-label">课程：</label>
 
 													<div class="controls">
 
-														<span class="text display-value">${course.name}</span>
+														<span class="text display-value" data-display="${course.name }"></span>
 														<!-- 获取课程名 course -->
 
 													</div>
@@ -393,7 +381,7 @@
 
 												<div class="control-group">
 
-													<label class="control-label">分数上限：</label>
+													<label class="control-label">分数上限；</label>
 
 													<div class="controls">
 
@@ -432,23 +420,11 @@
 
 												<div class="control-group">
 
-													<label class="control-label">基本要求:</label>
+													<label class="control-label">详细需求:</label>
 
 													<div class="controls">
 
 														<span class="text display-value" data-display="basicrequirement"></span>
-
-													</div>
-
-												</div>
-												
-												<div class="control-group">
-
-													<label class="control-label">附件名:</label>
-
-													<div class="controls">
-
-														<span class="text display-value" data-display="files"></span>
 
 													</div>
 
@@ -472,11 +448,12 @@
 
 											</a>
 
-											<a href="javascript:;" class="btn green button-submit" onclick="document:submit_form.submit();">
+									 		<a href="javascript:;" class="btn green button-submit">
 
 											提交 <i class="m-icon-swapright m-icon-white"></i>
 
 											</a>
+											<!-- <button id="submit" class="btn green">tijiao</button> -->
 
 										</div>
 
@@ -512,7 +489,7 @@
 
 		<div class="footer-inner">
 
-			2016 BuaaSoftware Best Group Null
+			2013 &copy; Metronic by keenthemes.
 
 		</div>
 
@@ -609,6 +586,11 @@
 		});
 
 	</script>
+<!-- 	<script>
+		$("#submit").unbind('click').click(function(){
+			$("#assignForm").submit();
+		});
+	</script> -->
 
 	<!-- END JAVASCRIPTS -->   
 
