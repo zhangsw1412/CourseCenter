@@ -51,6 +51,7 @@
 	<link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.10.1.custom.min.css"/>
 
 	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-toggle-buttons.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-datetimepicker.min.css" />
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -270,11 +271,11 @@
 
 													<div class="controls">
 
-														<input name="starttime" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_from"/>
+														<input name="starttime" readonly="readonly" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_from"/>
 
 														<span class="text-inline">&nbsp;至&nbsp;</span>
 
-														<input name="deadline" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_to"/>
+														<input name="deadline" readonly="readonly" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_to"/>
 
 													</div>
 
@@ -577,6 +578,10 @@
 	<script type="text/javascript" src="/media/js/jquery.tagsinput.min.js"></script>
 
 	<script type="text/javascript" src="/media/js/jquery.toggle.buttons.js"></script>
+	
+	<script type="text/javascript" src="/media/js/bootstrap-datetimepicker.min.js"></script>
+	
+	<script type="text/javascript" src="/media/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
 
@@ -586,10 +591,6 @@
 
 	<script src="/media/js/form-wizard.js"></script>    
 	
-	<script src="/media/js/ui-jqueryui.js"></script>  
-	
-	<script src="/media/js/form-components.js"></script>     
-
 	<!-- END PAGE LEVEL SCRIPTS -->
 
 	<script>
@@ -601,18 +602,34 @@
 		   App.init();
 
 		   FormWizard.init();
-		   
-		   UIJQueryUI.init();
-		   
-		   FormComponents.init();
-		   
+		   $('#ui_date_picker_range_from').datetimepicker({
+		        language:  'zh-CN',
+						format: 'yyyy-mm-dd hh:ii',
+		        weekStart: 1,
+		        todayBtn:  1,
+						autoclose: 1,
+						todayHighlight: 1,
+						startView: 2,
+						forceParse: 0,
+		        showMeridian: 1
+		    	});
+
+					$('#ui_date_picker_range_to').datetimepicker({
+		        language:  'zh-CN',
+						format: 'yyyy-mm-dd hh:ii',
+		        weekStart: 1,
+		        todayBtn:  1,
+						autoclose: 1,
+						todayHighlight: 1,
+						startView: 2,
+						forceParse: 0,
+		        showMeridian: 1
+		    	});
 		});
 
 	</script>
 
 	<!-- END JAVASCRIPTS -->   
-
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
 
 <!-- END BODY -->
 

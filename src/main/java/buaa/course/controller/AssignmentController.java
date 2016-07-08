@@ -107,7 +107,7 @@ public class AssignmentController {
         }
     	Timestamp startTime;
     	try{
-        	startTime = Timestamp.valueOf(startTime_s);
+        	startTime = Timestamp.valueOf(startTime_s+":00");
     	}
     	catch(Exception e){
         	m.addObject("error1", "开始时间不合法");
@@ -121,13 +121,16 @@ public class AssignmentController {
         }
     	Timestamp deadline;
     	try{
-        	deadline = Timestamp.valueOf(deadline_s);
+        	deadline = Timestamp.valueOf(deadline_s+":00");
     	}
     	catch(Exception e){
         	m.addObject("error1", "截止时间不合法");
         	return m;
     	}
-    	
+    	if(startTime.after(deadline)){
+        	m.addObject("error1", "截止时间须晚于开始时间");
+        	return m;
+    	}
     	String teamAvaliable_s = request.getParameter("teamavaliable");
     	if(teamAvaliable_s==null){
         	m.addObject("error2", "请选择是否允许团队参与");
@@ -135,7 +138,7 @@ public class AssignmentController {
     	}
     	boolean teamAvaliable;
     	try{
-        	teamAvaliable = Boolean.valueOf(teamAvaliable_s);
+        	teamAvaliable = teamAvaliable_s.equals("on")?true:false;
     	}
     	catch(Exception e){
         	m.addObject("error2", "请选择是否允许团队参与");

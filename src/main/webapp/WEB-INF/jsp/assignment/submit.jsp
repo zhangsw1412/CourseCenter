@@ -294,7 +294,29 @@
 													<!--/span-->
 
 												</div>
-                                                
+                                                <div class="row-fluid">
+
+													<div class="span12 ">
+
+														<div class="control-group">
+
+															<label class="control-label" style=" font-weight:bolder">附件</label>
+
+															<div class="controls">
+
+																<a href="${assignment.fileUrl}" class="btn green fileinput-button">
+                                            				<i class="icon-download"></i>
+                                            				<span>${fn:getFileName(assignment.fileUrl)}</span></a>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
                                                 <h3 class="form-section"></h3>
                                                 
                                                  <div class="row-fluid">
