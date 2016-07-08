@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -278,7 +279,7 @@
 
 							<li>
 
-								<a href="teacher_chat.html">讨论</a>
+								<a href="teacher_homework.html">讨论</a>
 
 							</li>
 
@@ -299,7 +300,7 @@
 					<div class="span12">
 					
                     
-							<div class="portlet box green">
+							<div class="portlet">
 
 								<div class="portlet-title line">
 
@@ -309,11 +310,11 @@
 
 										<a href="" class="collapse"></a>
 
-										
+										<a href="#portlet-config" data-toggle="modal" class="config"></a>
 
 										<a href="" class="reload"></a>
 
-										
+										<a href="" class="remove"></a>
 
 									</div>
 
@@ -325,7 +326,7 @@
 
 										<ul class="chats">
 
-											<li class="out">
+											<li class="in">
 
 												<img class="avatar" alt="" src="media/image/avatar1.jpg" />
 
@@ -347,7 +348,7 @@
 
 											</li>
 
-											<li class="in">
+											<li class="out">
 
 												<img class="avatar" alt="" src="media/image/avatar2.jpg" />
 
@@ -369,7 +370,7 @@
 
 											</li>
 
-											<li class="out">
+											<li class="in">
 
 												<img class="avatar" alt="" src="media/image/avatar1.jpg" />
 
@@ -421,7 +422,7 @@
 
 													<span class="arrow"></span>
 
-													<a href="#" class="name">再见</a>
+													<a href="#" class="name">二狗</a>
 
 													<span class="datetime">at Jul 25, 2012 11:09</span>
 
@@ -459,7 +460,7 @@
 
 											</li>
 
-											<li class="out">
+											<li class="in">
 
 												<img class="avatar" alt="" src="media/image/avatar1.jpg" />
 
@@ -598,6 +599,7 @@
 	<script>
 
 		jQuery(document).ready(function() {       
+
 
 		   // initiate layout and plugins
 
