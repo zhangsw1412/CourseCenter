@@ -19,12 +19,12 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(reqUrl.contains("/login")) {
             return true;
         }
+        if(reqUrl.contains(".map")) {
+            return false;
+        }
         User user = (User)request.getSession().getAttribute("user");
 
         if(user == null){
-            System.out.println("========================================================");
-            System.out.println("user is null");
-            System.out.println("========================================================");
             response.sendRedirect("/login");
             return false;
         }

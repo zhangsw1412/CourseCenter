@@ -1,8 +1,8 @@
 package buaa.course.mapper;
 
-import java.util.List;
-
 import buaa.course.model.Message;
+
+import java.util.List;
 
 public interface MessageMapper {
 	Message getMessage(int id);
@@ -13,4 +13,5 @@ public interface MessageMapper {
 	int countMessages();
 	List<Message> getMessagesByRange(int start,int row);
 	List<Message> getMessagesBySemesterCourseId(int semesterCourseId);
+	List<Message> getMessagesBySemesterCourseIdInRange(int semesterCourseId, int start, int length);
 }

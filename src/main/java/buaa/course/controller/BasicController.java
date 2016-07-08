@@ -1,6 +1,5 @@
 package buaa.course.controller;
 
-import buaa.course.model.Course;
 import buaa.course.model.User;
 import buaa.course.service.CourseService;
 import buaa.course.service.SemesterService;
@@ -18,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by 熊纪元 on 2016/7/2.
@@ -83,19 +80,13 @@ public class BasicController {
 
     @RequestMapping("/index")
     public ModelAndView index(HttpServletRequest request) {
-        Integer semesterId = (Integer)request.getSession().getAttribute("semesterId");
         ModelAndView m = null;
-        List<Course> courses = new ArrayList<>();
         User user = (User)request.getSession().getAttribute("user");
         if(user.getType() == 0){
             m =  new ModelAndView("student");
-            courses = courseService.getCoursesByStudent(semesterId, user.getNum());
         }else if(user.getType() == 1){
             m = new ModelAndView("teacher");
-            courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
         }
-        m.addObject("semester", semesterService.getSemesterById(semesterId));
-        m.addObject("courses", courses);
         return m;
     }
 

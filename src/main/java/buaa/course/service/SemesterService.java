@@ -31,7 +31,7 @@ public class SemesterService
 		return semesterMapper.updateSemester(semester);
 	}
 
-	public int deleteSemester(int id)
+	public int deleteSemester(Integer id)
 	{
 		return semesterMapper.deleteSemester(id);
 	}

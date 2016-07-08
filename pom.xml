@@ -66,6 +66,12 @@
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.0</version>
         </dependency>
+        <!-- Jackson JSON Mapper -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.10</version>
+        </dependency>
         <!-- spring 依赖 开始－－－－－－－－－－－－－－－－－ -->
         <!-- Core utilities used by other modules. Define this if you use Spring
             Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
