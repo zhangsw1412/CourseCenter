@@ -270,10 +270,7 @@
 
 											<label><big>作业评价</big></label>
 
-											<textarea class="span10 m-wrap" rows="8" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>
-												${homework.comment}
-												${noComment}
-											</textarea>
+											<textarea class="span10 m-wrap" rows="8" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>${homework.comment}${noComment}</textarea>
 																<div class="row-fluid">
 
 											<div class="span4">

@@ -305,9 +305,7 @@
 
 														<div class="controls">
 
-															<textarea class="span12 wysihtml5 m-wrap" rows="6" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>
-																${homework.text}
-															</textarea>
+															<textarea class="span12 wysihtml5 m-wrap" rows="6" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>${homework.text}</textarea>
 
 														</div>${error}
 
