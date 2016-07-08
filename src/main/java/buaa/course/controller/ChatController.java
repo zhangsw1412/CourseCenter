@@ -12,7 +12,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ChatController {
     @RequestMapping(method = RequestMethod.GET, value = "/semester/{semesterId}/course/{courseId}/chat")
-    public ModelAndView chat(@PathVariable Integer semesterId, @PathVariable Integer courseId) {
+    public ModelAndView chatGet(@PathVariable Integer semesterId, @PathVariable Integer courseId) {
+        return null;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/semester/{semesterId}/course/{courseId}/chat")
+    public ModelAndView chatPost(@PathVariable Integer semesterId, @PathVariable Integer courseId) {
         return null;
     }
 }

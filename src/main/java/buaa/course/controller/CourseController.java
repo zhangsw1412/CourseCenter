@@ -7,7 +7,6 @@ import buaa.course.model.User;
 import buaa.course.service.CourseService;
 import buaa.course.service.ResourceService;
 import buaa.course.service.SemesterService;
-import buaa.course.service.UserService;
 import buaa.course.utils.PagingUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,9 +37,6 @@ public class CourseController {
     @Resource(name = "semesterService")
     private SemesterService semesterService;
 
-    @Resource(name = "userService")
-    private UserService userService;
-
     @Resource(name = "resourceService")
     private ResourceService resourceService;
 
@@ -61,7 +57,6 @@ public class CourseController {
                     courses = courseService.getCoursesByStudent(semesterId, user.getNum());
                 }
                 m.addObject("semester", semesterService.getSemesterById(semesterId));
-                m.addObject("courses", courses);
                 Map<Long, Integer> semesterCourseIds = courseService.getSemesterCourseIdMap(semesterId, courses);
                 m.addObject("semesterCourseIds", semesterCourseIds);
 
