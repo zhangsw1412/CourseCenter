@@ -7,13 +7,14 @@
 <title>布置作业</title>
 </head>
 <body>
-	<form action="/assign/${semesterCourseId}" method="POST">
+	<form action="/test/assignTest/${semesterCourseId}" enctype="multipart/form-data" method="POST">
 	  作业名称：<input type="text" name="name" /><br/>
     基本要求：<input type="text" name="basicrequirement" /><br/>
     开始时间：<input type="text" name="starttime" /><br/>
     截止时间：<input type="text" name="deadline" /><br/>
     是否允许团队参与<input type="text" name="teamavaliable" /><br/>
     分数上限<input type="text" name="highestscore" /><br/>
+    <input type="file" name="files"  class="fileupload" /><br/>
     <input type="submit" value="确认" />
 	</form>${error}
 </body>

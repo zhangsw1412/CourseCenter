@@ -217,10 +217,9 @@
 							<li>
 
 								<a href="inbox.html?a=view"> <span class="photo"><img
-										src="/media/image/avatar2.jpg" alt="" /></span> <span class="subject">
-
-										<span class="from">Lisa Wong</span> <span class="time">Just
-											Now</span>
+										src="/media/image/avatar2.jpg" alt="" /></span> <span
+									class="subject"> <span class="from">Lisa Wong</span> <span
+										class="time">Just Now</span>
 
 								</span> <span class="message"> Vivamus sed auctor nibh congue
 										nibh. auctor nibh auctor nibh... </span>
@@ -232,10 +231,9 @@
 							<li>
 
 								<a href="inbox.html?a=view"> <span class="photo"><img
-										src="/media/image/avatar3.jpg" alt="" /></span> <span class="subject">
-
-										<span class="from">Richard Doe</span> <span class="time">16
-											mins</span>
+										src="/media/image/avatar3.jpg" alt="" /></span> <span
+									class="subject"> <span class="from">Richard Doe</span> <span
+										class="time">16 mins</span>
 
 								</span> <span class="message"> Vivamus sed congue nibh auctor
 										nibh congue nibh. auctor nibh auctor nibh... </span>
@@ -247,10 +245,9 @@
 							<li>
 
 								<a href="inbox.html?a=view"> <span class="photo"><img
-										src="/media/image/avatar1.jpg" alt="" /></span> <span class="subject">
-
-										<span class="from">Bob Nilson</span> <span class="time">2
-											hrs</span>
+										src="/media/image/avatar1.jpg" alt="" /></span> <span
+									class="subject"> <span class="from">Bob Nilson</span> <span
+										class="time">2 hrs</span>
 
 								</span> <span class="message"> Vivamus sed nibh auctor nibh
 										congue nibh. auctor nibh auctor nibh... </span>
@@ -505,7 +502,7 @@
 
 				<li class="start active ">
 
-					<a href="admin_semester.html"> <i class="icon-table"></i> <span
+					<a href="/semesterList"> <i class="icon-table"></i> <span
 						class="title">学期列表</span> <span class="selected"></span>
 
 					</a>
@@ -644,7 +641,8 @@
 
 								<!-- BEGIN FORM-->
 
-								<form action="/saveSemester" method="post" id="form_sample_1" class="form-horizontal">
+								<form action="/saveSemester" method="post" id="form_sample_1"
+									class="form-horizontal">
 
 									<div class="alert alert-error hide">
 
@@ -701,13 +699,17 @@
 										<div class="controls">
 
 											<input name="startDate" class="m-wrap small" size="16"
-												type="text" value="${semester.startDate }"
+												type="text"
+												value="<fmt:formatDate value="${semester.startDate }"
+														type="date" />"
 												id="ui_date_picker_range_from" />
 
 											<span class="text-inline">&nbsp;至&nbsp;</span>
 
 											<input name="endDate" class="m-wrap small" size="16"
-												type="text" value="${semester.endDate }"
+												type="text"
+												value="<fmt:formatDate value="${semester.startDate }"
+														type="date" />"
 												id="ui_date_picker_range_to" />
 
 										</div>
@@ -720,8 +722,8 @@
 
 										<div class="controls">
 
-											<input type="text" placeholder="" name="weeks" class="m-wrap large"
-												value="${semester.weeks }" />
+											<input type="text" placeholder="" name="weeks"
+												class="m-wrap large" value="${semester.weeks }" />
 
 											<span class="help-inline"></span>
 
@@ -821,7 +823,8 @@
 
 	<script type="text/javascript" src="/media/js/jquery.validate.min.js"></script>
 
-	<script type="text/javascript" src="/media/js/additional-methods.min.js"></script>
+	<script type="text/javascript"
+		src="/media/js/additional-methods.min.js"></script>
 
 	<script type="text/javascript" src="/media/js/select2.min.js"></script>
 

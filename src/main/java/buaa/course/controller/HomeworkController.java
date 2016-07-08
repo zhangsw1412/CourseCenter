@@ -10,11 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -179,7 +183,7 @@ public class HomeworkController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/submit/{assignmentId}")
-    public ModelAndView submitHomeworkPost(@PathVariable Integer assignmentId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView submitHomeworkPost(@PathVariable Integer assignmentId, @RequestParam("files") MultipartFile[] files, HttpServletRequest request, HttpServletResponse response) throws IOException {
     	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()!=0)
     		return new ModelAndView("login");
@@ -201,12 +205,34 @@ public class HomeworkController {
         	return submithomework;
         }
     	Timestamp submitTime = new Timestamp(System.currentTimeMillis());
+    	String fileUrl = null;
+    	for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                // 文件保存路径
+                String filePath = getResourcePath(assignmentId, request);
+                File dir = new File(filePath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                // 转存文件
+                try {
+                    File temp = new File(filePath + File.separator + file.getOriginalFilename());
+                    file.transferTo(temp);
+                    fileUrl = filePath + File.separator + file.getOriginalFilename();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ModelAndView m = new ModelAndView("assignment/teacher_assign");
+					m .addObject("message", e.getMessage());
+                    return m;
+                }
+            }
+        }
         Homework homework = new Homework();
         homework.setSemesterCourseId(semesterCourseId);
         homework.setStudentId(user.getNum());
         homework.setAssignmentId(assignmentId);
         homework.setText(text);
-        homework.setFileUrl("1");
+        homework.setFileUrl(fileUrl);
         homework.setSubmitTime(submitTime);
         homeworkService.createHomework(homework);
         if(true){
@@ -214,4 +240,10 @@ public class HomeworkController {
         }
         return null;
     }
+
+	private String getResourcePath(Integer assignmentId, HttpServletRequest request) {
+		String filePath = request.getSession().getServletContext().getRealPath("/")
+                + "resource" + File.separator + "assignment-" + assignmentId;
+        return filePath;
+	}
 }
