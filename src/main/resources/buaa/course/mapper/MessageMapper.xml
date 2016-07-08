@@ -17,6 +17,11 @@
 	    	select * from message where id = #{0}
 	    ]]>
 	</select>
+	<select id="getMessagesBySemesterCourseIdInRange" resultMap="messageMap">
+		<![CDATA[
+	    	select * from message where semester_course_id = #{0} limit #{1},#{2}
+	    ]]>
+	</select>
 	<insert id="addMessage" parameterType="buaa.course.model.Message"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
 	    	insert into message(semester_course_id,user_id,user_name,content,create_time) values(#{semesterCourseId},#{userId},#{userName},#{content},#{createTime})

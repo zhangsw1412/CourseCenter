@@ -44,4 +44,8 @@ public class MessageService {
 		return messageMapper.getMessagesBySemesterCourseId(semesterCourseId);
 	}
 
+    public List<Message> getMessagesBySemesterCourseIdInRange(int semesterCourseId, int start, int length) {
+        return messageMapper.getMessagesBySemesterCourseIdInRange(semesterCourseId, start, length);
+    }
+
 }
