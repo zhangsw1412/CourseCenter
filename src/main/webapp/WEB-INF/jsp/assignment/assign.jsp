@@ -402,11 +402,11 @@
 
 													<div class="controls">
 
-														<input name="startDate" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_from"/>
+														<input name="starttime" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_from"/>
 
 														<span class="text-inline">&nbsp;至&nbsp;</span>
 
-														<input name="endDate" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_to"/>
+														<input name="deadline" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_to"/>
 
 													</div>
 
@@ -425,7 +425,7 @@
 
 													<div class="controls">
 
-														<input type="text" class="span6 m-wrap" name="assign_name" />
+														<input type="text" class="span6 m-wrap" name="name" />
 
 														<span class="help-inline"></span>
 
@@ -440,7 +440,7 @@
 
 													<div class="controls">
 
-														<input type="text" name="_team" />
+														<input type="text" name="teamavaliable" />
 
 														<span class="help-inline"></span>
 
@@ -454,7 +454,7 @@
 
 													<div class="controls">
 
-														<input type="text" name="_limit" />
+														<input type="text" name="highestscore" />
 
 														<span class="help-inline"></span>
 
@@ -468,7 +468,7 @@
 
 													<div class="controls">
 
-														<textarea class="span6 m-wrap" rows="3"	name="request"></textarea>
+														<textarea class="span6 m-wrap" rows="3"	name="basci"></textarea>
 
 														<span class="help-inline"></span>
 

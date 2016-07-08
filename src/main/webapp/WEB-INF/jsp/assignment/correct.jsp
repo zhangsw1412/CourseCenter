@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="/WEB-INF/tld/fileUtil.tld"%>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -239,10 +240,19 @@
 										
 										<h3><strong>查阅</strong></h3>
 
-											<textarea readonly="readonly" class="span10 m-wrap">${homework.text }</textarea>
+											<textarea name="homeworktext" readonly="readonly" class="span10 m-wrap">${homework.text }</textarea>
 											
 											<div class="row-fluid">
-												附件：<a href="#">${homework.fileUrl}</a>
+												<c:if test="${homework.fileUrl != null}">
+														<div class="control-group">
+															<label class="control-label" style=" font-weight:bolder">附件</label>
+															<div class="controls">
+															<a href="${homework.fileUrl}" class="btn green fileinput-button">
+                                            				<i class="icon-download"></i>
+                                            				<span>${fn:getFileName(homework.fileUrl)}</span></a>
+														</div>
+														</div>
+														</c:if>
 											</div>
 									</div>
 									
@@ -378,10 +388,10 @@
 	<!-- END CORE PLUGINS -->
 
 	<script src="/media/js/app.js"></script>
-	<script src="ckeditor/ckeditor.js"></script>
+	<script src="/ckeditor/ckeditor.js"></script>
 
 	<script> CKEDITOR.replace('comment');</script>
-
+	<script> CKEDITOR.replace('homeworktext');</script>
 	<script>
 
 		jQuery(document).ready(function() {    
