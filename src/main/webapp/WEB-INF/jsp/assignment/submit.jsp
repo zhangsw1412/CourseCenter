@@ -336,7 +336,13 @@
 															<label class="control-label" style=" font-weight:bolder">附件</label>
 															<div class="controls">
 															<a href="${homework.fileUrl}" class="btn green fileinput-button">
-                                            				<i class="icon-download"></i><span> ${fn:substringAfter(${homework.fileUrl},"/")}</span></a>
+                                            				<i class="icon-download"></i>
+                                            				<span>
+                                            				<c:set var="string" value="${homework.fileUrl}"/>
+                                            				<c:set var="substr" value="${fn:substringAfter(string, '/')}" />
+                                            				${substr}
+                                            				</span>
+                                            				</a>
 														</div>
 														</div>
 														</c:if>
