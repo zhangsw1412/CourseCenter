@@ -6,8 +6,7 @@
 
     <!-- BEGIN SIDEBAR MENU -->
 
-    <c:if test="${sessionScope.user.type==0 or sesssionScop.user.type==1}">
-        <ul class="page-sidebar-menu">
+	<c:if test="${sessionScope.user.type==0 or sessionScope.user.type==1}">        <ul class="page-sidebar-menu">
             <li>
                 <div style="margin:50px"></div>
             </li>
@@ -20,7 +19,7 @@
                 </a>
                 <ul class="sub-menu">
                     <c:forEach items="${courses}" var="c">
-                        <li <c:if test="${course.id == c.id}">class="active"</c:if></li>
+                        <li <c:if test="${course.id == c.id}">class="active"</c:if>>
                         <a href="/semester/${sessionScope.semesterId}/courseDetail/${c.id}">
                                 ${c.name}
                         </a>

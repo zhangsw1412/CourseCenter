@@ -80,7 +80,7 @@
 
 	<div class="page-container row-fluid">
 
-		<jsp:include page="../include/sidebar_admin.jsp"></jsp:include>
+		<jsp:include page="../include/sidebar.jsp"></jsp:include>
 
 		<!-- BEGIN PAGE -->
 

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="/WEB-INF/tld/fileUtil.tld"%>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -295,7 +294,29 @@
 													<!--/span-->
 
 												</div>
-                                                
+                                                <div class="row-fluid">
+
+													<div class="span12 ">
+
+														<div class="control-group">
+
+															<label class="control-label" style=" font-weight:bolder">附件</label>
+
+															<div class="controls">
+
+																<a href="${assignment.fileUrl}" class="btn green fileinput-button">
+                                            				<i class="icon-download"></i>
+                                            				<span>${fn:getFileName(assignment.fileUrl)}</span></a>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
                                                 <h3 class="form-section"></h3>
                                                 
                                                  <div class="row-fluid">
@@ -336,7 +357,8 @@
 															<label class="control-label" style=" font-weight:bolder">附件</label>
 															<div class="controls">
 															<a href="${homework.fileUrl}" class="btn green fileinput-button">
-                                            				<i class="icon-download"></i><span> ${fn:substringAfter(${homework.fileUrl},"/")}</span></a>
+                                            				<i class="icon-download"></i>
+                                            				<span>${fn:getFileName(homework.fileUrl)}</span></a>
 														</div>
 														</div>
 														</c:if>

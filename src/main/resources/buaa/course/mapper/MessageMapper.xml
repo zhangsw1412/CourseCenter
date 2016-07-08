@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.MessageMapper">
+	
+	<resultMap id="messageMap" type="buaa.course.model.Message">
+		<id property="id" column="id" />
+		<result property="semesterCourseId" column="semester_course_id" />
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="content" column="content" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+	<select id="getMessage" parameterType="int" resultMap="messageMap">
+	    <![CDATA[
+	    	select * from message where id = #{0}
+	    ]]>
+	</select>
+	<select id="getMessagesBySemesterCourseIdInRange" resultMap="messageMap">
+		<![CDATA[
+	    	select * from message where semester_course_id = #{0} limit #{1},#{2}
+	    ]]>
+	</select>
+	<insert id="addMessage" parameterType="buaa.course.model.Message"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into message(semester_course_id,user_id,user_name,content,create_time) values(#{semesterCourseId},#{userId},#{userName},#{content},#{createTime})
+	    ]]>
+	</insert>
+	<delete id="deleteMessage" parameterType="int">
+		<![CDATA[
+			delete from message where id=#{id}
+		]]>
+	</delete>
+	<update id="updateMessage" parameterType="buaa.course.model.Message">
+	    <![CDATA[
+	    	update message set semester_course_id=#{semesterCourseId},user_id=#{userId},user_name=#{userName},content=#{content},create_time=#{createTime} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllMessages" resultMap="messageMap">
+	    <![CDATA[
+	    	select * from message
+	    ]]>
+	</select>
+	<select id="countMessages" resultType="int">
+	    <![CDATA[
+	    	select count(*) from message
+	    ]]>
+	</select>
+	<select id="getMessagesByRange" resultMap="messageMap">
+	    <![CDATA[
+	    	select * from message limit #{0},#{1}
+	    ]]>
+	</select>
+	<select id="getMessagesBySemesterCourseId" resultMap="messageMap">
+	    <![CDATA[
+	    	select * from message where semester_course_id=#{semesterCourseId}
+	    ]]>
+	</select>
+</mapper>
