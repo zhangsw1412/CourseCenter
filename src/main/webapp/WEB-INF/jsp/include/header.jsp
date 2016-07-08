@@ -1,70 +1,73 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+	isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- BEGIN HEADER -->
 
 <div class="header navbar navbar-inverse navbar-fixed-top">
 
-    <!-- BEGIN TOP NAVIGATION BAR -->
+	<!-- BEGIN TOP NAVIGATION BAR -->
 
-    <div class="navbar-inner">
+	<div class="navbar-inner">
 
-        <div class="container-fluid">
+		<div class="container-fluid">
 
-            <!-- BEGIN LOGO -->
+			<!-- BEGIN LOGO -->
 
-            <a class="brand" href="/index">
+			<a class="brand" href="/index"> <img src="/media/image/logo.png"
+				alt="logo" />
 
-                <img src="/media/image/logo.png" alt="logo"/>
+			</a>
 
-            </a>
+			<!-- END LOGO -->
 
-            <!-- END LOGO -->
+			<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 
-            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+			<a href="javascript:;" class="btn-navbar collapsed"
+				data-toggle="collapse" data-target=".nav-collapse"> <img
+				src="/media/image/menu-toggler.png" alt="" />
 
-            <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+			</a>
 
-                <img src="/media/image/menu-toggler.png" alt="" />
+			<!-- END RESPONSIVE MENU TOGGLER -->
 
-            </a>
+			<!-- BEGIN TOP NAVIGATION MENU -->
 
-            <!-- END RESPONSIVE MENU TOGGLER -->
+			<ul class="nav pull-right">
 
-            <!-- BEGIN TOP NAVIGATION MENU -->
+				<!-- BEGIN USER LOGIN DROPDOWN -->
 
-            <ul class="nav pull-right">
+				<li class="dropdown user">
 
-                <!-- BEGIN USER LOGIN DROPDOWN -->
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span
+						class="username">${sessionScope.user.name}</span> <i
+						class="icon-angle-down"></i>
 
-                <li class="dropdown user">
+					</a>
 
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<ul class="dropdown-menu">
 
-                        <span class="username">${sessionScope.user.name}</span>
+						<li>
+							<a href="/userInfo"><i class="icon-key"></i>个人信息</a>
+						</li>
+						<li>
+							<a href="/logout"><i class="icon-key"></i>退出</a>
+						</li>
 
-                        <i class="icon-angle-down"></i>
+					</ul>
 
-                    </a>
+				</li>
 
-                    <ul class="dropdown-menu">
+				<!-- END USER LOGIN DROPDOWN -->
 
-                        <li><a href="/logout"><i class="icon-key"></i>退出</a></li>
+			</ul>
 
-                    </ul>
+			<!-- END TOP NAVIGATION MENU -->
 
-                </li>
+		</div>
 
-                <!-- END USER LOGIN DROPDOWN -->
+	</div>
 
-            </ul>
-
-            <!-- END TOP NAVIGATION MENU -->
-
-        </div>
-
-    </div>
-
-    <!--END OF NAVIGATION BAR -->
+	<!--END OF NAVIGATION BAR -->
 
 </div>
 
