@@ -232,7 +232,7 @@ public class HomeworkController {
         homework.setStudentId(user.getNum());
         homework.setAssignmentId(assignmentId);
         homework.setText(text);
-        homework.setFileUrl("1");
+        homework.setFileUrl(fileUrl);
         homework.setSubmitTime(submitTime);
         homeworkService.createHomework(homework);
         if(true){
