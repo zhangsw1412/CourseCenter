@@ -152,6 +152,7 @@ public class CourseController {
             if (!file.isEmpty()) {
                 // 文件保存路径
                 String filePath = getResourcePath(semesterId, courseId, request);
+                String serverPath = getServerPath(semesterId, courseId, request, file);
                 File dir = new File(filePath);
                 if (!dir.exists()) {
                     dir.mkdirs();
@@ -162,7 +163,7 @@ public class CourseController {
                     file.transferTo(temp);
 
                     buaa.course.model.Resource r = new buaa.course.model.Resource();
-                    r.setFileUrl(temp.getAbsolutePath());
+                    r.setFileUrl(serverPath);
                     r.setSemesterCourseId(courseService.getCourseBySemesterCourseId(semesterId,courseId).getId());
                     r.setCategory("ppt");
                     resourceService.createResource(r);
@@ -189,6 +190,12 @@ public class CourseController {
         return m;
     }
 
+    private String getServerPath(Integer semesterId, Integer courseId, HttpServletRequest request, MultipartFile file) {
+        String dir = getServerDir(request, semesterId, courseId);
+        return dir + file.getOriginalFilename();
+    }
+
+
     /***
      * 读取上传文件中得所有文件并返回
      *
@@ -214,8 +221,7 @@ public class CourseController {
         String[] list = uploadDest.list();
         if (list != null) {
             m.addObject("files", Arrays.asList(uploadDest.list()));
-            String dirPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() +
-                    "resource" + "/" + "semester-" + semesterId + "/" + "course-" + courseId + "/";
+            String dirPath = getServerDir(request, semesterId, courseId);
             m.addObject("dir", dirPath);
         }
         List<Course> courses = new ArrayList<>();
@@ -233,5 +239,12 @@ public class CourseController {
         String filePath = request.getSession().getServletContext().getRealPath("/")
                 + "resource" + File.separator + "semester-" + semesterId + File.separator + "course-" + courseId;
         return filePath;
+
+    }
+
+    private String getServerDir(HttpServletRequest request, int semesterId, int courseId) {
+        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+                + "/" + request.getContextPath() +
+                "resource" + "/" + "semester-" + semesterId + "/" + "course-" + courseId + "/";
     }
 }

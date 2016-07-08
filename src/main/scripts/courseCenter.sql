@@ -9,7 +9,7 @@ create table `user`(
 	name varchar(10) not null default '' comment '姓名',
 	gender tinyint(1) unsigned not null default 0 comment '性别：男0女1',
 	type tinyint(1) unsigned not null default 0 comment '用户类型：学生0，教师1，教务2',
-	valid tinyint(1) unsigned not null default 0 comment '帐户是否有效：有效1，无效0',
+	valid tinyint(1) unsigned not null default 1 comment '帐户是否有效：有效1，无效0',
 	last_login_time datetime comment '上次登录时间',
 	last_login_ip char(15) default null comment '上次登录ip',
 	primary key(num),
@@ -126,3 +126,12 @@ create table `homework`(
 	submit_time datetime comment '提交时间，以unix时间戳形式存储',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='学生作业表';
+
+drop table if exists `message`;
+create table `message`(
+  id int not null auto_increment coment primary key '主键',
+  user_id varchar(20) not null default '' comment '学号/工号',
+  user_name varchar(255) not null default '' comment '用户名',
+  content text not null default '' comment '内容',
+  create_time datetime comment '创建时间'
+)engine=InnoDB default charset=utf8 coment='讨论记录表';
