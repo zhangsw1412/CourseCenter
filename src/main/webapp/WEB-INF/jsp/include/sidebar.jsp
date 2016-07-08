@@ -6,8 +6,7 @@
 
     <!-- BEGIN SIDEBAR MENU -->
 
-    <c:if test="${sessionScope.user.type == 0 or sessionScope.user.type == 1}">
-        <ul class="page-sidebar-menu">
+	<c:if test="${sessionScope.user.type==0 or sessionScope.user.type==1}">        <ul class="page-sidebar-menu">
             <li>
                 <div style="margin:50px"></div>
             </li>

@@ -18,10 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import java.io.File;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,34 +43,26 @@ public class AssignmentController {
     	User user = (User)request.getSession().getAttribute("user");
     	if(user==null||user.getType()==2)
     		return new ModelAndView("login");
-		List<Course> courses = new ArrayList<>();
 		ModelAndView m = new ModelAndView();
 		List<Assignment> assignmentlist = assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId);
     	if(user.getType() == 0){
     		m = new ModelAndView("assignment/student_assignments");
-    		courses = courseService.getCoursesByStudent(2, user.getNum());
 			Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
 			m.addObject("homeworks", homeworks);
 		}else if(user.getType() == 1){
 			m = new ModelAndView("assignment/teacher_assignments");
-			courses = courseService.getCoursesByTeacher(2, user.getNum());
 		}
 
     	if(semesterCourseId!=null){
     		m.addObject("assignmentlist", assignmentlist);
     	}
-		m.addObject("courses", courses);
 		m.addObject("course", courseService.getCourseBySemesterCourseId(semesterCourseId));
-		m.addObject("semester", semesterService.getSemesterById(2));
-
-
     	return m;
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/assign/{semesterCourseId}")
     public ModelAndView assignGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
     	User user = (User)request.getSession().getAttribute("user");
-    	List<Course> courses;
     	if(user==null||user.getType()!=1)
     		return new ModelAndView("login");
     	if(semesterCourseId==null)
@@ -80,11 +70,8 @@ public class AssignmentController {
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	if(course==null)
     		return new ModelAndView("assignment/teacher_assignments");
-    	courses = courseService.getCoursesByTeacher(2, user.getNum());
     	ModelAndView m = new ModelAndView("assignment/assign");
     	m.addObject("course",course);
-		m.addObject("courses", courses);
-		m.addObject("semester", semesterService.getSemesterById(2));
     	m.addObject("semesterCourseId", semesterCourseId);
     	return m;
     }
@@ -207,7 +194,6 @@ public class AssignmentController {
     	assignmentService.updateAssignment(assignment);
     	ModelAndView assignments = new ModelAndView("assignment/teacher_assignments");
     	assignments.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
-		m.addObject("semester", semesterService.getSemesterById(2));
     	return assignments;
     }
 
@@ -230,7 +216,6 @@ public class AssignmentController {
 	@RequestMapping(method = RequestMethod.GET, value = "/test/assignTest/{semesterCourseId}")
     public ModelAndView assignTestGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
     	User user = (User)request.getSession().getAttribute("user");
-    	List<Course> courses;
     	if(user==null||user.getType()!=1)
     		return new ModelAndView("login");
     	if(semesterCourseId==null)
@@ -238,12 +223,7 @@ public class AssignmentController {
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	if(course==null)
     		return new ModelAndView("assignment/teacher_assignments");
-    	courses = courseService.getCoursesByTeacher(2, user.getNum());
     	ModelAndView m = new ModelAndView("test/assignTest");
-    	m.addObject("course",course);
-		m.addObject("courses", courses);
-		m.addObject("semester", semesterService.getSemesterById(2));
-
     	m.addObject("semesterCourseId", semesterCourseId);
     	return m;
     }
@@ -366,7 +346,6 @@ public class AssignmentController {
     	assignmentService.updateAssignment(assignment);
     	ModelAndView assignments = new ModelAndView("assignment/teacher_assignments");
     	assignments.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
-		m.addObject("semester", semesterService.getSemesterById(2));
     	return assignments;
     }
     
