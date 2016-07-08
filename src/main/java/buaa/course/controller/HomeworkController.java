@@ -205,11 +205,20 @@ public class HomeworkController {
         	return submithomework;
         }
     	Timestamp submitTime = new Timestamp(System.currentTimeMillis());
+
+        Homework homework = new Homework();
+        homework.setSemesterCourseId(semesterCourseId);
+        homework.setStudentId(user.getNum());
+        homework.setAssignmentId(assignmentId);
+        homework.setText(text);
+        homework.setSubmitTime(submitTime);
+        homeworkService.createHomework(homework);
     	String fileUrl = null;
+    	int homeworkId = homework.getId();
     	for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 // 文件保存路径
-                String filePath = getResourcePath(assignmentId, request);
+                String filePath = getResourcePath(assignmentId,homeworkId,request);
                 File dir = new File(filePath);
                 if (!dir.exists()) {
                     dir.mkdirs();
@@ -218,7 +227,7 @@ public class HomeworkController {
                 try {
                     File temp = new File(filePath + File.separator + file.getOriginalFilename());
                     file.transferTo(temp);
-                    fileUrl = filePath + File.separator + file.getOriginalFilename();
+                    fileUrl = getServerPath(assignmentId,homeworkId,file.getOriginalFilename(),request);
                 } catch (Exception e) {
                     e.printStackTrace();
                     ModelAndView m = new ModelAndView("assignment/teacher_assign");
@@ -227,14 +236,8 @@ public class HomeworkController {
                 }
             }
         }
-        Homework homework = new Homework();
-        homework.setSemesterCourseId(semesterCourseId);
-        homework.setStudentId(user.getNum());
-        homework.setAssignmentId(assignmentId);
-        homework.setText(text);
         homework.setFileUrl(fileUrl);
-        homework.setSubmitTime(submitTime);
-        homeworkService.createHomework(homework);
+        homeworkService.updateHomework(homework);
         if(true){
         	response.sendRedirect("/assignment/assignments/"+semesterCourseId);        	
         }

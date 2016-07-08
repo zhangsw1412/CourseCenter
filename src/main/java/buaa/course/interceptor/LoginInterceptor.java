@@ -43,6 +43,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView m) throws Exception {
         User user = (User)request.getSession().getAttribute("user");
+
         if(user != null){
             Integer semesterId = (Integer)request.getSession().getAttribute("semesterId");
             if(semesterId == null){
@@ -56,6 +57,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
 
             System.out.println(o.getClass());
+        }else{
+            response.sendRedirect("/login");
         }
     }
 

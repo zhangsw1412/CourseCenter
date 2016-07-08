@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>fileUtil</short-name>
+
+    <function>
+        <!-- 定义第一个函数：getFileName -->
+        <name>getFileName</name>
+        <!-- 定义函数处理类 -->
+        <function-class>buaa.course.utils.FileNameUtil</function-class>
+        <!-- 定义函数的对应方法 -->
+        <function-signature>
+            java.lang.String getFileName(java.lang.String)
+        </function-signature>
+    </function>
+
+</taglib>

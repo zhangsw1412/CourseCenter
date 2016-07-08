@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -334,7 +336,13 @@
 															<label class="control-label" style=" font-weight:bolder">附件</label>
 															<div class="controls">
 															<a href="${homework.fileUrl}" class="btn green fileinput-button">
-                                            				<i class="icon-download"></i><span> ${homework.fileUrl}</span></a>
+                                            				<i class="icon-download"></i>
+                                            				<span>
+                                            				<c:set var="string" value="${homework.fileUrl}"/>
+                                            				<c:set var="substr" value="${fn:substringAfter(string, '/')}" />
+                                            				${substr}
+                                            				</span>
+                                            				</a>
 														</div>
 														</div>
 														</c:if>
