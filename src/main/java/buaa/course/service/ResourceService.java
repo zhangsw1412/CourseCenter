@@ -13,5 +13,7 @@ public class ResourceService {
     @Resource(name = "resourceMapper")
     private ResourceMapper resourceMapper;
 
-
+    public int createResource(buaa.course.model.Resource resource) {
+        return resourceMapper.addResource(resource);
+    }
 }

@@ -87,217 +87,13 @@
 
 <body class="page-header-fixed">
 
-	<!-- BEGIN HEADER -->
-
-	<div class="header navbar navbar-inverse navbar-fixed-top">
-
-		<!-- BEGIN TOP NAVIGATION BAR -->
-
-		<div class="navbar-inner">
-
-			<div class="container-fluid">
-
-				<!-- BEGIN LOGO -->
-
-				<a class="brand" href="student_homepage.html">
-
-				<img src="/media/image/logo.png" alt="logo" />
-
-				</a>
-
-				<!-- END LOGO -->
-
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-
-				<img src="/media/image/menu-toggler.png" alt="" />
-
-				</a>          
-
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-
-				<!-- BEGIN TOP NAVIGATION MENU -->              
-
-				<ul class="nav pull-right">
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-
-					<li class="dropdown user">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<span class="username">Bob Nilson</span>
-
-						<i class="icon-angle-down"></i>
-
-						</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
-
-						</ul>
-
-					</li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU --> 
-
-			</div>
-
-		</div>
-
-		<!-- END TOP NAVIGATION BAR -->
-
-	</div>
-
-	<!-- END HEADER -->
+<jsp:include page="../include/header.jsp"></jsp:include>
 
 	<!-- BEGIN CONTAINER -->   
 
 	<div class="page-container row-fluid">
 
-		<!-- BEGIN SIDEBAR -->
-
-		<div class="page-sidebar nav-collapse collapse">
-
-			<!-- BEGIN SIDEBAR MENU -->        
-
-			<ul class="page-sidebar-menu">
-
-				<li>
-
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
-					<div class="sidebar-toggler hidden-phone"></div>
-
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-
-				</li>
-
-				<li>
-
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-
-					<form class="sidebar-search">
-
-						<div class="input-box">
-
-							<a href="javascript:;" class="remove"></a>
-
-							<input type="text" placeholder="Search..." />
-
-							<input type="button" class="submit" value=" " />
-
-						</div>
-
-					</form>
-
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-
-				</li>
-
-				<li class="start ">
-
-					<a href="student_homepage.html">
-
-					<i class="icon-home"></i> 
-
-					<span class="title">主页</span>
-
-					</a>
-
-				</li>
-                
-                
-                <li class="">
-
-					<a href="student_homepage.html">
-
-					<i class="icon-table"></i> 
-
-					<span class="title">学期管理</span>
-
-					</a>
-
-				</li>
-                
-
-				<li class="active ">
-
-					<a href="javascript:;">
-
-					<i class="icon-bookmark-empty"></i> 
-
-					<span class="title">课程管理</span>
-
-
-					<span class="selected"></span>
-
-					<span class="arrow open"></span>
-
-					</a>
-
-					<ul class="sub-menu">
-
-						<li class="active">
-
-							<a href="student_course.html">经济管理</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							软件工程</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							体育</a>
-
-						</li>
-
-						<li >
-
-							<a href="student_course.html">
-
-							中国传统文化</a>
-
-						</li>
-
-					</ul>
-
-				</li>
-
-
-				<li class="last ">
-
-					<a href="#">
-
-					<i class="icon-bar-chart"></i> 
-
-					<span class="title">团队管理</span>
-
-					</a>
-
-				</li>
-
-			</ul>
-
-			<!-- END SIDEBAR MENU -->
-
-		</div>
-
-		<!-- END SIDEBAR -->
+		<jsp:include page="../include/sidebar.jsp"></jsp:include>
 
 		<!-- BEGIN PAGE -->
 
@@ -349,7 +145,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="student_homepage.html">主页</a> 
+								<a href="#">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -357,8 +153,7 @@
 
 							<li>
 
-								<a href="student_course.html">经济管理</a>
-								
+								<a href="#">${course.name}</a>								
 								<!-- 数据库获取该课程名 -->
 
 								<i class="icon-angle-right"></i>
@@ -367,7 +162,7 @@
 							
 							<li>
 
-								<a href="student_homework.html">作业管理</a>
+								<a href="#">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -403,7 +198,7 @@
 
 											<div class="form-horizontal form-view">
 
-												<h3> 软件开发实践: 作业</h3>
+												<h3> ${course.name }: 作业</h3>
 
 												<h3 class="form-section"></h3>
 
@@ -510,14 +305,14 @@
 
 														<div class="controls">
 
-															<textarea class="span12 wysihtml5 m-wrap" rows="6" name="text"></textarea>
+															<textarea class="span12 wysihtml5 m-wrap" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>${homework.text}</textarea>
 
 														</div>${error}
 
 													</div>
 
 														<div class="control-group">
-
+															<%--
 															<label class="control-label" style=" font-weight:bolder">上传</label>
 
 															<div class="controls">
@@ -528,13 +323,11 @@
 
 															<span>添加附件</span>
 
-														<input type="file" name="files[]" multiple> 
-                                    
+														<input type="file" name="files[]" multiple>
+
 																</span>
-
+--%>
 															</div>
-
-														</div>
 
 													</div>
 
@@ -550,13 +343,17 @@
 
 												</div>
 
-												<!--/row-->           
+												<!--/row-->
 
-												<div class="form-actions">
+											<div class="form-actions">
+												<c:if test="${homework == null}">
+													<input type="submit" class="btn blue"/>
+													<input type="reset" class="btn" value="重置">
+												</c:if>
+												<c:if test="${homework != null}">
+													该项作业已提交，不能再次提交
+												</c:if>
 
-													<input type="submit" class="btn blue">
-
-													<input type="button" class="btn">
 
 												</div>
 
@@ -636,7 +433,9 @@
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="/media/js/app.js"></script>      
+	<script src="/media/js/app.js"></script>
+	<script src="/ckeditor/ckeditor.js"></script>
+	<script> CKEDITOR.replace('text');</script>
 
 	<script>
 

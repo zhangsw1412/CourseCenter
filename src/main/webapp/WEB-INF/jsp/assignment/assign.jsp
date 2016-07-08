@@ -50,6 +50,8 @@
 	
 	<link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.10.1.custom.min.css"/>
 
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-toggle-buttons.css" />
+
 	<!-- END PAGE LEVEL STYLES -->
 
 	<link rel="shortcut icon" href="/media/image/favicon.ico" />
@@ -96,403 +98,11 @@
 
 				<ul class="nav pull-right">
 
-					<!-- BEGIN NOTIFICATION DROPDOWN -->   
-
-					<li class="dropdown" id="header_notification_bar">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<i class="icon-warning-sign"></i>
-
-						<span class="badge">6</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended notification">
-
-							<li>
-
-								<p>You have 14 new notifications</p>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-success"><i class="icon-plus"></i></span>
-
-								New user registered. 
-
-								<span class="time">Just now</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-important"><i class="icon-bolt"></i></span>
-
-								Server #12 overloaded. 
-
-								<span class="time">15 mins</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-warning"><i class="icon-bell"></i></span>
-
-								Server #2 not respoding.
-
-								<span class="time">22 mins</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-info"><i class="icon-bullhorn"></i></span>
-
-								Application error.
-
-								<span class="time">40 mins</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-important"><i class="icon-bolt"></i></span>
-
-								Database overloaded 68%. 
-
-								<span class="time">2 hrs</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="label label-important"><i class="icon-bolt"></i></span>
-
-								2 user IP blocked.
-
-								<span class="time">5 hrs</span>
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="#">See all notifications <i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- END NOTIFICATION DROPDOWN -->
-
-					<!-- BEGIN INBOX DROPDOWN -->
-
-					<li class="dropdown" id="header_inbox_bar">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<i class="icon-envelope"></i>
-
-						<span class="badge">5</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended inbox">
-
-							<li>
-
-								<p>You have 12 new messages</p>
-
-							</li>
-
-							<li>
-
-								<a href="inbox.html?a=view">
-
-								<span class="photo"><img src="/media/image/avatar2.jpg" alt="" /></span>
-
-								<span class="subject">
-
-								<span class="from">Lisa Wong</span>
-
-								<span class="time">Just Now</span>
-
-								</span>
-
-								<span class="message">
-
-								Vivamus sed auctor nibh congue nibh. auctor nibh
-
-								auctor nibh...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="inbox.html?a=view">
-
-								<span class="photo"><img src="/media/image/avatar3.jpg" alt="" /></span>
-
-								<span class="subject">
-
-								<span class="from">Richard Doe</span>
-
-								<span class="time">16 mins</span>
-
-								</span>
-
-								<span class="message">
-
-								Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
-
-								auctor nibh...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="inbox.html?a=view">
-
-								<span class="photo"><img src="/media/image/avatar1.jpg" alt="" /></span>
-
-								<span class="subject">
-
-								<span class="from">Bob Nilson</span>
-
-								<span class="time">2 hrs</span>
-
-								</span>
-
-								<span class="message">
-
-								Vivamus sed nibh auctor nibh congue nibh. auctor nibh
-
-								auctor nibh...
-
-								</span>  
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="inbox.html">See all messages <i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- END INBOX DROPDOWN -->
-
-					<!-- BEGIN TODO DROPDOWN -->
-
-					<li class="dropdown" id="header_task_bar">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<i class="icon-tasks"></i>
-
-						<span class="badge">5</span>
-
-						</a>
-
-						<ul class="dropdown-menu extended tasks">
-
-							<li>
-
-								<p>You have 12 pending tasks</p>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">New release v1.2</span>
-
-								<span class="percent">30%</span>
-
-								</span>
-
-								<span class="progress progress-success ">
-
-								<span style="width: 30%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Application deployment</span>
-
-								<span class="percent">65%</span>
-
-								</span>
-
-								<span class="progress progress-danger progress-striped active">
-
-								<span style="width: 65%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Mobile app release</span>
-
-								<span class="percent">98%</span>
-
-								</span>
-
-								<span class="progress progress-success">
-
-								<span style="width: 98%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Database migration</span>
-
-								<span class="percent">10%</span>
-
-								</span>
-
-								<span class="progress progress-warning progress-striped">
-
-								<span style="width: 10%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Web server upgrade</span>
-
-								<span class="percent">58%</span>
-
-								</span>
-
-								<span class="progress progress-info">
-
-								<span style="width: 58%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li>
-
-								<a href="#">
-
-								<span class="task">
-
-								<span class="desc">Mobile development</span>
-
-								<span class="percent">85%</span>
-
-								</span>
-
-								<span class="progress progress-success">
-
-								<span style="width: 85%;" class="bar"></span>
-
-								</span>
-
-								</a>
-
-							</li>
-
-							<li class="external">
-
-								<a href="#">See all tasks <i class="m-icon-swapright"></i></a>
-
-							</li>
-
-						</ul>
-
-					</li>
-
-					<!-- END TODO DROPDOWN -->
-
 					<!-- BEGIN USER LOGIN DROPDOWN -->
 
 					<li class="dropdown user">
 
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<img alt="" src="/media/image/avatar1_small.jpg" />
 
 						<span class="username">Bob Nilson</span>
 
@@ -501,18 +111,6 @@
 						</a>
 
 						<ul class="dropdown-menu">
-
-							<li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
-
-							<li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
-
-							<li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox(3)</a></li>
-
-							<li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
-
-							<li class="divider"></li>
-
-							<li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
 
 							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
 
@@ -540,119 +138,79 @@
 
 	<div class="page-container row-fluid">
 
-		<!-- BEGIN SIDEBAR -->
-
-		<div class="page-sidebar nav-collapse collapse">
+		<!-- BEGIN PAGE -->  
+		
+        <div class="page-sidebar nav-collapse collapse">
 
 			<!-- BEGIN SIDEBAR MENU -->
 
 			<ul class="page-sidebar-menu">
+					
+                 
+                 <li>
+                 <div style="margin:50px"></div>
+                 </li>
 
-				<li>
+				<li class="active ">
 
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<a href="javascript:;">
 
-					<div class="sidebar-toggler hidden-phone"></div>
+					<i class="icon-bookmark-empty"></i> 
 
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<span class="title">课程管理</span>
 
-				</li>
 
-				<li>
+					<span class="selected"></span>
 
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-
-					<form class="sidebar-search">
-
-						<div class="input-box">
-
-							<a href="javascript:;" class="remove"></a>
-
-							<input type="text" placeholder="Search..." />
-
-							<input type="button" class="submit" value=" " />
-
-						</div>
-
-					</form>
-
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-
-				</li>
-
-				<li class="">
-
-					<a href="teacher_homepage.html">
-
-						<i class="icon-home"></i>
-
-						<span class="title">主页</span>
+					<span class="arrow open"></span>
 
 					</a>
 
-				</li>
+					<ul class="sub-menu">
 
-				<li class="">
+						<li class="active">
 
-					<a href="teacher_semester.html">
+							<a href="teacher_course.html">经济管理</a>
 
-						<i class="icon-table"></i>
+						</li>
 
-						<span class="title">学期列表</span>
+						<li >
 
-					</a>
+							<a href="teacher_course.html">
 
+							软件工程</a>
 
-				</li>
-				<li class="">
+						</li>
 
-					<a href="teacher_course.html">
+						<li >
 
-						<i class="icon-cogs"></i>
+							<a href="teacher_course.html">
 
-						<span class="title">课程管理</span>
+							体育</a>
 
-					</a>
+						</li>
 
+						<li >
 
-				</li>
-				<li class="start active ">
+							<a href="teacher_course.html">
 
-					<a href="teacher_homework.html">
+							中国传统文化</a>
 
-						<i class="icon-file-text"></i>
+						</li>
 
-						<span class="title">作业管理</span>
-
-						<span class="selected"></span>
-
-					</a>
-
+					</ul>
 
 				</li>
 
-				<li class="last ">
-
-					<a href="teacher_reshource.html">
-
-						<i class="icon-folder-open"></i>
-
-						<span class="title">资源管理</span>
-
-					</a>
-
-				</li>
+				
 
 			</ul>
 
 			<!-- END SIDEBAR MENU -->
-			
+
 		</div>
 
-		<!-- END SIDEBAR -->
-
-		<!-- BEGIN PAGE -->  
-
+        
 		<div class="page-content">
 
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -737,7 +295,7 @@
 
 								<div class="caption">
 
-									<i class="icon-plus"></i> 添加作业 - <span class="step-title">Step 1 of 4</span>
+									<i class="icon-plus"></i> 添加作业 - <span class="step-title">Step 1 of 3</span>
 
 								</div>
 
@@ -767,23 +325,11 @@
 
 												<ul class="row-fluid">
 
-													<li class="span3">
+													<li class="span4">
 
-														<a href="#tab1" data-toggle="tab" class="step active">
+														<a href="#tab1" data-toggle="tab" class="step">
 
 														<span class="number">1</span>
-
-														<span class="desc"><i class="icon-ok"></i> 选择课程</span>   
-
-														</a>
-
-													</li>
-
-													<li class="span3">
-
-														<a href="#tab2" data-toggle="tab" class="step">
-
-														<span class="number">2</span>
 
 														<span class="desc"><i class="icon-ok"></i> 起始时间</span>   
 
@@ -791,11 +337,11 @@
 
 													</li>
 
-													<li class="span3">
+													<li class="span4">
 
-														<a href="#tab3" data-toggle="tab" class="step">
+														<a href="#tab2" data-toggle="tab" class="step">
 
-														<span class="number">3</span>
+														<span class="number">2</span>
 
 														<span class="desc"><i class="icon-ok"></i> 详细要求</span>   
 
@@ -803,11 +349,11 @@
 
 													</li>
 
-													<li class="span3">
+													<li class="span4">
 
-														<a href="#tab4" data-toggle="tab" class="step">
+														<a href="#tab3" data-toggle="tab" class="step">
 
-														<span class="number">4</span>
+														<span class="number">3</span>
 
 														<span class="desc"><i class="icon-ok"></i> 确认信息</span>   
 
@@ -846,36 +392,7 @@
 											</div>
 											
 											<!-- step1 -->
-											<div class="tab-pane active" id="tab1">
-											
-
-												<h3 class="block">请选择你的课程：</h3>
-
-												<div class="control-group">
-
-													<label class="control-label">课程名<span class="required">*</span></label>
-
-													<div class="controls">
-
-														<select class="span6" name="course" id="course_list">
-
-															<option value=""></option>
-															
-															<option value="RKS">软件开发实习</option>
-															
-															<option value="RGG">软件工程过程</option>
-															
-															<option value="XF">系统分析</option>
-
-														</select>
-
-													</div>
-												</div>
-
-											</div>
-											
-											<!-- step2 -->
-											<div class="tab-pane" id="tab2">
+											<div class="tab-pane" id="tab1">
 
 												<h3 class="block">请设置作业时间区域：</h3>
 
@@ -897,14 +414,14 @@
 
 											</div>
 
-											<!-- step3 -->
-											<div class="tab-pane" id="tab3">
+											<!-- step2 -->
+											<div class="tab-pane" id="tab2">
 
 												<h3 class="block">请填写作业要求与详情：</h3>
 
 												<div class="control-group">
 
-													<label class="control-label">作业名称<span class="required">*</span></label>
+													<label class="control-label">作业名称<span class="required"> *</span></label>
 
 													<div class="controls">
 
@@ -916,9 +433,38 @@
 
 												</div>
 												
+
 												<div class="control-group">
 
-													<label class="control-label">详细需求<span class="required">*</span></label>
+													<label class="control-label">团队参与<span class="required"> *</span></label>
+
+													<div class="controls">
+
+														<input type="text" name="_team" />
+
+														<span class="help-inline"></span>
+
+													</div>
+
+												</div>
+
+												<div class="control-group">
+
+													<label class="control-label">分数上限<span class="required"> *</span></label>
+
+													<div class="controls">
+
+														<input type="text" name="_limit" />
+
+														<span class="help-inline"></span>
+
+													</div>
+
+												</div>
+												
+												<div class="control-group">
+
+													<label class="control-label">详细需求<span class="required"> *</span></label>
 
 													<div class="controls">
 
@@ -933,8 +479,8 @@
 
 											</div>
 
-											<!-- step4 -->
-											<div class="tab-pane" id="tab4">
+											<!-- step3 -->
+											<div class="tab-pane" id="tab3">
 
 												<h3 class="block">请确认：</h3>
 
@@ -947,6 +493,7 @@
 													<div class="controls">
 
 														<span class="text display-value" data-display="course"></span>
+														<!-- 获取课程名 course -->
 
 													</div>
 
@@ -959,6 +506,31 @@
 													<div class="controls">
 
 														<span class="text display-value" data-display="assign_name"></span>
+
+													</div>
+
+												</div>
+
+												<div class="control-group">
+
+													<label class="control-label">分数上限；</label>
+
+													<div class="controls">
+
+														<span class="text display-value" data-display="_limit"></span>
+														
+
+													</div>
+
+												</div>
+
+												<div class="control-group">
+
+													<label class="control-label">团队参与：</label>
+
+													<div class="controls">
+
+														<span class="text display-value" data-display="_team"></span>
 
 													</div>
 
@@ -1110,6 +682,10 @@
 
 	<script type="text/javascript" src="/media/js/select2.min.js"></script>
 
+	<script type="text/javascript" src="/media/js/jquery.tagsinput.min.js"></script>
+
+	<script type="text/javascript" src="/media/js/jquery.toggle.buttons.js"></script>
+
 	<!-- END PAGE LEVEL PLUGINS -->
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -1120,6 +696,7 @@
 	
 	<script src="/media/js/ui-jqueryui.js"></script>  
 	
+	<script src="/media/js/form-components.js"></script>     
 
 	<!-- END PAGE LEVEL SCRIPTS -->
 
@@ -1134,6 +711,8 @@
 		   FormWizard.init();
 		   
 		   UIJQueryUI.init();
+		   
+		   FormComponents.init();
 		   
 		});
 
