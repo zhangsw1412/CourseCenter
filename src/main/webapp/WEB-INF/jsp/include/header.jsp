@@ -17,19 +17,19 @@
 
 			<ul class="nav pull-right" style="vertical-align: middle">
 				<li class="dropdown user">
-					<a href="javascript(0):;">
+					<a href="javascript:;">
 						<jsp:useBean id="now" class="java.util.Date" />
 						<fmt:formatDate value="${now}" type="both" dateStyle="long" pattern="yyyy年M月d日" />
 					</a>
 				</li>
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<li class="dropdown user">
-					<a href="javascript(0):;">
+					<a href="javascript:;">
 						第${semester.schoolYear}学年度
 					</a>
 				</li>
 				<li class="dropdown user">
-					<a href="javascript(0):;">
+					<a href="javascript:;">
 						第${semester.season}学期
 					</a>
 				</li>
