@@ -116,14 +116,14 @@
 
 								<i class="icon-home"></i>
 
-								<a href="#">主页</a>
+								<a href="/index">主页</a>
 
 								<i class="icon-angle-right"></i>
 
 							</li>
 							<li>
 
-								<a href="#">${course.name}</a>
+								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
 
 								<!-- 数据库获取该课程名 -->
 
@@ -194,7 +194,7 @@
 									<tr>
 										<td class="highlight">
 											<div class="success"></div>
-											<a href="#">${item.name }</a>
+											&nbsp;${item.name }
 										</td>
 										<td class="hidden-phone">${item.startTime}</td>
 										<td>${item.deadline}</td>

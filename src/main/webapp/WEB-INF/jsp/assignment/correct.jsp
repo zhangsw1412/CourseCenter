@@ -120,7 +120,22 @@
 
 								<i class="icon-home"></i>
 
-								<a href="#">主页</a>
+								<a href="/index">主页</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+							<li>
+
+								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>								
+								<!-- 数据库获取该课程名 -->
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+							<li>
+
+								<a href="/assignment/assignments/${semesterCourseId}">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -128,15 +143,7 @@
 
 							<li>
 
-								<a href="#">作业管理</a>
-
-								<i class="icon-angle-right"></i>
-
-							</li>
-
-							<li>
-
-								<a href="#">作业列表</a>
+								<a href="/assignment/homeworks/${assignment.id}">提交列表</a>
 
 								<i class="icon-angle-right"></i>
 
