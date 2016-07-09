@@ -108,19 +108,8 @@ public class CourseService {
         return courses;
     }
 
-    public List<Course> getCoursesByStudent(int semesterId, int studentId) {
-        List<CourseStudent> courseStudents = courseStudentMapper.getCourseStudentByStudent(studentId);
-        List<SemesterCourse> semesterCourses = semesterCourseMapper.getSemesterCourseBySemesterId(semesterId);
-        List<Course> courses = new ArrayList<>();
-        for(CourseStudent courseStudent : courseStudents){
-            for(SemesterCourse semesterCourse : semesterCourses){
-                if(courseStudent.getSemesterCourseId() == semesterCourse.getId()){
-                    courses.add(getCourseById(semesterCourse.getCourseId()));
-                }
-            }
-        }
-
-        return courses;
+    public List<Course> getCoursesByStudent(int semesterId, int studentId){
+    	return courseMapper.getCoursesBySemesterIdAndStudentId(semesterId,studentId);
     }
 
     public Map<Long, List<String>> getTeachersName(int semesterId, List<Course> courses) {
@@ -128,7 +117,6 @@ public class CourseService {
         for(Course course : courses){
             result.put(Long.valueOf(course.getId()), getTeachersName(semesterId, course));
         }
-
         return result;
     }
 

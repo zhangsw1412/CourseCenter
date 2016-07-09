@@ -13,4 +13,5 @@ public interface CourseMapper {
 	int countCourses();
 	List<Course> getCoursesByRange(int start,int lines);
 	Course getCourseByCourseCode(String courseCode);
+	List<Course> getCoursesBySemesterIdAndStudentId(int semesterId, int studentId);
 }
