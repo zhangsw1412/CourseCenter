@@ -74,28 +74,6 @@
 
     <div class="page-content">
 
-        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-        <div id="portlet-config" class="modal hide">
-
-            <div class="modal-header">
-
-                <button data-dismiss="modal" class="close" type="button"></button>
-
-                <h3>portlet Settings</h3>
-
-            </div>
-
-            <div class="modal-body">
-
-                <p>Here will be a configuration form</p>
-
-            </div>
-
-        </div>
-
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
         <!-- BEGIN PAGE CONTAINER-->
 
         <div class="container-fluid">
@@ -210,14 +188,14 @@
 
                             <i class="icon-home"></i>
 
-                            <a href="homepage.html">个人主页</a>
+                            <a href="/index">个人主页</a>
 
                             <i class="icon-angle-right"></i>
 
                         </li>
                         <li>
 
-                            <a href="#">${course.name}</a>
+                            <a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
 
                             <!-- 数据库获取该课程名 -->
 
@@ -227,8 +205,6 @@
                         <li>
 
                             <a href="#">资源管理</a>
-
-                            <i class="icon-angle-right"></i>
 
                         </li>
 

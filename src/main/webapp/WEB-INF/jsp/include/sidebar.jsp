@@ -31,7 +31,7 @@
                 </ul>
             </li>
             <li class="">
-                <a href="userInfo"> <i class="icon-file"></i> <span
+                <a href="/userInfo"> <i class="icon-file"></i> <span
                         class="title">个人信息</span>
                 </a>
             </li>
