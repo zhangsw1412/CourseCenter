@@ -44,14 +44,17 @@ public class CoursesInterceptor implements HandlerInterceptor {
 
             try{
                 m.addObject("semester", semesterService.getSemesterById(semesterId));
+                if(user.getType() == 0){
+                    m.addObject("courses", courseService.getCoursesByStudent(semesterId, user.getNum()));
+                }else if(user.getType() == 1){
+                    m.addObject("courses", courseService.getCoursesByTeacher(semesterId, user.getNum()));
+                }
             }catch (Exception e){
                 log.error(e);
+                log.info(semesterId == null);
+                log.info(user == null);
             }
-            if(user.getType() == 0){
-                m.addObject("courses", courseService.getCoursesByStudent(semesterId, user.getNum()));
-            }else if(user.getType() == 1){
-                m.addObject("courses", courseService.getCoursesByTeacher(semesterId, user.getNum()));
-            }
+
         }else{
             response.sendRedirect("/login");
         }

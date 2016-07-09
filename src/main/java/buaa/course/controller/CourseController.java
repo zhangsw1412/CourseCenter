@@ -180,6 +180,8 @@ public class CourseController {
         User user = (User) request.getSession().getAttribute("user");
         if (user.getType() == 0) {//学生查看资源列表
             m = new ModelAndView("course/student_resources");
+            m.addObject("semester", semesterService.getSemesterById(semesterId));
+            m.addObject("course", courseService.getCourseById(courseId));
         }else if(user.getType() == 1){//教师查看资源列表
             m = new ModelAndView("course/teacher_resources");
             m.addObject("semester", semesterService.getSemesterById(semesterId));

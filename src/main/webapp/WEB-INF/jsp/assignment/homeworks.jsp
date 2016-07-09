@@ -72,28 +72,6 @@
 
 		<div class="page-content">
 
-			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-			<div id="portlet-config" class="modal hide">
-
-				<div class="modal-header">
-
-					<button data-dismiss="modal" class="close" type="button"></button>
-
-					<h3>portlet Settings</h3>
-
-				</div>
-
-				<div class="modal-body">
-
-					<p>Here will be a configuration form</p>
-
-				</div>
-
-			</div>
-
-			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
 			<!-- BEGIN PAGE CONTAINER-->        
 
 			<div class="container-fluid">
@@ -166,18 +144,6 @@
 							<div class="portlet-title">
 
 								<div class="caption"><i class="icon-pencil"></i>${assignment.name}</div>
-
-								<div class="tools">
-
-									<a href="javascript:;" class="collapse"></a>
-
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-
-									<a href="javascript:;" class="reload"></a>
-
-									<a href="javascript:;" class="remove"></a>
-
-								</div>
 
 							</div>
 
