@@ -187,7 +187,7 @@
 										<td>&nbsp;</td>
 										<td>&nbsp;</td>
 										<td>&nbsp;</td>
-										<td><a  href="http://localhost:8080/teacher_homework_new.html" class="btn mini green"><i class="icon-plus"></i> 添加</a></td>
+										<td><a  href="/assignment/assign/${semesterCourseId }" class="btn mini green"><i class="icon-plus"></i> 添加</a></td>
 
 									</tr>
 									<c:forEach items="${assignmentlist}" var="item">

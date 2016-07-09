@@ -15,20 +15,24 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         //获取url地址
         String reqUrl=request.getRequestURI().replace(request.getContextPath(), "");
-        System.out.println(reqUrl);
         //当url地址为登录的url的时候跳过拦截器
         if(reqUrl.contains("/login")) {
             return true;
         }
+        if(reqUrl.contains(".map")) {
+            return false;
+        }
         User user = (User)request.getSession().getAttribute("user");
+
         if(user == null){
             response.sendRedirect("/login");
+            return false;
         }
         return true;
     }
 
     @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView m) throws Exception {
 
     }
 

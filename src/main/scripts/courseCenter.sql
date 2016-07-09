@@ -129,9 +129,10 @@ create table `homework`(
 
 drop table if exists `message`;
 create table `message`(
-  id int not null auto_increment coment primary key '主键',
+  id int not null auto_increment  primary key comment '主键',
+  semester_course_id int not null default 0 comment '对应学期课程表的主键',
   user_id varchar(20) not null default '' comment '学号/工号',
   user_name varchar(255) not null default '' comment '用户名',
-  content text not null default '' comment '内容',
+  content text comment '内容',
   create_time datetime comment '创建时间'
-)engine=InnoDB default charset=utf8 coment='讨论记录表';
+)engine=InnoDB default charset=utf8 comment='讨论记录表';

@@ -218,7 +218,9 @@
                             <div style="margin:15px"></div>
                             <h4>学分：${course.credit}</h4>
                             <div style="margin:15px"></div>
-                            <h4>任课老师：
+                            <h4>上课人数：${countStudent}</h4>
+                            <div style="margin:15px"></div>
+                            <h4>任课教师：
                                 <c:forEach items="${teachers}" var="name">
                                     ${name}&nbsp;
                                 </c:forEach>
@@ -239,7 +241,7 @@
                         </div>
                     </a>
 
-                    <a href="/semester/${semester.id}/course/${course.id}/resourceList">
+                    <a href="/semester/${semesterId}/course/${course.id}/resourceList">
                         <div class="tile double-down bg-purple">
                             <div class="tile-body">
                                 <i class="icon-paste"></i>
@@ -251,18 +253,18 @@
                             </div>
                         </div>
                     </a>
-
-                    <div class="tile double-down2 bg-yellow">
-                        <div class="tile-body">
-                            <i class="icon-comments-alt" style=" padding-top:75px"></i>
-                        </div>
-                        <div class="tile-object">
-                            <div class="name" style="font-size:large">
-                                讨论
+                    <a href="/semester/${semesterId}/course/${course.id}/chat">
+                        <div class="tile double-down2 bg-yellow">
+                            <div class="tile-body">
+                                <i class="icon-comments-alt" style=" padding-top:75px"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name" style="font-size:large">
+                                    讨论
+                                </div>
                             </div>
                         </div>
-                    </div>
-
+                    </a>
                 <br>
 
                 <!-- END PAGE CONTENT-->

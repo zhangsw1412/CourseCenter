@@ -51,6 +51,7 @@
 	<link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.10.1.custom.min.css"/>
 
 	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-toggle-buttons.css" />
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-datetimepicker.min.css" />
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -64,75 +65,7 @@
 
 <body class="page-header-fixed">
 
-	<!-- BEGIN HEADER -->
-
-	<div class="header navbar navbar-inverse navbar-fixed-top">
-
-		<!-- BEGIN TOP NAVIGATION BAR -->
-
-		<div class="navbar-inner">
-
-			<div class="container-fluid">
-
-				<!-- BEGIN LOGO -->
-
-				<a class="brand" href="teacher_homepage.html">
-
-				<img src="/media/image/logo.png" alt="logo" />
-
-				</a>
-
-				<!-- END LOGO -->
-
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-
-				<img src="/media/image/menu-toggler.png" alt="" />
-
-				</a>          
-
-				<!-- END RESPONSIVE MENU TOGGLER -->            
-
-				<!-- BEGIN TOP NAVIGATION MENU -->              
-
-				<ul class="nav pull-right">
-
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-
-					<li class="dropdown user">
-
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
-						<span class="username">Bob Nilson</span>
-
-						<i class="icon-angle-down"></i>
-
-						</a>
-
-						<ul class="dropdown-menu">
-
-							<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
-
-						</ul>
-
-					</li>
-
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-
-				<!-- END TOP NAVIGATION MENU --> 
-
-			</div>
-
-		</div>
-
-		<!-- END TOP NAVIGATION BAR -->
-
-	</div>
-
-	<!-- END HEADER -->
+	<jsp:include page="../include/header.jsp"></jsp:include>
 
 	<!-- BEGIN CONTAINER -->
 
@@ -142,71 +75,7 @@
 		
         <div class="page-sidebar nav-collapse collapse">
 
-			<!-- BEGIN SIDEBAR MENU -->
-
-			<ul class="page-sidebar-menu">
-					
-                 
-                 <li>
-                 <div style="margin:50px"></div>
-                 </li>
-
-				<li class="active ">
-
-					<a href="javascript:;">
-
-					<i class="icon-bookmark-empty"></i> 
-
-					<span class="title">课程管理</span>
-
-
-					<span class="selected"></span>
-
-					<span class="arrow open"></span>
-
-					</a>
-
-					<ul class="sub-menu">
-
-						<li class="active">
-
-							<a href="teacher_course.html">经济管理</a>
-
-						</li>
-
-						<li >
-
-							<a href="teacher_course.html">
-
-							软件工程</a>
-
-						</li>
-
-						<li >
-
-							<a href="teacher_course.html">
-
-							体育</a>
-
-						</li>
-
-						<li >
-
-							<a href="teacher_course.html">
-
-							中国传统文化</a>
-
-						</li>
-
-					</ul>
-
-				</li>
-
-				
-
-			</ul>
-
-			<!-- END SIDEBAR MENU -->
+			<jsp:include page="../include/sidebar.jsp"></jsp:include>
 
 		</div>
 
@@ -259,7 +128,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="teacher_homepage.html">主页</a> 
+								<a href="/index">主页</a> 
 
 								<span class="icon-angle-right"></span>
 
@@ -267,13 +136,13 @@
 
 							<li>
 
-								<a href="teacher_homework.html">作业管理</a>
+								<a href="/assignment/assignments/${semesterCourseId }">作业管理</a>
 
 								<span class="icon-angle-right"></span>
 
 							</li>
 
-							<li><a href="teacher_homework_new.html">添加作业</a></li>
+							<li><a href="#">添加作业</a></li>
 
 						</ul>
 
@@ -315,7 +184,7 @@
 
 							<div class="portlet-body form">
 
-								<form action="#" class="form-horizontal" id="submit_form">
+								<form action="/assignment/assign/${semesterCourseId}" class="form-horizontal" id="submit_form" method="POST" enctype="multipart/form-data">
 
 									<div class="form-wizard">
 
@@ -331,7 +200,7 @@
 
 														<span class="number">1</span>
 
-														<span class="desc"><i class="icon-ok"></i> 起始时间</span>   
+														<span class="desc"><i class="icon-ok"></i> 起止时间</span>   
 
 														</a>
 
@@ -394,19 +263,19 @@
 											<!-- step1 -->
 											<div class="tab-pane" id="tab1">
 
-												<h3 class="block">请设置作业时间区域：</h3>
+												<h3 class="block">请设置作业时间区域：${error1}</h3>
 
 												<div class="control-group">
 
-													<label class="control-label">起止日期<span class="required">*</span></label>
+													<label class="control-label">起止时间</label>
 
 													<div class="controls">
 
-														<input name="startDate" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_from"/>
+														<input name="starttime" readonly="readonly" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_from"/>
 
 														<span class="text-inline">&nbsp;至&nbsp;</span>
 
-														<input name="endDate" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_to"/>
+														<input name="deadline" readonly="readonly" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_to"/>
 
 													</div>
 
@@ -417,30 +286,15 @@
 											<!-- step2 -->
 											<div class="tab-pane" id="tab2">
 
-												<h3 class="block">请填写作业要求与详情：</h3>
+												<h3 class="block">请填写作业要求与详情：${error2}</h3>
 
 												<div class="control-group">
 
-													<label class="control-label">作业名称<span class="required"> *</span></label>
+													<label class="control-label">作业名称</label>
 
 													<div class="controls">
 
-														<input type="text" class="span6 m-wrap" name="assign_name" />
-
-														<span class="help-inline"></span>
-
-													</div>
-
-												</div>
-												
-
-												<div class="control-group">
-
-													<label class="control-label">团队参与<span class="required"> *</span></label>
-
-													<div class="controls">
-
-														<input type="text" name="_team" />
+														<input type="text" class="span6 m-wrap" name="name" />
 
 														<span class="help-inline"></span>
 
@@ -450,11 +304,11 @@
 
 												<div class="control-group">
 
-													<label class="control-label">分数上限<span class="required"> *</span></label>
+													<label class="control-label">分数上限</label>
 
 													<div class="controls">
 
-														<input type="text" name="_limit" />
+														<input type="text" name="highestscore" />
 
 														<span class="help-inline"></span>
 
@@ -464,19 +318,46 @@
 												
 												<div class="control-group">
 
-													<label class="control-label">详细需求<span class="required"> *</span></label>
+													<label class="control-label">团队参与</label>
 
 													<div class="controls">
 
-														<textarea class="span6 m-wrap" rows="3"	name="request"></textarea>
+														<input type="checkbox" name="teamavaliable" />
 
 														<span class="help-inline"></span>
 
 													</div>
 
 												</div>
+												
+												<div class="control-group">
 
+													<label class="control-label">基本要求</label>
 
+													<div class="controls">
+
+														<textarea class="span6 m-wrap" rows="3"	name="basicrequirement"></textarea>
+
+														<span class="help-inline"></span>
+
+													</div>
+
+												</div>
+												
+												<div class="control-group">
+
+													<label class="control-label">上传附件</label>
+
+														<div class="control-group">
+														
+															<div class="controls">
+
+														<input type="file" name="files" class="fileupload"/>
+
+															</div>
+														</div>
+
+												</div>
 											</div>
 
 											<!-- step3 -->
@@ -488,11 +369,11 @@
 
 												<div class="control-group">
 
-													<label class="control-label">课程：</label>
+													<label class="control-label">课程名：</label>
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="course"></span>
+														<span class="text display-value">${course.name}</span>
 														<!-- 获取课程名 course -->
 
 													</div>
@@ -505,7 +386,7 @@
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="assign_name"></span>
+														<span class="text display-value" data-display="name"></span>
 
 													</div>
 
@@ -513,11 +394,11 @@
 
 												<div class="control-group">
 
-													<label class="control-label">分数上限；</label>
+													<label class="control-label">分数上限：</label>
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="_limit"></span>
+														<span class="text display-value" data-display="highestscore"></span>
 														
 
 													</div>
@@ -530,7 +411,7 @@
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="_team"></span>
+														<span class="text display-value" data-display="teamavaliable"></span>
 
 													</div>
 
@@ -542,9 +423,9 @@
 
 													<div class="controls">
 													
-														<span class="text display-value" data-display="startDate"></span>
+														<span class="text display-value" data-display="starttime"></span>
 														&nbsp;&nbsp;至
-														<span class="text display-value" data-display="endDate"></span>
+														<span class="text display-value" data-display="deadline"></span>
 
 													</div>
 
@@ -552,11 +433,23 @@
 
 												<div class="control-group">
 
-													<label class="control-label">详细需求:</label>
+													<label class="control-label">基本要求:</label>
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="request"></span>
+														<span class="text display-value" data-display="basicrequirement"></span>
+
+													</div>
+
+												</div>
+												
+												<div class="control-group">
+
+													<label class="control-label">附件名:</label>
+
+													<div class="controls">
+
+														<span class="text display-value" data-display="files"></span>
 
 													</div>
 
@@ -580,7 +473,7 @@
 
 											</a>
 
-											<a href="javascript:;" class="btn green button-submit">
+											<a href="javascript:;" class="btn green button-submit" onclick="document:submit_form.submit();">
 
 											提交 <i class="m-icon-swapright m-icon-white"></i>
 
@@ -620,7 +513,7 @@
 
 		<div class="footer-inner">
 
-			2013 &copy; Metronic by keenthemes.
+			2016 BuaaSoftware Best Group Null
 
 		</div>
 
@@ -685,6 +578,10 @@
 	<script type="text/javascript" src="/media/js/jquery.tagsinput.min.js"></script>
 
 	<script type="text/javascript" src="/media/js/jquery.toggle.buttons.js"></script>
+	
+	<script type="text/javascript" src="/media/js/bootstrap-datetimepicker.min.js"></script>
+	
+	<script type="text/javascript" src="/media/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
 	<!-- END PAGE LEVEL PLUGINS -->
 
@@ -694,10 +591,6 @@
 
 	<script src="/media/js/form-wizard.js"></script>    
 	
-	<script src="/media/js/ui-jqueryui.js"></script>  
-	
-	<script src="/media/js/form-components.js"></script>     
-
 	<!-- END PAGE LEVEL SCRIPTS -->
 
 	<script>
@@ -709,18 +602,34 @@
 		   App.init();
 
 		   FormWizard.init();
-		   
-		   UIJQueryUI.init();
-		   
-		   FormComponents.init();
-		   
+		   $('#ui_date_picker_range_from').datetimepicker({
+		        language:  'zh-CN',
+						format: 'yyyy-mm-dd hh:ii',
+		        weekStart: 1,
+		        todayBtn:  1,
+						autoclose: 1,
+						todayHighlight: 1,
+						startView: 2,
+						forceParse: 0,
+		        showMeridian: 1
+		    	});
+
+					$('#ui_date_picker_range_to').datetimepicker({
+		        language:  'zh-CN',
+						format: 'yyyy-mm-dd hh:ii',
+		        weekStart: 1,
+		        todayBtn:  1,
+						autoclose: 1,
+						todayHighlight: 1,
+						startView: 2,
+						forceParse: 0,
+		        showMeridian: 1
+		    	});
 		});
 
 	</script>
 
 	<!-- END JAVASCRIPTS -->   
-
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
 
 <!-- END BODY -->
 
