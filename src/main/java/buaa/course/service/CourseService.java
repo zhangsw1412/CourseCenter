@@ -159,4 +159,8 @@ public class CourseService {
         }
         return result;
     }
+    
+    public int countStudents(int semesterCourseId){
+    	return courseStudentMapper.countStudents(semesterCourseId);
+    }
 }
