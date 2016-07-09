@@ -83,28 +83,6 @@
 
 		<div class="page-content">
 
-			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-			<div id="portlet-config" class="modal hide">
-
-				<div class="modal-header">
-
-					<button data-dismiss="modal" class="close" type="button"></button>
-
-					<h3>portlet Settings</h3>
-
-				</div>
-
-				<div class="modal-body">
-
-					<p>Here will be a configuration form</p>
-
-				</div>
-
-			</div>
-
-			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
 			<!-- BEGIN PAGE CONTAINER-->        
 
 			<div class="container-fluid">
@@ -160,18 +138,6 @@
 								<div class="portlet-title line">
 
 									<div class="caption"><i class="icon-comments"></i>讨论</div>
-
-									<div class="tools">
-
-										<a href="" class="collapse"></a>
-
-										<a href="#portlet-config" data-toggle="modal" class="config"></a>
-
-										<a href="" class="reload"></a>
-
-										<a href="" class="remove"></a>
-
-									</div>
 
 								</div>
 
@@ -242,29 +208,7 @@
 
 	<!-- END CONTAINER -->
 
-	<!-- BEGIN FOOTER -->
-
-	<div class="footer">
-
-		<div class="footer-inner">
-
-			2013 &copy; Metronic by keenthemes.
-
-		</div>
-
-		<div class="footer-tools">
-
-			<span class="go-top">
-
-			<i class="icon-angle-up"></i>
-
-			</span>
-
-		</div>
-
-	</div>
-
-	<!-- END FOOTER -->
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 
@@ -320,7 +264,7 @@
 		}
 
 		function scrollToEnd() {
-			$("#messageDiv").scrollTop($("#messageDiv").height());
+			$("#messageDiv").scrollTop($("#messageDiv").scrollHeight());
 		}
 
 		function longPoll() {

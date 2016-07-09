@@ -186,28 +186,6 @@
 
     <div class="page-content">
 
-        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-        <div id="portlet-config" class="modal hide">
-
-            <div class="modal-header">
-
-                <button data-dismiss="modal" class="close" type="button"></button>
-
-                <h3>portlet Settings</h3>
-
-            </div>
-
-            <div class="modal-body">
-
-                <p>Here will be a configuration form</p>
-
-            </div>
-
-        </div>
-
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
         <!-- BEGIN PAGE CONTAINER-->
 
         <div class="container-fluid">
@@ -417,29 +395,7 @@
 
 <!-- END CONTAINER -->
 
-<!-- BEGIN FOOTER -->
-
-<div class="footer">
-
-    <div class="footer-inner">
-
-        2013 &copy; Metronic by keenthemes.
-
-    </div>
-
-    <div class="footer-tools">
-
-			<span class="go-top">
-
-			<i class="icon-angle-up"></i>
-
-			</span>
-
-    </div>
-
-</div>
-
-<!-- END FOOTER -->
+	<jsp:include page="include/footer.jsp"></jsp:include>
 
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 

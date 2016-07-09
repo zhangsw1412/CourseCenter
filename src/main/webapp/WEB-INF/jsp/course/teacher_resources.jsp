@@ -73,28 +73,6 @@
 
 		<div class="page-content">
 
-			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-			<div id="portlet-config" class="modal hide">
-
-				<div class="modal-header">
-
-					<button data-dismiss="modal" class="close" type="button"></button>
-
-					<h3>portlet Settings</h3>
-
-				</div>
-
-				<div class="modal-body">
-
-					<p>Here will be a configuration form</p>
-
-				</div>
-
-			</div>
-
-			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
 			<!-- BEGIN PAGE CONTAINER-->        
 
 			<div class="container-fluid">
@@ -119,14 +97,14 @@
 
 								<i class="icon-home"></i>
 
-								<a href="teacher_homepage.html">主页</a> 
+								<a href="/index">主页</a> 
 
 								<i class="icon-angle-right"></i>
 
 							</li>
 							<li>
 
-								<a href="#">${course.name}</a>
+								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
 
 								<!-- 数据库获取该课程名 -->
 
@@ -135,7 +113,7 @@
 							</li>
 							<li>
 
-								<a href="teacher_resources.html">资源管理</a>
+								<a href="#">资源管理</a>
 
 							</li>
 
@@ -220,29 +198,7 @@
 
 	<!-- END CONTAINER -->
 
-	<!-- BEGIN FOOTER -->
-
-	<div class="footer">
-
-		<div class="footer-inner">
-
-			2013 &copy; Metronic by keenthemes.
-
-		</div>
-
-		<div class="footer-tools">
-
-			<span class="go-top">
-
-			<i class="icon-angle-up"></i>
-
-			</span>
-
-		</div>
-
-	</div>
-
-	<!-- END FOOTER -->
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 
