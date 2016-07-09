@@ -53,11 +53,12 @@ public class AssignmentController {
 		}else if(user.getType() == 1){
 			m = new ModelAndView("assignment/teacher_assignments");
 		}
-
     	if(semesterCourseId!=null){
     		m.addObject("assignmentlist", assignmentlist);
     	}
 		m.addObject("course", courseService.getCourseBySemesterCourseId(semesterCourseId));
+    	int semesterId = courseService.getSemesterCourseBySemesterCourseId(semesterCourseId).getSemesterId();
+    	m.addObject("semesterId",semesterId);
     	return m;
     }
     
@@ -216,141 +217,5 @@ public class AssignmentController {
                 + "resource" + File.separator + "semestercourse-" + semesterCourseId + File.separator + "assignment-" +assignmentId;
         return filePath;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/test/assignTest/{semesterCourseId}")
-    public ModelAndView assignTestGet(@PathVariable Integer semesterCourseId, HttpServletRequest request) {
-    	User user = (User)request.getSession().getAttribute("user");
-    	if(user==null||user.getType()!=1)
-    		return new ModelAndView("login");
-    	if(semesterCourseId==null)
-    		return new ModelAndView("assignment/teacher_assignments");
-    	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
-    	if(course==null)
-    		return new ModelAndView("assignment/teacher_assignments");
-    	ModelAndView m = new ModelAndView("test/assignTest");
-    	m.addObject("semesterCourseId", semesterCourseId);
-    	return m;
-    }
-    
-    @RequestMapping(method = RequestMethod.POST, value = "/test/assignTest/{semesterCourseId}")
-    public ModelAndView assignTestPost(@PathVariable Integer semesterCourseId, @RequestParam("files") MultipartFile[] files, HttpServletRequest request){
-    	User user = (User)request.getSession().getAttribute("user");
-    	if(user==null||user.getType()!=1)
-    		return new ModelAndView("login");
-    	if(semesterCourseId==null)
-    		return new ModelAndView("assignment/teacher_assignments");
-    	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
-    	ModelAndView m = new ModelAndView("test/assignTest");
-    	m.addObject("course",course);
-    	
-    	String name = request.getParameter("name");
-    	if(name==null){
-        	m.addObject("error2", "作业名称不能为空");
-        	return m;
-        }
-    	
-    	String basicRequirement = request.getParameter("basicrequirement");
-    	if(basicRequirement==null){
-        	m.addObject("error2", "请填写作业基本要求");
-        	return m;
-        }
-    	
-    	String startTime_s = request.getParameter("starttime");
-    	if(startTime_s==null){
-        	m.addObject("error1", "开始时间不能为空");
-        	return m;
-        }
-    	Timestamp startTime;
-    	try{
-        	startTime = Timestamp.valueOf(startTime_s);
-    	}
-    	catch(Exception e){
-        	m.addObject("error1", "开始时间不合法");
-        	return m;
-    	}
-    	
-    	String deadline_s = request.getParameter("deadline");
-    	if(deadline_s==null){
-        	m.addObject("error1", "截止时间不能为空");
-        	return m;
-        }
-    	Timestamp deadline;
-    	try{
-        	deadline = Timestamp.valueOf(deadline_s);
-    	}
-    	catch(Exception e){
-        	m.addObject("error1", "截止时间不合法");
-        	return m;
-    	}
-    	
-    	String teamAvaliable_s = request.getParameter("teamavaliable");
-    	if(teamAvaliable_s==null){
-        	m.addObject("error2", "请选择是否允许团队参与");
-        	return m;
-    	}
-    	boolean teamAvaliable;
-    	try{
-        	teamAvaliable = Boolean.valueOf(teamAvaliable_s);
-    	}
-    	catch(Exception e){
-        	m.addObject("error2", "请选择是否允许团队参与");
-        	return m;
-    	}
-    	
-    	String highestScore_s = request.getParameter("highestscore");
-    	if(highestScore_s==null){
-        	m.addObject("error2", "分数上限不能为空");
-        	return m;
-    	}
-    	int highestScore;
-    	try{
-    		highestScore = Integer.valueOf(highestScore_s);
-    	}
-    	catch(Exception e){
-        	m.addObject("error2", "分数上限不合法");
-        	return m;
-    	}
-    	if(highestScore<=0||highestScore>=100){
-        	m.addObject("error2", "分数上限不合法");
-        	return m;
-    	}
-    	
-    	Assignment assignment = new Assignment();
-    	assignment.setSemesterCourseId(semesterCourseId);
-    	assignment.setName(name);
-    	assignment.setBasicRequirement(basicRequirement);
-    	assignment.setStartTime(startTime);
-    	assignment.setDeadline(deadline);
-    	assignment.setTeamAvaliable(teamAvaliable);
-    	assignment.setHighestScore(highestScore);
-    	assignmentService.createAssignment(assignment);
-    	int assignmentId=assignment.getId();
-    	String fileUrl = null;
-    	for (MultipartFile file : files) {
-            if (!file.isEmpty()) {
-                // 文件保存路径
-                String filePath = getResourcePath(semesterCourseId, assignmentId, request);
-                File dir = new File(filePath);
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                // 转存文件
-                try {
-                    File temp = new File(filePath + File.separator + file.getOriginalFilename());
-                    file.transferTo(temp);
-                    fileUrl = getServerPath(semesterCourseId,assignmentId,file.getOriginalFilename(),request);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    m.addObject("message", e.getMessage());
-                    return m;
-                }
-            }
-        }
-    	assignment.setFileUrl(fileUrl);
-    	assignmentService.updateAssignment(assignment);
-    	ModelAndView assignments = new ModelAndView("assignment/teacher_assignments");
-    	assignments.addObject("assignmentlist",assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId));
-    	return assignments;
-    }
     
 }
