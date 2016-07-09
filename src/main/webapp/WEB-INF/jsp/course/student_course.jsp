@@ -212,19 +212,24 @@
                         <div class="check"></div>
                         <div class="tile-body">
                             <div style="margin:20px"></div>
-                            <h2 style=" font-weight:bolder">${course.name}</h2>
+                            <h3 style=" font-weight:bolder">${course.name}<small>(代码：${course.courseCode})</small></h3>
                             <div style="margin:20px"></div>
-                            <h4>学时：${course.period}</h4>
-                            <div style="margin:15px"></div>
-                            <h4>学分：${course.credit}</h4>
-                            <div style="margin:15px"></div>
-                            <h4>上课人数：${countStudent}</h4>
-                            <div style="margin:15px"></div>
-                            <h4>任课教师：
+                            <h5>
+                                <c:if test="${course.type==true}">必修课</c:if>
+                                <c:if test="${course.type==false}">选修课</c:if>
+                            </h5>
+                            <div style="margin:20px"></div>
+                            <h5>任课教师：
                                 <c:forEach items="${teachers}" var="name">
                                     ${name}&nbsp;
                                 </c:forEach>
-                            </h4>
+                            </h5>
+                            <div style="margin:20px"></div>
+                            <h5>学时：${course.period}&nbsp;学分：${course.credit}&nbsp;上课人数：${countStudent}</h5>
+                            <div style="margin:20px"></div>
+                            <h5>
+                                <c:if test="${course.teamAvaliable==true}">允许团队参与</c:if>
+                            </h5>
                         </div>
                     </div>
 
