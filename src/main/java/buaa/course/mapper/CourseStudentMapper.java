@@ -13,4 +13,5 @@ public interface CourseStudentMapper {
 	int countCourseStudents();
 	List<CourseStudent> getCourseStudentsByRange(int start,int lines);
 	List<CourseStudent> getCourseStudentByStudent(int studentId);
+	int countStudents(int semesterCourseId);
 }

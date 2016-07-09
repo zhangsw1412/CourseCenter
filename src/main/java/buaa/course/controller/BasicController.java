@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by 熊纪元 on 2016/7/2.
@@ -60,7 +62,23 @@ public class BasicController {
             user.setLastLoginIp(IpUtil.getIpAddr(request));
             userService.updateUser(user);
             request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("semesterId", 2);
+            Calendar calendar = Calendar.getInstance();
+    		calendar.setTime(new Date());
+    		int year = calendar.get(Calendar.YEAR);
+    		int month = calendar.get(Calendar.MONTH) + 1;
+    		if ((month >= 9 && month <= 12)||month==1||month==2)
+    		{
+    			month = 0;
+    		}
+    		else if (month >= 3 && month <= 6)
+    		{
+    			month = 1;
+    		}
+    		else if (month >= 7 && month <= 8)
+    		{
+    			month = 2;
+    		}
+            request.getSession().setAttribute("semesterId", semesterService.getCurrentSemesterId(year, month));
             if(user.getType() == 0 ||user.getType() == 1){
                response.sendRedirect("/index");
             }else if(user.getType() == 2){

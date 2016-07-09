@@ -200,7 +200,7 @@
 
 														<span class="number">1</span>
 
-														<span class="desc"><i class="icon-ok"></i> 起始时间</span>   
+														<span class="desc"><i class="icon-ok"></i> 起止时间</span>   
 
 														</a>
 
@@ -267,7 +267,7 @@
 
 												<div class="control-group">
 
-													<label class="control-label">起止日期</label>
+													<label class="control-label">起止时间</label>
 
 													<div class="controls">
 

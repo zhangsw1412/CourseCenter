@@ -80,6 +80,7 @@ public class CourseController {
             m.addObject("teachers", teachers);
             SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
             m.addObject("semesterCourseId", semesterCourse.getId());
+            m.addObject("countStudent",courseService.countStudents(semesterCourse.getId()));
         }
         return m;
     }

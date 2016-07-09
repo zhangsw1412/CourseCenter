@@ -27,6 +27,11 @@
                     </c:forEach>
                 </ul>
             </li>
+            <li class="">
+                <a href="userInfo"> <i class="icon-file"></i> <span
+                        class="title">个人信息</span>
+                </a>
+            </li>
         </ul>
     </c:if>
     <c:if test="${sessionScope.user.type==2}">
@@ -53,18 +58,23 @@
                 </a>
             </li>
             <li class="start active ">
-                <a href="admin_semester.html"> <i class="icon-table"></i> <span
+                <a href="/semesterList"> <i class="icon-table"></i> <span
                         class="title">学期列表</span> <span class="selected"></span>
                 </a>
             </li>
             <li class="">
-                <a href="admin_course.html"> <i class="icon-cogs"></i> <span
+                <a href="/adminCourse"> <i class="icon-cogs"></i> <span
                         class="title">课程管理</span>
                 </a>
             </li>
             <li class="">
-                <a href="admin_infoManager.html"> <i class="icon-file"></i> <span
+                <a href="/userList"> <i class="icon-file"></i> <span
                         class="title">基本信息管理</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="userInfo"> <i class="icon-file"></i> <span
+                        class="title">个人信息</span>
                 </a>
             </li>
         </ul>
