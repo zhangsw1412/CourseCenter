@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:forEach items="${messages}" var="message">
+<c:forEach items="${messages}" var="message" varStatus="status">
     <c:if test="${message.userId == sessionScope.user.id}">
         <li class="out">
         <img class="avatar" alt="" src="/media/image/avatar2.jpg" />
@@ -9,7 +9,7 @@
         <li class="in">
         <img class="avatar" alt="" src="/media/image/avatar1.jpg" />
     </c:if>
-    <div class="message">
+    <div class="message" <c:if test="${status.last == true}">id="messageDiv"</c:if>>
         <span class="arrow"></span>
         <a href="#">${message.userName}</a>
         <span>${message.createTime}</span>
@@ -18,4 +18,5 @@
         </span>
     </div>
     </li>
+
 </c:forEach>

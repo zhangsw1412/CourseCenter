@@ -177,10 +177,10 @@
 
 								<div class="portlet-body" id="chats">
 
-									<div class="scroller" data-height="435px" data-always-visible="1" data-rail-visible1="1">
+									<div id="messageDiv" class="scroller" data-height="435px" data-always-visible="1" data-rail-visible1="1">
 
 										<ul class="chats" id="messageList">
-											<c:forEach items="${messages}" var="message">
+											<c:forEach items="${messages}" var="message" varStatus="status">
 												<c:if test="${message.userId == sessionScope.user.id}">
 													<li class="out">
 														<img class="avatar" alt="" src="/media/image/avatar2.jpg" />
@@ -189,7 +189,7 @@
 													<li class="in">
 													<img class="avatar" alt="" src="/media/image/avatar1.jpg" />
 												</c:if>
-														<div class="message">
+														<div class="message" <c:if test="${status.last == true}"> id="lastMessage"</c:if>>
 															<span class="arrow"></span>
 															<a href="#">${message.userName}</a>
 															<span>${message.createTime}</span>
@@ -197,6 +197,7 @@
 															${message.content}
 															</span>
 														</div>
+
 													</li>
 											</c:forEach>
 
@@ -204,16 +205,15 @@
 
 									</div>
 
-									<form id="chatForm" action="/semester/${semesterId}/course/${course.id}/chat" method="post">
-										<input type="hidden" name="size" value="${fn:length(messages)}" />
-										<div class="chat-form">
+									<form id="chatForm">
+										<div class="chat-form" id="chat-form">
 											<div class="input-cont">
 												<input name="content" class="m-wrap" type="text" placeholder="输入消息..." />
 											</div>
 											<div class="btn-cont">
 												<span class="arrow"></span>
-												<input type="submit" class="btn blue icn-only" />
-												<input id="refreshMessage" type="button" class="btn green" value="刷新"/>
+												<button id="sendMessage" class="btn blue">发送</button>
+
 											</div>
 										</div>
 									</form>
@@ -228,6 +228,7 @@
                         </div>
 				</div>
 
+				<div id="state"></div>
 				<!-- END PAGE CONTENT-->
 
 			</div>
@@ -313,63 +314,63 @@
 
 	<script>
 
-		jQuery(document).ready(function() {
-		   // initiate layout and plugins
-		   App.init();
-		});
-	</script>
-	<script>
-		$("#sendMessage").unbind('click').click(function(){
-			htmlobj = $.ajax({
-				url : "/semester/${semesterId}/course/${course.id}/chat/ajax",
-				data : $("#chatForm").serialize(),
-				type : "POST",
-				async : false
-			});
-			$("#messageList").html(htmlobj.responseText);
-		});
+		function scrollToEnd() {
+			var div = document.getElementById('messageDiv');
+			div.scrollTop = div.scrollHeight;
 
-		$("#refreshMessage").unbind('click').click(function(){
-			htmlobj = $.ajax({
-				url : "/semester/${semesterId}/course/${course.id}/chat/ajax",
-				data : {size : ${fn:length(messages)}},
-				type : "GET",
-				async : false
-			});
-			$("#messageList").html(htmlobj.responseText);
-		});
+			var d = document.getElementById('chat-form');
+			d.scrollTop = d.scrollHeight;
+		}
 
-	</script>
-<script type="text/javascript">
-	$(function () {
-		(function longPolling() {
+		function longPoll() {
 			$.ajax({
-				url : "/semester/${semesterId}/course/${course.id}/chat/ajax",
-				type : "GET",
-				timeout: 50000,
-				error: function (XMLHttpRequest, textStatus, errorThrown) {
-					if (textStatus == "timeout") { // 请求超时
-						longPolling(); // 递归调用
-						// 其他错误，如网络错误等
-					} else {
-						longPolling();
+				type:"POST",
+				url:"/semester/${semesterId}/course/${course.id}/chat/ajax",
+				timeout:80000,     //ajax请求超时时间80秒
+				success:function(data,textStatus){
+					$("#messageList").html(data);
+					scrollToEnd();
+					if (textStatus == "success") { // 请求成功
+						longPoll();
 					}
 				},
-				success: function (htmlobj, textStatus) {
-					$("#messageList").appendChild(htmlobj.responseText);
-					if (textStatus == "success") { // 请求成功
-						longPolling();
+				//Ajax请求超时，继续查询
+				error:function(XMLHttpRequest,textStatus,errorThrown){
+					if(textStatus=="timeout"){
+						longPoll();
 					}
 				}
-			});
-		})();
 
-	});
-</script>
+			});
+		}
+
+		jQuery(document).ready(function() {
+		   	App.init();
+			longPoll();
+			$("#sendMessage").unbind('click').click(function(){
+				htmlobj = $.ajax({
+					url : "/semester/${semesterId}/course/${course.id}/chat/ajax",
+					data : $("#chatForm").serialize(),
+					type : "POST",
+					async : false
+				});
+				$("#messageList").html(htmlobj.responseText);
+				scrollToEnd();
+			});
+
+			$("#refreshMessage").unbind('click').click(function(){
+				htmlobj = $.ajax({
+					url : "/semester/${semesterId}/course/${course.id}/chat/ajax",
+					type : "GET",
+					async : false
+				});
+				$("#messageList").html(htmlobj.responseText);
+				scrollToEnd();
+			});
+		});
+	</script>
 
 	<!-- END JAVASCRIPTS -->
-
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
 
 </body>
 

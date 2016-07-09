@@ -27,13 +27,19 @@ public class CoursesInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView m) throws Exception {
+        //获取url地址
+        String reqUrl=request.getRequestURI().replace(request.getContextPath(), "");
+        //当url地址为登录的url的时候跳过拦截器
+        if(reqUrl.contains("/ajax")) {
+            return;
+        }
+
         User user = (User)request.getSession().getAttribute("user");
 
         if(user != null){
             Integer semesterId = (Integer)request.getSession().getAttribute("semesterId");
-            System.out.println(semesterId);
             if(semesterId == null)
-                throw new RuntimeException();
+                throw new RuntimeException("semesterId is null");
             m.addObject("semester", semesterService.getSemesterById(semesterId));
             if(user.getType() == 0){
                 m.addObject("courses", courseService.getCoursesByStudent(semesterId, user.getNum()));
