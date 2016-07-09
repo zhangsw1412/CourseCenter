@@ -183,16 +183,16 @@
 											<c:forEach items="${messages}" var="message" varStatus="status">
 												<c:if test="${message.userId == sessionScope.user.id}">
 													<li class="out">
-														<img class="avatar" alt="" src="/media/image/avatar2.jpg" />
+														<img class="avatar" alt="" src="/assets/img/Avatar-${sessionScope.user.id%15}.jpg" />
 												</c:if>
 												<c:if test="${message.userId != sessionScope.user.id}">
 													<li class="in">
-													<img class="avatar" alt="" src="/media/image/avatar1.jpg" />
+													<img class="avatar" alt="" src="/assets/img/Avatar-${message.userId%15}.jpg" />
 												</c:if>
 														<div class="message" <c:if test="${status.last == true}"> id="lastMessage"</c:if>>
 															<span class="arrow"></span>
-															<a href="#">${message.userName}</a>
-															<span>${message.createTime}</span>
+															<a href="javascript(0):;" class="name">${message.userName}</a>
+															<span class="datetime">${message.createTime}</span>
 															<span class="body">
 															${message.content}
 															</span>
@@ -205,14 +205,14 @@
 
 									</div>
 
-									<form id="chatForm">
+									<form id="chatForm" method="post	">
 										<div class="chat-form" id="chat-form">
 											<div class="input-cont">
-												<input name="content" class="m-wrap" type="text" placeholder="输入消息..." />
+												<input id="content" name="content" class="m-wrap" type="text" placeholder="输入消息..." />
 											</div>
-											<div class="btn-cont">
+											<div>
 												<span class="arrow"></span>
-												<button id="sendMessage" class="btn blue">发送</button>
+												<button id="sendMessage" class="btn blue"><i class="icon-share-alt icon-white"></i></button>
 
 											</div>
 										</div>
@@ -313,6 +313,11 @@
 	<script src="/media/js/table-advanced.js"></script>     
 
 	<script>
+		function preventForm() {
+			$("form").submit(function(e){
+				e.preventDefault();
+			});
+		}
 
 		function scrollToEnd() {
 			var div = document.getElementById('messageDiv');
@@ -329,7 +334,6 @@
 				timeout:80000,     //ajax请求超时时间80秒
 				success:function(data,textStatus){
 					$("#messageList").html(data);
-					scrollToEnd();
 					if (textStatus == "success") { // 请求成功
 						longPoll();
 					}
@@ -346,26 +350,23 @@
 
 		jQuery(document).ready(function() {
 		   	App.init();
+			preventForm();
+			scrollToEnd();
 			longPoll();
 			$("#sendMessage").unbind('click').click(function(){
-				htmlobj = $.ajax({
+				$.ajax({
 					url : "/semester/${semesterId}/course/${course.id}/chat/ajax",
 					data : $("#chatForm").serialize(),
 					type : "POST",
-					async : false
+					success:function(data,textStatus){
+						if (textStatus == "success") { // 请求成功
+							$("#content").val("");
+							$("#messageList").html(data);
+							scrollToEnd();
+							longPoll();
+						}
+					}
 				});
-				$("#messageList").html(htmlobj.responseText);
-				scrollToEnd();
-			});
-
-			$("#refreshMessage").unbind('click').click(function(){
-				htmlobj = $.ajax({
-					url : "/semester/${semesterId}/course/${course.id}/chat/ajax",
-					type : "GET",
-					async : false
-				});
-				$("#messageList").html(htmlobj.responseText);
-				scrollToEnd();
 			});
 		});
 	</script>

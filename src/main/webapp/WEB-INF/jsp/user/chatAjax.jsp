@@ -3,16 +3,16 @@
 <c:forEach items="${messages}" var="message" varStatus="status">
     <c:if test="${message.userId == sessionScope.user.id}">
         <li class="out">
-        <img class="avatar" alt="" src="/media/image/avatar2.jpg" />
+        <img class="avatar" alt="" src="/assets/img/Avatar-${sessionScope.user.id%15}.jpg" />
     </c:if>
     <c:if test="${message.userId != sessionScope.user.id}">
         <li class="in">
-        <img class="avatar" alt="" src="/media/image/avatar1.jpg" />
+        <img class="avatar" alt="" src="/assets/img/Avatar-${message.userId%15}.jpg" />
     </c:if>
     <div class="message" <c:if test="${status.last == true}">id="messageDiv"</c:if>>
         <span class="arrow"></span>
-        <a href="#">${message.userName}</a>
-        <span>${message.createTime}</span>
+        <a href="javascript(0):;" class="name">${message.userName}</a>
+        <span class="datetime">${message.createTime}</span>
         <span class="body">
             ${message.content}
         </span>
