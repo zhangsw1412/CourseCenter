@@ -1,7 +1,10 @@
 package buaa.course.service;
 
 import buaa.course.mapper.SemesterMapper;
+import buaa.course.model.Course;
 import buaa.course.model.Semester;
+import buaa.course.model.User;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -59,5 +62,20 @@ public class SemesterService
 		}
 		else
 			return semesterMapper.addSemester(semester);
+	}
+
+	public List<Course> getCoursesOfCurrentSemester(int year, int month)
+	{
+		return semesterMapper.getCoursesOfCurrentSemester(year, month);
+	}
+
+	public int getCurrentSemesterId(int year, int month)
+	{
+		return semesterMapper.getCurrentSemesterId(year, month);
+	}
+
+	public List<User> getCourseStudents(int semesterId, int courseId)
+	{
+		return semesterMapper.getCourseStudents(semesterId, courseId);
 	}
 }

@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="buaa.course.mapper.SemesterMapper">
-	
+
 	<resultMap id="semesterMap" type="buaa.course.model.Semester">
 		<id property="id" column="id" />
 		<result property="schoolYear" column="school_year" />
@@ -12,12 +12,28 @@
 		<result property="endDate" column="end_date" />
 		<result property="weeks" column="weeks" />
 	</resultMap>
+	<resultMap id="courseMap" type="buaa.course.model.Course">
+		<id property="id" column="id" />
+		<result property="courseCode" column="course_code" />
+		<result property="name" column="name" />
+		<result property="collegeId" column="college_id" />
+		<result property="period" column="period" />
+		<result property="credit" column="credit" />
+		<result property="type" column="type" />
+		<result property="teamAvaliable" column="team_avaliable" />
+	</resultMap>
+	<resultMap id="userMap" type="buaa.course.model.User">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="gender" column="gender" />
+	</resultMap>
 	<select id="getSemester" parameterType="int" resultMap="semesterMap">
 	    <![CDATA[
 	    	select * from semester where id = #{0}
 	    ]]>
 	</select>
-	<insert id="addSemester" parameterType="buaa.course.model.Semester"  useGeneratedKeys="true" keyProperty="id">
+	<insert id="addSemester" parameterType="buaa.course.model.Semester"
+		useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
 	    	insert into semester (school_year,season,start_date,end_date,weeks) values(#{schoolYear},#{season},#{startDate},#{endDate},#{weeks})
 	    ]]>
@@ -46,5 +62,35 @@
 	    <![CDATA[
 	    	select * from semester limit #{0},#{1}
 	    ]]>
+	</select>
+	<select id="getCoursesOfCurrentSemester" resultMap="courseMap">
+		<![CDATA[
+			select c.id,c.course_code,c.name,c.college_id,c.period,c.credit,c.type,c.team_avaliable
+			from semester s
+			left join semester_course sc on s.id=sc.semester_id
+			left join course c on sc.course_id=c.id
+			where s.school_year=#{0} and s.season=#{1}
+		]]>
+	</select>
+	<select id="getCurrentSemesterId" resultType="int">
+		<![CDATA[
+			select id
+			from semester
+			where school_year=#{0} and season=#{1}
+		]]>
+	</select>
+	<select id="getCourseStudents" resultMap="userMap">
+		<![CDATA[
+			select *
+			from user u
+			where u.valid=1
+			and u.num in
+			(
+				select cs.student_id
+				from course_student cs
+				left join semester_course sc on cs.semester_course_id=sc.id
+				where sc.semester_id=#{0} and sc.course_id=#{1}
+			)
+		]]>
 	</select>
 </mapper>
