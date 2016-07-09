@@ -108,7 +108,7 @@
 
 						<h3 class="page-title">
 
-							作业列表
+							提交列表
 								<small>选择要批改、评分的作业</small>
 						</h3>
 
@@ -118,7 +118,16 @@
 
 								<i class="icon-home"></i>
 
-								<a href="#">主页</a>
+								<a href="/index">主页</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+							<li>
+
+								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
+								
+								<!-- 数据库获取该课程名 -->
 
 								<i class="icon-angle-right"></i>
 
@@ -126,13 +135,13 @@
 
 							<li>
 
-								<a href="#">作业管理</a>
+								<a href="/assignment/assignments/${assignmentId}">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
 							</li>
 
-							<li><a href="#">作业列表</a></li>
+							<li><a href="#">提交列表</a></li>
 
 						</ul>
 
@@ -156,7 +165,7 @@
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-pencil"></i>软件开发实习</div>
+								<div class="caption"><i class="icon-pencil"></i>${assignment.name}</div>
 
 								<div class="tools">
 

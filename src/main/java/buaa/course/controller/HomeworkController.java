@@ -3,6 +3,7 @@ package buaa.course.controller;
 import buaa.course.model.Assignment;
 import buaa.course.model.Course;
 import buaa.course.model.Homework;
+import buaa.course.model.SemesterCourse;
 import buaa.course.model.User;
 import buaa.course.service.*;
 import com.mysql.jdbc.StringUtils;
@@ -67,11 +68,14 @@ public class HomeworkController {
     	Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
     	Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
     	User student = userService.getUserByNum(homework.getStudentId());
+    	SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(assignment.getSemesterCourseId());
     	m.addObject("homeworkId",homeworkId);
         m.addObject("homework",homework);
         m.addObject("assignment", assignment);
         m.addObject("course", course);
         m.addObject("student", student);
+        m.addObject("semesterId", semesterCourse.getSemesterId());
+        m.addObject("semesterCourseId", semesterCourse.getId());
         return m;
     }
 
@@ -153,6 +157,7 @@ public class HomeworkController {
 		m.addObject("semester", semesterService.getSemesterById(2));
 		m.addObject("homework", homeworkService.getHomeworkByAssignment(assignmentId, user.getNum()));
 		m.addObject("course",course);
+		m.addObject("semesterCourseId", courseService.getSemesterCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId()).getId());
 		return m;
     }
 
