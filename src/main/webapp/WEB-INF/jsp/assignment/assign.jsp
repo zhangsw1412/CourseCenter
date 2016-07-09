@@ -133,7 +133,15 @@
 								<span class="icon-angle-right"></span>
 
 							</li>
+							<li>
 
+								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
+
+								<!-- 数据库获取该课程名 -->
+
+								<i class="icon-angle-right"></i>
+
+							</li>
 							<li>
 
 								<a href="/assignment/assignments/${semesterCourseId }">作业管理</a>
@@ -165,18 +173,6 @@
 								<div class="caption">
 
 									<i class="icon-plus"></i> 添加作业 - <span class="step-title">Step 1 of 3</span>
-
-								</div>
-
-								<div class="tools hidden-phone">
-
-									<a href="javascript:;" class="collapse"></a>
-
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-
-									<a href="javascript:;" class="reload"></a>
-
-									<a href="javascript:;" class="remove"></a>
 
 								</div>
 
