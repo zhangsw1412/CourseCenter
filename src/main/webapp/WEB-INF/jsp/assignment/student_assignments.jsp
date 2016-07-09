@@ -158,12 +158,6 @@
 						<div class="portlet box green">
 							<div class="portlet-title">
 								<div class="caption"><i class="icon-bell"></i>作业列表</div>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="#portlet-config" data-toggle="modal" class="config"></a>
-									<a href="javascript:;" class="reload"></a>
-									
-								</div>
 							</div>
 							<div class="portlet-body">
 								<table class="table table-striped table-bordered table-advance table-hover">
