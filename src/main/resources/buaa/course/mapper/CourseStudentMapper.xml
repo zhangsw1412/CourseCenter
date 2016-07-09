@@ -50,4 +50,9 @@
 	    	select * from course_student where student_id=#{0}
 	    ]]>
 	</select>
+	<select id="countStudents" parameterType="int" resultType="int">
+	    <![CDATA[
+	    	select count(*) from course_student where semester_course_id=#{0}
+	    ]]>
+	</select>
 </mapper>

@@ -295,7 +295,7 @@
 												<input type="submit" value="确认" class="btn green big hidden-print"/>
 											</c:if>
 												<c:if test="${homework.comment != null}">
-													该项作业已提交，不能再次提交
+													该项作业已批改，不能再次批改
 												</c:if>
 											<a class="btn big hidden-print" href="/assignment/assignments/${assignment.semesterCourseId}">返回</a>
 				
