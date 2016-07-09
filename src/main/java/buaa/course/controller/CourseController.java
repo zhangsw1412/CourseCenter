@@ -74,16 +74,7 @@ public class CourseController {
             response.sendRedirect("index");
         }
         if (user.getType() == 1 || user.getType() == 0){
-            List<Course> courses = new ArrayList<>();
-            if(user.getType() == 1){
-                courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
-            }else{
-                courses = courseService.getCoursesByStudent(semesterId, user.getNum());
-            }
-            m.addObject("semester", semesterService.getSemesterById(semesterId));
-            m.addObject("courses", courses);
             Course course = courseService.getCourseById(courseId);
-            m.addObject("semester", semesterService.getSemesterById(semesterId));
             m.addObject("course", course);
             List<String> teachers = courseService.getTeachersName(semesterId, course);
             m.addObject("teachers", teachers);
@@ -111,15 +102,6 @@ public class CourseController {
         } else {
             m.addObject("message", "找不到课程！");
         }
-        List<Course> courses = new ArrayList<>();
-        User user = (User)request.getSession().getAttribute("user");
-        if(user.getType() == 1){
-            courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
-        }else{
-            courses = courseService.getCoursesByStudent(semesterId, user.getNum());
-        }
-        m.addObject("semester", semesterService.getSemesterById(semesterId));
-        m.addObject("courses", courses);
         return m;
     }
 
@@ -172,15 +154,6 @@ public class CourseController {
         Course course = courseService.getCourseBySemesterCourseId(semesterId, courseId);
         m.addObject("course", course);
         m.addObject("message", "上传成功！");
-        List<Course> courses = new ArrayList<>();
-        User user = (User)request.getSession().getAttribute("user");
-        if(user.getType() == 1){
-            courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
-        }else{
-            courses = courseService.getCoursesByStudent(semesterId, user.getNum());
-        }
-        m.addObject("semester", semesterService.getSemesterById(semesterId));
-        m.addObject("courses", courses);
         return m;
     }
 
@@ -218,14 +191,6 @@ public class CourseController {
             String dirPath = getServerDir(request, semesterId, courseId);
             m.addObject("dir", dirPath);
         }
-        List<Course> courses = new ArrayList<>();
-        if(user.getType() == 1){
-            courses = courseService.getCoursesByTeacher(semesterId, user.getNum());
-        }else{
-            courses = courseService.getCoursesByStudent(semesterId, user.getNum());
-        }
-        m.addObject("semester", semesterService.getSemesterById(semesterId));
-        m.addObject("courses", courses);
         return m;
     }
 

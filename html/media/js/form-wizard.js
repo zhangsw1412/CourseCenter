@@ -71,7 +71,7 @@ var FormWizard = function () {
                     }
                 },
 
-                invalidHandler: function (event, validator) { //display error alert on form submit   
+                invalidHandler: function (event, validator) { //display error alert on form submit
                     success.hide();
                     error.show();
                     App.scrollTo(error, -200);
@@ -118,6 +118,11 @@ var FormWizard = function () {
                         $(this).html(input.find('option:selected').text());
                     } else if (input.is(":radio") && input.is(":checked")) {
                         $(this).html(input.attr("data-title"));
+                    } else if(input.is(":file")) {
+                          var file = input.attr("value");
+                          var strFileName=file.replace(/^.+?\\([^\\]+?)(\.[^\.\\]*?)?$/gi,"$1");  //正则表达式获取文件名，不带后缀
+                          var FileExt=file.replace(/.+\./,"");   //正则表达式获取后缀
+                          $(this).html(strFileName+FileExt);
                     } else if ($(this).attr("data-display") == 'card_expiry') {
                         $(this).html($('[name="card_expiry_mm"]', form).val() + '/' + $('[name="card_expiry_yyyy"]', form).val());
                     } else if ($(this).attr("data-display") == 'payment') {

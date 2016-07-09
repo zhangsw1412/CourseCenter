@@ -5,7 +5,7 @@ import java.util.List;
 import buaa.course.model.Semester;
 
 public interface SemesterMapper {
-	Semester getSemester(int id);
+	Semester getSemester(Integer id);
 	int addSemester(Semester semester);
 	int deleteSemester(int id);
 	int updateSemester(Semester semester);

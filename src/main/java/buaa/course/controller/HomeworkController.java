@@ -40,7 +40,6 @@ public class HomeworkController {
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/homeworks/{assignmentId}")
     public ModelAndView homeworksGet(@PathVariable Integer assignmentId, HttpServletRequest request) {
     	User user = (User)request.getSession().getAttribute("user");
-    	List<Course> courses;
     	if(user==null||user.getType()!=1)
     		return new ModelAndView("login");
     	ModelAndView homeworks = new ModelAndView("assignment/homeworks");
@@ -51,21 +50,14 @@ public class HomeworkController {
     	if(homeworklist==null)
     		return index;
     	Map<Long,User> studentlist =userService.getUsersMap(homeworklist);
-    	courses = courseService.getCoursesByTeacher(2, user.getNum());
     	homeworks.addObject("homeworklist",homeworklist);
     	homeworks.addObject("studentlist",studentlist);
-    	homeworks.addObject("courses", courses);
-		homeworks.addObject("semester", semesterService.getSemesterById(2));
 		homeworks.addObject("course", courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId()));
     	return homeworks;
     }
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/correct/{homeworkId}")
     public ModelAndView correctHomeworkGet(@PathVariable Integer homeworkId, HttpServletRequest request){
-    	User user = (User)request.getSession().getAttribute("user");
-    	List<Course> courses;
-    	if(user==null||user.getType()!=1)
-    		return new ModelAndView("login");
     	ModelAndView m= new ModelAndView("assignment/correct");
     	Homework homework = null;
     	if(homeworkId!=null)
@@ -75,22 +67,16 @@ public class HomeworkController {
     	Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
     	Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
     	User student = userService.getUserByNum(homework.getStudentId());
-    	courses = courseService.getCoursesByTeacher(2, user.getNum());
     	m.addObject("homeworkId",homeworkId);
         m.addObject("homework",homework);
         m.addObject("assignment", assignment);
         m.addObject("course", course);
         m.addObject("student", student);
-        m.addObject("courses", courses);
-		m.addObject("semester", semesterService.getSemesterById(2));
         return m;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/correct/{homeworkId}")
     public ModelAndView correctHomeworkPost(@PathVariable Integer homeworkId, HttpServletRequest request, HttpServletResponse response) throws IOException{
-    	User user = (User)request.getSession().getAttribute("user");
-    	if(user==null||user.getType()!=1)
-    		return new ModelAndView("login");
         ModelAndView m = new ModelAndView("assignment/correct");
         String score_s = request.getParameter("score");
         String comment = request.getParameter("comment");
@@ -113,8 +99,6 @@ public class HomeworkController {
 			m.addObject("assignment", assignment);
 			m.addObject("course", course);
 			m.addObject("student", student);
-			m.addObject("courses", courseService.getCoursesByTeacher(2, user.getNum()));
-			m.addObject("semester", semesterService.getSemesterById(2));
         	m.addObject("illegalScore", "分数形式不合法");
         	return m;
         }
@@ -128,9 +112,6 @@ public class HomeworkController {
 			m.addObject("assignment", assignment);
 			m.addObject("course", course);
 			m.addObject("student", student);
-			m.addObject("courses", courseService.getCoursesByTeacher(2, user.getNum()));
-			m.addObject("semester", semesterService.getSemesterById(2));
-
         	return m;
         }
 		if(StringUtils.isNullOrEmpty(comment)){
@@ -143,8 +124,6 @@ public class HomeworkController {
 			m.addObject("assignment", assignment);
 			m.addObject("course", course);
 			m.addObject("student", student);
-			m.addObject("courses", courseService.getCoursesByTeacher(2, user.getNum()));
-			m.addObject("semester", semesterService.getSemesterById(2));
 			return m;
 		}
         homework.setScore(score);
@@ -158,11 +137,8 @@ public class HomeworkController {
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/submit/{assignmentId}")
     public ModelAndView submitHomeworkGet(@PathVariable Integer assignmentId, HttpServletRequest request){
-    	User user = (User)request.getSession().getAttribute("user");
-    	List<Course> courses;
     	Course course=null;
-    	if(user==null||user.getType()!=0)
-    		return new ModelAndView("login");
+		User user = (User)request.getSession().getAttribute("user");
     	ModelAndView m = new ModelAndView("assignment/submit");
     	ModelAndView index = new ModelAndView("index");
     	Assignment assignment = null;
@@ -171,11 +147,9 @@ public class HomeworkController {
     	assignment = assignmentService.getAssignmentById(assignmentId);
     	if(assignment==null)
     		return index;
-    	courses = courseService.getCoursesByStudent(2, user.getNum());
     	course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId());
     	m.addObject("assignmentId", assignmentId);
     	m.addObject("assignment",assignment);
-    	m.addObject("courses", courses);
 		m.addObject("semester", semesterService.getSemesterById(2));
 		m.addObject("homework", homeworkService.getHomeworkByAssignment(assignmentId, user.getNum()));
 		m.addObject("course",course);
