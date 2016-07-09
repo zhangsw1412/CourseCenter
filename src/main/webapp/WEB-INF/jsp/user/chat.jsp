@@ -320,7 +320,7 @@
 		}
 
 		function scrollToEnd() {
-			$("#messageDiv").scrollTop($("#messageDiv").height());
+			$("#messageDiv").scrollTop($("#messageDiv").scrollHeight());
 		}
 
 		function longPoll() {
