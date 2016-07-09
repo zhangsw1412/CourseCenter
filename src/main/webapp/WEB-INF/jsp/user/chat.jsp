@@ -159,7 +159,7 @@
 
 								<div class="portlet-title line">
 
-									<div class="caption"><i class="icon-comments"></i>Chats</div>
+									<div class="caption"><i class="icon-comments"></i>讨论</div>
 
 									<div class="tools">
 
@@ -205,12 +205,12 @@
 
 									</div>
 
-									<form id="chatForm" method="post	">
+									<form id="chatForm" method="post">
 										<div class="chat-form" id="chat-form">
 											<div class="input-cont">
 												<input id="content" name="content" class="m-wrap" type="text" placeholder="输入消息..." />
 											</div>
-											<div>
+											<div class="btn-cont">
 												<span class="arrow"></span>
 												<button id="sendMessage" class="btn blue"><i class="icon-share-alt icon-white"></i></button>
 
@@ -320,11 +320,7 @@
 		}
 
 		function scrollToEnd() {
-			var div = document.getElementById('messageDiv');
-			div.scrollTop = div.scrollHeight;
-
-			var d = document.getElementById('chat-form');
-			d.scrollTop = d.scrollHeight;
+			$("#messageDiv").scrollTop($("#messageDiv").height());
 		}
 
 		function longPoll() {

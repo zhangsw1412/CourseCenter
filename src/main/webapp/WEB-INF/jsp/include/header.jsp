@@ -38,10 +38,10 @@
 
 				<li class="dropdown user">
 
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span
-						class="username">${sessionScope.user.name}</span> <i
-						class="icon-angle-down"></i>
-
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<img style="width:30px" src="/assets/img/Avatar-${sessionScope.user.id%15}.jpg" />
+						<span class="username">${sessionScope.user.name}</span>
+						<i class="icon-angle-down"></i>
 					</a>
 
 					<ul class="dropdown-menu">
