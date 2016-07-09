@@ -1,20 +1,21 @@
 package buaa.course.controller;
 
-import java.io.Reader;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import buaa.course.model.Course;
 import buaa.course.model.Semester;
+import buaa.course.service.CourseService;
 import buaa.course.service.SemesterService;
 
 @Controller
@@ -22,6 +23,9 @@ public class SemesterController
 {
 	@Resource(name = "semesterService")
 	private SemesterService semesterService;
+
+	@Resource(name = "courseService")
+	private CourseService courseService;
 
 	/**
 	 * 获取学期列表
@@ -56,9 +60,15 @@ public class SemesterController
 	 * @return
 	 */
 	@RequestMapping(value = "/saveSemester", method = RequestMethod.POST)
-	public String saveSemester(@RequestParam(value="schoolYear") Integer schoolYear,@RequestParam(value="season") Integer season,@RequestParam(value="startDate") Date startDate,@RequestParam(value="endDate") Date endDate,@RequestParam(value="weeks") Integer weeks)
+	public String saveSemester(
+			@RequestParam(value = "schoolYear") Integer schoolYear,
+			@RequestParam(value = "season") Integer season,
+			@RequestParam(value = "startDate") Date startDate,
+			@RequestParam(value = "endDate") Date endDate,
+			@RequestParam(value = "weeks") Integer weeks)
 	{
-		semesterService.saveSemester(new Semester(schoolYear,season,startDate,endDate,weeks));
+		semesterService.saveSemester(
+				new Semester(schoolYear, season, startDate, endDate, weeks));
 		return "redirect:semesterList";
 	}
 
@@ -88,5 +98,47 @@ public class SemesterController
 	{
 		semesterService.deleteSemester(id);
 		return "redirect:/semesterList";
+	}
+
+	/**
+	 * 课程列表页面
+	 * 
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value = "/adminCourse")
+	public String adminCourse(Map<String, Object> map)
+	{
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		if ((month >= 9 && month <= 12) || month == 1 || month == 2)
+		{
+			month = 0;
+		}
+		else if (month >= 3 && month <= 6)
+		{
+			month = 1;
+		}
+		else if (month >= 7 && month <= 8)
+		{
+			month = 2;
+		}
+		map.put("courses",
+				semesterService.getCoursesOfCurrentSemester(year, month));
+		return "course/admin_course";
+	}
+
+	@RequestMapping(value = "/adminCourseInfo/{id}")
+	public String adminCourseInfo(@PathVariable(value = "id") Integer courseId,
+			Map<String, Object> map, HttpServletRequest request)
+	{
+		Course course = courseService.getCourseById(courseId);
+		map.put("course", course);
+		int semesterId = (int) request.getSession().getAttribute("semesterId");
+		map.put("students",
+				semesterService.getCourseStudents(semesterId, courseId));
+		return "course/admin_courseInfo";
 	}
 }
