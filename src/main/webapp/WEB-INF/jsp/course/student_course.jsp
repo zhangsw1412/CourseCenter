@@ -218,7 +218,9 @@
                             <div style="margin:15px"></div>
                             <h4>学分：${course.credit}</h4>
                             <div style="margin:15px"></div>
-                            <h4>任课老师：
+                            <h4>上课人数：${countStudent}</h4>
+                            <div style="margin:15px"></div>
+                            <h4>任课教师：
                                 <c:forEach items="${teachers}" var="name">
                                     ${name}&nbsp;
                                 </c:forEach>

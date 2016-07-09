@@ -1,15 +1,25 @@
 package buaa.course.mapper;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import buaa.course.model.Course;
+=======
+>>>>>>> 68eb1da515dfef9277f71b5e86c53a84392d2aaa
 import buaa.course.model.Semester;
 import buaa.course.model.User;
 
+<<<<<<< HEAD
 public interface SemesterMapper
 {
 	Semester getSemester(Integer id);
 
+=======
+import java.util.List;
+
+public interface SemesterMapper {
+	Semester getSemester(int id);
+>>>>>>> 68eb1da515dfef9277f71b5e86c53a84392d2aaa
 	int addSemester(Semester semester);
 
 	int deleteSemester(int id);

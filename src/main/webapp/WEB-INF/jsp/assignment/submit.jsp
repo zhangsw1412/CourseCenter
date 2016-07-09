@@ -146,7 +146,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="#">主页</a>
+								<a href="/index">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -154,7 +154,7 @@
 
 							<li>
 
-								<a href="#">${course.name}</a>								
+								<a href="/semester/${semester.id}/courseDetail/${course.id}">${course.name}</a>								
 								<!-- 数据库获取该课程名 -->
 
 								<i class="icon-angle-right"></i>
@@ -163,7 +163,7 @@
 							
 							<li>
 
-								<a href="#">作业管理</a>
+								<a href="/assignment/assignments/${semesterCourseId}">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 

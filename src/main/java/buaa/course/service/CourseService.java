@@ -92,7 +92,7 @@ public class CourseService {
         return courses;
     }
 
-    public List<Course> getCoursesByTeacher(int semesterId, int teacherId) {
+/*    public List<Course> getCoursesByTeacher(int semesterId, int teacherId) {
         List<CourseTeacher> courseTeachers = courseTeacherMapper.getCourseTeacherByTeacher(teacherId);
         List<SemesterCourse> semesterCourses = semesterCourseMapper.getSemesterCourseBySemesterId(semesterId);
         List<Course> courses = new ArrayList<>();
@@ -106,21 +106,13 @@ public class CourseService {
         }
 
         return courses;
+    }*/
+    public List<Course> getCoursesByTeacher(int semesterId, int teacherId){
+    	return courseMapper.getCoursesBySemesterIdAndTeacherId(semesterId,teacherId);
     }
-
-    public List<Course> getCoursesByStudent(int semesterId, int studentId) {
-        List<CourseStudent> courseStudents = courseStudentMapper.getCourseStudentByStudent(studentId);
-        List<SemesterCourse> semesterCourses = semesterCourseMapper.getSemesterCourseBySemesterId(semesterId);
-        List<Course> courses = new ArrayList<>();
-        for(CourseStudent courseStudent : courseStudents){
-            for(SemesterCourse semesterCourse : semesterCourses){
-                if(courseStudent.getSemesterCourseId() == semesterCourse.getId()){
-                    courses.add(getCourseById(semesterCourse.getCourseId()));
-                }
-            }
-        }
-
-        return courses;
+    
+    public List<Course> getCoursesByStudent(int semesterId, int studentId){
+    	return courseMapper.getCoursesBySemesterIdAndStudentId(semesterId,studentId);
     }
 
     public Map<Long, List<String>> getTeachersName(int semesterId, List<Course> courses) {
@@ -128,7 +120,6 @@ public class CourseService {
         for(Course course : courses){
             result.put(Long.valueOf(course.getId()), getTeachersName(semesterId, course));
         }
-
         return result;
     }
 
@@ -159,4 +150,12 @@ public class CourseService {
         }
         return result;
     }
+    
+    public int countStudents(int semesterCourseId){
+    	return courseStudentMapper.countStudents(semesterCourseId);
+    }
+
+	public SemesterCourse getSemesterCourseBySemesterCourseId(int semesterCourseId) {
+		return semesterCourseMapper.getSemesterCourse(semesterCourseId);
+	}
 }

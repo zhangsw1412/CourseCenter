@@ -116,7 +116,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="#">主页</a>
+								<a href="/index">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -126,7 +126,7 @@
 
 							<li>
 
-								<a href="#">${course.name}</a>
+								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
 								
 								<!-- 数据库获取该课程名 -->
 

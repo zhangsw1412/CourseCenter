@@ -54,4 +54,14 @@
 	    	select * from course where course_code = #{0}
 	    ]]>
 	</select>
+	<select id="getCoursesBySemesterIdAndStudentId" resultMap="courseMap">
+		<![CDATA[
+	    	select * from course c,semester_course sc,course_student cs where cs.student_id=#{1} and sc.id=cs.semester_course_id and sc.semester_id=#{0} and c.id=sc.course_id
+	    ]]>
+	</select>
+	<select id="getCoursesBySemesterIdAndTeacherId" resultMap="courseMap">
+		<![CDATA[
+	    	select * from course c,semester_course sc,course_teacher ct where ct.teacher_id=#{1} and sc.id=ct.semester_course_id and sc.semester_id=#{0} and c.id=sc.course_id
+	    ]]>
+	</select>
 </mapper>

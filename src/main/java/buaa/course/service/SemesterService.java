@@ -21,6 +21,8 @@ public class SemesterService
 
 	public Semester getSemesterById(Integer id)
 	{
+		if(id == null)
+			throw new RuntimeException("semesterId is null");
 		return semesterMapper.getSemester(id);
 	}
 
