@@ -92,7 +92,7 @@ public class CourseService {
         return courses;
     }
 
-    public List<Course> getCoursesByTeacher(int semesterId, int teacherId) {
+/*    public List<Course> getCoursesByTeacher(int semesterId, int teacherId) {
         List<CourseTeacher> courseTeachers = courseTeacherMapper.getCourseTeacherByTeacher(teacherId);
         List<SemesterCourse> semesterCourses = semesterCourseMapper.getSemesterCourseBySemesterId(semesterId);
         List<Course> courses = new ArrayList<>();
@@ -106,8 +106,11 @@ public class CourseService {
         }
 
         return courses;
+    }*/
+    public List<Course> getCoursesByTeacher(int semesterId, int teacherId){
+    	return courseMapper.getCoursesBySemesterIdAndTeacherId(semesterId,teacherId);
     }
-
+    
     public List<Course> getCoursesByStudent(int semesterId, int studentId){
     	return courseMapper.getCoursesBySemesterIdAndStudentId(semesterId,studentId);
     }

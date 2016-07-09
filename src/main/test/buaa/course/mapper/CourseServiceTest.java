@@ -16,7 +16,10 @@ public class CourseServiceTest {
 	 public void main() {
 		CourseService courseService = context.getBean(CourseService.class);
 		List<Course> courses=courseService.getCoursesByStudent(2, 1);
+		List<Course> courset=courseService.getCoursesByTeacher(2, 2);
 		for(Course course:courses)
+			System.out.println(course);
+		for(Course course:courset)
 			System.out.println(course);
 	}
 }
