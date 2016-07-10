@@ -113,7 +113,7 @@
 
 							<li>
 
-								<a href="/assignment/assignments/${assignmentId}">作业管理</a>
+								<a href="/assignment/assignments/${assignment.semesterCourseId}">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
