@@ -155,7 +155,7 @@
 
 									<ul class="unstyled">
 
-										<h1>${course.name}<h1>
+										<h1>${course.name}</h1>
 
 									</ul>
 
@@ -251,10 +251,10 @@
 											</label>
 
 
-											<label><big>作业评价</big></label>
+											<label><strong>作业评价</strong></label>
 
-											<textarea class="span10 m-wrap" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>${homework.comment}${noComment}</textarea>
-																<div class="row-fluid">
+											<textarea class="span10 m-wrap" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>${homework.comment}</textarea>
+																${noComment}<div class="row-fluid">
 
 											<div class="span4">
 

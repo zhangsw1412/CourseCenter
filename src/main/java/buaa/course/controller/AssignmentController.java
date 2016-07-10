@@ -208,8 +208,7 @@ public class AssignmentController {
 	}
 
 	private String getServerDir(Integer semesterCourseId, Integer assignmentId, HttpServletRequest request) {
-		return request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()
-		+"/"+request.getContextPath()+"resource/"+ "semestercourse-" + semesterCourseId +"/assignment-" +assignmentId+"/";
+		return "/"+request.getContextPath()+"resource/"+ "semestercourse-" + semesterCourseId +"/assignment-" +assignmentId+"/";
 	}
 
 	private String getResourcePath(Integer semesterCourseId, Integer assignmentId, HttpServletRequest request) {
