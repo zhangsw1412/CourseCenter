@@ -206,24 +206,11 @@
 										</div>
 									</div>
 
-
-									<div class="control-group">
-
-										<label class="control-label">备注</label>
-
-										<div class="controls">
-
-											<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
-
-										</div>
-
-									</div>
-
 									<div class="form-actions">
 
 										<button type="submit" class="btn blue">上传</button>
 
-										<a href="teacher_resources.html"><button type="button" class="btn">取消</button><a>
+										<a href="/semester/${semesterId}/course/${course.id}/resourceList"><button type="button" class="btn">返回</button><a>
 
 									</div>
 
