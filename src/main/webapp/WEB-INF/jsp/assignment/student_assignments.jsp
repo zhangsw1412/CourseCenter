@@ -148,13 +148,13 @@
 										<th>评论</th>
 										<th>操作</th>
 									</tr>
-									<c:forEach items="${assignmentlist }" var="item">
+									<c:forEach items="${assignmentlist}" var="item">
 									<tr>
 										<td class="highlight">
 											<div class="success"></div>
-											<span>${item.name }</span>
+											<span>&nbsp;${item.name}</span>
 										</td>
-										<td class="hidden-phone">${item.startTime }</td>
+										<td class="hidden-phone">${item.startTime}</td>
 										<td>${item.deadline }</td>
 										<td>${homeworks[item.id+0].submitTime}</td>
 										<c:if test="${homeworks[item.id+0] == null}">
