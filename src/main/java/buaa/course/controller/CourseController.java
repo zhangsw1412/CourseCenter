@@ -195,8 +195,7 @@ public class CourseController {
     }
 
     private String getServerDir(HttpServletRequest request, int semesterId, int courseId) {
-        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-                + "/" + request.getContextPath() +
+        return "/"+request.getContextPath() +
                 "resource" + "/" + "semester-" + semesterId + "/" + "course-" + courseId + "/";
     }
 }
