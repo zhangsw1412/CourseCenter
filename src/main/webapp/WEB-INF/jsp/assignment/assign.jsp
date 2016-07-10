@@ -56,6 +56,11 @@
 	<!-- END PAGE LEVEL STYLES -->
 
 	<link rel="shortcut icon" href="/media/image/favicon.ico" />
+	<style>
+		.readonlyinput:hover{ 
+			cursor:pointer;  
+		}
+	</style>
 
 </head>
 
@@ -236,19 +241,18 @@
 											<!-- step1 -->
 											<div class="tab-pane" id="tab1">
 
-												<h3 class="block">请设置作业时间区域：</h3>
-
+												<h3 class="block">请设置作业时间区域：<small>默认为现在开始一周时间</small></h3>
 												<div class="control-group">
 
 													<label class="control-label">起止时间</label>
 
 													<div class="controls">
 
-														<input name="starttime" readonly="readonly" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_from"/>
+														<input name="starttime" readonly="readonly" class="m-wrap small readonlyinput" size="16" type="text" value="${currentTime}" id="ui_date_picker_range_from"/>
 
 														<span class="text-inline">&nbsp;至&nbsp;</span>
 
-														<input name="deadline" readonly="readonly" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_to"/>
+														<input name="deadline" readonly="readonly" class="m-wrap small readonlyinput" size="16" type="text" value="${toTime}" id="ui_date_picker_range_to"/>
 
 													</div>
 													
@@ -394,18 +398,26 @@
 
 												<div class="control-group">
 
-													<label class="control-label">起止日期：</label>
+													<label class="control-label">开始时间：</label>
 
 													<div class="controls">
 													
 														<span class="text display-value" data-display="starttime"></span>
-														&nbsp;&nbsp;至
+
+													</div>
+
+												</div>
+												<div class="control-group">
+
+													<label class="control-label">截止时间：</label>
+
+													<div class="controls">
+													
 														<span class="text display-value" data-display="deadline"></span>
 
 													</div>
 
 												</div>
-
 												<div class="control-group">
 
 													<label class="control-label">基本要求:</label>
@@ -563,7 +575,7 @@
 			});
 		   $('#ui_date_picker_range_from').datetimepicker({
 		        language:  'zh-CN',
-						format: 'yyyy-mm-dd hh:ii',
+				format: 'yyyy-mm-dd hh:ii',
 		        weekStart: 1,
 		        todayBtn:  1,
 						autoclose: 1,
@@ -573,9 +585,9 @@
 		        showMeridian: 1
 		    	});
 
-					$('#ui_date_picker_range_to').datetimepicker({
+			$('#ui_date_picker_range_to').datetimepicker({
 		        language:  'zh-CN',
-						format: 'yyyy-mm-dd hh:ii',
+				format: 'yyyy-mm-dd hh:ii',
 		        weekStart: 1,
 		        todayBtn:  1,
 						autoclose: 1,
@@ -587,7 +599,6 @@
 		});
 
 	</script>
-
 	<!-- END JAVASCRIPTS -->   
 
 <!-- END BODY -->

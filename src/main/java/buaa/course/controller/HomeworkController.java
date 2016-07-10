@@ -78,6 +78,8 @@ public class HomeworkController {
         m.addObject("student", student);
         m.addObject("semesterId", semesterCourse.getSemesterId());
         m.addObject("semesterCourseId", semesterCourse.getId());
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        m.addObject("currentTime",currentTime);
         return m;
     }
 
@@ -106,6 +108,8 @@ public class HomeworkController {
 			m.addObject("course", course);
 			m.addObject("student", student);
         	m.addObject("illegalScore", "分数形式不合法");
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            m.addObject("currentTime",currentTime);
         	return m;
         }
         if(score<0||(score>homeworkService.getHighestScore(homeworkId)&&homeworkService.getHighestScore(homeworkId)>0)){
@@ -118,6 +122,8 @@ public class HomeworkController {
 			m.addObject("assignment", assignment);
 			m.addObject("course", course);
 			m.addObject("student", student);
+	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+	        m.addObject("currentTime",currentTime);
         	return m;
         }
 		if(StringUtils.isNullOrEmpty(comment)){
@@ -130,6 +136,8 @@ public class HomeworkController {
 			m.addObject("assignment", assignment);
 			m.addObject("course", course);
 			m.addObject("student", student);
+	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+	        m.addObject("currentTime",currentTime);
 			return m;
 		}
         homework.setScore(score);
@@ -153,6 +161,18 @@ public class HomeworkController {
     	assignment = assignmentService.getAssignmentById(assignmentId);
     	if(assignment==null)
     		return index;
+    	Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    	if(assignment.getStartTime().after(currentTime)){
+    		ModelAndView notYet = new ModelAndView("assignment/student_assignments");
+    		int semesterCourseId = assignmentService.getAssignmentById(assignmentId).getSemesterCourseId();
+    		List<Assignment> assignmentlist = assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId);
+    		Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
+    		notYet.addObject("assignmentlist", assignmentlist);
+    		notYet.addObject("homeworks", homeworks);
+    		notYet.addObject("course", courseService.getCourseBySemesterCourseId(semesterCourseId));
+    		notYet.addObject("currentTime", currentTime);
+    		return notYet;
+    	}
     	course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId());
     	m.addObject("assignmentId", assignmentId);
     	m.addObject("assignment",assignment);
@@ -160,7 +180,6 @@ public class HomeworkController {
 		m.addObject("homework", homeworkService.getHomeworkByAssignment(assignmentId, user.getNum()));
 		m.addObject("course",course);
 		m.addObject("semesterCourseId", courseService.getSemesterCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId()).getId());
-		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		m.addObject("currentTime", currentTime);
 		return m;
     }

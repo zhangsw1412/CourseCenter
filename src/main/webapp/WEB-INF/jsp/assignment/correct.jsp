@@ -265,12 +265,15 @@
 
 											<br />
 				
-											<c:if test="${homework.comment == null}">
+											<c:if test="${homework.comment == null and currentTime >= assignment.deadline}">
 												<input type="submit" value="确认" class="btn green big hidden-print"/>
 											</c:if>
-												<c:if test="${homework.comment != null}">
-													该项作业已批改，不能再次批改
-												</c:if>
+											<c:if test="${homework.comment == null and currentTime < assignment.deadline}">
+												该项作业未截止，请于截止时间后批改
+											</c:if>
+											<c:if test="${homework.comment != null}">
+												该项作业已批改，不能再次批改
+											</c:if>
 											<a class="btn big hidden-print" href="/assignment/homeworks/${assignment.id}">返回</a>
 				
 											</div>

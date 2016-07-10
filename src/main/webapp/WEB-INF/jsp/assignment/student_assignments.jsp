@@ -144,7 +144,7 @@
 										<th class="hidden-phone"><i class="icon-time"></i> 开始时间</th>
 										<th><i class="icon-bell"></i> 截止时间</th>
 										<th>上次提交时间</th>
-										<th>得分</th>
+										<th>得分(最高分)</th>
 										<th>操作</th>
 									</tr>
 									<c:forEach items="${assignmentlist}" var="item">
@@ -154,27 +154,37 @@
 											<span>&nbsp;${item.name}</span>
 										</td>
 										<td class="hidden-phone">${item.startTime}</td>
-										<td>${item.deadline }</td>
-										<td>${homeworks[item.id+0].submitTime}</td>
-										<c:if test="${homeworks[item.id+0] == null}">
-											<td>
-												未提交
-											</td>
+										<td>${item.deadline}</td>
+										<c:if test="${currentTime<item.startTime}">
+											<td>未开始</td><td>未开始</td>
 										</c:if>
-										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment == null}">
-											<td>
-												未批改
-											</td>
+										<c:if test="${currentTime>=item.startTime and currentTime<item.deadline and homeworks[item.id+0] == null}">
+											<td>未提交</td><td>未提交</td>
 										</c:if>
-										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment != null}">
+										<c:if test="${currentTime>=item.startTime and currentTime<item.deadline and homeworks[item.id+0] != null}">
+											<td>已提交</td><td>已提交</td>
+										</c:if>
+										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] == null}">
+											<td>未提交</td><td>未提交</td>
+										</c:if>
+										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] != null and homeworks[item.id+0].score < 0}">
+											<td>未批改</td><td>未批改</td>
+										</c:if>
+										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] != null and homeworks[item.id+0].score >= 0}">
+											<td>${homeworks[item.id+0].submitTime}</td>
 											<td>
-												${homeworks[item.id+0].score}
+												${homeworks[item.id+0].score}<c:if test="${item.highestScore>0}">(${item.highestScore})</c:if>
+												<c:if test="${item.highestScore<0}">(无)</c:if>
 											</td>
 										</c:if>
 										<td>
-											<a href="/assignment/submit/${item.id}" class="btn mini green"><i class="icon-eye-open"></i> 查看</a>
+										<c:if test="${currentTime<item.startTime}">
+												未开始
+										</c:if>
+										<c:if test="${currentTime>=item.startTime}">
+												<a href="/assignment/submit/${item.id}" class="btn mini green"><i class="icon-eye-open"></i> 查看</a>
+										</c:if>
 										</td>
-
 									</tr>
 									</c:forEach>
 								</table>

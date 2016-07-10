@@ -50,8 +50,10 @@ public class AssignmentController {
 		List<Assignment> assignmentlist = assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId);
     	if(user.getType() == 0){
     		m = new ModelAndView("assignment/student_assignments");
+    		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 			Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
 			m.addObject("homeworks", homeworks);
+			m.addObject("currentTime", currentTime);
 		}else if(user.getType() == 1){
 			m = new ModelAndView("assignment/teacher_assignments");
 		}
@@ -74,9 +76,13 @@ public class AssignmentController {
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	if(course==null)
     		return new ModelAndView("assignment/teacher_assignments");
+    	Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    	Timestamp toTime = new Timestamp(System.currentTimeMillis()+604800000);
     	ModelAndView m = new ModelAndView("assignment/assign");
     	m.addObject("course",course);
     	m.addObject("semesterCourseId", semesterCourseId);
+    	m.addObject("currentTime", currentTime.toString().substring(0,16));
+    	m.addObject("toTime", toTime.toString().substring(0, 16));
     	return m;
     }
     
@@ -89,6 +95,10 @@ public class AssignmentController {
     		return new ModelAndView("assignment/teacher_assignments");
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	ModelAndView m = new ModelAndView("assignment/assign");
+    	Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    	Timestamp toTime = new Timestamp(System.currentTimeMillis()+604800000);
+    	m.addObject("currentTime", currentTime.toString().substring(0,16));
+    	m.addObject("toTime", toTime.toString().substring(0, 16));
     	m.addObject("course",course);
     	m.addObject("semesterCourseId",semesterCourseId);
     	String name = request.getParameter("name");
