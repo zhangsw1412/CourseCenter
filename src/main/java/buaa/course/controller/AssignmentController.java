@@ -21,7 +21,10 @@ import com.mysql.jdbc.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -83,6 +86,24 @@ public class AssignmentController {
     	m.addObject("semesterCourseId", semesterCourseId);
     	m.addObject("currentTime", currentTime.toString().substring(0,16));
     	m.addObject("toTime", toTime.toString().substring(0, 16));
+    	return m;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/assignment/assign_check/{assignmentId}")
+    public ModelAndView assignCheckGet(@PathVariable Integer assignmentId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	User user = (User)request.getSession().getAttribute("user");
+    	if(user==null||user.getType()!=1)
+    		return new ModelAndView("login");
+    	Assignment assignment = assignmentService.getAssignmentById(assignmentId);
+    	if(assignment==null){
+    		response.sendRedirect("/404.html");
+    	}
+    	Integer semesterCourseId = assignment.getSemesterCourseId();
+    	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
+    	ModelAndView m = new ModelAndView("assignment/assign_check");
+    	m.addObject("course",course);
+    	m.addObject("semesterCourseId", semesterCourseId);
+    	m.addObject("assignment", assignment);
     	return m;
     }
     

@@ -420,7 +420,7 @@
 												</div>
 												<div class="control-group">
 
-													<label class="control-label">基本要求:</label>
+													<label class="control-label">基本要求：</label>
 
 													<div class="controls">
 
@@ -432,7 +432,7 @@
 												
 												<div class="control-group">
 
-													<label class="control-label">附件名:</label>
+													<label class="control-label">附件名：</label>
 
 													<div class="controls">
 
