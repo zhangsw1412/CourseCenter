@@ -30,6 +30,9 @@ public class CoursesInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView m) throws Exception {
+        if(m == null){
+            return;
+        }
         //获取url地址
         String reqUrl=request.getRequestURI().replace(request.getContextPath(), "");
         //当url地址为登录的url的时候跳过拦截器
@@ -42,19 +45,14 @@ public class CoursesInterceptor implements HandlerInterceptor {
         if(user != null){
             Integer semesterId = (Integer)request.getSession().getAttribute("semesterId");
 
-            try{
-                m.addObject("semester", semesterService.getSemesterById(semesterId));
-                if(user.getType() == 0){
-                    m.addObject("courses", courseService.getCoursesByStudent(semesterId, user.getNum()));
-                }else if(user.getType() == 1){
-                    m.addObject("courses", courseService.getCoursesByTeacher(semesterId, user.getNum()));
-                }
-            }catch (Exception e){
-                log.error(e);
-                log.info(semesterId == null);
-                log.info(user == null);
+            m.addObject("semester", semesterService.getSemesterById(semesterId));
+            if(user.getType() == 0){
+                m.addObject("courses", courseService.getCoursesByStudent(semesterId, user.getNum()));
+            }else if(user.getType() == 1){
+                m.addObject("courses", courseService.getCoursesByTeacher(semesterId, user.getNum()));
             }
 
+            m.addObject("url", reqUrl);
         }else{
             response.sendRedirect("/login");
         }
