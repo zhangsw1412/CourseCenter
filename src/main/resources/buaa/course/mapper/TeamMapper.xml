@@ -45,4 +45,19 @@
 	    	select * from team limit #{0},#{1}
 	    ]]>
 	</select>
+	<select id="getTeamsByStudentId" parameterType="int" resultMap="teamMap">
+		<![CDATA[
+	    	select t.id,name,leader_id,max_num from team t, team_student ts where ts.student_id = #{0} and ts.team_id = t.id;
+	    ]]>
+	</select>
+	<select id="isUserFromTeam"  resultType="int">
+		<![CDATA[
+
+	    ]]>
+	</select>
+	<select id="applyToTeam">
+		<![CDATA[
+
+	    ]]>
+	</select>
 </mapper>

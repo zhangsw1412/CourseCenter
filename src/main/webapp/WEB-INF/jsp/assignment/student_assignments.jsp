@@ -145,7 +145,6 @@
 										<th><i class="icon-bell"></i> 截止时间</th>
 										<th>上次提交时间</th>
 										<th>得分</th>
-										<th>评论</th>
 										<th>操作</th>
 									</tr>
 									<c:forEach items="${assignmentlist }" var="item">
@@ -158,23 +157,18 @@
 										<td>${item.deadline }</td>
 										<td>${homeworks[item.id+0].submitTime}</td>
 										<c:if test="${homeworks[item.id+0] == null}">
-											<td colspan="2">
+											<td>
 												未提交
 											</td>
-
 										</c:if>
 										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment == null}">
-											<td colspan="2">
+											<td>
 												未批改
 											</td>
-
 										</c:if>
 										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment != null}">
 											<td>
 												${homeworks[item.id+0].score}
-											</td>
-											<td style="width:10em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-												${homeworks[item.id+0].comment}
 											</td>
 										</c:if>
 										<td>
