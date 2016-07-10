@@ -1,9 +1,11 @@
 package buaa.course.service;
 
 import buaa.course.mapper.ResourceMapper;
+import buaa.course.mapper.SemesterCourseMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by 熊纪元 on 2016/7/4.
@@ -13,7 +15,14 @@ public class ResourceService {
     @Resource(name = "resourceMapper")
     private ResourceMapper resourceMapper;
 
+    @Resource(name = "semesterCourseMapper")
+    private SemesterCourseMapper semesterCourseMapper;
+
     public int createResource(buaa.course.model.Resource resource) {
         return resourceMapper.addResource(resource);
+    }
+
+    public List<buaa.course.model.Resource> getResourcesByCourse(int semesterId, int courseId) {
+        return resourceMapper.getResourcesByCourse(semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId).getId());
     }
 }

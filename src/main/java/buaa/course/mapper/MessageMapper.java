@@ -2,6 +2,7 @@ package buaa.course.mapper;
 
 import buaa.course.model.Message;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface MessageMapper {
@@ -14,4 +15,5 @@ public interface MessageMapper {
 	List<Message> getMessagesByRange(int start,int row);
 	List<Message> getMessagesBySemesterCourseId(int semesterCourseId);
 	List<Message> getMessagesBySemesterCourseIdInRange(int semesterCourseId, int start, int length);
+	List<Message> getMessagesBySemesterCourseIdAfterTime(int semesterCourseId, Timestamp now);
 }

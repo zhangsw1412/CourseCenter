@@ -189,29 +189,28 @@
 										<label class="control-label">资源名称</label>
 										<div class="controls">
 											<input type="file" name="files"  class="fileupload" />
+
 											<br/>
 											<span>${message}</span>
 										</div>
+
 									</div>
-
-
 									<div class="control-group">
-
-										<label class="control-label">备注</label>
-
+										<label class="control-label">资源类别</label>
 										<div class="controls">
-
-											<textarea class="span12 wysihtml5 m-wrap" rows="6"></textarea>
-
+											<select name="category">
+												<option value="课件">课件</option>
+												<option value="视频">视频</option>
+												<option value="文档">文档</option>
+											</select>
 										</div>
-
 									</div>
 
 									<div class="form-actions">
 
 										<button type="submit" class="btn blue">上传</button>
 
-										<a href="teacher_resources.html"><button type="button" class="btn">取消</button><a>
+										<a href="/semester/${semesterId}/course/${course.id}/resourceList"><button type="button" class="btn">返回</button><a>
 
 									</div>
 

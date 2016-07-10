@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="/WEB-INF/tld/fileUtil.tld"%>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 
@@ -158,13 +159,14 @@
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<tr>
 										<th>文件名</th>
+										<th>类别</th>
 										<th>操作</th>
 									</tr>
-									<c:forEach items="${files}" var="file">
+									<c:forEach items="${resources}" var="file">
 										<tr>
-											<td>${file}</td>
-
-											<td><a href="${dir}${file}" class="btn mini green">
+											<td>${fn:getFileName(file.fileUrl)}</td>
+											<td>${file.category}</td>
+											<td><a href="${file.fileUrl}" class="btn mini green">
 												<i class="icon-download"></i> 下载</a>
 											</td>
 										</tr>

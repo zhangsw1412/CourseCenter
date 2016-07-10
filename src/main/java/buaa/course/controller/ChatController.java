@@ -49,19 +49,28 @@ public class ChatController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/semester/{semesterId}/course/{courseId}/chat/ajax")
-    public ModelAndView chatGetAjax(@PathVariable Integer semesterId, @PathVariable Integer courseId) {
+    public ModelAndView chatGetAjax(@PathVariable Integer semesterId, @PathVariable Integer courseId, HttpServletRequest request) {
+        String lastTime = request.getParameter("lastMessageTime");
+        if(StringUtils.isNullOrEmpty(lastTime)){
+            return null;
+        }
         ModelAndView m = new ModelAndView("user/chatAjax");
+        Timestamp lastMessageTime = Timestamp.valueOf(lastTime);
         SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
-        List<Message> messageList = messageService.getMessagesBySemesterCourseId(semesterCourse.getId());
+        System.out.println(lastMessageTime);
+        List<Message> messageList = messageService.getMessagesBySemesterCourseIdAfterTime(semesterCourse.getId(), lastMessageTime);
         m.addObject("messages", messageList);
         m.addObject("course", courseService.getCourseById(courseId));
+        if(messageList.size() > 0){
+            System.out.println(messageList);
+        }
         return m;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/semester/{semesterId}/course/{courseId}/chat/ajax")
     public ModelAndView chatPostAjax(@PathVariable Integer semesterId, @PathVariable Integer courseId, HttpServletRequest request) {
         createMessage(semesterId, courseId, request);
-        return chatGetAjax(semesterId,courseId);
+        return chatGetAjax(semesterId,courseId, request);
     }
 
     private void createMessage(Integer semesterId, Integer courseId, HttpServletRequest request) {
@@ -74,6 +83,7 @@ public class ChatController {
             message.setCreateTime(new Timestamp(System.currentTimeMillis()));
             message.setSemesterCourseId(semesterCourse.getId());
             message.setUserId(user.getId());
+            message.setUserNum(user.getNum());
             message.setUserName(user.getName());
 
             messageService.createMessage(message);

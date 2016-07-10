@@ -131,6 +131,7 @@ drop table if exists `message`;
 create table `message`(
   id int not null auto_increment  primary key comment '主键',
   semester_course_id int not null default 0 comment '对应学期课程表的主键',
+  user_num int not null default 0 comment '用户主键',
   user_id varchar(20) not null default '' comment '学号/工号',
   user_name varchar(255) not null default '' comment '用户名',
   content text comment '内容',

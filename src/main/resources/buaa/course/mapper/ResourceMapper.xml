@@ -45,4 +45,9 @@
 	    	select * from resource limit #{0},#{1}
 	    ]]>
 	</select>
+	<select id="getResourcesByCourse" parameterType="int" resultMap="resourceMap">
+		<![CDATA[
+	    	select * from resource where semester_course_id = #{0}
+	    ]]>
+	</select>
 </mapper>

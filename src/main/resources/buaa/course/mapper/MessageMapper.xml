@@ -7,6 +7,7 @@
 	<resultMap id="messageMap" type="buaa.course.model.Message">
 		<id property="id" column="id" />
 		<result property="semesterCourseId" column="semester_course_id" />
+		<result property="userNum" column="user_num" />
 		<result property="userId" column="user_id" />
 		<result property="userName" column="user_name" />
 		<result property="content" column="content" />
@@ -24,7 +25,7 @@
 	</select>
 	<insert id="addMessage" parameterType="buaa.course.model.Message"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
-	    	insert into message(semester_course_id,user_id,user_name,content,create_time) values(#{semesterCourseId},#{userId},#{userName},#{content},#{createTime})
+	    	insert into message(semester_course_id,user_num,user_id,user_name,content,create_time) values(#{semesterCourseId},#{userNum},#{userId},#{userName},#{content},#{createTime})
 	    ]]>
 	</insert>
 	<delete id="deleteMessage" parameterType="int">
@@ -34,7 +35,7 @@
 	</delete>
 	<update id="updateMessage" parameterType="buaa.course.model.Message">
 	    <![CDATA[
-	    	update message set semester_course_id=#{semesterCourseId},user_id=#{userId},user_name=#{userName},content=#{content},create_time=#{createTime} where id=#{id}
+	    	update message set semester_course_id=#{semesterCourseId},user_num=#{userNum},user_id=#{userId},user_name=#{userName},content=#{content},create_time=#{createTime} where id=#{id}
 	    ]]>
 	</update>
 	<select id="getAllMessages" resultMap="messageMap">
@@ -55,6 +56,11 @@
 	<select id="getMessagesBySemesterCourseId" resultMap="messageMap">
 	    <![CDATA[
 	    	select * from message where semester_course_id=#{semesterCourseId}
+	    ]]>
+	</select>
+	<select id="getMessagesBySemesterCourseIdAfterTime" resultMap="messageMap">
+		<![CDATA[
+	    	select * from message where semester_course_id=#{0} and UNIX_TIMESTAMP(create_time) > UNIX_TIMESTAMP(#{1})
 	    ]]>
 	</select>
 </mapper>

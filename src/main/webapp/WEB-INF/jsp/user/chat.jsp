@@ -147,18 +147,18 @@
 
 										<ul class="chats" id="messageList">
 											<c:forEach items="${messages}" var="message" varStatus="status">
-												<c:if test="${message.userId == sessionScope.user.id}">
-													<li class="out">
-														<img class="avatar" alt="" src="/assets/img/Avatar-${sessionScope.user.id%15}.jpg" />
+												<c:if test="${message.userNum == sessionScope.user.num}">
+													<li class="out" time="${message.createTime}"  <c:if test="${status.last == true}"> id="lastMessage"</c:if>>
+														<img class="avatar" alt="" src="/assets/img/Avatar-${sessionScope.user.num%15}.jpg" />
 												</c:if>
-												<c:if test="${message.userId != sessionScope.user.id}">
-													<li class="in">
-													<img class="avatar" alt="" src="/assets/img/Avatar-${message.userId%15}.jpg" />
+												<c:if test="${message.userNum != sessionScope.user.num}">
+													<li class="in" time="${message.createTime}" >
+													<img class="avatar" alt="" src="/assets/img/Avatar-${message.userNum%15}.jpg" />
 												</c:if>
-														<div class="message" <c:if test="${status.last == true}"> id="lastMessage"</c:if>>
+														<div class="message">
 															<span class="arrow"></span>
 															<a href="javascript(0):;" class="name">${message.userName}</a>
-															<span class="datetime">${message.createTime}</span>
+															<span id="lastMessageTime" class="datetime">${message.createTime}</span>
 															<span class="body">
 															${message.content}
 															</span>
@@ -179,7 +179,6 @@
 											<div class="btn-cont">
 												<span class="arrow"></span>
 												<button id="sendMessage" class="btn blue"><i class="icon-share-alt icon-white"></i></button>
-
 											</div>
 										</div>
 									</form>
@@ -264,7 +263,7 @@
 		}
 
 		function scrollToEnd() {
-			$("#messageDiv").scrollTop($("#messageDiv").scrollHeight());
+			$("#messageDiv").scrollTop($("#messageDiv")[0].scrollHeight);
 		}
 
 		function longPoll() {
@@ -272,9 +271,13 @@
 				type:"POST",
 				url:"/semester/${semesterId}/course/${course.id}/chat/ajax",
 				timeout:80000,     //ajax请求超时时间80秒
+				data:{lastMessageTime:$("#messageList li:last").attr("time")},
 				success:function(data,textStatus){
-					$("#messageList").html(data);
 					if (textStatus == "success") { // 请求成功
+						if(data.length > 0){
+							$("#messageList").append(data);
+						}
+						scrollToEnd();
 						longPoll();
 					}
 				},
@@ -301,9 +304,6 @@
 					success:function(data,textStatus){
 						if (textStatus == "success") { // 请求成功
 							$("#content").val("");
-							$("#messageList").html(data);
-							scrollToEnd();
-							longPoll();
 						}
 					}
 				});

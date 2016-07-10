@@ -1,8 +1,8 @@
 package buaa.course.mapper;
 
-import java.util.List;
-
 import buaa.course.model.Resource;
+
+import java.util.List;
 
 public interface ResourceMapper {
 	Resource getResource(int id);
@@ -12,4 +12,5 @@ public interface ResourceMapper {
 	List<Resource> getAllResources();
 	int countResources();
 	List<Resource> getResourcesByRange(int start,int row);
+	List<Resource> getResourcesByCourse(int semesterCourseId);
 }

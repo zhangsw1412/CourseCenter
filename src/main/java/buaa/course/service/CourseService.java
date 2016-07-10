@@ -69,16 +69,8 @@ public class CourseService {
         else
         	return null;
     }
-
-    public Course getCourseBySemesterCourseId(int semesterId, int courseId) {
-        SemesterCourse sc = semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId);
-        if(sc != null)
-            return courseMapper.getCourse(sc.getCourseId());
-        else return null;
-    }
-
+    
     public SemesterCourse getSemesterCourseBySemesterCourseId(int semesterId, int courseId) {
-        SemesterCourse sc = semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId);
         return semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId);
     }
 
