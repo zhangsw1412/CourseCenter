@@ -1,8 +1,8 @@
 package buaa.course.mapper;
 
-import java.util.List;
-
 import buaa.course.model.Team;
+
+import java.util.List;
 
 public interface TeamMapper {
 	Team getTeam(int id);
@@ -12,4 +12,7 @@ public interface TeamMapper {
 	List<Team> getAllTeams();
 	int countTeams();
 	List<Team> getTeamsByRange(int start,int lines);
+	List<Team> getTeamsByStudentId(int id);
+	int isUserFromTeam(int num, int id);
+	void applyToTeam(Integer userId, Integer teamId);
 }

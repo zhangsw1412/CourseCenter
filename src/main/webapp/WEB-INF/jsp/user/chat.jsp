@@ -104,16 +104,16 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a href="#.html">主页</a>
+								<a href="/index">主页</a>
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-								<a href="#">${course.name}</a>
+								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
 								<i class="icon-angle-right"></i>
 
 							</li>
 							<li>
-								<a href="teacher_homework.html">讨论</a>
+								<a href="">讨论</a>
 							</li>
 
 						</ul>
@@ -276,8 +276,8 @@
 					if (textStatus == "success") { // 请求成功
 						if(data.length > 0){
 							$("#messageList").append(data);
+							scrollToEnd();
 						}
-						scrollToEnd();
 						longPoll();
 					}
 				},

@@ -43,10 +43,10 @@
 
 					<ul class="dropdown-menu">
 						<li>
-							<a href="/userInfo"><i class="icon-user"></i>个人信息</a>
+							<a href="/userInfo"><i class="icon-user"> </i>个人信息</a>
 						</li>
 						<li>
-							<a href="/logout"><i class="icon-signout"></i>退出</a>
+							<a href="/logout"><i class="icon-signout"> </i>退出</a>
 						</li>
 
 					</ul>

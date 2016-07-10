@@ -9,7 +9,7 @@ public class Homework {
 	private int assignmentId;
 	private String text;
 	private String fileUrl;
-	private int score;
+	private int score = -1;
 	private String comment;
 	private Timestamp submitTime;
 	public Homework() {

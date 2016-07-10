@@ -295,7 +295,9 @@
 
 													<div class="controls">
 
-														<input type="checkbox" name="teamavaliable" />
+														<div class="basic-toggle-button">
+															<input type="checkbox" name="teamavaliable" class="toggle" />
+														</div>
 
 														<span class="help-inline"></span>
 
@@ -553,6 +555,12 @@
 		   App.init();
 
 		   FormWizard.init();
+			$('.basic-toggle-button').toggleButtons({
+				style: {
+					enabled: "success",
+					disabled: ""
+				}
+			});
 		   $('#ui_date_picker_range_from').datetimepicker({
 		        language:  'zh-CN',
 						format: 'yyyy-mm-dd hh:ii',
