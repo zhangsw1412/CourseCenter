@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.jdbc.StringUtils;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -90,20 +92,20 @@ public class AssignmentController {
     	m.addObject("course",course);
     	m.addObject("semesterCourseId",semesterCourseId);
     	String name = request.getParameter("name");
-    	if(name==null){
-        	m.addObject("error2", "作业名称不能为空");
+    	if(StringUtils.isNullOrEmpty(name)){
+        	m.addObject("error", "作业名称不能为空");
         	return m;
         }
     	
     	String basicRequirement = request.getParameter("basicrequirement");
-    	if(basicRequirement==null){
-        	m.addObject("error2", "请填写作业基本要求");
+    	if(StringUtils.isNullOrEmpty(basicRequirement)){
+        	m.addObject("error", "请填写作业基本要求");
         	return m;
         }
     	
     	String startTime_s = request.getParameter("starttime");
     	if(startTime_s==null){
-        	m.addObject("error1", "开始时间不能为空");
+        	m.addObject("error", "开始时间不能为空");
         	return m;
         }
     	Timestamp startTime;
@@ -111,13 +113,13 @@ public class AssignmentController {
         	startTime = Timestamp.valueOf(startTime_s+":00");
     	}
     	catch(Exception e){
-        	m.addObject("error1", "开始时间不合法");
+        	m.addObject("error", "开始时间不合法");
         	return m;
     	}
     	
     	String deadline_s = request.getParameter("deadline");
     	if(deadline_s==null){
-        	m.addObject("error1", "截止时间不能为空");
+        	m.addObject("error", "截止时间不能为空");
         	return m;
         }
     	Timestamp deadline;
@@ -125,30 +127,19 @@ public class AssignmentController {
         	deadline = Timestamp.valueOf(deadline_s+":00");
     	}
     	catch(Exception e){
-        	m.addObject("error1", "截止时间不合法");
+        	m.addObject("error", "截止时间不合法");
         	return m;
     	}
     	if(startTime.after(deadline)){
-        	m.addObject("error1", "截止时间须晚于开始时间");
+        	m.addObject("error", "截止时间须晚于开始时间");
         	return m;
     	}
     	String teamAvaliable_s = request.getParameter("teamavaliable");
-    	if(teamAvaliable_s==null){
-        	m.addObject("error2", "请选择是否允许团队参与");
-        	return m;
-    	}
     	boolean teamAvaliable;
-    	try{
-        	teamAvaliable = teamAvaliable_s.equals("on")?true:false;
-    	}
-    	catch(Exception e){
-        	m.addObject("error2", "请选择是否允许团队参与");
-        	return m;
-    	}
-    	
+    	teamAvaliable = teamAvaliable_s==null?false:true;
     	String highestScore_s = request.getParameter("highestscore");
     	if(highestScore_s==null){
-        	m.addObject("error2", "分数上限不能为空");
+        	m.addObject("error", "分数上限不能为空");
         	return m;
     	}
     	int highestScore;
@@ -156,11 +147,11 @@ public class AssignmentController {
     		highestScore = Integer.valueOf(highestScore_s);
     	}
     	catch(Exception e){
-        	m.addObject("error2", "分数上限不合法");
+        	m.addObject("error", "分数上限不合法");
         	return m;
     	}
     	if(highestScore<=0||highestScore>=100){
-        	m.addObject("error2", "分数上限不合法");
+        	m.addObject("error", "分数上限不合法");
         	return m;
     	}
     	
