@@ -117,8 +117,8 @@
                             <h3 style=" font-weight:bolder">${course.name}<small>(代码：${course.courseCode})</small></h3>
                             <div style="margin:20px"></div>
                             <h5>
-                                <c:if test="${course.type==true}">必修课</c:if>
-                                <c:if test="${course.type==false}">选修课</c:if>
+                                <c:if test="${course.type==false}">必修课</c:if>
+                                <c:if test="${course.type==true}">选修课</c:if>
                             </h5>
                             <div style="margin:20px"></div>
                             <h5>任课教师：

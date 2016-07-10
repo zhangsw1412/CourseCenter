@@ -108,7 +108,7 @@ public class HomeworkController {
         	m.addObject("illegalScore", "分数形式不合法");
         	return m;
         }
-        if(score<0||score>homeworkService.getHighestScore(homeworkId)){
+        if(score<0||(score>homeworkService.getHighestScore(homeworkId)&&homeworkService.getHighestScore(homeworkId)>0)){
         	m.addObject("scoreOutOfRange", "分数不在允许区间内");
 			Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
 			Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
@@ -208,6 +208,7 @@ public class HomeworkController {
         homework.setAssignmentId(assignmentId);
         homework.setText(text);
         homework.setSubmitTime(submitTime);
+        homework.setScore(-1);
         homeworkService.createHomework(homework);
     	String fileUrl = null;
     	int homeworkId = homework.getId();

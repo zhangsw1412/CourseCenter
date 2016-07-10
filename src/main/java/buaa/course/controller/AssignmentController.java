@@ -138,23 +138,23 @@ public class AssignmentController {
     	boolean teamAvaliable;
     	teamAvaliable = teamAvaliable_s==null?false:true;
     	String highestScore_s = request.getParameter("highestscore");
-    	if(highestScore_s==null){
-        	m.addObject("error", "分数上限不能为空");
-        	return m;
-    	}
     	int highestScore;
-    	try{
-    		highestScore = Integer.valueOf(highestScore_s);
+    	if(StringUtils.isNullOrEmpty(highestScore_s)){
+    		highestScore = -1;
     	}
-    	catch(Exception e){
-        	m.addObject("error", "分数上限不合法");
-        	return m;
+    	else{
+	    	try{
+	    		highestScore = Integer.valueOf(highestScore_s);
+	    	}
+	    	catch(Exception e){
+	        	m.addObject("error", "分数上限不合法");
+	        	return m;
+	    	}
+	    	if(highestScore<=0||highestScore>=100){
+	        	m.addObject("error", "分数上限不合法");
+	        	return m;
+	    	}
     	}
-    	if(highestScore<=0||highestScore>=100){
-        	m.addObject("error", "分数上限不合法");
-        	return m;
-    	}
-    	
     	Assignment assignment = new Assignment();
     	assignment.setSemesterCourseId(semesterCourseId);
     	assignment.setName(name);

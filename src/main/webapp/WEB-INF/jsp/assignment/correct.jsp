@@ -244,8 +244,9 @@
 												<strong>分数</strong><span class="color-red"></span>
 												
 												<input type="text" name="score" class="span1" <c:if test="${homework.comment != null}">readonly="readonly" value="${homework.score}"</c:if>>
-											
+												<c:if test="${assignment.highestScore>0}">
 												<strong><big><big>/${assignment.highestScore}</big></big></strong>
+												</c:if>
 												<strong><span style="color:red">${illegalScore}</span></strong>
 												<strong><span style="color:red">${scoreOutOfRange}</span></strong>
 											</label>

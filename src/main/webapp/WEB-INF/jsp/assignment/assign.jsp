@@ -284,7 +284,7 @@
 														<input type="text" name="highestscore" />
 
 														<span class="help-inline"></span>
-														请输入两位以内的正整数
+														请输入两位以内的正整数，如无可不填写
 													</div>
 													
 												</div>
