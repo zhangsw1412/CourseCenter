@@ -6,10 +6,13 @@
 
     <!-- BEGIN SIDEBAR MENU -->
 
-	<c:if test="${sessionScope.user.type==0 or sessionScope.user.type==1}">        <ul class="page-sidebar-menu">
-            <li>
-                <div style="margin:50px"></div>
-            </li>
+	<c:if test="${sessionScope.user.type==0 or sessionScope.user.type==1}">
+        <ul class="page-sidebar-menu">
+            <div align="center" class="icon_head">
+                <img src="/assets/img/Avatar-${sessionScope.user.num%15}.jpg" alt="头像" style="border-radius:10px;width:50%;margin:5%"/>
+                <h3  style="color:white; font-family:'汉仪粗圆简'">${sessionScope.user.name}</h3>
+                 <p style="color:white; font-family:'幼圆'">${sessionScope.user.id}</p>
+            </div>
             <li class="active ">
                 <a href="javascript:;">
                     <i class="icon-bookmark-empty"></i>
