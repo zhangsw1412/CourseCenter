@@ -183,7 +183,7 @@ public class CourseController {
             m = new ModelAndView("course/teacher_resources");
         }
         m.addObject("course", courseService.getCourseById(courseId));
-        m.addObject("resourses", resourceService.getResourcesByCourse(semesterId, courseId));
+        m.addObject("resources", resourceService.getResourcesByCourse(semesterId, courseId));
         return m;
     }
 

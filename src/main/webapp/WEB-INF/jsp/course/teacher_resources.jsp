@@ -162,7 +162,7 @@
 										<th>类别</th>
 										<th>操作</th>
 									</tr>
-									<c:forEach items="${resoures}" var="file">
+									<c:forEach items="${resources}" var="file">
 										<tr>
 											<td>${fn:getFileName(file.fileUrl)}</td>
 											<td>${file.category}</td>
