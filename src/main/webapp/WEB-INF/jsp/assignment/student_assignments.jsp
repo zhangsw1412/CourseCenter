@@ -158,20 +158,16 @@
 										<td>${item.deadline }</td>
 										<td>${homeworks[item.id+0].submitTime}</td>
 										<c:if test="${homeworks[item.id+0] == null}">
-											<td>
+											<td colspan="2">
 												未提交
 											</td>
-											<td>
-												未提交
-											</td>
+
 										</c:if>
 										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment == null}">
-											<td>
+											<td colspan="2">
 												未批改
 											</td>
-											<td>
-												未批改
-											</td>
+
 										</c:if>
 										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment != null}">
 											<td>
@@ -259,7 +255,7 @@
 
 	</script>
 
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+</body>
 
 <!-- END BODY -->
 
