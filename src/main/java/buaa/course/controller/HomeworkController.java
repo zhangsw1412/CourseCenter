@@ -50,7 +50,9 @@ public class HomeworkController {
     	List<Homework> homeworklist = homeworkService.getHomeworksByAssignmentId(assignmentId);
     	if(homeworklist==null)
     		return index;
+    	Assignment assignment = assignmentService.getAssignmentById(assignmentId);
     	Map<Long,User> studentlist =userService.getUsersMap(homeworklist);
+    	homeworks.addObject("assignment",assignment);
     	homeworks.addObject("homeworklist",homeworklist);
     	homeworks.addObject("studentlist",studentlist);
 		homeworks.addObject("course", courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId()));

@@ -14,7 +14,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>作业管理</title>
+	<title>提交列表</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -113,7 +113,7 @@
 
 							<li>
 
-								<a href="/assignment/assignments/${assignmentId}">作业管理</a>
+								<a href="/assignment/assignments/${assignment.semesterCourseId}">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
