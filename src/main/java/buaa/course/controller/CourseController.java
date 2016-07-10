@@ -97,7 +97,7 @@ public class CourseController {
         if (semesterId != null && courseId != null) {
             Semester semester = semesterService.getSemesterById(semesterId);
             m.addObject("semester", semester);
-            Course course = courseService.getCourseBySemesterCourseId(semesterId, courseId);
+            Course course = courseService.getCourseById(courseId);
             m.addObject("course", course);
         } else {
             m.addObject("message", "找不到课程！");
@@ -140,7 +140,7 @@ public class CourseController {
 
                     buaa.course.model.Resource r = new buaa.course.model.Resource();
                     r.setFileUrl(serverPath);
-                    r.setSemesterCourseId(courseService.getCourseBySemesterCourseId(semesterId,courseId).getId());
+                    r.setSemesterCourseId(courseService.getSemesterCourseBySemesterCourseId(semesterId,courseId).getId());
                     r.setCategory(category);
                     resourceService.createResource(r);
                 } catch (Exception e) {
@@ -151,7 +151,7 @@ public class CourseController {
             }
         }
 
-        Course course = courseService.getCourseBySemesterCourseId(semesterId, courseId);
+        Course course = courseService.getCourseById(courseId);
         m.addObject("course", course);
         m.addObject("message", "上传成功！");
         return m;
@@ -182,7 +182,7 @@ public class CourseController {
         }else if(user.getType() == 1){//教师查看资源列表
             m = new ModelAndView("course/teacher_resources");
         }
-        m.addObject("course", courseService.getCourseBySemesterCourseId(semesterId, courseId));
+        m.addObject("course", courseService.getCourseById(courseId));
         m.addObject("resourses", resourceService.getResourcesByCourse(semesterId, courseId));
         return m;
     }
