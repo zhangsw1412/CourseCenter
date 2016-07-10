@@ -57,7 +57,6 @@ public class ChatController {
         ModelAndView m = new ModelAndView("user/chatAjax");
         Timestamp lastMessageTime = Timestamp.valueOf(lastTime);
         SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
-        System.out.println(lastMessageTime);
         List<Message> messageList = messageService.getMessagesBySemesterCourseIdAfterTime(semesterCourse.getId(), lastMessageTime);
         m.addObject("messages", messageList);
         m.addObject("course", courseService.getCourseById(courseId));

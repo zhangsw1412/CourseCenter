@@ -152,7 +152,7 @@
 									<tr>
 										<td class="highlight">
 											<div class="success"></div>
-											<a href="#">${item.name }</a>
+											<span>${item.name }</span>
 										</td>
 										<td class="hidden-phone">${item.startTime }</td>
 										<td>${item.deadline }</td>
@@ -177,7 +177,7 @@
 											<td>
 												${homeworks[item.id+0].score}
 											</td>
-											<td>
+											<td style="width:10em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
 												${homeworks[item.id+0].comment}
 											</td>
 										</c:if>
