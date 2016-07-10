@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -124,7 +123,7 @@ public class CourseController {
             m.addObject("message", "未选择课程！");
             return m;
         }
-
+        String category = request.getParameter("category");
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
                 // 文件保存路径
@@ -142,7 +141,7 @@ public class CourseController {
                     buaa.course.model.Resource r = new buaa.course.model.Resource();
                     r.setFileUrl(serverPath);
                     r.setSemesterCourseId(courseService.getCourseBySemesterCourseId(semesterId,courseId).getId());
-                    r.setCategory("ppt");
+                    r.setCategory(category);
                     resourceService.createResource(r);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -180,20 +179,11 @@ public class CourseController {
         User user = (User) request.getSession().getAttribute("user");
         if (user.getType() == 0) {//学生查看资源列表
             m = new ModelAndView("course/student_resources");
-            m.addObject("semester", semesterService.getSemesterById(semesterId));
-            m.addObject("course", courseService.getCourseById(courseId));
         }else if(user.getType() == 1){//教师查看资源列表
             m = new ModelAndView("course/teacher_resources");
-            m.addObject("semester", semesterService.getSemesterById(semesterId));
-            m.addObject("course", courseService.getCourseById(courseId));
         }
-        File uploadDest = new File(filePath);
-        String[] list = uploadDest.list();
-        if (list != null) {
-            m.addObject("files", Arrays.asList(uploadDest.list()));
-            String dirPath = getServerDir(request, semesterId, courseId);
-            m.addObject("dir", dirPath);
-        }
+        m.addObject("course", courseService.getCourseBySemesterCourseId(semesterId, courseId));
+        m.addObject("resourses", resourceService.getResourcesByCourse(semesterId, courseId));
         return m;
     }
 

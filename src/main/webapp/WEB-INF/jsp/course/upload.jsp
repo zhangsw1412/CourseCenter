@@ -189,8 +189,20 @@
 										<label class="control-label">资源名称</label>
 										<div class="controls">
 											<input type="file" name="files"  class="fileupload" />
+
 											<br/>
 											<span>${message}</span>
+										</div>
+
+									</div>
+									<div class="control-group">
+										<label class="control-label">资源类别</label>
+										<div class="controls">
+											<select name="category">
+												<option value="课件">课件</option>
+												<option value="视频">视频</option>
+												<option value="文档">文档</option>
+											</select>
 										</div>
 									</div>
 

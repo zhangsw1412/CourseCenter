@@ -5,6 +5,7 @@ import buaa.course.model.Message;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -44,8 +45,8 @@ public class MessageService {
 		return messageMapper.getMessagesBySemesterCourseId(semesterCourseId);
 	}
 
-    public List<Message> getMessagesBySemesterCourseIdInRange(int semesterCourseId, int start, int length) {
-        return messageMapper.getMessagesBySemesterCourseIdInRange(semesterCourseId, start, length);
+    public List<Message> getMessagesBySemesterCourseIdAfterTime(int semesterCourseId, Timestamp now) {
+        return messageMapper.getMessagesBySemesterCourseIdAfterTime(semesterCourseId, now);
     }
 
 }

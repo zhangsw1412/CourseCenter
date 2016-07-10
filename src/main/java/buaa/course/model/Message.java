@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class Message {
 	private int id;
 	private int semesterCourseId;
+	private int userNum;
 	private String userId;
 	private String userName;
 	private String content;
@@ -14,10 +15,14 @@ public class Message {
 		super();
 	}
 
-	public Message(int semesterCourseId, String userId, String userName, String content, Timestamp createTime) {
+
+
+	public Message(int semesterCourseId, int userNum, String userId, String userName, String content, Timestamp createTime) {
 		super();
 		this.semesterCourseId = semesterCourseId;
+		this.userNum = userNum;
 		this.userId = userId;
+
 		this.userName = userName;
 		this.content = content;
 		this.createTime = createTime;
@@ -46,6 +51,13 @@ public class Message {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public int getUserNum() {
+		return userNum;
+	}
+
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -73,7 +85,14 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", semesterCourseId=" + semesterCourseId + ", userId=" + userId + ", userName="
-				+ userName + ", content=" + content + ", createTime=" + createTime + "]";
+		return "Message{" +
+				"id=" + id +
+				", semesterCourseId=" + semesterCourseId +
+				", userNum=" + userNum +
+				", userId='" + userId + '\'' +
+				", userName='" + userName + '\'' +
+				", content='" + content + '\'' +
+				", createTime=" + createTime +
+				'}';
 	}
 }
