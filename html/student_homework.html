@@ -329,7 +329,7 @@
 										<td>2016-07-12</td>
 										<td>2016-07-10 14:59:47</td>
 										<td>80</td>
-                                        <td id="a" title="打工皇帝就当减肥就放假打击打击就打击就放假继续减肥就放假人家就打击饭卡饭卡击毙阿吉豆不减肥惊喜阿卡卡">打工皇帝就当减肥就放假打击打击就打击就放假继续减肥就放假人家就打击饭卡饭卡击毙阿吉豆不减肥惊喜阿卡</td>
+                                        <td class="words" title="打工皇帝就当减肥就放假打击打击就打击就放假继续减肥就放假人家就打击饭卡饭卡击毙阿吉豆不减肥惊喜阿卡卡">打工皇帝就当减肥就放假打击打击就打击就放假继续减肥就放假人家就打击饭卡饭卡击毙阿吉豆不减肥惊喜阿卡</td>
 										<td><a href="student_hw_submitInfo.html" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
 										
 									</tr>
@@ -342,7 +342,58 @@
 										<td>2016-07-12</td>
 										<td>2016-07-10 14:59:47</td>
 										<td>80</td>
-                                        <td >打工卡</td>
+                                        <td  class="words" title="打工惊喜计划已经和空间和顾">打工惊喜计划已经和空间和顾客阿</td>
+										<td><a href="student_hwview.html" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
+										
+									</tr>
+                                    <tr>
+										<td class="highlight">
+											<div class="success"></div>
+											<a href="student_hwview.html">软件开发实习</a>
+										</td>
+										<td class="hidden-phone">2016-07-01</td>
+										<td>2016-07-12</td>
+										<td>2016-07-10 14:59:47</td>
+										<td>80</td>
+                                        <td  class="words" title="打工惊喜阿识别识别识别识别识别识别识别">打工惊喜阿识别识别识别识别识别识别识别</td>
+										<td><a href="student_hwview.html" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
+										
+									</tr>
+                                    <tr>
+										<td class="highlight">
+											<div class="success"></div>
+											<a href="student_hwview.html">软件开发实习</a>
+										</td>
+										<td class="hidden-phone">2016-07-01</td>
+										<td>2016-07-12</td>
+										<td>2016-07-10 14:59:47</td>
+										<td>80</td>
+                                        <td  class="words" title="打工惊喜阿">打工惊喜阿</td>
+										<td><a href="student_hwview.html" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
+										
+									</tr>
+                                    <tr>
+										<td class="highlight">
+											<div class="success"></div>
+											<a href="student_hwview.html">软件开发实习</a>
+										</td>
+										<td class="hidden-phone">2016-07-01</td>
+										<td>2016-07-12</td>
+										<td>2016-07-10 14:59:47</td>
+										<td>80</td>
+                                        <td  class="words" title="打工惊喜阿打工惊喜打工惊喜打工惊喜打工惊喜打工惊喜">打工惊喜阿打工惊喜打工惊喜打工惊喜打工惊喜打工惊喜</td>
+										<td><a href="student_hwview.html" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
+										
+									</tr><tr>
+										<td class="highlight">
+											<div class="success"></div>
+											<a href="student_hwview.html">软件开发实习</a>
+										</td>
+										<td class="hidden-phone">2016-07-01</td>
+										<td>2016-07-12</td>
+										<td>2016-07-10 14:59:47</td>
+										<td>80</td>
+                                        <td  class="words" title="打工惊喜打工惊喜打工惊喜打工惊喜打工惊喜打工惊喜打工惊喜阿">打工惊喜打工惊喜打工惊喜打工惊喜打工惊喜打工惊喜打工惊喜阿</td>
 										<td><a href="student_hwview.html" class="btn mini green"><i class="icon-eye-open"></i> 查看</a></td>
 										
 									</tr>
@@ -444,12 +495,19 @@
     
     <script>
 	$(function(){
-		var num=$("#a").html();
+		/*var num=$(document.getElementByClassName("words")).html();
 		if(num.length>8){
-			$("#a").html(num.substr(0,8)+"...")	
+			$(document.getElementByClassName("words")).html(num.substr(0,8)+"...")	
 			}
 		
-		});
+		});*/
+		$('.words').each(function(index, element) {
+            if($(element).text().length>8){
+				var str=$(element).text().substr(0,8)+'...';
+				$(element).text(str);
+			}
+        });
+	});
     
     </script>
 
