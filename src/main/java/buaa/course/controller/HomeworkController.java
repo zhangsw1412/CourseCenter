@@ -180,6 +180,17 @@ public class HomeworkController {
     	if(semesterCourseId==0)
     		return index;
     	ModelAndView submithomework = new ModelAndView("assignment/submit");
+    	if(!StringUtils.isNullOrEmpty(request.getParameter("delete"))){
+    		homeworkService.deleteHomework(Integer.valueOf(request.getParameter("homeworkId")));
+    		ModelAndView m = new ModelAndView("assignment/student_assignments");
+    		m.addObject("semesterCourseId", semesterCourseId);
+    		m.addObject("course", courseService.getCourseBySemesterCourseId(semesterCourseId));
+    		List<Assignment> assignmentlist = assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId);
+			Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
+			m.addObject("homeworks", homeworks);
+    		m.addObject("assignmentlist", assignmentlist);
+    		return m;
+    	}
     	String text = request.getParameter("text");
     	if(StringUtils.isNullOrEmpty(text)){
     		Course course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId());

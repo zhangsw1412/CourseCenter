@@ -52,7 +52,7 @@
 	</select>
 	<select id="getAssignmentsBySemesterCourseId" resultMap="assignmentMap">
 	    <![CDATA[
-	    	select * from assignment where semester_course_id=#{semesterCourseId}
+	    	select * from assignment where semester_course_id=#{semesterCourseId} order by start_time asc
 	    ]]>
 	</select>
 </mapper>

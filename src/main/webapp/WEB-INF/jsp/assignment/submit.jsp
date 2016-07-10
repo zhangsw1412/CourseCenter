@@ -171,6 +171,10 @@
 
 										</div>
 										<form action="/assignment/submit/${assignmentId}" method="POST" enctype="multipart/form-data">
+										<c:if test="${homework != null}">
+											<input type="hidden" name="delete" value="true"/>
+											<input type="hidden" name="homeworkId" value="${homework.id}"/>
+										</c:if>
 										<div class="portlet-body form">
 
 											<!-- BEGIN FORM-->
@@ -202,9 +206,27 @@
 													
 
 												</div>
+												<div class="row-fluid">
 
-								
+													<div class="span12 ">
 
+														<div class="control-group">
+
+															<label class="control-label" style=" font-weight:bolder">开始时间</label>
+
+															<div class="controls">
+
+																<span class="text">${assignment.startTime }</span> 
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
 												<div class="row-fluid">
 
 													<div class="span12 ">
@@ -360,10 +382,12 @@
 													<input type="submit" class="btn blue" value="确认"/>
 												</c:if>
 												<c:if test="${homework != null}">
-													该项作业已提交，不能再次提交
+													<input type="submit" class="btn red" value="删除"/>
 												</c:if>
 												<a href="/assignment/assignments/${semesterCourseId}" class="btn">返回</a>
-
+												<c:if test="${homework != null}">
+													该项作业已提交，如需修改请删除后重新提交
+												</c:if>
 												</div>
 
 											</div>

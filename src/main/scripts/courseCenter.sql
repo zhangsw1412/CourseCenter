@@ -137,3 +137,21 @@ create table `message`(
   content text comment '内容',
   create_time datetime comment '创建时间'
 )engine=InnoDB default charset=utf8 comment='讨论记录表';
+
+drop table if exists `team_application`;
+create table `team_application`(
+  id int not null auto_increment  primary key comment '主键',
+  team_id int not null default 0 comment '对应团队表的主键',
+  user_id int not null default 0 comment '对应用户表的主键',
+  apply_time datetime comment '申请时间',
+  status int not null default 0 comment '申请状态：未处理0/允许1/拒绝2'
+)engine=InnoDB default charset=utf8 comment='学生申请加入团队表';
+
+drop table if exists `course_application`;
+create table `course_application`(
+  id int not null auto_increment  primary key comment '主键',
+  team_id int not null default 0 comment '对应团队表的主键',
+  semester_course_id int not null default 0 comment '对应学期课程表的主键',
+  apply_time datetime comment '申请时间',
+  status int not null default 0 comment '申请状态：未处理0/允许1/拒绝2'
+)engine=InnoDB default charset=utf8 comment='团队申请加入课程表';

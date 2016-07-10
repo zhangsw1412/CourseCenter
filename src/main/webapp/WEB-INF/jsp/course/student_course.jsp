@@ -74,18 +74,32 @@
 
                 <div class="span12">
 
-                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+						<h3 class="page-title">
 
-                    <h3 class="page-title">
+							${course.name}
 
+						</h3>
+						
+						<ul class="breadcrumb">
 
+							<li>
 
-                    </h3>
+								<i class="icon-home"></i>
 
+								<a href="/index">主页</a> 
 
+								<span class="icon-angle-right"></span>
 
-                    <!-- END PAGE TITLE & BREADCRUMB-->
+							</li>
+							<li>
 
+								<a href="#">${course.name}</a>
+
+								<!-- 数据库获取该课程名 -->
+
+							</li>
+
+						</ul>
                 </div>
 
             </div>
