@@ -270,7 +270,7 @@
 												<c:if test="${homework.comment != null}">
 													该项作业已批改，不能再次批改
 												</c:if>
-											<a class="btn big hidden-print" href="/assignment/assignments/${assignment.semesterCourseId}">返回</a>
+											<a class="btn big hidden-print" href="/assignment/homeworks/${assignment.id}">返回</a>
 				
 											</div>
 				
@@ -355,7 +355,7 @@
 
 	<!-- END JAVASCRIPTS -->
 
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+</body>
 
 <!-- END BODY -->
 

@@ -42,4 +42,24 @@ public class TeamService {
     public int countTeams() {
         return teamMapper.countTeams();
     }
+
+    public List<Team> getTeamsByStudentId(int id) {
+        return teamMapper.getTeamsByStudentId(id);
+    }
+
+    public boolean isUserFromTeam(int num, Team team) {
+        return teamMapper.isUserFromTeam(num, team.getId()) > 0;
+    }
+
+    public Long getTeamApplicationStatus(int num, Team team) {
+        return null;
+    }
+
+    public void applyToTeam(Integer userId, Integer teamId) {
+        teamMapper.applyToTeam(userId, teamId);
+    }
+
+    public void handleTeamApplication(Integer userId, Integer applicationId, Integer handleType) {
+        
+    }
 }

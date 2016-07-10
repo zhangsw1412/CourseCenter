@@ -271,7 +271,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="teacher_homepage.html">主页</a> 
+								<a href="/index">主页</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -279,7 +279,7 @@
 
 							<li>
 
-								<a href="teacher_homework.html">讨论</a>
+								<a href="">讨论</a>
 
 							</li>
 

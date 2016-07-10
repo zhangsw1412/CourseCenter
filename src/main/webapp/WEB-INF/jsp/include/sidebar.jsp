@@ -17,11 +17,15 @@
                  <p style="color:white; font-family:'幼圆'">${sessionScope.user.id}</p>
             </div>
             <li <c:if test="${func:contains(url, 'index')}">class="active"</c:if>>
-                <a href="/index"> <i class="icon-home"></i> <span
-                        class="title">主页</span>
+                <a href="/index"> <i class="icon-home"></i>
+                    <span class="title">主页</span>
+                    <c:if test="${func:contains(url, 'index')}">
+                        <span class="selected"></span>
+                    </c:if>
                 </a>
+
             </li>
-            <li <c:if test="${func:contains(url, 'userInfo')==false}">class="active"</c:if>>
+            <li <c:if test="${func:contains(url, 'userInfo')==false and func:contains(url, 'index')==false}">class="active"</c:if>>
                 <a href="javascript:;">
                     <i class="icon-bookmark-empty"></i>
                     <span class="title">课程列表</span>
@@ -37,11 +41,18 @@
                         </li>
                     </c:forEach>
                 </ul>
+                <c:if test="${func:contains(url, 'userInfo')==false and func:contains(url, 'index')==false}">
+                    <span class="selected"></span>
+                </c:if>
             </li>
             <li <c:if test="${func:contains(url, 'userInfo')}">class="active"</c:if>>
-                <a href="/userInfo"> <i class="icon-file"></i> <span
-                        class="title">个人信息</span>
+                <a href="/userInfo"> <i class="icon-file"></i>
+                    <span class="title">个人信息</span>
+                    <c:if test="${func:contains(url, 'userInfo')}">
+                        <span class="selected"></span>
+                    </c:if>
                 </a>
+
             </li>
         </ul>
     </c:if>
@@ -54,35 +65,54 @@
                 <h3  style="color:white; font-family:'汉仪粗圆简'">${sessionScope.user.name}</h3>
                 <p style="color:white; font-family:'幼圆'">${sessionScope.user.id}</p>
             </div>
-            <li>
+            <%--<li>
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
                 <div class="sidebar-toggler hidden-phone"></div>
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-            </li>
+            </li>--%>
             <li <c:if test="${func:contains(url, 'index')}">class="active"</c:if>>
-                <a href="/index"> <i class="icon-home"></i> <span
-                        class="title">主页</span>
+                <a href="/index"> <i class="icon-home"></i>
+                    <span class="title">主页</span>
+                    <c:if test="${func:contains(url, 'index')}">
+                        <span class="selected"></span>
+                    </c:if>
                 </a>
             </li>
             <li <c:if test="${func:contains(url, 'emester')}">class="active"</c:if>>
-                <a href="/semesterList"> <i class="icon-table"></i> <span
-                        class="title">学期列表</span> <span class="selected"></span>
+                <a href="/semesterList"> <i class="icon-table"></i>
+                    <span class="title">学期列表</span> <span class="selected"></span>
+                    <c:if test="${func:contains(url, 'emester')}">
+                        <span class="selected"></span>
+                    </c:if>
                 </a>
+
             </li>
             <li <c:if test="${func:contains(url, 'ourse')}">class="active"</c:if>>
-                <a href="/adminCourse"> <i class="icon-cogs"></i> <span
-                        class="title">课程管理</span>
+                <a href="/adminCourse"> <i class="icon-cogs"></i>
+                    <span class="title">课程管理</span>
+                    <c:if test="${func:contains(url, 'ourse')}">
+                        <span class="selected"></span>
+                    </c:if>
                 </a>
+
             </li>
             <li <c:if test="${func:contains(url, 'userList')}">class="active"</c:if>">
-                <a href="/userList"> <i class="icon-file"></i> <span
-                        class="title">基本信息管理</span>
+                <a href="/userList"> <i class="icon-file"></i>
+                    <span class="title">基本信息管理</span>
+                    <c:if test="${func:contains(url, 'userList')}">
+                        <span class="selected"></span>
+                    </c:if>
                 </a>
+
             </li>
             <li <c:if test="${func:contains(url, 'userInfo')}">class="active"</c:if>>
-                <a href="userInfo"> <i class="icon-file"></i> <span
-                        class="title">个人信息</span>
+                <a href="userInfo"> <i class="icon-file"></i>
+                    <span class="title">个人信息</span>
+                    <c:if test="${func:contains(url, 'userInfo')}">
+                        <span class="selected"></span>
+                    </c:if>
                 </a>
+
             </li>
         </ul>
     </c:if>

@@ -57,7 +57,7 @@
 	</select>
 	<select id="getHomeworksByAssignmentId" resultMap="homeworkMap">
 	    <![CDATA[
-	    	select * from homework where assignment_id=#{assignmentId}
+	    	select * from homework where assignment_id=#{assignmentId}  order by submit_time asc
 	    ]]>
 	</select>
 </mapper>

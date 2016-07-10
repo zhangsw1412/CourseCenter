@@ -180,7 +180,6 @@
 											<td>${item.submitTime }</td>
 
 											<td><c:if test="${item.score>=0}" ><i class="icon-check"></i></c:if>
-											<c:if test="${item.score<0}" ><i class="icon-remove"></i></c:if></td>
 
 											<td><a href="/assignment/correct/${item.id}" class="btn mini yellow"><i class="icon-pencil"></i> 批改</a></td>
 										</tr>
@@ -274,7 +273,7 @@
 
 	</script>
 
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+</body>
 
 <!-- END BODY -->
 

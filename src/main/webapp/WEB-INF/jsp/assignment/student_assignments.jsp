@@ -145,22 +145,18 @@
 										<th><i class="icon-bell"></i> 截止时间</th>
 										<th>上次提交时间</th>
 										<th>得分</th>
-										<th>评论</th>
 										<th>操作</th>
 									</tr>
-									<c:forEach items="${assignmentlist }" var="item">
+									<c:forEach items="${assignmentlist}" var="item">
 									<tr>
 										<td class="highlight">
 											<div class="success"></div>
-											<span>${item.name }</span>
+											<span>&nbsp;${item.name}</span>
 										</td>
-										<td class="hidden-phone">${item.startTime }</td>
+										<td class="hidden-phone">${item.startTime}</td>
 										<td>${item.deadline }</td>
 										<td>${homeworks[item.id+0].submitTime}</td>
 										<c:if test="${homeworks[item.id+0] == null}">
-											<td>
-												未提交
-											</td>
 											<td>
 												未提交
 											</td>
@@ -169,16 +165,10 @@
 											<td>
 												未批改
 											</td>
-											<td>
-												未批改
-											</td>
 										</c:if>
 										<c:if test="${homeworks[item.id+0] != null and homeworks[item.id+0].comment != null}">
 											<td>
 												${homeworks[item.id+0].score}
-											</td>
-											<td style="width:10em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-												${homeworks[item.id+0].comment}
 											</td>
 										</c:if>
 										<td>
@@ -259,7 +249,7 @@
 
 	</script>
 
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+</body>
 
 <!-- END BODY -->
 
