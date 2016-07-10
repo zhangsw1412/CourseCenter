@@ -158,6 +158,8 @@ public class HomeworkController {
 		m.addObject("homework", homeworkService.getHomeworkByAssignment(assignmentId, user.getNum()));
 		m.addObject("course",course);
 		m.addObject("semesterCourseId", courseService.getSemesterCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId()).getId());
+		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+		m.addObject("currentTime", currentTime);
 		return m;
     }
 
@@ -184,7 +186,6 @@ public class HomeworkController {
         	return submithomework;
         }
     	Timestamp submitTime = new Timestamp(System.currentTimeMillis());
-
         Homework homework = new Homework();
         homework.setSemesterCourseId(semesterCourseId);
         homework.setStudentId(user.getNum());

@@ -164,7 +164,7 @@
 										</td>
 										<td class="hidden-phone">${item.startTime}</td>
 										<td>${item.deadline}</td>
-										<td><a href="/assignment/homeworks/${item.id}" class="btn mini purple"><i class="icon-edit"></i>查看提交情况</a></td>
+										<td><a href="/assignment/homeworks/${item.id}" class="btn mini purple"><i class="icon-edit"></i> 查看提交情况</a></td>
 
 									</tr>
 									</c:forEach>
@@ -192,29 +192,7 @@
 
 	<!-- END CONTAINER -->
 
-	<!-- BEGIN FOOTER -->
-
-	<div class="footer">
-
-		<div class="footer-inner">
-
-			2013 &copy; Metronic by keenthemes.
-
-		</div>
-
-		<div class="footer-tools">
-
-			<span class="go-top">
-
-			<i class="icon-angle-up"></i>
-
-			</span>
-
-		</div>
-
-	</div>
-
-	<!-- END FOOTER -->
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 

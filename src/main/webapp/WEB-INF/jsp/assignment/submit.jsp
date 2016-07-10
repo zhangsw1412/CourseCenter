@@ -147,7 +147,7 @@
 
 							</li>
 
-							<li><a href="#">作业上传</a></li>
+							<li><a href="#">作业提交</a></li>
 
 						</ul>
 
@@ -187,7 +187,7 @@
 
 														<div class="control-group">
 
-															<label class="control-label" style=" font-weight:bolder">标题</label>
+															<label class="control-label" style=" font-weight:bolder">作业名称</label>
 
 															<div class="controls">
 
@@ -211,7 +211,7 @@
 
 														<div class="control-group">
 
-															<label class="control-label" style=" font-weight:bolder">截止</label>
+															<label class="control-label" style=" font-weight:bolder">截止时间</label>
 
 															<div class="controls">
 
@@ -239,7 +239,11 @@
 
 															<div class="controls">
 
-																<span class="text">正在进行</span>
+																<span class="text">
+																<c:if test="${currentTime<assignment.startTime}">未开始</c:if>
+																<c:if test="${currentTime>=assignment.startTime and currentTime<assignment.deadline}">正在进行</c:if>
+																<c:if test="${currentTime>=assignment.deadline}">已结束</c:if>
+																</span>
 
 															</div>
 
@@ -257,7 +261,7 @@
 
 														<div class="control-group">
 
-															<label class="control-label" style=" font-weight:bolder">详情</label>
+															<label class="control-label" style=" font-weight:bolder">基本要求</label>
 
 															<div class="controls">
 
@@ -306,12 +310,14 @@
 
 														<div class="controls">
 
-															<textarea class="span12 wysihtml5 m-wrap" name="text" <c:if test="${homework != null}">readonly="readonly"</c:if>>${homework.text}</textarea>
+															<textarea class="span12 wysihtml5 m-wrap" name="text" 
+															<c:if test="${currentTime<assignment.startTime or currentTime>=assignment.deadline or homework != null}">readonly="readonly"</c:if>>
+															${homework.text}</textarea>
 
-														</div>${error}
+														</div>
 
 													</div>
-														<c:if test="${homework == null}">															
+														<c:if test="${homework == null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">															
 														<div class="control-group">
 														
 															<label class="control-label" style=" font-weight:bolder">上传</label>
@@ -330,7 +336,7 @@
 															</div>
 														</div>
 														</c:if>
-														<c:if test="${homework != null}">
+														<c:if test="${currentTime>assignment.startTime and homework.fileUrl != null}">
 														<div class="control-group">
 															<label class="control-label" style=" font-weight:bolder">附件</label>
 															<div class="controls">
@@ -358,8 +364,8 @@
 
 											<div class="form-actions">
 												<c:if test="${homework == null}">
-													<input type="submit" class="btn blue"/>
-													<input type="reset" class="btn" value="重置">
+													<input type="submit" class="btn blue" value="确认"/>
+													<a href="/assignment/assignments/${semesterCourseId}" class="btn">取消</a>
 												</c:if>
 												<c:if test="${homework != null}">
 													该项作业已提交，不能再次提交
@@ -388,29 +394,7 @@
 
 	<!-- END CONTAINER -->
 
-	<!-- BEGIN FOOTER -->
-
-	<div class="footer">
-
-		<div class="footer-inner">
-
-			2013 &copy; Metronic by keenthemes.
-
-		</div>
-
-		<div class="footer-tools">
-
-			<span class="go-top">
-
-			<i class="icon-angle-up"></i>
-
-			</span>
-
-		</div>
-
-	</div>
-
-	<!-- END FOOTER -->
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 

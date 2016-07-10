@@ -113,7 +113,7 @@
 							</li>
 							<li>
 
-								<a href="/assignment/assignments/${semesterCourseId}">作业管理</a>
+								<a href="/assignment/assignments/${assignment.semesterCourseId}">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -241,7 +241,7 @@
 
 											<label>
 											
-												<strong>分数</strong><span class="color-red">*</span>
+												<strong>分数</strong><span class="color-red"></span>
 												
 												<input type="text" name="score" class="span1" <c:if test="${homework.comment != null}">readonly="readonly" value="${homework.score}"</c:if>>
 											
@@ -304,29 +304,7 @@
 
 	<!-- END CONTAINER -->
 
-	<!-- BEGIN FOOTER -->
-
-	<div class="footer">
-
-		<div class="footer-inner">
-
-			2013 &copy; Metronic by keenthemes.
-
-		</div>
-
-		<div class="footer-tools">
-
-			<span class="go-top">
-
-			<i class="icon-angle-up"></i>
-
-			</span>
-
-		</div>
-
-	</div>
-
-	<!-- END FOOTER -->
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 
