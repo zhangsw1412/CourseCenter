@@ -141,10 +141,9 @@
 				<!-- BEGIN PAGE CONTENT-->
 
 				<div class="row-fluid">
-
+					
 					<div class="span12">
-
-						<div class="portlet box green" id="form_wizard_1">
+					<div style="color:red">${error}</div>						<div class="portlet box green" id="form_wizard_1">
 
 							<div class="portlet-title">
 
@@ -237,7 +236,7 @@
 											<!-- step1 -->
 											<div class="tab-pane" id="tab1">
 
-												<h3 class="block">请设置作业时间区域：${error1}</h3>
+												<h3 class="block">请设置作业时间区域：</h3>
 
 												<div class="control-group">
 
@@ -260,7 +259,7 @@
 											<!-- step2 -->
 											<div class="tab-pane" id="tab2">
 
-												<h3 class="block">请填写作业要求与详情：${error2}</h3>
+												<h3 class="block">请填写作业要求与详情：</h3>
 
 												<div class="control-group">
 

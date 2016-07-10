@@ -23,3 +23,4 @@ bin/
 /.externalToolBuilders/*.launch
 src/main/resources/jdbc.properties
 html/.idea/
+src/main/main.iml
