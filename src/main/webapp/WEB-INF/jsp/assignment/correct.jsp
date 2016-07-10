@@ -113,7 +113,7 @@
 							</li>
 							<li>
 
-								<a href="/assignment/assignments/${semesterCourseId}">作业管理</a>
+								<a href="/assignment/assignments/${assignment.semesterCourseId}">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -241,7 +241,7 @@
 
 											<label>
 											
-												<strong>分数</strong><span class="color-red">*</span>
+												<strong>分数</strong><span class="color-red"></span>
 												
 												<input type="text" name="score" class="span1" <c:if test="${homework.comment != null}">readonly="readonly" value="${homework.score}"</c:if>>
 											

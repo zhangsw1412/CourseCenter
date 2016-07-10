@@ -252,7 +252,7 @@
 														<input name="deadline" readonly="readonly" class="m-wrap small" size="16" type="text" value="" id="ui_date_picker_range_to"/>
 
 													</div>
-
+													
 												</div>
 
 											</div>
@@ -285,9 +285,9 @@
 														<input type="text" name="highestscore" />
 
 														<span class="help-inline"></span>
-
+														请输入两位以内的正整数
 													</div>
-
+													
 												</div>
 												
 												<div class="control-group">
@@ -320,7 +320,7 @@
 												
 												<div class="control-group">
 
-													<label class="control-label">上传附件</label>
+													<label class="control-label">上传附件(如有)</label>
 
 														<div class="control-group">
 														
@@ -330,7 +330,6 @@
 
 															</div>
 														</div>
-
 												</div>
 											</div>
 
@@ -385,7 +384,8 @@
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="teamavaliable"></span>
+														<span class="text display-value" data-display="teamavaliable">
+														</span>
 
 													</div>
 

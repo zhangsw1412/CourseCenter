@@ -134,9 +134,9 @@ var FormWizard = function () {
                 			$(this).html(path.substring(pos+1));
                     } else if(input.is(":checkbox")) {
                 		if(input.attr("checked"))
-                			$(this).html("true");
+                			$(this).html("是");
                 		else
-                			$(this).html("false");
+                			$(this).html("否");
                     }
                 });
             }

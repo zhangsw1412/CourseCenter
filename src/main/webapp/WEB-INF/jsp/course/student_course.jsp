@@ -113,7 +113,7 @@
                                 </c:forEach>
                             </h5>
                             <div style="margin:20px"></div>
-                            <h5>学时：${course.period}&nbsp;学分：${course.credit}&nbsp;上课人数：${countStudent}</h5>
+                            <h5>学时：${course.period}&nbsp;&nbsp;学分：${course.credit}&nbsp;&nbsp;上课人数：${countStudent}</h5>
                             <div style="margin:20px"></div>
                             <h5>
                                 <c:if test="${course.teamAvaliable==true}">允许团队参与</c:if>
