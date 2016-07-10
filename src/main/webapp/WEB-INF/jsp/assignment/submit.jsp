@@ -132,7 +132,7 @@
 
 							<li>
 
-								<a href="/semester/${semester.id}/courseDetail/${course.id}">${course.name}</a>								
+								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>								
 								<!-- 数据库获取该课程名 -->
 
 								<i class="icon-angle-right"></i>
@@ -141,7 +141,7 @@
 							
 							<li>
 
-								<a href="/assignment/assignments/${semesterCourseId}">作业管理</a>
+								<a href="/assignment/assignments/${assignment.semesterCourseId}">作业管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -277,7 +277,7 @@
 
 												</div>
                                                 <div class="row-fluid">
-
+												<c:if test="${homework.fileUrl != null}">
 													<div class="span12 ">
 
 														<div class="control-group">
@@ -295,7 +295,7 @@
 														</div>
 
 													</div>
-
+													</c:if>
 													<!--/span-->
 
 												</div>
@@ -312,7 +312,7 @@
 
 															<textarea class="span12 wysihtml5 m-wrap" name="text" 
 															<c:if test="${currentTime<assignment.startTime or currentTime>=assignment.deadline or homework != null}">readonly="readonly"</c:if>>
-															${homework.text}</textarea>
+															${homework.text}</textarea>${error}
 
 														</div>
 
@@ -324,15 +324,8 @@
 
 															<div class="controls">
 
-																 <span class="btn green fileinput-button">
-
-																<i class="icon-plus icon-white"></i>
-
-															<span>添加附件</span>
-
 														<input type="file" name="files" class="fileupload"/>
-
-																</span>
+														
 															</div>
 														</div>
 														</c:if>
@@ -365,12 +358,11 @@
 											<div class="form-actions">
 												<c:if test="${homework == null}">
 													<input type="submit" class="btn blue" value="确认"/>
-													<a href="/assignment/assignments/${semesterCourseId}" class="btn">取消</a>
 												</c:if>
 												<c:if test="${homework != null}">
 													该项作业已提交，不能再次提交
 												</c:if>
-
+												<a href="/assignment/assignments/${semesterCourseId}" class="btn">取消</a>
 
 												</div>
 

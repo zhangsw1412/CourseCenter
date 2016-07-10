@@ -180,8 +180,11 @@ public class HomeworkController {
     	ModelAndView submithomework = new ModelAndView("assignment/submit");
     	String text = request.getParameter("text");
     	if(StringUtils.isNullOrEmpty(text)){
+    		Course course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId());
     		submithomework.addObject("assignment", assignment);
-    		
+    		submithomework.addObject("course", course);
+    		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    		submithomework.addObject("currentTime", currentTime);
         	submithomework.addObject("error", "内容不能为空");
         	return submithomework;
         }
