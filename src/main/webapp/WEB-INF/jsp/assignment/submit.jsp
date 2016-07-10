@@ -277,7 +277,7 @@
 
 												</div>
                                                 <div class="row-fluid">
-												<c:if test="${homework.fileUrl != null}">
+												<c:if test="${assignment.fileUrl != null}">
 													<div class="span12 ">
 
 														<div class="control-group">

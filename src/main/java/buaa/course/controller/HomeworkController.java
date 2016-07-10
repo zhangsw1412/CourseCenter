@@ -239,7 +239,6 @@ public class HomeworkController {
 	}
 
 	private String getServerDir(Integer assignmentId, Integer homeworkId, HttpServletRequest request) {
-		return request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()
-		+"/"+request.getContextPath()+"resource/"+ "assignment-" + assignmentId +"/homework-" +homeworkId+"/";
+		return "/"+request.getContextPath()+"resource/"+ "assignment-" + assignmentId +"/homework-" +homeworkId+"/";
 	}
 }
