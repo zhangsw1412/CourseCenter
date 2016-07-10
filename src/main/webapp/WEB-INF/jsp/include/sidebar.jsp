@@ -16,7 +16,12 @@
                 <h3  style="color:white; font-family:'汉仪粗圆简'">${sessionScope.user.name}</h3>
                  <p style="color:white; font-family:'幼圆'">${sessionScope.user.id}</p>
             </div>
-            <li <c:if test="${func:contains(url, 'userInfo')}">class="active"</c:if>>
+            <li <c:if test="${func:contains(url, 'index')}">class="active"</c:if>>
+                <a href="/index"> <i class="icon-home"></i> <span
+                        class="title">主页</span>
+                </a>
+            </li>
+            <li <c:if test="${func:contains(url, 'userInfo')==false}">class="active"</c:if>>
                 <a href="javascript:;">
                     <i class="icon-bookmark-empty"></i>
                     <span class="title">课程列表</span>
