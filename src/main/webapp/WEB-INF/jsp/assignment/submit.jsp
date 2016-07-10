@@ -367,8 +367,37 @@
 													<!--/span-->
 
 												</div>
-                                                
-												
+                                                <c:if test="${homework.score>=0}"><hr/></c:if>
+												<div class="row-fluid">
+													<div class="span12 ">
+														<c:if test="${homework.score>=0}">
+															<div class="control-group">
+																<label class="control-label" style="font-weight: bolder">分数</label>
+																<div class="controls">
+																	${homework.score}
+																</div>
+															</div>
+														</c:if>
+														<c:if test="${homework.comment!=null}">
+															<div class="control-group">
+																<label class="control-label" style="font-weight: bolder">评价</label>
+																<div class="controls">
+																	${homework.comment}
+																</div>
+															</div>
+														</c:if>
+														<c:if test="${homework.correctFileUrl!=null}">
+															<div class="control-group">
+																<label class="control-label" style="font-weight: bolder">附件</label>
+																<div class="controls">
+																	<a href="${homework.correctFileUrl}" class="btn green fileinput-button">
+																		<i class="icon-download"></i> <span>${fn:getFileName(homework.correctFileUrl)}</span>
+																	</a>
+																</div>
+															</div>
+														</c:if>
+													</div>
+												</div>
                                                 <div style="margin:20px"></div>
 												<!--/row-->                
 

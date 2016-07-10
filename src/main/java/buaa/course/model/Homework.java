@@ -11,13 +11,14 @@ public class Homework {
 	private String fileUrl;
 	private int score = -1;
 	private String comment;
+	private String correctFileUrl;
 	private Timestamp submitTime;
 	public Homework() {
 		super();
 	}
 	public Homework(int semesterCourseId, int studentId, int assignmentId, String text, String fileUrl, int score, String comment,
 		
-					Timestamp submitTime) {
+					String correctFileUrl, Timestamp submitTime) {
 		super();
 		this.semesterCourseId = semesterCourseId;
 		this.studentId = studentId;
@@ -26,6 +27,7 @@ public class Homework {
 		this.fileUrl = fileUrl;
 		this.score = score;
 		this.comment = comment;
+		this.correctFileUrl = correctFileUrl;
 		this.submitTime = submitTime;
 	}
 	public int getId() {
@@ -76,6 +78,12 @@ public class Homework {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	public String getCorrectFileUrl() {
+		return correctFileUrl;
+	}
+	public void setCorrectFileUrl(String correctFileUrl) {
+		this.correctFileUrl = correctFileUrl;
+	}
 	public Timestamp getSubmitTime() {
 		return submitTime;
 	}
@@ -85,7 +93,7 @@ public class Homework {
 	@Override
 	public String toString() {
 		return "Homework [id=" + id + ", semesterCourseId=" + semesterCourseId + ", studentId=" + studentId + ", text="
-				+ text + ", fileUrl=" + fileUrl + ", score=" + score + ", comment=" + comment + ", submitTime="
-				+ submitTime + "]";
+				+ text + ", fileUrl=" + fileUrl + ", score=" + score + ", comment=" + comment + ", correctFileUrl=" + correctFileUrl 
+				+ ", submitTime="+ submitTime + "]";
 	}
 }

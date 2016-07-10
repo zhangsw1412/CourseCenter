@@ -225,19 +225,16 @@
                                             				<span>${fn:getFileName(homework.fileUrl)}</span></a>
 														</div>
 														</div>
-														</c:if>
+												</c:if>
 											</div>
 									</div>
 									
-									<br/>
-									
-									<hr/>
-									
-									<div class="post-comment">
-
+										<c:if test="${currentTime >= assignment.deadline}">
+										<div class="post-comment">
+										<br/><hr/>
 										<h3><strong>批示</strong></h3>
 
-										<form action="/assignment/correct/${homeworkId}" method="POST">
+										<form action="/assignment/correct/${homeworkId}" method="POST" enctype="multipart/form-data">
 
 											<label>
 											
@@ -252,24 +249,33 @@
 											</label>
 
 
-											<label><strong>作业评价</strong></label>
+											<label><strong>作业评价<span style="color:red">&nbsp;${noComment}</span></strong></label>
 
 											<textarea class="span10 m-wrap" name="comment" <c:if test="${homework.comment != null}">readonly="readonly"</c:if>>${homework.comment}</textarea>
-																${noComment}<div class="row-fluid">
+																<div class="row-fluid">
 
 											<div class="span4">
-
+											<c:if test="${homework.correctFileUrl==null and homework.score<0}">
+											<label><strong>上传附件(如有)</strong></label><input type="file" name="files" class="fileupload"/>
+											</c:if>
+											<c:if test="${homework.correctFileUrl!=null}">
+												<div class="control-group">
+													<label class="control-label" style=" font-weight:bolder">附件</label>
+													<div class="controls">
+													<a href="${homework.correctFileUrl}" class="btn green fileinput-button">
+                                            		<i class="icon-download"></i>
+                                            		<span>${fn:getFileName(homework.correctFileUrl)}</span></a>
+												</div>
+												</div>
+											</c:if>
 											</div>
-					
+											
 											<div class="span8 invoice-block">
 
-											<br />
+											<br/>
 				
-											<c:if test="${homework.comment == null and currentTime >= assignment.deadline}">
+											<c:if test="${homework.comment == null}">
 												<input type="submit" value="确认" class="btn green big hidden-print"/>
-											</c:if>
-											<c:if test="${homework.comment == null and currentTime < assignment.deadline}">
-												该项作业未截止，请于截止时间后批改
 											</c:if>
 											<c:if test="${homework.comment != null}">
 												该项作业已批改，不能再次批改
@@ -280,15 +286,21 @@
 				
 											</div>
 										</form>
-										
-									</div>
+										</div>
+										</c:if>
+									
 								</div>
 								
 							</div>
+							<c:if test="${homework.comment == null and currentTime < assignment.deadline}">
+								<div class="span8 invoice-block">
+									<a class="btn big hidden-print" href="/assignment/homeworks/${assignment.id}">返回</a>该项作业未截止，请于截止时间后批改
+								</div>
+							</c:if>
 						
 						</div>
 
-					</div>
+					</div><br/>
 
 
 
