@@ -121,7 +121,7 @@ create table `homework`(
 	assignment_id int not null default 1 comment '对应课程作业表的主键',
 	text text comment '文本',
 	file_url varchar(255) comment '作业附件存储路径',
-	score tinyint(2) not null default 0 comment '分数',
+	score tinyint(2) not null default -1 comment '分数',
 	comment text comment '评论',
 	submit_time datetime comment '提交时间，以unix时间戳形式存储',
 	primary key(id)
