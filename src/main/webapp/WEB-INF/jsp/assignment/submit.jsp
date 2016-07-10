@@ -362,7 +362,7 @@
 												<c:if test="${homework != null}">
 													该项作业已提交，不能再次提交
 												</c:if>
-												<a href="/assignment/assignments/${semesterCourseId}" class="btn">取消</a>
+												<a href="/assignment/assignments/${semesterCourseId}" class="btn">返回</a>
 
 												</div>
 

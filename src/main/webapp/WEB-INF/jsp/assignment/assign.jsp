@@ -143,8 +143,7 @@
 				<div class="row-fluid">
 					
 					<div class="span12">
-						<div style="color:red">${error}</div>
-						<div class="portlet box green" id="form_wizard_1">
+					<div style="color:red">${error}</div>						<div class="portlet box green" id="form_wizard_1">
 
 							<div class="portlet-title">
 
