@@ -6,7 +6,7 @@
 	
 	<resultMap id="SemesterCourseMap" type="buaa.course.model.SemesterCourse">
 		<id property="id" column="id" />
-		<result property="semesterCourseId" column="semester_id" />
+		<result property="semesterId" column="semester_id" />
 		<result property="courseId" column="course_id" />
 	</resultMap>
 	<select id="getSemesterCourse" parameterType="int" resultMap="SemesterCourseMap">

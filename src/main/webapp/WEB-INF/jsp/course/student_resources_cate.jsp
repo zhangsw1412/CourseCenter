@@ -15,7 +15,7 @@
 
     <meta charset="utf-8"/>
 
-    <title>source</title>
+    <title>资源分类</title>
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
@@ -155,10 +155,12 @@
                                 <c:forEach items="${categories}" var="category">
                                     <tr>
                                         <td>
-                                            <i class="icon-folder-close"></i>
-                                            <a href="/semester/${semesterCourseId}/course/${course.id}/resources/${category}">${category}</a>
+                                            <a href="/semester/${semesterId}/course/${course.id}/resources/${category.category}">
+                                                <i class="icon-folder-close-alt"></i>
+                                            ${category.category}
+                                            </a>
                                         </td>
-                                        <td></td>
+                                        <td>${category.createTime}</td>
                                     </tr>
                                 </c:forEach>
 
