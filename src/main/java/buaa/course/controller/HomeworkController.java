@@ -78,11 +78,13 @@ public class HomeworkController {
         m.addObject("student", student);
         m.addObject("semesterId", semesterCourse.getSemesterId());
         m.addObject("semesterCourseId", semesterCourse.getId());
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        m.addObject("currentTime",currentTime);
         return m;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/correct/{homeworkId}")
-    public ModelAndView correctHomeworkPost(@PathVariable Integer homeworkId, HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public ModelAndView correctHomeworkPost(@PathVariable Integer homeworkId, @RequestParam("files") MultipartFile[] files, HttpServletRequest request, HttpServletResponse response) throws IOException{
         ModelAndView m = new ModelAndView("assignment/correct");
         String score_s = request.getParameter("score");
         String comment = request.getParameter("comment");
@@ -106,9 +108,11 @@ public class HomeworkController {
 			m.addObject("course", course);
 			m.addObject("student", student);
         	m.addObject("illegalScore", "分数形式不合法");
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+            m.addObject("currentTime",currentTime);
         	return m;
         }
-        if(score<0||score>homeworkService.getHighestScore(homeworkId)){
+        if(score<0||(score>homeworkService.getHighestScore(homeworkId)&&homeworkService.getHighestScore(homeworkId)>0)){
         	m.addObject("scoreOutOfRange", "分数不在允许区间内");
 			Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
 			Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
@@ -118,10 +122,12 @@ public class HomeworkController {
 			m.addObject("assignment", assignment);
 			m.addObject("course", course);
 			m.addObject("student", student);
+	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+	        m.addObject("currentTime",currentTime);
         	return m;
         }
 		if(StringUtils.isNullOrEmpty(comment)){
-			m.addObject("noComment", "评论不能为空!");
+			m.addObject("noComment", "评价不能为空!");
 			Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
 			Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
 			User student = userService.getUserByNum(homework.getStudentId());
@@ -130,8 +136,33 @@ public class HomeworkController {
 			m.addObject("assignment", assignment);
 			m.addObject("course", course);
 			m.addObject("student", student);
+	        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+	        m.addObject("currentTime",currentTime);
 			return m;
 		}
+		String fileUrl = null;
+    	for (MultipartFile file : files) {
+            if (!file.isEmpty()) {
+                // 文件保存路径
+                String filePath = getResourcePath_correct(homework.getAssignmentId(),homeworkId,request);
+                File dir = new File(filePath);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                // 转存文件
+                try {
+                    File temp = new File(filePath + File.separator + file.getOriginalFilename());
+                    file.transferTo(temp);
+                    fileUrl = getServerPath_correct(homework.getAssignmentId(),homeworkId,file.getOriginalFilename(),request);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ModelAndView c = new ModelAndView("assignment/correct");
+					c.addObject("message", e.getMessage());
+                    return c;
+                }
+            }
+        }
+        homework.setCorrectFileUrl(fileUrl);
         homework.setScore(score);
         homework.setComment(comment);
         homeworkService.updateHomework(homework);
@@ -153,6 +184,18 @@ public class HomeworkController {
     	assignment = assignmentService.getAssignmentById(assignmentId);
     	if(assignment==null)
     		return index;
+    	Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    	if(assignment.getStartTime().after(currentTime)){
+    		ModelAndView notYet = new ModelAndView("assignment/student_assignments");
+    		int semesterCourseId = assignmentService.getAssignmentById(assignmentId).getSemesterCourseId();
+    		List<Assignment> assignmentlist = assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId);
+    		Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
+    		notYet.addObject("assignmentlist", assignmentlist);
+    		notYet.addObject("homeworks", homeworks);
+    		notYet.addObject("course", courseService.getCourseBySemesterCourseId(semesterCourseId));
+    		notYet.addObject("currentTime", currentTime);
+    		return notYet;
+    	}
     	course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId());
     	m.addObject("assignmentId", assignmentId);
     	m.addObject("assignment",assignment);
@@ -160,7 +203,6 @@ public class HomeworkController {
 		m.addObject("homework", homeworkService.getHomeworkByAssignment(assignmentId, user.getNum()));
 		m.addObject("course",course);
 		m.addObject("semesterCourseId", courseService.getSemesterCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId()).getId());
-		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 		m.addObject("currentTime", currentTime);
 		return m;
     }
@@ -208,6 +250,7 @@ public class HomeworkController {
         homework.setAssignmentId(assignmentId);
         homework.setText(text);
         homework.setSubmitTime(submitTime);
+        homework.setScore(-1);
         homeworkService.createHomework(homework);
     	String fileUrl = null;
     	int homeworkId = homework.getId();
@@ -226,7 +269,7 @@ public class HomeworkController {
                     fileUrl = getServerPath(assignmentId,homeworkId,file.getOriginalFilename(),request);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    ModelAndView m = new ModelAndView("assignment/teacher_assign");
+                    ModelAndView m = new ModelAndView("assignment/submit");
 					m .addObject("message", e.getMessage());
                     return m;
                 }
@@ -253,5 +296,20 @@ public class HomeworkController {
 
 	private String getServerDir(Integer assignmentId, Integer homeworkId, HttpServletRequest request) {
 		return "/"+request.getContextPath()+"resource/"+ "assignment-" + assignmentId +"/homework-" +homeworkId+"/";
+	}
+	
+	private String getResourcePath_correct(Integer assignmentId, Integer homeworkId, HttpServletRequest request) {
+		String filePath = request.getSession().getServletContext().getRealPath("/")
+                + "resource" + File.separator + "assignment-" + assignmentId + File.separator + "homeworkcorrect-" +homeworkId;
+        return filePath;
+	}
+	
+	private String getServerPath_correct(Integer assignmentId, Integer homeworkId, String originalFilename,HttpServletRequest request) {		
+		String dir = getServerDir_correct(assignmentId, homeworkId, request);
+		return dir+originalFilename;
+	}
+	
+	private String getServerDir_correct(Integer assignmentId, Integer homeworkId, HttpServletRequest request) {
+		return "/"+request.getContextPath()+"resource/"+ "assignment-" + assignmentId +"/homeworkcorrect-" +homeworkId+"/";
 	}
 }

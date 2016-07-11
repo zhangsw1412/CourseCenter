@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="/WEB-INF/tld/fileUtil.tld"%>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -99,9 +100,9 @@
 
 						<h3 class="page-title">
 
-							添加作业
+							作业详情
 
-							 <small>输入作业详细信息</small>
+							 <small>确认作业详细信息</small>
 
 						</h3>
 
@@ -133,7 +134,7 @@
 
 							</li>
 
-							<li><a href="#">添加作业</a></li>
+							<li><a href="#">作业详情</a></li>
 
 						</ul>
 
@@ -150,200 +151,15 @@
 					<div class="span12">
 					<div style="color:red">${error}</div>						<div class="portlet box green" id="form_wizard_1">
 
-							<div class="portlet-title">
-
-								<div class="caption">
-
-									<i class="icon-plus"></i> 添加作业 - <span class="step-title">Step 1 of 3</span>
-
-								</div>
-
-							</div>
-
 							<div class="portlet-body form">
 
 								<form action="/assignment/assign/${semesterCourseId}" class="form-horizontal" id="submit_form" method="POST" enctype="multipart/form-data">
 
 									<div class="form-wizard">
 
-										<div class="navbar steps">
-
-											<div class="navbar-inner">
-
-												<ul class="row-fluid">
-
-													<li class="span4">
-
-														<a href="#tab1" data-toggle="tab" class="step">
-
-														<span class="number">1</span>
-
-														<span class="desc"><i class="icon-ok"></i> 起止时间</span>   
-
-														</a>
-
-													</li>
-
-													<li class="span4">
-
-														<a href="#tab2" data-toggle="tab" class="step">
-
-														<span class="number">2</span>
-
-														<span class="desc"><i class="icon-ok"></i> 详细要求</span>   
-
-														</a>
-
-													</li>
-
-													<li class="span4">
-
-														<a href="#tab3" data-toggle="tab" class="step">
-
-														<span class="number">3</span>
-
-														<span class="desc"><i class="icon-ok"></i> 确认信息</span>   
-
-														</a> 
-
-													</li>
-
-												</ul>
-
-											</div>
-
-										</div>
-
-										<div id="bar" class="progress progress-success progress-striped">
-
-											<div class="bar"></div>
-
-										</div>
-
 										<div class="tab-content">
 
-											<div class="alert alert-error hide">
-
-												<button class="close" data-dismiss="alert"></button>
-
-												You have some form errors. Please check below.
-
-											</div>
-
-											<div class="alert alert-success hide">
-
-												<button class="close" data-dismiss="alert"></button>
-
-												Your form validation is successful!
-
-											</div>
-											
-											<!-- step1 -->
-											<div class="tab-pane" id="tab1">
-
-												<h3 class="block">请设置作业时间区域：<small>默认为现在开始一周时间</small></h3>
-												<div class="control-group">
-
-													<label class="control-label">起止时间</label>
-
-													<div class="controls">
-
-														<input name="starttime" readonly="readonly" class="m-wrap small readonlyinput" size="16" type="text" value="${currentTime}" id="ui_date_picker_range_from"/>
-
-														<span class="text-inline">&nbsp;至&nbsp;</span>
-
-														<input name="deadline" readonly="readonly" class="m-wrap small readonlyinput" size="16" type="text" value="${toTime}" id="ui_date_picker_range_to"/>
-
-													</div>
-													
-												</div>
-
-											</div>
-
-											<!-- step2 -->
-											<div class="tab-pane" id="tab2">
-
-												<h3 class="block">请填写作业要求与详情：</h3>
-
-												<div class="control-group">
-
-													<label class="control-label">作业名称</label>
-
-													<div class="controls">
-
-														<input type="text" class="span6 m-wrap" name="name" />
-
-														<span class="help-inline"></span>
-
-													</div>
-
-												</div>
-
-												<div class="control-group">
-
-													<label class="control-label">分数上限</label>
-
-													<div class="controls">
-
-														<input type="text" name="highestscore" />
-
-														<span class="help-inline"></span>
-														请输入两位以内的正整数，如无可不填写
-													</div>
-													
-												</div>
-												
-												<div class="control-group">
-
-													<label class="control-label">团队参与</label>
-
-													<div class="controls">
-
-														<div class="basic-toggle-button">
-															<input type="checkbox" name="teamavaliable" class="toggle" />
-														</div>
-
-														<span class="help-inline"></span>
-
-													</div>
-
-												</div>
-												
-												<div class="control-group">
-
-													<label class="control-label">基本要求</label>
-
-													<div class="controls">
-
-														<textarea class="span6 m-wrap" rows="3"	name="basicrequirement"></textarea>
-
-														<span class="help-inline"></span>
-
-													</div>
-
-												</div>
-												
-												<div class="control-group">
-
-													<label class="control-label">上传附件(如有)</label>
-
-														<div class="control-group">
-														
-															<div class="controls">
-
-														<input type="file" name="files" class="fileupload"/>
-
-															</div>
-														</div>
-												</div>
-											</div>
-
-											<!-- step3 -->
-											<div class="tab-pane" id="tab3">
-
-												<h3 class="block">请确认：</h3>
-
-												<h4 class="form-section">详细信息</h4>
+												<h2 class="form-section">详细信息</h2>
 
 												<div class="control-group">
 
@@ -364,32 +180,34 @@
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="name"></span>
+														<span class="text display-value">${assignment.name}</span>
 
 													</div>
 
 												</div>
-
+												<c:if test="${assignment.highestScore>0}">
 												<div class="control-group">
 
 													<label class="control-label">分数上限：</label>
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="highestscore"></span>
+														<span class="text display-value">${assignment.highestScore}</span>
 														
 
 													</div>
 
 												</div>
-
+												</c:if>
 												<div class="control-group">
 
 													<label class="control-label">团队参与：</label>
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="teamavaliable">
+														<span class="text display-value">
+														<c:if test="${assignment.teamAvaliable==true}">允许</c:if>
+														<c:if test="${assignment.teamAvaliable==false}">不允许</c:if>
 														</span>
 
 													</div>
@@ -402,7 +220,7 @@
 
 													<div class="controls">
 													
-														<span class="text display-value" data-display="starttime"></span>
+														<span class="text display-value">${assignment.startTime}</span>
 
 													</div>
 
@@ -413,7 +231,7 @@
 
 													<div class="controls">
 													
-														<span class="text display-value" data-display="deadline"></span>
+														<span class="text display-value">${assignment.deadline}</span>
 
 													</div>
 
@@ -424,58 +242,39 @@
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="basicrequirement"></span>
+														<span class="text display-value">${assignment.basicRequirement}</span>
 
 													</div>
 
 												</div>
-												
+												<c:if test="${assignment.fileUrl!=null}">
 												<div class="control-group">
 
-													<label class="control-label">附件名：</label>
+													<label class="control-label">附件：</label>
 
 													<div class="controls">
 
-														<span class="text display-value" data-display="files"></span>
+														<a href="${assignment.fileUrl}" class="btn green fileinput-button">
+                                            				<i class="icon-download"></i>
+                                            				<span>${fn:getFileName(assignment.fileUrl)}</span></a>
 
 													</div>
-
+												
 												</div>
-
-											</div>
-
-										</div>
-
-										<div class="form-actions clearfix">
-
-											<a href="javascript:;" class="btn button-previous">
-
-											<i class="m-icon-swapleft"></i> 上一步 
-
-											</a>
-
-											<a href="javascript:;" class="btn green button-next">
-
-											下一步 <i class="m-icon-swapright m-icon-white"></i>
-
-											</a>
-
-											<a href="javascript:;" class="btn green button-submit" onclick="document:submit_form.submit();">
-
-											提交 <i class="m-icon-swapright m-icon-white"></i>
-
-											</a>
-
+												
+												</c:if>
 										</div>
 
 									</div>
 
 								</form>
-
+								
 							</div>
-
+								
 						</div>
-
+						
+						<div align="center"><a href="/assignment/assignments/${semesterCourseId}" class="btn">返回</a></div>
+						
 					</div>
 
 				</div>

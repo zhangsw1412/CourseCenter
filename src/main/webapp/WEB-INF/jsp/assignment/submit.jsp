@@ -334,7 +334,8 @@
 
 															<textarea class="span12 wysihtml5 m-wrap" name="text" 
 															<c:if test="${currentTime<assignment.startTime or currentTime>=assignment.deadline or homework != null}">readonly="readonly"</c:if>>
-															${homework.text}</textarea>${error}
+															${homework.text}</textarea>
+															<div style="color:red">${error}</div>
 
 														</div>
 
@@ -366,8 +367,37 @@
 													<!--/span-->
 
 												</div>
-                                                
-												
+                                                <c:if test="${homework.score>=0}"><hr/></c:if>
+												<div class="row-fluid">
+													<div class="span12 ">
+														<c:if test="${homework.score>=0}">
+															<div class="control-group">
+																<label class="control-label" style="font-weight: bolder">分数</label>
+																<div class="controls">
+																	${homework.score}
+																</div>
+															</div>
+														</c:if>
+														<c:if test="${homework.comment!=null}">
+															<div class="control-group">
+																<label class="control-label" style="font-weight: bolder">评价</label>
+																<div class="controls">
+																	${homework.comment}
+																</div>
+															</div>
+														</c:if>
+														<c:if test="${homework.correctFileUrl!=null}">
+															<div class="control-group">
+																<label class="control-label" style="font-weight: bolder">附件</label>
+																<div class="controls">
+																	<a href="${homework.correctFileUrl}" class="btn green fileinput-button">
+																		<i class="icon-download"></i> <span>${fn:getFileName(homework.correctFileUrl)}</span>
+																	</a>
+																</div>
+															</div>
+														</c:if>
+													</div>
+												</div>
                                                 <div style="margin:20px"></div>
 												<!--/row-->                
 
@@ -378,14 +408,14 @@
 												<!--/row-->
 
 											<div class="form-actions">
-												<c:if test="${homework == null}">
+												<c:if test="${homework == null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">
 													<input type="submit" class="btn blue" value="确认"/>
 												</c:if>
-												<c:if test="${homework != null}">
+												<c:if test="${homework != null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">
 													<input type="submit" class="btn red" value="删除"/>
 												</c:if>
 												<a href="/assignment/assignments/${semesterCourseId}" class="btn">返回</a>
-												<c:if test="${homework != null}">
+												<c:if test="${homework != null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">
 													该项作业已提交，如需修改请删除后重新提交
 												</c:if>
 												</div>

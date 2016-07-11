@@ -160,7 +160,7 @@
 									<tr>
 										<td class="highlight">
 											<div class="success"></div>
-											&nbsp;${item.name }
+											<a href="/assignment/assign_check/${item.id}"> ${item.name }</a>
 										</td>
 										<td class="hidden-phone">${item.startTime}</td>
 										<td>${item.deadline}</td>
@@ -187,8 +187,6 @@
 		</div>
 
 		<!-- END PAGE -->
-
-	</div>
 
 	<!-- END CONTAINER -->
 

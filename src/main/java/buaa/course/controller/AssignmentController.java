@@ -21,7 +21,10 @@ import com.mysql.jdbc.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -50,8 +53,10 @@ public class AssignmentController {
 		List<Assignment> assignmentlist = assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId);
     	if(user.getType() == 0){
     		m = new ModelAndView("assignment/student_assignments");
+    		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 			Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
 			m.addObject("homeworks", homeworks);
+			m.addObject("currentTime", currentTime);
 		}else if(user.getType() == 1){
 			m = new ModelAndView("assignment/teacher_assignments");
 		}
@@ -74,9 +79,31 @@ public class AssignmentController {
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	if(course==null)
     		return new ModelAndView("assignment/teacher_assignments");
+    	Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    	Timestamp toTime = new Timestamp(System.currentTimeMillis()+604800000);
     	ModelAndView m = new ModelAndView("assignment/assign");
     	m.addObject("course",course);
     	m.addObject("semesterCourseId", semesterCourseId);
+    	m.addObject("currentTime", currentTime.toString().substring(0,16));
+    	m.addObject("toTime", toTime.toString().substring(0, 16));
+    	return m;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/assignment/assign_check/{assignmentId}")
+    public ModelAndView assignCheckGet(@PathVariable Integer assignmentId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	User user = (User)request.getSession().getAttribute("user");
+    	if(user==null||user.getType()!=1)
+    		return new ModelAndView("login");
+    	Assignment assignment = assignmentService.getAssignmentById(assignmentId);
+    	if(assignment==null){
+    		response.sendRedirect("/404.html");
+    	}
+    	Integer semesterCourseId = assignment.getSemesterCourseId();
+    	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
+    	ModelAndView m = new ModelAndView("assignment/assign_check");
+    	m.addObject("course",course);
+    	m.addObject("semesterCourseId", semesterCourseId);
+    	m.addObject("assignment", assignment);
     	return m;
     }
     
@@ -89,6 +116,10 @@ public class AssignmentController {
     		return new ModelAndView("assignment/teacher_assignments");
     	Course course = courseService.getCourseBySemesterCourseId(semesterCourseId);
     	ModelAndView m = new ModelAndView("assignment/assign");
+    	Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    	Timestamp toTime = new Timestamp(System.currentTimeMillis()+604800000);
+    	m.addObject("currentTime", currentTime.toString().substring(0,16));
+    	m.addObject("toTime", toTime.toString().substring(0, 16));
     	m.addObject("course",course);
     	m.addObject("semesterCourseId",semesterCourseId);
     	String name = request.getParameter("name");
@@ -138,23 +169,23 @@ public class AssignmentController {
     	boolean teamAvaliable;
     	teamAvaliable = teamAvaliable_s==null?false:true;
     	String highestScore_s = request.getParameter("highestscore");
-    	if(highestScore_s==null){
-        	m.addObject("error", "分数上限不能为空");
-        	return m;
-    	}
     	int highestScore;
-    	try{
-    		highestScore = Integer.valueOf(highestScore_s);
+    	if(StringUtils.isNullOrEmpty(highestScore_s)){
+    		highestScore = -1;
     	}
-    	catch(Exception e){
-        	m.addObject("error", "分数上限不合法");
-        	return m;
+    	else{
+	    	try{
+	    		highestScore = Integer.valueOf(highestScore_s);
+	    	}
+	    	catch(Exception e){
+	        	m.addObject("error", "分数上限不合法");
+	        	return m;
+	    	}
+	    	if(highestScore<=0||highestScore>=100){
+	        	m.addObject("error", "分数上限不合法");
+	        	return m;
+	    	}
     	}
-    	if(highestScore<=0||highestScore>=100){
-        	m.addObject("error", "分数上限不合法");
-        	return m;
-    	}
-    	
     	Assignment assignment = new Assignment();
     	assignment.setSemesterCourseId(semesterCourseId);
     	assignment.setName(name);

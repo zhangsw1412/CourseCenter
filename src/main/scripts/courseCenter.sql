@@ -124,6 +124,7 @@ create table `homework`(
 	file_url varchar(255) comment '作业附件存储路径',
 	score tinyint(2) not null default -1 comment '分数',
 	comment text comment '评论',
+	correct_file_url varchar(255) comment '批改作业附件存储路径',
 	submit_time datetime comment '提交时间，以unix时间戳形式存储',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='学生作业表';

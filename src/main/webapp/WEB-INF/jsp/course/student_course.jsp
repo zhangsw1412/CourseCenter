@@ -114,24 +114,24 @@
                         <div class="check"></div>
                         <div class="tile-body">
                             <div style="margin:20px"></div>
-                            <h3 style=" font-weight:bolder">${course.name}<small>(代码：${course.courseCode})</small></h3>
+                            <h1 style=" font-weight:bolder">${course.name}</h1>
+                            <div style="margin:30px"></div>
+                            <h4>
+                                <c:if test="${course.type==false}">必修课</c:if>
+                                <c:if test="${course.type==true}">选修课</c:if>
+                            </h4>
                             <div style="margin:20px"></div>
-                            <h5>
-                                <c:if test="${course.type==true}">必修课</c:if>
-                                <c:if test="${course.type==false}">选修课</c:if>
-                            </h5>
-                            <div style="margin:20px"></div>
-                            <h5>任课教师：
+                            <h4>任课教师：
                                 <c:forEach items="${teachers}" var="name">
                                     ${name}&nbsp;
                                 </c:forEach>
-                            </h5>
+                            </h4>
                             <div style="margin:20px"></div>
-                            <h5>学时：${course.period}&nbsp;&nbsp;学分：${course.credit}&nbsp;&nbsp;上课人数：${countStudent}</h5>
+                            <h4>学时：${course.period}&nbsp;&nbsp;学分：${course.credit}</h4>
                             <div style="margin:20px"></div>
-                            <h5>
-                                <c:if test="${course.teamAvaliable==true}">允许团队参与</c:if>
-                            </h5>
+                            <h4>
+                              	上课人数：${countStudent}<c:if test="${course.teamAvaliable==true}">&nbsp;&nbsp;允许团队参与</c:if>
+                            </h4>
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@
                             </div>
                             <div class="tile-object">
                                 <div class="name" style="font-size:large">
-                                    作业
+                                	<h1>作业</h1>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                             </div>
                             <div class="tile-object">
                                 <div class="name" style="font-size:large">
-                                    资源
+                                   <h1>资源</h1>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="tile-object">
                                 <div class="name" style="font-size:large">
-                                    讨论
+                                    <h1>讨论</h1>
                                 </div>
                             </div>
                         </div>
