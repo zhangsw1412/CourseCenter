@@ -29,9 +29,6 @@ public class BasicController
 	@Resource(name = "userService")
 	private UserService userService;
 
-	@Resource(name = "courseService")
-	private CourseService courseService;
-
 	@Resource(name = "semesterService")
 	private SemesterService semesterService;
 

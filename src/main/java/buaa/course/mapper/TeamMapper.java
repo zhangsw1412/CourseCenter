@@ -15,7 +15,7 @@ public interface TeamMapper {
 	List<Team> getTeamsByRange(int start,int lines);
 	List<Team> getTeamsByStudentId(int id);
 	int isUserFromTeam(int num, int id);
-	void applyToTeam(int teamId, int userId);
+	void applyToTeam(TeamApplication application);
 	Team getTeamByApplicationId(int applicationId);
 	int getTeamMemberCount(int id);
 	void applicationHandled(int applicationId, int handleType);
@@ -24,4 +24,6 @@ public interface TeamMapper {
 	List<TeamApplication> getTeamApplicationsByStudentId(int id);
 	Team getTeamBySemesterCourseIdAndStudentId(int semesterCourseId, int studentId);
 	List<Integer> getTeamMemberIds(int id);
+	TeamApplication getApplicationById(int applicationId);
+	int updateTeamApplication(TeamApplication application);
 }

@@ -1,17 +1,14 @@
 package buaa.course.controller;
 
-import buaa.course.model.Team;
-import buaa.course.model.TeamApplication;
-import buaa.course.model.TeamStudent;
-import buaa.course.model.User;
+import buaa.course.model.*;
+import buaa.course.service.CourseService;
 import buaa.course.service.TeamService;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.mysql.jdbc.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +25,9 @@ import java.util.Map;
 public class TeamController {
     @Resource(name = "teamService")
     private TeamService teamService;
+
+    @Resource(name = "courseService")
+    private CourseService courseService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/team/all_teams")
     public ModelAndView allTeams(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -63,13 +63,12 @@ public class TeamController {
     public void createTeam(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
         Integer userId = user.getNum();
-        ModelA
         String name = request.getParameter("name");
         String num_s = request.getParameter("num");
         if(StringUtils.isNullOrEmpty(name)||StringUtils.isNullOrEmpty(num_s)){
         	
         }
-        response.sendRedirect("/team/myTeams");
+        response.sendRedirect("/team/my_teams");
     }
     
     @RequestMapping(method = RequestMethod.POST, value = "/applyToTeam/{teamId}")
@@ -77,7 +76,7 @@ public class TeamController {
         User user = checkUser(request, response);
         Integer userId = user.getNum();
         teamService.applyToTeam(userId, teamId);
-        response.sendRedirect("/team/myTeams");
+        response.sendRedirect("/team/my_teams");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/teamApplications/{teamId}")
@@ -89,6 +88,7 @@ public class TeamController {
         return m;
     }
 
+
     @RequestMapping(method = RequestMethod.POST, value = "/handleTeamApplication/{applicationId}/handleType/{handleType}" )
     public void handleTeamApplication(@PathVariable Integer applicationId, HttpServletRequest request, HttpServletResponse response, @PathVariable Integer handleType) throws IOException {
         User user = checkUser(request, response);
@@ -96,6 +96,46 @@ public class TeamController {
         teamService.handleTeamApplication(userId, applicationId, handleType);
         response.sendRedirect("/teamApplications/{teamId}");
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/handleTeamApplication/{applicationId}/handleType/{handleType}" )
+    public void deleteTeamApplication(@PathVariable Integer applicationId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = checkUser(request, response);
+        Integer userId = user.getNum();
+        teamService.deleteTeamApplication(userId, applicationId);
+        response.sendRedirect("/team/my_teams");
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/semester/{semesterId}/team_courses/{teamId}")
+    public ModelAndView teamCourses(@PathVariable("semesterId") Integer semesterId, HttpServletRequest request, HttpServletResponse response, @PathVariable("teamId") Integer teamId) throws IOException {
+        User user = checkUser(request, response);
+        List<Course> courses = courseService.getTeamAvaliableCourses(semesterId);
+        Map<Long, Long> courseStatusMap = getCourseStatusMap(semesterId, courses, teamId);
+        ModelAndView m = new ModelAndView("/team/teamCourses");
+        m.addObject("courses", courses);
+        m.addObject("courseStatusMap", courseStatusMap);
+        return m;
+    }
+
+    private Map<Long,Long> getCourseStatusMap(int semesterId, List<Course> courses, int teamId) {
+        Map<Long, Long> result = new HashMap<>();
+        for(Course course : courses){
+            SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, course.getId());
+            result.put(Long.valueOf(course.getId()), getCourseStatus(sc.getSemesterId(), teamId));
+        }
+        return result;
+    }
+
+    private Long getCourseStatus(int semesterCourseId, int teamId) {
+        CourseStudent cs = courseService.getCourseByCourseIdAndTeamId(semesterCourseId, teamId);
+        if(cs != null){
+            return 1L;//已加入
+        }
+        CourseApplication application = courseService.getCourseApplicationByTeamId(semesterCourseId, teamId);
+        if(application != null)
+            return Long.valueOf(application.getStatus());
+        return 3L;
+    }
+
 
     private User checkUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User)request.getSession().getAttribute("user");

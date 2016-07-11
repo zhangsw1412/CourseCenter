@@ -6,9 +6,11 @@
  import buaa.course.model.Team;
  import buaa.course.model.TeamApplication;
  import buaa.course.model.TeamStudent;
+ import org.apache.commons.lang.StringUtils;
  import org.springframework.stereotype.Service;
 
  import javax.annotation.Resource;
+ import java.sql.Timestamp;
  import java.util.List;
 
 /**
@@ -69,7 +71,12 @@ public class TeamService {
     public void applyToTeam(Integer userId, Integer teamId) {
         Team team = teamMapper.getTeam(teamId);
         if(isApplicationAllowed(team)){
-            teamMapper.applyToTeam(userId, team.getId());
+            TeamApplication application = new TeamApplication();
+            application.setApplyTime(new Timestamp(System.currentTimeMillis()));
+            application.setTeamId(teamId);
+            application.setUserId(userId);
+            application.setStatus(0);
+            teamMapper.applyToTeam(application);
         }
     }
 
@@ -79,6 +86,8 @@ public class TeamService {
         Team team = teamMapper.getTeamByApplicationId(applicationId);
         if(handleType == 1){
             teamStudentMapper.addTeamStudent(new TeamStudent(userId, team.getId()));
+            team.setNum(team.getNum()+1);
+            teamMapper.updateTeam(team);
             teamMapper.applicationHandled(applicationId, handleType);
         }
         if(handleType == 2){
@@ -104,5 +113,16 @@ public class TeamService {
 
     public List<Integer> getTeamMemberIds(Team team) {
         return teamMapper.getTeamMemberIds(team.getId());
+    }
+
+    public int deleteTeamApplication(int userId, int applicationId) {
+        Team team = teamMapper.getTeamByApplicationId(applicationId);
+        TeamApplication application = teamMapper.getApplicationById(applicationId);
+        if(team.getLeaderId() == userId){
+            application.setLeaderDelete(true);
+        }else{
+            application.setStudentDelete(true);
+        }
+        return teamMapper.updateTeamApplication(application);
     }
 }

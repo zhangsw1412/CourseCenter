@@ -14,6 +14,14 @@
 		<result property="type" column="type" />
 		<result property="teamAvaliable" column="team_avaliable" />
 	</resultMap>
+
+	<resultMap id="applicationMap" type="buaa.course.model.CourseApplication">
+		<id property="id" column="id"/>
+		<result property="teamId" column="team_id"/>
+		<result property="semesterCourseId" column="semester_course_id"/>
+		<result property="applyTime" column="apply_time"/>
+		<result property="status" column="status"/>
+	</resultMap>
 	<select id="getCourse" parameterType="int" resultMap="courseMap">
 	    <![CDATA[
 	    	select * from course where id = #{0}
@@ -62,6 +70,17 @@
 	<select id="getCoursesBySemesterIdAndTeacherId" resultMap="courseMap">
 		<![CDATA[
 	    	select c.id,course_code,name,college_id,period,credit,type,team_avaliable from course c,semester_course sc,course_teacher ct where ct.teacher_id=#{1} and sc.id=ct.semester_course_id and sc.semester_id=#{0} and c.id=sc.course_id
+	    ]]>
+	</select>
+	<select id="getTeamAvaliableCourses" parameterType="int" resultMap="courseMap">
+		<![CDATA[
+	    	select c.id,c.course_code,c.name,c.college_id,c.period,c.credit,c.type,c.team_avaliable from course c,semester_course sc
+	    	where sc.semester_id = #{0} and sc.course_id = c.id and team_avaliable='1'
+	    ]]>
+	</select>
+	<select id="getCourseApplicationByTeamId" resultMap="applicationMap">
+		<![CDATA[
+	    	select * from course_application where semester_course_id = #{0} and team_id = #{1}
 	    ]]>
 	</select>
 </mapper>

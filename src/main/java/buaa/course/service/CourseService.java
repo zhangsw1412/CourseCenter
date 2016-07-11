@@ -150,4 +150,16 @@ public class CourseService {
 	public SemesterCourse getSemesterCourseBySemesterCourseId(int semesterCourseId) {
 		return semesterCourseMapper.getSemesterCourse(semesterCourseId);
 	}
+
+    public List<Course> getTeamAvaliableCourses(int semesterId) {
+        return courseMapper.getTeamAvaliableCourses(semesterId);
+    }
+
+    public CourseStudent getCourseByCourseIdAndTeamId(int id, int teamId) {
+        return courseStudentMapper.getCourseByCourseIdAndTeamId(id, teamId);
+    }
+
+    public CourseApplication getCourseApplicationByTeamId(int semesterCourseId, int teamId) {
+        return courseMapper.getCourseApplicationByTeamId(semesterCourseId, teamId);
+    }
 }

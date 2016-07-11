@@ -16,7 +16,7 @@
 	<resultMap id="teamApplicationMap" type="buaa.course.model.TeamApplication">
 		<id property="id" column="id" />
 		<result property="teamId" column="team_id" />
-		<result property="user_id" column="user_id" />
+		<result property="userId" column="user_id" />
 		<result property="applyTime" column="apply_time" />
 		<result property="status" column="status" />
 		<result property="studentDelete" column="student_delete" />
@@ -67,9 +67,10 @@
 			select count(*) from team_student where student_id=#{0} and team_id=#{1}
 	    ]]>
 	</select>
-	<insert id="applyToTeam">
+	<insert id="applyToTeam" parameterType="buaa.course.model.TeamApplication">
 		<![CDATA[
-			insert into team_application (team_id, user_id, apply_time) values(#{0}, #{1}, now())
+			insert into team_application (team_id, user_id, apply_time, status, student_delete, leader_delete)
+			values(#{teamId},#{userId},#{applyTime},#{status},#{studentDelete},#{leaderDelete})
 	    ]]>
 	</insert>
 	<select id="getTeamByApplicationId" parameterType="int" resultMap="teamMap">
@@ -107,4 +108,15 @@
 			select student_id  from team_student where team_id = #{0};
 		]]>
 	</select>
+	<select id="getApplicationById" parameterType="int" resultMap="teamApplicationMap">
+		<![CDATA[
+			select *  from team_application where id = #{0};
+		]]>
+	</select>
+	<update id="updateTeamApplication" parameterType="buaa.course.model.TeamApplication">
+		<![CDATA[
+			update team_application set team_id=#{teamId},user_id=#{userId},apply_time=#{applyTime},status=#{status},
+			student_delete=#{studentDelete},leader_delete=#{leaderDelete}
+		]]>
+	</update>
 </mapper>

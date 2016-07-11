@@ -8,11 +8,11 @@ import java.sql.Timestamp;
 public class TeamApplication {
     private int id;
     private int teamId;
-    private int user_id;
+    private int userId;
     private Timestamp applyTime;
     private int status;
-    private boolean studentDelete;
-    private boolean leaderDelete;
+    private boolean studentDelete = false;
+    private boolean leaderDelete = false;
 
     public TeamApplication() {
 		super();
@@ -23,7 +23,7 @@ public class TeamApplication {
 		super();
 		this.id = id;
 		this.teamId = teamId;
-		this.user_id = user_id;
+		this.userId = user_id;
 		this.applyTime = applyTime;
 		this.status = status;
 		this.studentDelete = studentDelete;
@@ -46,12 +46,12 @@ public class TeamApplication {
         this.teamId = teamId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int user_id) {
+        this.userId = user_id;
     }
 
     public Timestamp getApplyTime() {
@@ -88,7 +88,7 @@ public class TeamApplication {
 
 	@Override
 	public String toString() {
-		return "TeamApplication [id=" + id + ", teamId=" + teamId + ", user_id=" + user_id + ", applyTime=" + applyTime
+		return "TeamApplication [id=" + id + ", teamId=" + teamId + ", userId=" + userId + ", applyTime=" + applyTime
 				+ ", status=" + status + ", studentDelete=" + studentDelete + ", leaderDelete=" + leaderDelete + "]";
 	}
 }

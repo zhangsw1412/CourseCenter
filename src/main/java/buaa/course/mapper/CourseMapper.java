@@ -1,6 +1,7 @@
 package buaa.course.mapper;
 
 import buaa.course.model.Course;
+import buaa.course.model.CourseApplication;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface CourseMapper {
 	Course getCourseByCourseCode(String courseCode);
 	List<Course> getCoursesBySemesterIdAndStudentId(int semesterId, int studentId);
 	List<Course> getCoursesBySemesterIdAndTeacherId(int semesterId, int teacherId);
+	List<Course> getTeamAvaliableCourses(int semesterId);
+	CourseApplication getCourseApplicationByTeamId(int semesterCourseId, int teamId);
 }
