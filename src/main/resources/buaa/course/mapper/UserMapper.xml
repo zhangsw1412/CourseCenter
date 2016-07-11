@@ -55,4 +55,9 @@
 	    	select * from user limit #{0},#{1}
 	    ]]>
 	</select>
+	<select id="getUsersByTeamId" parameterType="int" resultMap="userMap">
+	    <![CDATA[
+	    	select * from user u,team_student ts where ts.team_id=#{0} and u.num=ts.student_id
+	    ]]>
+	</select>
 </mapper>

@@ -188,7 +188,7 @@
 
 							<div class="portlet-body flip-scroll">
 
-								<table class="table-bordered table-striped table-condensed flip-content">
+								<table class="table table-striped table-hover table-bordered">
 
 									<thead class="flip-content">
 
@@ -200,7 +200,7 @@
 
 											<th>性别</th>
 
-											<th>委任管理员</th>
+											<th>委任负责人</th>
 											
 										</tr>
 
@@ -215,7 +215,7 @@
 											<td>${item.name}</td>
 
 											<td><c:if test="${item.gender==true}">女</c:if><c:if test="${item.gender==false}">男</c:if></td>
-
+											<td><c:if test="${item.num!=team.leaderId}"><a class="btn mini red" ><i class="icon-hand-left"></i>&nbsp;委任</a></c:if></td>
 										</tr>
 										</c:forEach>
 									</tbody>

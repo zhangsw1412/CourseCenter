@@ -191,7 +191,7 @@
 											<td>${item.leaderName}</td>
 
 											<td>${item.num}</td>
-											<td><a href="team/details" class="btn mini green" style="margin-right:10px">查看</a></td>
+											<td><a href="/team/team_details/${item.id}" class="btn mini green" style="margin-right:10px">查看</a></td>
 										</tr>
 										</c:forEach>
 									</tbody>

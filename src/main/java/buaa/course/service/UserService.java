@@ -62,4 +62,8 @@ public class UserService {
 		}
 		return map;
 	}
+
+	public List<User> getUsersByTeamId(int teamId) {
+		return userMapper.getUsersByTeamId(teamId);
+	}
 }

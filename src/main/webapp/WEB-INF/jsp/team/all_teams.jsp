@@ -135,7 +135,7 @@
 							</div>
 
 							<div class="portlet-body">
-								<div style="padding:15px"></div>
+								<div style="padding:5px"></div>
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 
 									<thead>
@@ -167,7 +167,7 @@
 											<c:if test="${teamMap[item.id+0]==1}">已加入</c:if>
 											<c:if test="${teamMap[item.id+0]==2}">已拒绝</c:if>
 											<c:if test="${teamMap[item.id+0]==3}">
-											<a href="team/apply_team/${item.id}" class="btn mini green" style="margin-right:10px"><i class="icon-ok-sign"></i>&nbsp;可申请</a>
+											<a href="team/team_details/${item.id}" class="btn mini green" style="margin-right:10px"><i class="icon-ok-sign"></i>&nbsp;可申请</a>
 											</c:if>
 											</td>
 										</tr>

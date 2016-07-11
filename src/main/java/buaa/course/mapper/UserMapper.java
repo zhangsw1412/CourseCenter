@@ -13,4 +13,5 @@ public interface UserMapper {
 	List<User> getAllUsers();
 	int countUsers();
 	List<User> getUsersByRange(int start,int lines);
+	List<User> getUsersByTeamId(int teamId);
 }

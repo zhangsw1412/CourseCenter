@@ -3,6 +3,8 @@ package buaa.course.controller;
 import buaa.course.model.*;
 import buaa.course.service.CourseService;
 import buaa.course.service.TeamService;
+import buaa.course.service.UserService;
+
 import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +30,9 @@ public class TeamController {
 
     @Resource(name = "courseService")
     private CourseService courseService;
+    
+    @Resource(name = "userService")
+    private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/team/all_teams")
     public ModelAndView allTeams(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -54,8 +59,11 @@ public class TeamController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/team/team_details/{teamId}")
     public ModelAndView teamDetails(@PathVariable Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ModelAndView m = new ModelAndView("team/team_details");
+    	checkUser(request, response);
+    	ModelAndView m = new ModelAndView("team/team_details");
         m.addObject("team", teamService.getTeam(teamId));
+        List<User> members = userService.getUsersByTeamId(teamId);
+        m.addObject("members", members);
         return m;
     }
 
@@ -80,7 +88,7 @@ public class TeamController {
         team.setLeaderName(user.getName());
         team.setMaxNum(Integer.valueOf(maxNum_s));
         team.setNum(1);
-        team.setApplicable(true);
+        team.setApplicable(team.getMaxNum()>team.getNum());
         teamService.createTeam(team);
         TeamStudent teamStudent = new TeamStudent();
         teamStudent.setTeamId(team.getId());
