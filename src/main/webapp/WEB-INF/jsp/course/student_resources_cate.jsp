@@ -106,7 +106,7 @@
                         </li>
                         <li>
 
-                            <a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
+                            <a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
 
                             <!-- 数据库获取该课程名 -->
 
@@ -150,12 +150,15 @@
                             <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                                 <tr>
                                     <th>类别</th>
-
+                                    <th>创建时间</th>
                                 </tr>
                                 <c:forEach items="${categories}" var="category">
                                     <tr>
-                                        <td><a href="/semester/${semesterId}/course/${course.id}/resources/${category}">${category}</a></td>
-
+                                        <td>
+                                            <i class="icon-folder-close"></i>
+                                            <a href="/semester/${semesterCourseId}/course/${course.id}/resources/${category}">${category}</a>
+                                        </td>
+                                        <td></td>
                                     </tr>
                                 </c:forEach>
 

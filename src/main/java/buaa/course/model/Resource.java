@@ -1,10 +1,14 @@
 package buaa.course.model;
 
+import java.sql.Timestamp;
+
 public class Resource {
 	private int id;
 	private int semesterCourseId;
 	private String fileUrl;
 	private String category;
+	private Timestamp createTime;
+
 	public Resource() {
 		super();
 	}
@@ -13,6 +17,7 @@ public class Resource {
 		this.semesterCourseId = semesterCourseId;
 		this.fileUrl = fileUrl;
 		this.category = category;
+		this.createTime = new Timestamp(System.currentTimeMillis());
 	}
 	public int getId() {
 		return id;
@@ -38,9 +43,23 @@ public class Resource {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
 	@Override
 	public String toString() {
-		return "Resource [id=" + id + ", semesterCourseId=" + semesterCourseId + ", fileUrl=" + fileUrl + ", category="
-				+ category + "]";
+		return "Resource{" +
+				"id=" + id +
+				", semesterCourseId=" + semesterCourseId +
+				", fileUrl='" + fileUrl + '\'' +
+				", category='" + category + '\'' +
+				", createTime=" + createTime +
+				'}';
 	}
 }

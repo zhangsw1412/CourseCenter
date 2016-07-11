@@ -133,7 +133,7 @@
 							</li>
 							<li>
 
-								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
+								<a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
 
 								<!-- 数据库获取该课程名 -->
 
@@ -142,7 +142,7 @@
 							</li>
 							<li>
 
-								<a href="/semester/${semesterId}/course/${course.id}/resourceList">资源管理</a>
+								<a href="/semester/${semesterCourseId}/course/${course.id}/resourceList">资源管理</a>
 
 								<i class="icon-angle-right"></i>
 
@@ -213,7 +213,7 @@
 
 										<button type="submit" class="btn blue">上传</button>
 
-										<a href="/semester/${semesterId}/course/${course.id}/resourceList"><button type="button" class="btn">返回</button><a>
+										<a href="/semester/${semesterCourseId}/course/${course.id}/resourceList"><button type="button" class="btn">返回</button><a>
 
 									</div>
 
