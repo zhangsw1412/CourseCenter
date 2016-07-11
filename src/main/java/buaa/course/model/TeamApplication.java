@@ -11,8 +11,26 @@ public class TeamApplication {
     private int user_id;
     private Timestamp applyTime;
     private int status;
+    private boolean studentDelete;
+    private boolean leaderDelete;
 
-    public int getId() {
+    public TeamApplication() {
+		super();
+	}
+
+	public TeamApplication(int id, int teamId, int user_id, Timestamp applyTime, int status, boolean studentDelete,
+			boolean leaderDelete) {
+		super();
+		this.id = id;
+		this.teamId = teamId;
+		this.user_id = user_id;
+		this.applyTime = applyTime;
+		this.status = status;
+		this.studentDelete = studentDelete;
+		this.leaderDelete = leaderDelete;
+	}
+
+	public int getId() {
         return id;
     }
 
@@ -52,14 +70,25 @@ public class TeamApplication {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "TeamApplication{" +
-                "id=" + id +
-                ", teamId=" + teamId +
-                ", user_id=" + user_id +
-                ", applyTime=" + applyTime +
-                ", status=" + status +
-                '}';
-    }
+    public boolean isStudentDelete() {
+		return studentDelete;
+	}
+
+	public void setStudentDelete(boolean studentDelete) {
+		this.studentDelete = studentDelete;
+	}
+
+	public boolean isLeaderDelete() {
+		return leaderDelete;
+	}
+
+	public void setLeaderDelete(boolean leaderDelete) {
+		this.leaderDelete = leaderDelete;
+	}
+
+	@Override
+	public String toString() {
+		return "TeamApplication [id=" + id + ", teamId=" + teamId + ", user_id=" + user_id + ", applyTime=" + applyTime
+				+ ", status=" + status + ", studentDelete=" + studentDelete + ", leaderDelete=" + leaderDelete + "]";
+	}
 }

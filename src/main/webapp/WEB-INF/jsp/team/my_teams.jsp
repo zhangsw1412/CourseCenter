@@ -235,24 +235,35 @@
 											<th>人数</th>
 											
 											<th>团队详情</th>
+											
+											<th>申请时间</th>
+											
+											<th>状态</th>
 
 										</tr>
 									</thead>
 
 									<tbody>
 
-										<c:forEach items="${teams}" var="item">
+										<c:forEach items="${teamApplications}" var="item">
 										
 										<tr class="">
 
-											<td> NULL</a></td>
+											<td>${item.teamId}</td>
 
-											<td>张三</td>
+											<td>${teamsApplied[item.teamId+0].name}</td>
 
-											<td>8</td>
+											<td>${teamsApplied[item.teamId+0].leaderName}</td>
 
-											<td></td>
-											<td><a href="team/details" class="btn mini green" style="margin-right:10px">查看</a></td>
+											<td>${teamsApplied[item.teamId+0].num}</td>
+											
+											<td>${item.applyTime}</td>
+											
+											<td>
+											<c:if test="${item.status==0}">未处理</c:if>
+											<c:if test="${teamMap[item.id+0]==1}">已加入</c:if>
+											<c:if test="${teamMap[item.id+0]==2}">已拒绝</c:if>
+											</td>
 										</tr>
 										</c:forEach>
 									</tbody>
