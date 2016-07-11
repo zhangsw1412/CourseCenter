@@ -4,6 +4,8 @@ import buaa.course.mapper.AssignmentMapper;
 import buaa.course.mapper.HomeworkMapper;
 import buaa.course.model.Assignment;
 import buaa.course.model.Homework;
+import buaa.course.model.Team;
+import buaa.course.model.TeamStudent;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,8 +18,11 @@ import java.util.Map;
 public class HomeworkService {
     @Resource(name = "homeworkMapper")
     private HomeworkMapper homeworkMapper;
-    @Resource(name = "assignmentMapper")
-    private AssignmentMapper assignmentMapper;
+    @Resource(name = "assignmentService")
+    private AssignmentService assignmentService;
+
+    @Resource(name = "teamService")
+    private TeamService teamService;
 
     public Homework getHomeworkById(int id) {
         return homeworkMapper.getHomework(id);
@@ -48,7 +53,7 @@ public class HomeworkService {
     }
 
 	public int getHighestScore(int homeworkId) {
-		return assignmentMapper.getAssignment(homeworkMapper.getHomework(homeworkId).getAssignmentId()).getHighestScore();
+		return assignmentService.getAssignmentById(homeworkMapper.getHomework(homeworkId).getAssignmentId()).getHighestScore();
 	}
 
 	public List<Homework> getHomeworksByAssignmentId(int assignmentId) {
@@ -60,11 +65,48 @@ public class HomeworkService {
         for(Assignment assignment : assignmentlist){
             Homework homework = getHomeworkByAssignment(assignment.getId(), studentId);
             result.put(Long.valueOf(assignment.getId()), homework);
+
+            if(assignment.isTeamAvaliable()){
+                Team team = teamService.getTeamByStudent(assignment.getSemesterCourseId(), studentId);
+                if(team != null){
+                    for(Integer student : teamService.getTeamMemberIds(team)){
+                        homework = getHomeworkByAssignment(assignment.getId(), student);
+                        if(homework != null){
+                            result.put(Long.valueOf(assignment.getId()), homework);
+                            break;
+                        }
+                    }
+                }
+            }
         }
         return result;
     }
 
-    public Homework getHomeworkByAssignment(int assignmentId, int num) {
-        return homeworkMapper.getHomeworkByAssignment(assignmentId, num);
+    public Homework getHomeworkByAssignment(int assignmentId, int studentId) {
+        Homework homework = getHomeWorkByAssignmentByAssignmentIdAndStudentId(assignmentId, studentId);
+        if(homework != null)
+            return homework;
+
+        Assignment assignment = assignmentService.getAssignmentById(assignmentId);
+        if(assignment.isTeamAvaliable()){
+            Team team = teamService.getTeamByStudent(assignment.getSemesterCourseId(), studentId);
+            if(team != null){
+                for(Integer student : teamService.getTeamMemberIds(team)){
+                    homework = getHomeWorkByAssignmentByAssignmentIdAndStudentId(assignment.getId(), student);
+                    if(homework != null){
+                        return homework;
+                    }
+                }
+            }
+        }
+        return homework;
+    }
+
+    public Homework getHomeWorkByAssignmentByAssignmentIdAndStudentId(int assignmentId, int studentId) {
+        return homeworkMapper.getHomeworkByAssignment(assignmentId, studentId);
+    }
+
+    public void submitTeamHomework(Assignment assignment, Homework homework) {
+
     }
 }

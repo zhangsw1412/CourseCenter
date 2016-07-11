@@ -51,18 +51,17 @@ public class ChatController {
     @RequestMapping(method = RequestMethod.GET, value = "/semester/{semesterId}/course/{courseId}/chat/ajax")
     public ModelAndView chatGetAjax(@PathVariable Integer semesterId, @PathVariable Integer courseId, HttpServletRequest request) {
         String lastTime = request.getParameter("lastMessageTime");
-        if(StringUtils.isNullOrEmpty(lastTime)){
-            return null;
-        }
         ModelAndView m = new ModelAndView("user/chatAjax");
-        Timestamp lastMessageTime = Timestamp.valueOf(lastTime);
+        Timestamp lastMessageTime;
+        if(StringUtils.isNullOrEmpty(lastTime)){
+            lastMessageTime = new Timestamp(0);
+        }else{
+            lastMessageTime = Timestamp.valueOf(lastTime);
+        }
         SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
         List<Message> messageList = messageService.getMessagesBySemesterCourseIdAfterTime(semesterCourse.getId(), lastMessageTime);
         m.addObject("messages", messageList);
         m.addObject("course", courseService.getCourseById(courseId));
-        if(messageList.size() > 0){
-            System.out.println(messageList);
-        }
         return m;
     }
 

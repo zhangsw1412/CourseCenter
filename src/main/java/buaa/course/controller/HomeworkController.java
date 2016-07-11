@@ -37,6 +37,8 @@ public class HomeworkController {
     private CourseService courseService;
 	@Resource(name = "semesterService")
 	private SemesterService semesterService;
+	@Resource(name = "teamService")
+	private TeamService teamService;
     
     @RequestMapping(method = RequestMethod.GET, value = "/assignment/homeworks/{assignmentId}")
     public ModelAndView homeworksGet(@PathVariable Integer assignmentId, HttpServletRequest request) {
@@ -200,12 +202,62 @@ public class HomeworkController {
     	m.addObject("assignmentId", assignmentId);
     	m.addObject("assignment",assignment);
 		m.addObject("semester", semesterService.getSemesterById(2));
-		m.addObject("homework", homeworkService.getHomeworkByAssignment(assignmentId, user.getNum()));
+		Homework homework = homeworkService.getHomeworkByAssignment(assignmentId, user.getNum());
+		m.addObject("homework", homework);
+		if(homework != null){
+			m.addObject("submitter", userService.getUserByNum(homework.getStudentId()).getName());
+			if(assignment.isTeamAvaliable()){
+				m.addObject("teamLeaderId", teamService.getTeamByStudent(assignment.getSemesterCourseId(), homework.getStudentId()).getLeaderId());
+			}
+		}
 		m.addObject("course",course);
 		m.addObject("semesterCourseId", courseService.getSemesterCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId()).getId());
 		m.addObject("currentTime", currentTime);
 		return m;
     }
+
+	@RequestMapping(method = RequestMethod.GET, value = "/assignment/updateHomework/{homeworkId}")
+	public ModelAndView updateHomeworkGet(@PathVariable Integer homeworkId, HttpServletRequest request){
+		Course course=null;
+		User user = (User)request.getSession().getAttribute("user");
+		ModelAndView m = new ModelAndView("assignment/updateHomework");
+		ModelAndView index = new ModelAndView("index");
+		Homework homework = null;
+		if(homeworkId==null)
+			return index;
+		homework = homeworkService.getHomeworkById(homeworkId);
+		if(homework==null)
+			return index;
+		Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
+		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+		if(assignment.getStartTime().after(currentTime)){
+			ModelAndView notYet = new ModelAndView("assignment/student_assignments");
+			int semesterCourseId = assignment.getSemesterCourseId();
+			List<Assignment> assignmentlist = assignmentService.getAssignmentsBySemesterCourseId(semesterCourseId);
+			Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
+			notYet.addObject("assignmentlist", assignmentlist);
+			notYet.addObject("homeworks", homeworks);
+			notYet.addObject("course", courseService.getCourseBySemesterCourseId(semesterCourseId));
+			notYet.addObject("currentTime", currentTime);
+			return notYet;
+		}
+		course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignment.getId()).getSemesterCourseId());
+		m.addObject("assignmentId", assignment.getId());
+		m.addObject("assignment",assignment);
+		m.addObject("semester", semesterService.getSemesterById((Integer)request.getSession().getAttribute("semesterId")));
+
+		m.addObject("homework", homework);
+		if(homework != null){
+			m.addObject("submitter", userService.getUserByNum(homework.getStudentId()).getName());
+			if(assignment.isTeamAvaliable()){
+				m.addObject("teamLeaderId", teamService.getTeamByStudent(assignment.getSemesterCourseId(), homework.getStudentId()).getLeaderId());
+			}
+		}
+		m.addObject("course",course);
+		m.addObject("semesterCourseId", courseService.getSemesterCourseBySemesterCourseId(assignmentService.getAssignmentById(assignment.getId()).getSemesterCourseId()).getId());
+		m.addObject("currentTime", currentTime);
+		return m;
+	}
 
     @RequestMapping(method = RequestMethod.POST, value = "/assignment/submit/{assignmentId}")
     public ModelAndView submitHomeworkPost(@PathVariable Integer assignmentId, @RequestParam("files") MultipartFile[] files, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -254,6 +306,12 @@ public class HomeworkController {
         homework.setSubmitTime(submitTime);
         homework.setScore(-1);
         homeworkService.createHomework(homework);
+
+		//团队作业相关
+		if(assignment.isTeamAvaliable()){
+			homeworkService.submitTeamHomework(assignment, homework);
+		}
+
     	String fileUrl = null;
     	int homeworkId = homework.getId();
     	for (MultipartFile file : files) {
@@ -284,6 +342,73 @@ public class HomeworkController {
         }
         return null;
     }
+
+	@RequestMapping(method = RequestMethod.POST, value = "/assignment/updateHomework/{homeworkId}")
+	public ModelAndView updateHomeworkPost(@RequestParam("files") MultipartFile[] files, HttpServletRequest request, HttpServletResponse response, @PathVariable Integer homeworkId) throws IOException {
+		User user = (User)request.getSession().getAttribute("user");
+		if(user==null||user.getType()!=0)
+			return new ModelAndView("login");
+		ModelAndView index = new ModelAndView("index");
+		if(homeworkId==null)
+			return index;
+		Homework homework = homeworkService.getHomeworkById(homeworkId);
+
+		if(homework==null)
+			return index;
+		Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
+		int semesterCourseId = assignment.getSemesterCourseId();
+
+		ModelAndView updateHomework = new ModelAndView("assignment/updateHomework");
+
+		String text = request.getParameter("text");
+		if(StringUtils.isNullOrEmpty(text)){
+			Course course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignment.getId()).getSemesterCourseId());
+			updateHomework.addObject("assignment", assignment);
+			updateHomework.addObject("course", course);
+			Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+			updateHomework.addObject("currentTime", currentTime);
+			updateHomework.addObject("error", "内容不能为空");
+			return updateHomework;
+		}
+		Timestamp submitTime = new Timestamp(System.currentTimeMillis());
+
+		homework.setSemesterCourseId(semesterCourseId);
+		homework.setStudentId(user.getNum());
+		homework.setAssignmentId(assignment.getId());
+		homework.setText(text);
+		homework.setSubmitTime(submitTime);
+		homework.setScore(-1);
+
+		String fileUrl = null;
+
+		for (MultipartFile file : files) {
+			if (!file.isEmpty()) {
+				// 文件保存路径
+				String filePath = getResourcePath(assignment.getId(),homeworkId,request);
+				File dir = new File(filePath);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				// 转存文件
+				try {
+					File temp = new File(filePath + File.separator + file.getOriginalFilename());
+					file.transferTo(temp);
+					fileUrl = getServerPath(assignment.getId(),homeworkId,file.getOriginalFilename(),request);
+				} catch (Exception e) {
+					e.printStackTrace();
+					ModelAndView m = new ModelAndView("assignment/submit");
+					m .addObject("message", e.getMessage());
+					return m;
+				}
+			}
+		}
+		homework.setFileUrl(fileUrl);
+		homeworkService.updateHomework(homework);
+		if(true){
+			response.sendRedirect("/assignment/assignments/"+semesterCourseId);
+		}
+		return null;
+	}
 
 	private String getResourcePath(Integer assignmentId, Integer homeworkId, HttpServletRequest request) {
 		String filePath = request.getSession().getServletContext().getRealPath("/")

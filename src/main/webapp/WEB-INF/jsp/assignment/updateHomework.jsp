@@ -15,7 +15,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>提交作业</title>
+	<title>修改作业</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -147,7 +147,7 @@
 
 							</li>
 
-							<li><a href="#">作业提交</a></li>
+							<li><a href="#">作业修改</a></li>
 
 						</ul>
 
@@ -170,11 +170,8 @@
 											<div class="caption"><i class="icon-reorder"></i>作业详情</div>
 
 										</div>
-										<form action="/assignment/submit/${assignmentId}" method="POST" enctype="multipart/form-data">
-										<c:if test="${homework != null}">
-											<input type="hidden" name="delete" value="true"/>
-											<input type="hidden" name="homeworkId" value="${homework.id}"/>
-										</c:if>
+										<form action="/assignment/updateHomework/${homework.id}" method="POST" enctype="multipart/form-data">
+
 										<div class="portlet-body form">
 
 											<!-- BEGIN FORM-->
@@ -270,10 +267,6 @@
 														</div>
 
 													</div>
-
-													<!--/span-->
-
-												</div>
 												<!--/row-->        
 
 												<div class="row-fluid">
@@ -369,35 +362,19 @@
 														<div class="controls">
 
 															<textarea class="span12 wysihtml5 m-wrap" name="text" 
-															<c:if test="${currentTime<assignment.startTime or currentTime>=assignment.deadline or homework != null}">readonly="readonly"</c:if>>
+															<c:if test="${currentTime<assignment.startTime or currentTime>=assignment.deadline or homework != null}"></c:if>>
 															${homework.text}</textarea>
 															<div style="color:red">${error}</div>
 
 														</div>
-
-													</div>
-														<c:if test="${homework == null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">															
-														<div class="control-group">
-														
-															<label class="control-label" style=" font-weight:bolder">上传</label>
-
-															<div class="controls">
-
-														<input type="file" name="files" class="fileupload"/>
-														
-															</div>
-														</div>
-														</c:if>
-														<c:if test="${currentTime>assignment.startTime and homework.fileUrl != null}">
 														<div class="control-group">
 															<label class="control-label" style=" font-weight:bolder">附件</label>
 															<div class="controls">
-															<a href="${homework.fileUrl}" class="btn green fileinput-button">
-                                            				<i class="icon-download"></i>
-                                            				<span>${fn:getFileName(homework.fileUrl)}</span></a>
+																<input type="file" name="files" class="fileupload"/>
+															</div>
+
 														</div>
-														</div>
-														</c:if>
+
 													</div>
 
 													<!--/span-->
@@ -444,21 +421,8 @@
 												<!--/row-->
 
 											<div class="form-actions">
-												<c:if test="${homework == null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">
-													<input type="submit" class="btn blue" value="确认"/>
-												</c:if>
-
 												<c:if test="${homework != null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">
-													<c:if test="${assignment.teamAvaliable == true and sessionScope.user.num == teamLeaderId}">
-														<input type="submit" class="btn red" value="删除"/>
-														<a class="btn yellow" href="/assignment/updateHomework/${homework.id}">修改</a>
-														<span style="color:red">如果点击修改，已上传的作业附件将不能保留，如需保留附件请先在此页面下载上传的附件</span>
-													</c:if>
-													<c:if test="${assignment.teamAvaliable == false}">
-														<input type="submit" class="btn red" value="删除"/>
-														<a class="btn yellow" href="/assignment/updateHomework/${homework.id}">修改</a>
-														<span style="color:red">如果点击修改，已上传的作业附件将不能保留，如需保留附件请先在此页面下载上传的附件</span>
-													</c:if>
+													<input type="submit" class="btn blue" value="确认"/>
 												</c:if>
 												<a href="/assignment/assignments/${semesterCourseId}" class="btn">返回</a>
 
