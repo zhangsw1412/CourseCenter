@@ -17,7 +17,13 @@
 		<result property="applyTime" column="apply_time" />
 		<result property="status" column="status" />
 	</resultMap>
-
+	<resultMap id="teamApplicationMap" type="buaa.course.model.TeamApplication">
+		<id property="id" column="id" />
+		<result property="teamId" column="team_id" />
+		<result property="userId" column="user_id" />
+		<result property="applyTime" column="apply_time" />
+		<result property="status" column="status" />
+	</resultMap>
 	<select id="getTeam" parameterType="int" resultMap="teamMap">
 	    <![CDATA[
 	    	select * from team where id = #{0}
@@ -25,7 +31,7 @@
 	</select>
 	<insert id="addTeam" parameterType="buaa.course.model.Team"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
-	    	insert into team(name,leader_id,max_num,applicable) values(#{name},#{leaderId},#{maxNum},#{applicable})
+	    	insert into team(name,leader_id,max_num,num,applicable) values(#{name},#{leaderId},#{maxNum},#{num},#{applicable})
 	    ]]>
 	</insert>
 	<delete id="deleteTeam" parameterType="int">
@@ -35,7 +41,7 @@
 	</delete>
 	<update id="updateTeam" parameterType="buaa.course.model.Team">
 	    <![CDATA[
-	    	update team set name=#{name},leader_id=#{leaderId},max_num=#{maxNum},applicable=#{applicable} where id=#{id}
+	    	update team set name=#{name},leader_id=#{leaderId},max_num=#{maxNum},num=#{num},,applicable=#{applicable} where id=#{id}
 	    ]]>
 	</update>
 	<select id="getAllTeams" resultMap="teamMap">
@@ -81,6 +87,11 @@
 	<select id="getApplicationsByTeamId" parameterType="int" resultMap="applicationMap">
 		<![CDATA[
 			select * from team_application where team_id=#{0}
+		]]>
+	</select>
+	<select id="getTeamApplicationStatus" resultType="long">
+		<![CDATA[
+			select status from team_application where team_id=#{1} and user_id=#{0}
 		]]>
 	</select>
 </mapper>

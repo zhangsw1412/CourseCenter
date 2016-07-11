@@ -25,20 +25,20 @@ public class TeamController {
     @Resource(name = "teamService")
     private TeamService teamService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/teams")
-    public ModelAndView teams(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @RequestMapping(method = RequestMethod.GET, value = "/team/all_teams")
+    public ModelAndView allTeams(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
-        ModelAndView m = new ModelAndView("team/teams");
+        ModelAndView m = new ModelAndView("team/all_teams");
         List<Team> teams = teamService.getAllTeams();
         m.addObject("teams", teams);
         m.addObject("teamMap", getTeamMap(teams, user.getNum()));
         return m;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/myTeams")
+    @RequestMapping(method = RequestMethod.GET, value = "/team/my_teams")
     public ModelAndView myTeams(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
-        ModelAndView m = new ModelAndView("team/myTeams");
+        ModelAndView m = new ModelAndView("team/my_teams");
         List<Team> teams = teamService.getTeamsByStudentId(user.getNum());
         m.addObject("teams", teams);
         return m;
@@ -90,8 +90,10 @@ public class TeamController {
         for(Team team : teams){
             if(teamService.isUserFromTeam(num, team)){
                 result.put(Long.valueOf(team.getId()), 1L);
-            }else{
+            }else if(teamService.getTeamApplicationStatus(num,team)!=null){
                 result.put(Long.valueOf(team.getId()), teamService.getTeamApplicationStatus(num, team));
+            }else{
+            	result.put(Long.valueOf(team.getId()), 3L);
             }
         }
         return result;

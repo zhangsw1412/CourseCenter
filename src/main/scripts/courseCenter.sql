@@ -71,6 +71,7 @@ create table `team`(
 	name varchar(20) not null default '' comment '团队名',
 	leader_id int not null default 1 comment '团队负责人，对应用户表中学生的主键',
 	max_num tinyint(2) not null default 0 comment '团队人数上限',
+	num tinyint(2) not null default 0 comment '团队人数',
 	applicable tinyint(1) not null default 1 comment '是否允许申请',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='团队表';

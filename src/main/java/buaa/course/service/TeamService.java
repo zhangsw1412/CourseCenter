@@ -58,7 +58,7 @@ public class TeamService {
     }
 
     public Long getTeamApplicationStatus(int num, Team team) {
-        return null;
+    	return teamMapper.getTeamApplicationStatus(num,team.getId());
     }
 
     public void applyToTeam(Integer userId, Integer teamId) {

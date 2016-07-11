@@ -14,7 +14,7 @@ public class TeamMapperTest {
 	int id;
 	@Test
 	public void test(){
-		Team team=new Team("小组",11111111,20);
+		Team team=new Team("小组",11111111,20,20,false);
 		Assert.assertEquals(1, mapper.addTeam(team));
 		id = team.getId();
 		Assert.assertEquals(team.toString(), mapper.getTeam(team.getId()).toString());
