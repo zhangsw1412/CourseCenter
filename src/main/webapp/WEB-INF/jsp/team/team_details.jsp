@@ -194,13 +194,13 @@
 
 										<tr>
 
-											<th>学号</th>
+											<th><div align="center">学号</div></th>
 
-											<th>姓名</th>
+											<th><div align="center">姓名</div></th>
 
-											<th>性别</th>
+											<th><div align="center">性别</div></th>
 
-											<th>委任负责人</th>
+											<c:if test="${sessionScope.user.num==team.leaderId}"><th><div align="center">委任负责人</div></th></c:if>
 											
 										</tr>
 
@@ -210,12 +210,16 @@
 										<c:forEach items="${members}" var="item">
 										<tr>
 
-											<td>${item.id}</td>
+											<td><div align="center">${item.id}</div></td>
 
-											<td>${item.name}</td>
+											<td><div align="center">${item.name}</div></td>
 
-											<td><c:if test="${item.gender==true}">女</c:if><c:if test="${item.gender==false}">男</c:if></td>
-											<td><c:if test="${item.num!=team.leaderId}"><a class="btn mini red" ><i class="icon-hand-left"></i>&nbsp;委任</a></c:if></td>
+											<td><div align="center"><c:if test="${item.gender==true}">女</c:if><c:if test="${item.gender==false}">男</c:if></div></td>
+											<c:if test="${sessionScope.user.num==team.leaderId}">
+											<td><div align="center"><c:if test="${item.num!=team.leaderId}">
+											<a href="/team/${team.id}/appoint/${item.num}" class="btn mini red">
+											<i class="icon-hand-left"></i>&nbsp;委任</a></c:if></div></td>
+											</c:if>
 										</tr>
 										</c:forEach>
 									</tbody>
@@ -227,6 +231,7 @@
 							</div>
 
 						</div>
+						<c:if test="${sessionScope.user.num==team.leaderId}">
 						<div class="portlet box purple">
 
 							<div class="portlet-title">
@@ -249,15 +254,15 @@
 
 										<tr>
 
-											<th>学号</th>
+											<th class="numeric">学号</th>
 
-											<th>姓名</th>
+											<th class="numeric">姓名</th>
 
 											<th class="numeric">性别</th>
 
 											<th class="numeric">申请时间</th>
 
-											<th class="numeric">审核</th>
+											<th class="numeric">状态</th>
 
 										</tr>
 
@@ -265,19 +270,30 @@
 
 									<tbody>
 										<c:forEach items="${applications}" var="item">
+											<c:if test="${item.leaderDelete==false}">
 										<tr>
+											<td><div align="center">${applicants[item.userId+0].id}</div></td>
 
-											<td>13210000</td>
+											<td><div align="center">${applicants[item.userId+0].name}</div></td>
 
-											<td>张三</td>
+											<td><div align="center"><c:if test="${applicants[item.userId+0].gender==true}">女</c:if><c:if test="${applicants[item.userId+0].gender==false}">男</c:if></div></td>
 
-											<td>男/女</td>
+											<td><div align="center">${item.applyTime}</div></td>
 
-											<td>${item.applyTime}</td>
-
-											<td><div align="center"> <a  class="btn mini blue"><i class="icon-pencil"></i> 同意</a>     <a  class="btn mini black"><i class="icon-trash"></i> 拒绝</a></div></td>
-										
+											<td><div align="center">
+											<c:if test="${item.status==0}">
+												<a href="/team/handleTeamApplication/${item.id}/handleType/1" class="btn mini green"><i class="icon-ok"></i>&nbsp;同意</a>
+												<a href="/team/handleTeamApplication/${item.id}/handleType/2" class="btn mini black"><i class="icon-remove"></i>&nbsp;拒绝</a>
+											</c:if>
+											<c:if test="${item.status==1}">
+												已同意&nbsp;<a href="/team/deleteTeamApplication/${item.id}" class="btn mini red"><i class="icon-trash"></i>&nbsp;删除</a>
+											</c:if>
+											<c:if test="${item.status==2}">
+												已拒绝&nbsp;<a href="/team/deleteTeamApplication/${item.id}" class="btn mini red"><i class="icon-trash"></i>&nbsp;删除</a>
+											</c:if>
+											</div></td>
 										</tr>
+											</c:if>
 										</c:forEach>
 									</tbody>
 
@@ -286,14 +302,20 @@
 							</div>
 
 							</div>
+							
+							</c:if>
 
 						</div>
 
 						<!-- END SAMPLE TABLE PORTLET-->
 						<div align="center">
-																<a class="btn medium purple" ><i class="icon-edit"></i> <big>关闭申请</big></a>
-																<a class="btn medium black" ><i class="icon-edit"></i> <big>解散</big></a>
-																<a class="btn medium blue" ><i class="icon-edit"></i> <big>加入课程</big></a>
+							<c:if test="${team.leaderId==sessionScope.user.num}">
+							<a href="/semester/${semesterId}/team_courses/${team.id}" class="btn medium blue" ><i class="icon-signin"></i> <big>加入课程</big></a>&nbsp;&nbsp;&nbsp;
+							<c:if test="${team.applicable==true}"><a href="/team/changeStatus/${team.id}" class="btn medium red"><i class="icon-edit"></i> <big>关闭申请</big></a></c:if>
+							<c:if test="${team.applicable==false and team.maxNum>team.num}"><a href="/team/changeStatus/${team.id}" class="btn medium green"><i class="icon-edit"></i> <big>开放申请</big></a></c:if>
+							<%-- <a href="/team/dissolve/${team.id}" class="btn medium gray" ><i class="icon-trash"></i> <big>解散团队</big></a> --%>
+							</c:if>
+							<c:if test="${isInTeam==false and team.applicable==true and isApplied==false}"><a href="/team/applyToTeam/${team.id}" class="btn medium blue" ><i class="icon-signin"></i> <big>申请加入团队</big></a></c:if>
 						</div>
 			
 						<!-- END SAMPLE TABLE PORTLET-->

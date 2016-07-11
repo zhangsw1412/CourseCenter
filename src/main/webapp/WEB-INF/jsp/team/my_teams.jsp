@@ -167,15 +167,15 @@
 
 										<tr>
 
-											<th>团队编号</th>
+											<th><div align="center">团队编号</div></th>
 
-											<th>团队名</th>
+											<th><div align="center">团队名</div></th>
 
-											<th>负责人</th>
+											<th><div align="center">负责人</div></th>
 
-											<th>人数</th>
+											<th><div align="center">人数</div></th>
 											
-											<th>团队详情</th>
+											<th><div align="center">团队详情</div></th>
 										</tr>
 
 									</thead>
@@ -184,14 +184,14 @@
 										<c:forEach items="${teams}" var="item">
 										<tr class="">
 
-											<td>${item.id}</td>
+											<td><div align="center">${item.id}</div></td>
 
-											<td>${item.name}</td>
+											<td><div align="center">${item.name}</div></td>
 
-											<td>${item.leaderName}</td>
+											<td><div align="center">${item.leaderName}</div></td>
 
-											<td>${item.num}</td>
-											<td><a href="/team/team_details/${item.id}" class="btn mini green" style="margin-right:10px">查看</a></td>
+											<td><div align="center">${item.num}</div></td>
+											<td><div align="center"><a href="/team/team_details/${item.id}" class="btn mini green" style="margin-right:10px">查看</a></div></td>
 										</tr>
 										</c:forEach>
 									</tbody>
@@ -226,17 +226,17 @@
 									<thead>
 										<tr>
 
-											<th>团队编号</th>
+											<th><div align="center">团队编号</div></th>
 
-											<th>团队名</th>
+											<th><div align="center">团队名</div></th>
 
-											<th>负责人</th>
+											<th><div align="center">负责人</div></th>
 
-											<th>人数</th>
+											<th><div align="center">人数</div></th>
 											
-											<th>申请时间</th>
+											<th><div align="center">申请时间</div></th>
 											
-											<th>状态</th>
+											<th><div align="center">状态</div></th>
 
 										</tr>
 									</thead>
@@ -244,25 +244,26 @@
 									<tbody>
 
 										<c:forEach items="${teamApplications}" var="item">
-										
+										<c:if test="${item.studentDelete==false}">
 										<tr class="">
 
-											<td>${item.teamId}</td>
+											<td><div align="center">${item.teamId}</div></td>
 
-											<td>${teamsApplied[item.teamId+0].name}</td>
+											<td><div align="center">${teamsApplied[item.teamId+0].name}</div></td>
 
-											<td>${teamsApplied[item.teamId+0].leaderName}</td>
+											<td><div align="center">${teamsApplied[item.teamId+0].leaderName}</div></td>
 
-											<td>${teamsApplied[item.teamId+0].num}</td>
+											<td><div align="center">${teamsApplied[item.teamId+0].num}</div></td>
 											
-											<td>${item.applyTime}</td>
+											<td><div align="center">${item.applyTime}</div></td>
 											
-											<td>
+											<td><div align="center">
 											<c:if test="${item.status==0}">未处理</c:if>
-											<c:if test="${item.status==1}">已加入</c:if>
-											<c:if test="${item.status==2}">已拒绝</c:if>
-											</td>
+											<c:if test="${item.status==1}">已加入&nbsp;<a href="/team/deleteTeamApplication/${item.id}" class="btn mini red"><i class="icon-trash"></i>&nbsp;删除</a></c:if>
+											<c:if test="${item.status==2}">已拒绝&nbsp;<a href="/team/deleteTeamApplication/${item.id}" class="btn mini red"><i class="icon-trash"></i>&nbsp;删除</a></c:if>
+											</div></td>
 										</tr>
+										</c:if>
 										</c:forEach>
 									</tbody>
 

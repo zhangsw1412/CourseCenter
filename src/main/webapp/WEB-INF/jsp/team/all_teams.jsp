@@ -146,7 +146,7 @@
 											<th>团队名</th>
 											<th>负责人</th>
 											<th>人数</th>
-											<th>状态</th>
+											<th>详情</th>
 
 										</tr>
 
@@ -163,12 +163,11 @@
 											<td>${item.num}</td>
 
 											<td>
-											<c:if test="${teamMap[item.id+0]==0}">已申请</c:if>
-											<c:if test="${teamMap[item.id+0]==1}">已加入</c:if>
-											<c:if test="${teamMap[item.id+0]==2}">已拒绝</c:if>
-											<c:if test="${teamMap[item.id+0]==3}">
-											<a href="team/team_details/${item.id}" class="btn mini green" style="margin-right:10px"><i class="icon-ok-sign"></i>&nbsp;可申请</a>
-											</c:if>
+											<a href="/team/team_details/${item.id}" style="margin-right:10px"
+											<c:if test="${teamMap[item.id+0]==0}">class="btn mini gray" ><i class="icon-ok-sign"></i>&nbsp;已申请</a></c:if>
+											<c:if test="${teamMap[item.id+0]==1}">class="btn mini blue" ><i class="icon-ok-sign"></i>&nbsp;已加入</a></c:if>
+											<c:if test="${teamMap[item.id+0]==2}">class="btn mini red" ><i class="icon-remove"></i>&nbsp;已拒绝</a></c:if>
+											<c:if test="${teamMap[item.id+0]==3}">class="btn mini green" ><i class="icon-signin"></i>&nbsp;可申请</a></c:if>
 											</td>
 										</tr>
                                      	</c:forEach>

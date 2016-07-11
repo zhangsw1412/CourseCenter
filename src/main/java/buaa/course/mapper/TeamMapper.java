@@ -27,4 +27,6 @@ public interface TeamMapper {
 	TeamApplication getApplicationById(int applicationId);
 	int updateTeamApplication(TeamApplication application);
 	int applyCourse(int semesterCourseId, int teamId);
+	List<TeamApplication> getTeamApplicationsByTeamId(int teamId);
+	int deleteTeamApplication(int id);
 }

@@ -60,15 +60,42 @@ public class TeamController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/team/team_details/{teamId}")
     public ModelAndView teamDetails(@PathVariable Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	checkUser(request, response);
+    	User user = checkUser(request, response);
     	ModelAndView m = new ModelAndView("team/team_details");
-        m.addObject("team", teamService.getTeam(teamId));
         List<User> members = userService.getUsersByTeamId(teamId);
+        boolean isInTeam = false;
+        boolean isApplied = false;
+        for(User member : members){
+        	if(member.getNum()==user.getNum())
+        		isInTeam = true;
+        }
+        if(!isInTeam){
+        	List<TeamApplication> teamApplications = teamService.getTeamApplicationsByStudentId(user.getNum());
+        	for(TeamApplication item : teamApplications){
+        		if(item.getTeamId()==teamId)
+        			isApplied=true;
+        	}
+        }
+        List<TeamApplication> applications = teamService.getTeamApplicationsByTeamId(teamId);
+        Map<Long, User> applicants = getApplicants(applications);
+        m.addObject("team", teamService.getTeam(teamId));
+        m.addObject("applications", applications);
+        m.addObject("applicants", applicants);
         m.addObject("members", members);
+        m.addObject("isInTeam", isInTeam);
+        m.addObject("isApplied", isApplied);
         return m;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/team/create_team")
+    private Map<Long, User> getApplicants(List<TeamApplication> applications) {
+        Map<Long, User> result = new HashMap<>();
+        for(TeamApplication application : applications){
+        	result.put(Long.valueOf(application.getUserId()), userService.getUserByNum(application.getUserId()));
+        }
+        return result;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/team/create_team")
     public ModelAndView createTeam(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
                 String name = request.getParameter("name");
@@ -102,12 +129,30 @@ public class TeamController {
         m.addObject("teams", teams);
         m.addObject("teamApplications", teamApplications);
         m.addObject("teamsApplied", teamsApplied);
-        return m;    }
+        return m;
+	}
+
+    @RequestMapping(method = RequestMethod.GET, value = "/team/{teamId}/appoint/{studentNum}")
+    public void appointTeamLeader(@PathVariable Integer teamId, @PathVariable Integer studentNum, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = checkUser(request, response);
+        List<User> members = userService.getUsersByTeamId(teamId);
+        boolean isInTeam = false;
+        for(User member : members){
+        	if(member.getNum()==studentNum)
+        		isInTeam = true;
+        }
+        if(user.getNum()==teamService.getTeam(teamId).getLeaderId()&&isInTeam){
+        	Team team = teamService.getTeam(teamId);
+        	team.setLeaderId(studentNum);
+        	teamService.updateTeam(team);
+        }
+        response.sendRedirect("/team/team_details/"+teamId);
+    }
     
-    @RequestMapping(method = RequestMethod.POST, value = "/team/apply_team/{teamId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/team/applyToTeam/{teamId}")
     public void applyToTeam(@PathVariable Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
-        Integer userId = user.getNum();
+        int userId = user.getNum();
         teamService.applyToTeam(userId, teamId);
         response.sendRedirect("/team/my_teams");
     }
@@ -121,26 +166,48 @@ public class TeamController {
         return m;
     }
 
-
-    @RequestMapping(method = RequestMethod.POST, value = "/handleTeamApplication/{applicationId}/handleType/{handleType}" )
+    @RequestMapping(method = RequestMethod.GET, value = "/team/handleTeamApplication/{applicationId}/handleType/{handleType}" )
     public void handleTeamApplication(@PathVariable Integer applicationId, HttpServletRequest request, HttpServletResponse response, @PathVariable Integer handleType) throws IOException {
-        User user = checkUser(request, response);
-        Integer userId = user.getNum();
-        teamService.handleTeamApplication(userId, applicationId, handleType);
-        response.sendRedirect("/teamApplications/{teamId}");
+        checkUser(request, response);
+        TeamApplication application = teamService.getTeamApplicationByTeamApplicationId(applicationId);
+        teamService.handleTeamApplication(application.getUserId(), applicationId, handleType);
+        Team team = teamService.getTeamByApplicationId(applicationId);
+        response.sendRedirect("/team/team_details/"+team.getId());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/deleteTeamApplication/{applicationId}/handleType/{handleType}" )
+    @RequestMapping(method = RequestMethod.GET, value = "/team/deleteTeamApplication/{applicationId}" )
     public void deleteTeamApplication(@PathVariable Integer applicationId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
         Integer userId = user.getNum();
         teamService.deleteTeamApplication(userId, applicationId);
-        response.sendRedirect("/team/my_teams");
+        TeamApplication application = teamService.getTeamApplicationByTeamApplicationId(applicationId);
+        Team team = teamService.getTeamByApplicationId(applicationId);
+        if(userId==team.getLeaderId())
+        	response.sendRedirect("/team/team_details/"+team.getId());
+        else if(userId==application.getUserId())
+        	response.sendRedirect("/team/my_teams");
     }
-
+    
+    @RequestMapping(method = RequestMethod.GET, value="/team/changeStatus/{teamId}")
+    public void changeTeamStatus(@PathVariable("teamId") Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException{
+        checkUser(request, response);
+        Team team = teamService.getTeam(teamId);
+        if(team.isApplicable()){
+        	team.setApplicable(false);
+        }
+        else if(team.getMaxNum()>team.getNum()){
+        	team.setApplicable(true);
+        }
+        teamService.updateTeam(team);
+        response.sendRedirect("/team/team_details/"+teamId);
+    }
+    
     @RequestMapping(method = RequestMethod.GET, value="/semester/{semesterId}/team_courses/{teamId}")
     public ModelAndView teamCourses(@PathVariable("semesterId") Integer semesterId, HttpServletRequest request, HttpServletResponse response, @PathVariable("teamId") Integer teamId) throws IOException {
-        checkUser(request, response);
+        User user = checkUser(request, response);
+        Team team = teamService.getTeam(teamId);
+        if(user.getNum()!=team.getLeaderId())
+        	response.sendRedirect("/index");
         ModelAndView m = new ModelAndView("/team/team_course_list");
         List<Course> courses = courseService.getTeamAvaliableCourses(semesterId);
         m.addObject("team_courses", courses);

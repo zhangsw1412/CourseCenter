@@ -86,7 +86,7 @@
 
                     <h3 class="page-title">
 
-                        课程列表 <small>为本团队申请加入课程</small>
+                        团队课程列表 <small>申请本团队加入团队课程</small>
 
                     </h3>
 
@@ -104,12 +104,20 @@
 
                         <li>
 
-                            <a href="/team/my_teams">团队管理</a>
+                            <a href="/team/my_teams">我的团队</a>
 
                             <i class="icon-angle-right"></i>
 
                         </li>
+                        
+                        <li>
 
+                            <a href="/team/team_details/${teamId}">${teamId}</a>
+
+                            <i class="icon-angle-right"></i>
+
+                        </li>
+                        
                         <li>
 
                             <a href="#">加入课程</a>

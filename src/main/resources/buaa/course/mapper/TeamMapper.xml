@@ -20,7 +20,7 @@
 		<result property="applyTime" column="apply_time" />
 		<result property="status" column="status" />
 		<result property="studentDelete" column="student_delete" />
-		<result property="leaderDelete" column="student_delete" />
+		<result property="leaderDelete" column="leader_delete" />
 	</resultMap>
 	<select id="getTeam" parameterType="int" resultMap="teamMap">
 	    <![CDATA[
@@ -39,7 +39,7 @@
 	</delete>
 	<update id="updateTeam" parameterType="buaa.course.model.Team">
 	    <![CDATA[
-	    	update team set name=#{name},leader_id=#{leaderId},leader_name=#{leaderName},max_num=#{maxNum},num=#{num},,applicable=#{applicable} where id=#{id}
+	    	update team set name=#{name},leader_id=#{leaderId},leader_name=#{leaderName},max_num=#{maxNum},num=#{num},applicable=#{applicable} where id=#{id}
 	    ]]>
 	</update>
 	<select id="getAllTeams" resultMap="teamMap">
@@ -116,7 +116,7 @@
 	</select>
 	<select id="getApplicationById" parameterType="int" resultMap="teamApplicationMap">
 		<![CDATA[
-			select *  from team_application where id = #{0};
+			select * from team_application where id = #{0};
 		]]>
 	</select>
 	<update id="updateTeamApplication" parameterType="buaa.course.model.TeamApplication">
@@ -125,4 +125,19 @@
 			student_delete=#{studentDelete},leader_delete=#{leaderDelete}
 		]]>
 	</update>
+	<select id="getTeamApplicationsByTeamId" parameterType="int" resultMap="teamApplicationMap">
+		<![CDATA[
+			select * from team_application where team_id = #{0};
+		]]>
+	</select>
+	<update id="applicationHandled">
+		<![CDATA[
+			update team_application set status=#{1} where id=#{0}
+		]]>
+	</update>
+	<delete id="deleteTeamApplication" parameterType="int">
+		<![CDATA[
+			delete from team_application where id=#{0}
+		]]>
+	</delete>
 </mapper>

@@ -87,6 +87,8 @@ public class TeamService {
         if(handleType == 1){
             teamStudentMapper.addTeamStudent(new TeamStudent(userId, team.getId()));
             team.setNum(team.getNum()+1);
+            if(team.getNum()==team.getMaxNum())
+            	team.setApplicable(false);
             teamMapper.updateTeam(team);
             teamMapper.applicationHandled(applicationId, handleType);
         }
@@ -122,13 +124,27 @@ public class TeamService {
         TeamApplication application = teamMapper.getApplicationById(applicationId);
         if(team.getLeaderId() == userId){
             application.setLeaderDelete(true);
-        }else{
+        }else if(application.getUserId()==userId){
             application.setStudentDelete(true);
         }
+        if(application.isStudentDelete()&&application.isLeaderDelete())
+        	return teamMapper.deleteTeamApplication(application.getId());
         return teamMapper.updateTeamApplication(application);
     }
 
     public int applyCourse(int semesterCourseId, int teamId) {
         return teamMapper.applyCourse(semesterCourseId, teamId);
     }
+
+	public List<TeamApplication> getTeamApplicationsByTeamId(int teamId) {
+		return teamMapper.getTeamApplicationsByTeamId(teamId);
+	}
+
+	public Team getTeamByApplicationId(int applicationId) {
+		return teamMapper.getTeamByApplicationId(applicationId);
+	}
+
+	public TeamApplication getTeamApplicationByTeamApplicationId(Integer applicationId) {
+		return teamMapper.getApplicationById(applicationId);
+	}
 }
