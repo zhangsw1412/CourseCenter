@@ -9,6 +9,7 @@
 		<result property="semesterCourseId" column="semester_course_id" />
 		<result property="fileUrl" column="file_url" />
 		<result property="category" column="category" />
+		<result property="createTime" column="create_time" />
 	</resultMap>
 
 	<resultMap id="categoryMap" type="buaa.course.model.ResourceCategory">
@@ -73,4 +74,9 @@
 	    	delete from resource where semester_course_id = #{0} and category = #{1}
 	    ]]>
 	</delete>
+	<insert id="createResourceCategory">
+		<![CDATA[
+	    	insert into resource_category (semester_course_id, create_time, category) values(#{0}, now(), #{1})
+	    ]]>
+	</insert>
 </mapper>

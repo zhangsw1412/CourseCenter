@@ -38,4 +38,8 @@ public class ResourceService {
     public void deleteResourcesByCategory(int id, String category) {
         resourceMapper.deleteResourceByCategory(id, category);
     }
+
+    public int createResourceCategory(int id, String category) {
+        return resourceMapper.createResourceCategory(id, category);
+    }
 }

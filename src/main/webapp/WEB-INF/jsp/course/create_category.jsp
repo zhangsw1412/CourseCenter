@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="/WEB-INF/tld/fileUtil.tld"%>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 
@@ -14,7 +13,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>资源分类</title>
+	<title>添加资源分类</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -43,6 +42,35 @@
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
+    	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-fileupload.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.gritter.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/chosen.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/select2_metro.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.tagsinput.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/clockface.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-wysihtml5.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/datepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/timepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/colorpicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/bootstrap-toggle-buttons.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/daterangepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/datetimepicker.css" />
+
+	<link rel="stylesheet" type="text/css" href="/media/css/multi-select-metro.css" />
+
+	<link href="/media/css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
 
 	<link rel="stylesheet" href="/media/css/DT_bootstrap.css" />
     
@@ -105,7 +133,7 @@
 							</li>
 							<li>
 
-								<a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
+								<a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
 
 								<!-- 数据库获取该课程名 -->
 
@@ -114,11 +142,17 @@
 							</li>
 							<li>
 
-								<a href="#">资源管理</a>
+								<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources">资源分类</a>
+
+								<i class="icon-angle-right"></i>
 
 							</li>
 
+							<li>
 
+								<a href="#">添加资源分类</a>
+
+							</li>
 						</ul>
 
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -130,61 +164,55 @@
 				<!-- END PAGE HEADER-->
 
 				<!-- BEGIN PAGE CONTENT--> 
-   									<div class="row-fluid">
+ 
+ 									<div class="row-fluid">
 
 					<div class="span12">
 
-						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<!-- BEGIN EXTRAS PORTLET-->
 
 						<div class="portlet box blue">
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-edit"></i>资源列表 </div>
-
+								<div class="caption"><i class="icon-reorder"></i>资源上传</div>
 							</div>
 
-							<div class="portlet-body">
+							<div class="portlet-body form">
 
-								<div class="span5">
+								<!-- BEGIN FORM-->
 
-									<a class="btn green" href="/semester/${sessionScope.semesterId}/course/${course.id}/resources/addCategory">
-										<i class="icon-plus icon-white">添加类别</i>
-									</a>
+								<form action="/semester/${semesterId}/course/${course.id}/resources/addCategory" class="form-horizontal" method="post">
 
-								</div>
-                                
-                                <div style="padding:25px"></div>
 
-								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-									<tr>
-										<th>类别</th>
-										<th>操作</th>
-									</tr>
-									<c:forEach items="${categories}" var="category">
-										<tr>
-											<td>
-												<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources/${category.category}">
-													<i class="icon-folder-close-alt"></i>
-													${category.category}
-												</a>
-											</td>
-											<td>
-												<form action="/semester/${sessionScope.semesterId}/course/${course.id}/resources/${category.category}/delete" method="post">
-													<button type="submit" class="btn mini red">删除</button>
-												</form>
+									<div class="control-group">
+										<label class="control-label">类别名称</label>
+										<div class="controls">
+											<input type="text" name="category"  />
 
-												</a>
-											</td>
-										</tr>
-									</c:forEach>
-								</table>
+											<br/>
+											<span>${message}</span>
+										</div>
+
+									</div>
+
+									<div class="form-actions">
+
+										<button type="submit" class="btn blue">确认</button>
+
+										<a href="/semester/${semesterId}/course/${course.id}/resources"><button type="button" class="btn">返回</button></a>
+
+									</div>
+
+								</form>
+
+								<!-- END FORM-->
 
 							</div>
 
 						</div>
 
-						<!-- END EXAMPLE TABLE PORTLET-->
+						<!-- END EXTRAS PORTLET-->
 
 					</div>
 
@@ -241,17 +269,11 @@
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="/media
-	+000/js/app.js"></script>
-
+	<script src="/media/js/app.js"></script>
 	<script>
 
-		jQuery(document).ready(function() {       
-
-		   // initiate layout and plugins
-
-		   App.init();
-
+		jQuery(document).ready(function() {
+			App.init();
 		});
 
 	</script>

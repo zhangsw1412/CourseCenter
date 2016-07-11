@@ -8,6 +8,7 @@ import buaa.course.service.CourseService;
 import buaa.course.service.ResourceService;
 import buaa.course.service.SemesterService;
 import buaa.course.utils.PagingUtil;
+import com.mysql.jdbc.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -187,11 +188,38 @@ public class CourseController {
             m = new ModelAndView("course/teacher_resources");
         }
         m.addObject("course", courseService.getCourseById(courseId));
+        m.addObject("category", category);
         m.addObject("resources", resourceService.getResourcesByCategory(semesterId, courseId, category));
         return m;
     }
 
-    @RequestMapping("/semester/{semesterId}/course/{courseId}/resources/{category}/delete")
+
+    @RequestMapping(method = RequestMethod.GET, value = "/semester/{semesterId}/course/{courseId}/resources/addCategory")
+    public ModelAndView addResourcesCategoryGet(@PathVariable Integer semesterId, @PathVariable Integer courseId,
+                                         HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ModelAndView m = new ModelAndView("course/create_category");
+        m.addObject("course", courseService.getCourseById(courseId));
+        return m;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/semester/{semesterId}/course/{courseId}/resources/addCategory")
+    public ModelAndView addResourcesCategoryPost(@PathVariable Integer semesterId, @PathVariable Integer courseId,
+                                     HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ModelAndView m = new ModelAndView("course/create_category");
+        String category = request.getParameter("category");
+        if(!StringUtils.isNullOrEmpty(category)){
+            SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
+            resourceService.createResourceCategory(sc.getId(), category);
+            m.addObject("message", "添加成功!");
+        }else{
+            m.addObject("message", "请输入类别名称！");
+        }
+
+        m.addObject("course", courseService.getCourseById(courseId));
+        return m;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/semester/{semesterId}/course/{courseId}/resources/{category}/delete")
     public void delResourcesCategory(@PathVariable Integer semesterId, @PathVariable Integer courseId,
                                                @PathVariable String category, HttpServletRequest request){
         SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
