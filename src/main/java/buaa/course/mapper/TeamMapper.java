@@ -20,4 +20,5 @@ public interface TeamMapper {
 	int getTeamMemberCount(int id);
 	void applicationHandled(int applicationId, int handleType);
 	List<TeamApplication> getApplicationsByTeamId(int id);
+	Long getTeamApplicationStatus(int num, int teamId);
 }

@@ -70,7 +70,9 @@ create table `team`(
 	id int not null auto_increment comment '主键',
 	name varchar(20) not null default '' comment '团队名',
 	leader_id int not null default 1 comment '团队负责人，对应用户表中学生的主键',
+	leader_name varchar(10) not null default '' comment '团队负责人姓名',
 	max_num tinyint(2) not null default 0 comment '团队人数上限',
+	num tinyint(2) not null default 0 comment '团队人数',
 	applicable tinyint(1) not null default 1 comment '是否允许申请',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='团队表';

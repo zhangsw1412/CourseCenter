@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -14,7 +14,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>作业管理</title>
+	<title>所有团队</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -45,6 +45,10 @@
 	<!-- BEGIN PAGE LEVEL STYLES -->
 
 	<link rel="stylesheet" href="/media/css/DT_bootstrap.css" />
+    
+    <link href="/media/css/jquery.fancybox.css" rel="stylesheet" />
+
+	<link href="/media/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
 	<!-- END PAGE LEVEL STYLES -->
 
@@ -58,14 +62,13 @@
 
 <body class="page-header-fixed">
 
-<jsp:include page="../include/header.jsp"></jsp:include>
-
+	<jsp:include page="../include/header.jsp"></jsp:include>
 	<!-- BEGIN CONTAINER -->
 
 	<div class="page-container row-fluid">
 
 		<jsp:include page="../include/sidebar.jsp"></jsp:include>
-
+		
 		<!-- BEGIN PAGE -->
 
 		<div class="page-content">
@@ -84,12 +87,11 @@
 
 						<h3 class="page-title">
 
-							作业管理 <small>课程作业提交</small>
+							所有团队 
 
 						</h3>
 
 						<ul class="breadcrumb">
-
 							<li>
 
 								<i class="icon-home"></i>
@@ -99,24 +101,13 @@
 								<i class="icon-angle-right"></i>
 
 							</li>
-							
-							
-
 							<li>
 
-								<a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
-								
-								<!-- 数据库获取该课程名 -->
-
-								<i class="icon-angle-right"></i>
+								<a href="#">所有团队</a> 
 
 							</li>
+							
 
-							<li>
-
-								<a href="#">作业管理</a>
-
-							</li>
 
 						</ul>
 
@@ -128,74 +119,77 @@
 
 				<!-- END PAGE HEADER-->
 
-				<!-- BEGIN PAGE CONTENT-->
+				<!-- BEGIN PAGE CONTENT--> 
+   				<div class="row-fluid">
 
-				<div class="row-fluid">
 					<div class="span12">
-						<!-- BEGIN SAMPLE TABLE PORTLET-->
-						<div class="portlet box green">
+
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+						<div class="portlet box blue">
+
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-bell"></i>作业列表</div>
+
+								<div class="caption"><i class="icon-edit"></i>团队列表 </div>
+
 							</div>
+
 							<div class="portlet-body">
-								<table class="table table-striped table-bordered table-advance table-hover">
-									<tr>
-										<th><i class="icon-file-text"></i> 作业名称</th>
-										<th class="hidden-phone"><i class="icon-time"></i> 开始时间</th>
-										<th><i class="icon-bell"></i> 截止时间</th>
-										<th>上次提交时间</th>
-										<th>得分(最高分)</th>
-										<th>操作</th>
-									</tr>
-									<c:forEach items="${assignmentlist}" var="item">
-									<tr>
-										<td class="highlight">
-											<div class="success"></div>
-											<span>&nbsp;${item.name}</span>
-										</td>
-										<td class="hidden-phone">${item.startTime}</td>
-										<td>${item.deadline}</td>
-										<c:if test="${currentTime<item.startTime}">
-											<td>未开始</td><td>未开始</td>
-										</c:if>
-										<c:if test="${currentTime>=item.startTime and currentTime<item.deadline and homeworks[item.id+0] == null}">
-											<td>未提交</td><td>未提交</td>
-										</c:if>
-										<c:if test="${currentTime>=item.startTime and currentTime<item.deadline and homeworks[item.id+0] != null}">
-											<td>${homeworks[item.id+0].submitTime}</td><td>已提交</td>
-										</c:if>
-										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] == null}">
-											<td>未提交</td><td>未提交</td>
-										</c:if>
-										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] != null and homeworks[item.id+0].score < 0}">
-											<td>${homeworks[item.id+0].submitTime}</td><td>未批改</td>
-										</c:if>
-										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] != null and homeworks[item.id+0].score >= 0}">
-											<td>${homeworks[item.id+0].submitTime}</td>
+								<div style="padding:15px"></div>
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+
+									<thead>
+
+										<tr>
+
+											<th>团队编号</th>
+											<th>团队名</th>
+											<th>负责人</th>
+											<th>人数</th>
+											<th>状态</th>
+
+										</tr>
+
+									</thead>
+
+									<tbody>
+										<c:forEach items="${teams}" var="item">
+										<tr class="">
+
+											<td>${item.id}</td>
+
+											<td>${item.name}</td>
+											<td>${item.leaderName}</td>
+											<td>${item.num}</td>
+
 											<td>
-												${homeworks[item.id+0].score}<c:if test="${item.highestScore>0}">(${item.highestScore})</c:if>
-												<c:if test="${item.highestScore<0}">(无)</c:if>
+											<c:if test="${teamMap[item.id+0]==0}">未处理</c:if>
+											<c:if test="${teamMap[item.id+0]==1}">已加入</c:if>
+											<c:if test="${teamMap[item.id+0]==2}">已拒绝</c:if>
+											<c:if test="${teamMap[item.id+0]==3}">
+											<a href="team/apply_team/${item.id}" class="btn mini green" style="margin-right:10px"><i class="icon-ok-sign"></i>&nbsp;可申请</a>
+											</c:if>
 											</td>
-										</c:if>
-										<td>
-										<c:if test="${currentTime<item.startTime}">
-												未开始
-										</c:if>
-										<c:if test="${currentTime>=item.startTime}">
-												<a href="/assignment/submit/${item.id}" class="btn mini green"><i class="icon-eye-open"></i> 查看</a>
-										</c:if>
-										</td>
-									</tr>
-									</c:forEach>
+										</tr>
+                                     	</c:forEach>
+									</tbody>
+
 								</table>
+
 							</div>
+
 						</div>
-						<!-- END SAMPLE TABLE PORTLET-->
+
+						<!-- END EXAMPLE TABLE PORTLET-->
+
 					</div>
-			
-						<!-- END SAMPLE TABLE PORTLET-->
-					</div>
+
 				</div>
+
+				
+						<!-- END SAMPLE TABLE PORTLET-->
+
+					</div></div>
 
 				<!-- END PAGE CONTENT-->
 
