@@ -293,10 +293,9 @@
 										<h3 id="myModalLabel2">创建团队</h3>
 
 									</div>
-
+									<form action="/team/create_team" class="form-horizontal" method="POST" id="form" name="form" onsubmit="checkForm()">
 									<div class="modal-body">
 
-										<form action="/team/create_team" id="create_team" class="form-horizontal" method="POST">
                                         
                                         	<div class="control-group">
 
@@ -304,36 +303,35 @@
 
 										<div class="controls">
 
-											<input type="text" name="name"/>
-
+											<input type="text" name="name" id="name"/>
 										</div>
 
 									</div>
                                     
                                     <div class="control-group">
 
-										<label class="control-label">团队人数</label>
+										<label class="control-label">人数上限</label>
 
 										<div class="controls">
 
-											<input type="text" name="num"/>
+											<input type="text" name="num" id="num"/>
                                             
                                           
 										</div>
 
 									</div>
 
-										</form>
 
 									</div>
-
+</form>
 									<div class="modal-footer">
 
-										<button class="btn green btn-primary" data-dismiss="modal" onclick="document:create_team.submit();">创建</button>
-
+										<input type="submit" class="btn green btn-primary" value="创建"/>
+										
 										<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 									
 									</div>
+										
 
 								</div>
                     </div>
@@ -452,22 +450,24 @@
 		});
 
 	</script>
+	<script>
+		function checkForm(){   
+			var name = document.getElementById("name").value;
+			var num = document.getElementById("num").value;
+			if(name==null||name ==''){
+				alert("请输入团队名称");
+				return false;
+			}
+			if(num== null||num==''){
+				alert("请输入人数上限");
+				return false;
+			}
+			return true;
+		}
+	</script>
 
 	<!-- END JAVASCRIPTS -->   
-
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>    
-
-	<script>
-
-		jQuery(document).ready(function() {       
-
-		   // initiate layout and plugins
-
-		   App.init();
-
-		});
-
-	</script>
+   
 
 </body>
 

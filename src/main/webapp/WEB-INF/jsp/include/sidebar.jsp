@@ -48,7 +48,7 @@
             <c:if test="${sessionScope.user.type==0}">
  			<li <c:if test="${func:contains(url, 'team')==true}">class="active"</c:if>>
                 <a href="javascript:;">
-                    <i class="icon-bookmark-empty"></i>
+                    <i class="icon-group"></i>
                     <span class="title">团队管理</span>
                     <span class="selected"></span>
                     <span class="arrow open"></span>

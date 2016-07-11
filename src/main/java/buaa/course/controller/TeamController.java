@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.jdbc.StringUtils;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,7 +63,12 @@ public class TeamController {
     public void createTeam(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
         Integer userId = user.getNum();
-        
+        ModelA
+        String name = request.getParameter("name");
+        String num_s = request.getParameter("num");
+        if(StringUtils.isNullOrEmpty(name)||StringUtils.isNullOrEmpty(num_s)){
+        	
+        }
         response.sendRedirect("/team/myTeams");
     }
     
