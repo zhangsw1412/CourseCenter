@@ -128,7 +128,7 @@ public class HomeworkController {
 	        m.addObject("currentTime",currentTime);
         	return m;
         }
-		if(StringUtils.isNullOrEmpty(comment)){
+		if(StringUtils.isEmptyOrWhitespaceOnly(comment)){
 			m.addObject("noComment", "评价不能为空!");
 			Assignment assignment = assignmentService.getAssignmentById(homework.getAssignmentId());
 			Course course = courseService.getCourseBySemesterCourseId(assignment.getSemesterCourseId());
@@ -274,7 +274,7 @@ public class HomeworkController {
     	if(semesterCourseId==0)
     		return index;
     	ModelAndView submithomework = new ModelAndView("assignment/submit");
-    	if(!StringUtils.isNullOrEmpty(request.getParameter("delete"))){
+    	if(!StringUtils.isEmptyOrWhitespaceOnly(request.getParameter("delete"))){
     		homeworkService.deleteHomework(Integer.valueOf(request.getParameter("homeworkId")));
     		ModelAndView m = new ModelAndView("assignment/student_assignments");
     		m.addObject("semesterCourseId", semesterCourseId);
@@ -288,7 +288,7 @@ public class HomeworkController {
     		return m;
     	}
     	String text = request.getParameter("text");
-    	if(StringUtils.isNullOrEmpty(text)){
+    	if(StringUtils.isEmptyOrWhitespaceOnly(text)){
     		Course course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignmentId).getSemesterCourseId());
     		submithomework.addObject("assignment", assignment);
     		submithomework.addObject("course", course);
@@ -361,7 +361,7 @@ public class HomeworkController {
 		ModelAndView updateHomework = new ModelAndView("assignment/updateHomework");
 
 		String text = request.getParameter("text");
-		if(StringUtils.isNullOrEmpty(text)){
+		if(StringUtils.isEmptyOrWhitespaceOnly(text)){
 			Course course = courseService.getCourseBySemesterCourseId(assignmentService.getAssignmentById(assignment.getId()).getSemesterCourseId());
 			updateHomework.addObject("assignment", assignment);
 			updateHomework.addObject("course", course);

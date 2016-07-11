@@ -114,8 +114,10 @@ public class TeamService {
     public List<Integer> getTeamMemberIds(Team team) {
         return teamMapper.getTeamMemberIds(team.getId());
     }
-
-    public int deleteTeamApplication(int userId, int applicationId) {
+	public int createTeamStudent(TeamStudent teamStudent) {
+		return teamStudentMapper.addTeamStudent(teamStudent);
+	}
+	public int deleteTeamApplication(int userId, int applicationId) {
         Team team = teamMapper.getTeamByApplicationId(applicationId);
         TeamApplication application = teamMapper.getApplicationById(applicationId);
         if(team.getLeaderId() == userId){
@@ -124,5 +126,4 @@ public class TeamService {
             application.setStudentDelete(true);
         }
         return teamMapper.updateTeamApplication(application);
-    }
-}
+    }}

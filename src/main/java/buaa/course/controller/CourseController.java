@@ -211,7 +211,7 @@ public class CourseController {
                                      HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView m = new ModelAndView("course/create_category");
         String category = request.getParameter("category");
-        if(!StringUtils.isNullOrEmpty(category)){
+        if(!StringUtils.isEmptyOrWhitespaceOnly(category)){
             SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
             resourceService.createResourceCategory(sc.getId(), category);
             m.addObject("message", "添加成功!");
@@ -227,7 +227,7 @@ public class CourseController {
     public void delResourcesCategory(@PathVariable Integer semesterId, @PathVariable Integer courseId,
                                                HttpServletRequest request, HttpServletResponse response) throws IOException {
         String category = request.getParameter("category");
-        if(!StringUtils.isNullOrEmpty(category)){
+        if(!StringUtils.isEmptyOrWhitespaceOnly(category)){
             SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
             resourceService.deleteResourcesByCategory(sc.getId(), category);
         }
@@ -239,14 +239,14 @@ public class CourseController {
                                HttpServletRequest request, HttpServletResponse response) throws IOException {
         String resourceId = request.getParameter("fileId");
         String category = request.getParameter("category");
-        if(!StringUtils.isNullOrEmpty(resourceId)){
+        if(!StringUtils.isEmptyOrWhitespaceOnly(resourceId)){
             try{
                 resourceService.deleteResourceById(Integer.valueOf(resourceId));
             }catch (Exception e){
 
             }
         }
-        if(StringUtils.isNullOrEmpty(category)){
+        if(StringUtils.isEmptyOrWhitespaceOnly(category)){
             response.sendRedirect("/semester/"+semesterId+"/course/"+courseId+"/resources");
         }
         response.sendRedirect("/semester/"+semesterId+"/course/"+courseId+"/resources/"+category);

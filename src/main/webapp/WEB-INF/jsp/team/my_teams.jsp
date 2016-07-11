@@ -293,7 +293,7 @@
 										<h3 id="myModalLabel2">创建团队</h3>
 
 									</div>
-									<form action="/team/create_team" class="form-horizontal" method="POST" id="form" name="form" onsubmit="checkForm()">
+									<form action="/team/create_team" class="form-horizontal" method="POST" id="form">
 									<div class="modal-body">
 
                                         
@@ -303,7 +303,7 @@
 
 										<div class="controls">
 
-											<input type="text" name="name" id="name"/>
+											<input type="text" id="name" name="name"/>
 										</div>
 
 									</div>
@@ -314,7 +314,7 @@
 
 										<div class="controls">
 
-											<input type="text" name="num" id="num"/>
+											<input type="text" id="maxNum" name="maxNum"/>
                                             
                                           
 										</div>
@@ -323,16 +323,16 @@
 
 
 									</div>
-</form>
+
+									</form>
 									<div class="modal-footer">
 
-										<input type="submit" class="btn green btn-primary" value="创建"/>
+										<button class="btn green btn-primary" onclick="checkAndSubmit()">创建</button>
 										
 										<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
 									
 									</div>
 										
-
 								</div>
                     </div>
 
@@ -451,15 +451,32 @@
 
 	</script>
 	<script>
+		function checkAndSubmit(){
+			if(checkForm())
+				document.getElementById("form").submit();
+		}
 		function checkForm(){   
 			var name = document.getElementById("name").value;
-			var num = document.getElementById("num").value;
+			var maxNum = document.getElementById("maxNum").value;
 			if(name==null||name ==''){
 				alert("请输入团队名称");
 				return false;
 			}
-			if(num== null||num==''){
+			if(name.indexOf(' ')>=0){
+				alert("团队名称不能含空格");
+				return false;
+			}
+			if(maxNum== null||maxNum==''){
 				alert("请输入人数上限");
+				return false;
+			}
+			if(maxNum.indexOf(' ')>=0){
+				alert("人数上限不能含空格");
+				return false;
+			}
+			var re = /^[1-9][0-9]?$/ ;
+			if(!re.test(maxNum)){
+				alert("人数上限须为两位以内正整数");
 				return false;
 			}
 			return true;
