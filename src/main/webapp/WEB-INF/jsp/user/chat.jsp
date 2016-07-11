@@ -108,7 +108,7 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-								<a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
+								<a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
 								<i class="icon-angle-right"></i>
 
 							</li>
@@ -149,11 +149,11 @@
 											<c:forEach items="${messages}" var="message" varStatus="status">
 												<c:if test="${message.userNum == sessionScope.user.num}">
 													<li class="out" time="${message.createTime}"  <c:if test="${status.last == true}"> id="lastMessage"</c:if>>
-														<img class="avatar" alt="" src="/assets/img/Avatar-${sessionScope.user.num%15}.jpg" />
+														<img class="avatar" alt="" src="/assets/img/Avatar-${sessionScope.user.num%26}.jpg" />
 												</c:if>
 												<c:if test="${message.userNum != sessionScope.user.num}">
 													<li class="in" time="${message.createTime}" >
-													<img class="avatar" alt="" src="/assets/img/Avatar-${message.userNum%15}.jpg" />
+													<img class="avatar" alt="" src="/assets/img/Avatar-${message.userNum%26}.jpg" />
 												</c:if>
 														<div class="message">
 															<span class="arrow"></span>
@@ -269,7 +269,7 @@
 		function longPoll() {
 			$.ajax({
 				type:"POST",
-				url:"/semester/${semesterCourseId}/course/${course.id}/chat/ajax",
+				url:"/semester/${sessionScope.semesterId}/course/${course.id}/chat/ajax",
 				timeout:80000,     //ajax请求超时时间80秒
 				data:{lastMessageTime:$("#messageList li:last").attr("time")},
 				success:function(data,textStatus){
@@ -298,7 +298,7 @@
 			longPoll();
 			$("#sendMessage").unbind('click').click(function(){
 				$.ajax({
-					url : "/semester/${semesterCourseId}/course/${course.id}/chat/ajax",
+					url : "/semester/${sessionScope.semesterId}/course/${course.id}/chat/ajax",
 					data : $("#chatForm").serialize(),
 					type : "POST",
 					success:function(data,textStatus){

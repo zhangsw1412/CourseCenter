@@ -132,7 +132,7 @@
 
 							<li>
 
-								<a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
+								<a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
 								<!-- 数据库获取该课程名 -->
 
 								<i class="icon-angle-right"></i>
