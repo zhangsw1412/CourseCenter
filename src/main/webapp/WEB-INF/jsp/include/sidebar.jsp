@@ -55,18 +55,13 @@
                 </a>
                 <ul class="sub-menu">
                         <li>
-                        <a href="/team/all_teams">
-                              	所有团队
-                        </a>
-                        </li>
-                        <li>
                         <a href="/team/my_teams">
                         		我的团队
                         </a>
                         </li>
                         <li>
-                        <a href="#">
-                        	课程申请
+                        <a href="/team/all_teams">
+                              	所有团队
                         </a>
                         </li>
                 </ul>

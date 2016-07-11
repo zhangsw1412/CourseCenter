@@ -198,9 +198,10 @@
 
 											<th>姓名</th>
 
-											<th class="numeric">性别</th>
+											<th>性别</th>
 
-
+											<th>委任管理员</th>
+											
 										</tr>
 
 									</thead>
@@ -270,9 +271,9 @@
 
 											<td>张三</td>
 
-											<td class="numeric">男/女</td>
+											<td>男/女</td>
 
-											<td>2016/07/10</td>
+											<td>${item.applyTime}</td>
 
 											<td><div align="center"> <a  class="btn mini blue"><i class="icon-pencil"></i> 同意</a>     <a  class="btn mini black"><i class="icon-trash"></i> 拒绝</a></div></td>
 										

@@ -57,6 +57,14 @@ public class TeamController {
         return m;
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/team/create_team")
+    public void createTeam(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = checkUser(request, response);
+        Integer userId = user.getNum();
+        
+        response.sendRedirect("/team/myTeams");
+    }
+    
     @RequestMapping(method = RequestMethod.POST, value = "/applyToTeam/{teamId}")
     public void applyToTeam(@PathVariable Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
