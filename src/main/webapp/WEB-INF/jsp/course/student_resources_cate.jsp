@@ -15,7 +15,7 @@
 
     <meta charset="utf-8"/>
 
-    <title>source</title>
+    <title>资源分类</title>
 
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
@@ -106,7 +106,7 @@
                         </li>
                         <li>
 
-                            <a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
+                            <a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
 
                             <!-- 数据库获取该课程名 -->
 
@@ -150,12 +150,17 @@
                             <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                                 <tr>
                                     <th>类别</th>
-
+                                    <th>创建时间</th>
                                 </tr>
                                 <c:forEach items="${categories}" var="category">
                                     <tr>
-                                        <td><a href="/semester/${semesterId}/course/${course.id}/resources/${category}">${category}</a></td>
-
+                                        <td>
+                                            <a href="/semester/${semesterId}/course/${course.id}/resources/category/${category.category}">
+                                                <i class="icon-folder-close-alt"></i>
+                                            ${category.category}
+                                            </a>
+                                        </td>
+                                        <td>${category.createTime}</td>
                                     </tr>
                                 </c:forEach>
 

@@ -108,7 +108,7 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
+								<a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
 								<i class="icon-angle-right"></i>
 
 							</li>
@@ -269,7 +269,7 @@
 		function longPoll() {
 			$.ajax({
 				type:"POST",
-				url:"/semester/${semesterId}/course/${course.id}/chat/ajax",
+				url:"/semester/${sessionScope.semesterId}/course/${course.id}/chat/ajax",
 				timeout:80000,     //ajax请求超时时间80秒
 				data:{lastMessageTime:$("#messageList li:last").attr("time")},
 				success:function(data,textStatus){
@@ -298,7 +298,7 @@
 			longPoll();
 			$("#sendMessage").unbind('click').click(function(){
 				$.ajax({
-					url : "/semester/${semesterId}/course/${course.id}/chat/ajax",
+					url : "/semester/${sessionScope.semesterId}/course/${course.id}/chat/ajax",
 					data : $("#chatForm").serialize(),
 					type : "POST",
 					success:function(data,textStatus){

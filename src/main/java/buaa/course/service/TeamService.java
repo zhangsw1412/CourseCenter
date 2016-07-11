@@ -52,13 +52,17 @@ public class TeamService {
     public List<Team> getTeamsByStudentId(int id) {
         return teamMapper.getTeamsByStudentId(id);
     }
-
+    
+    public List<TeamApplication> getTeamApplicationsByStudentId(int id) {
+    	return teamMapper.getTeamApplicationsByStudentId(id);
+    }
+    
     public boolean isUserFromTeam(int num, Team team) {
         return teamMapper.isUserFromTeam(num, team.getId()) > 0;
     }
 
     public Long getTeamApplicationStatus(int num, Team team) {
-        return null;
+    	return teamMapper.getTeamApplicationStatus(num,team.getId());
     }
 
     public void applyToTeam(Integer userId, Integer teamId) {

@@ -2,6 +2,7 @@ package buaa.course.mapper;
 
 import buaa.course.model.Team;
 import buaa.course.model.TeamApplication;
+import buaa.course.model.TeamStudent;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface TeamMapper {
 	int getTeamMemberCount(int id);
 	void applicationHandled(int applicationId, int handleType);
 	List<TeamApplication> getApplicationsByTeamId(int id);
+	Long getTeamApplicationStatus(int num, int teamId);
+	List<TeamApplication> getTeamApplicationsByStudentId(int id);
 }

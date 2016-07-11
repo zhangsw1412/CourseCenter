@@ -2,6 +2,7 @@ package buaa.course.service;
 
 import buaa.course.mapper.ResourceMapper;
 import buaa.course.mapper.SemesterCourseMapper;
+import buaa.course.model.ResourceCategory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,7 +27,7 @@ public class ResourceService {
         return resourceMapper.getResourcesByCourse(semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId).getId());
     }
 
-    public List<String> getResourcesInCategory(int semesterId, int courseId) {
+    public List<ResourceCategory> getResourcesInCategory(int semesterId, int courseId) {
         return resourceMapper.getResourcesInCategory(semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId).getId());
     }
 
@@ -36,5 +37,14 @@ public class ResourceService {
 
     public void deleteResourcesByCategory(int id, String category) {
         resourceMapper.deleteResourceByCategory(id, category);
+        resourceMapper.deleteResourceCategory(id, category);
+    }
+
+    public int createResourceCategory(int id, String category) {
+        return resourceMapper.createResourceCategory(id, category);
+    }
+
+    public int deleteResourceById(int resourceId) {
+        return resourceMapper.deleteResource(resourceId);
     }
 }

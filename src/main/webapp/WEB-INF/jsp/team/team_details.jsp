@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -14,7 +14,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>提交列表</title>
+	<title>团队详情</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -60,7 +60,7 @@
 
 <body class="page-header-fixed">
 
-<jsp:include page="../include/header.jsp"></jsp:include>
+	<jsp:include page="../include/header.jsp"></jsp:include>
 
 	<!-- BEGIN CONTAINER -->
 
@@ -69,7 +69,7 @@
 		<jsp:include page="../include/sidebar.jsp"></jsp:include>
 
 		<!-- BEGIN PAGE -->
-
+		
 		<div class="page-content">
 
 			<!-- BEGIN PAGE CONTAINER-->        
@@ -86,8 +86,8 @@
 
 						<h3 class="page-title">
 
-							提交列表
-								<small>选择要批改、评分的作业</small>
+							团队详情 <small>查看团队信息，组员信息等</small>
+
 						</h3>
 
 						<ul class="breadcrumb">
@@ -96,16 +96,7 @@
 
 								<i class="icon-home"></i>
 
-								<a href="/index">主页</a>
-
-								<i class="icon-angle-right"></i>
-
-							</li>
-							<li>
-
-								<a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
-								
-								<!-- 数据库获取该课程名 -->
+								<a href="/index">主页</a> 
 
 								<i class="icon-angle-right"></i>
 
@@ -113,13 +104,9 @@
 
 							<li>
 
-								<a href="/assignment/assignments/${assignment.semesterCourseId}">作业管理</a>
-
-								<i class="icon-angle-right"></i>
+								<a href="#">团队详情</a>
 
 							</li>
-
-							<li><a href="#">提交列表</a></li>
 
 						</ul>
 
@@ -131,57 +118,104 @@
 
 				<!-- END PAGE HEADER-->
 
-				<!-- BEGIN PAGE CONTENT-->          
+				<!-- BEGIN PAGE CONTENT-->
 
 				<div class="row-fluid">
-
+				
 					<div class="span12">
-
+					
 						<!-- BEGIN SAMPLE TABLE PORTLET-->
+						
+						<div class="portlet box green">
+						
+							<div class="portlet-title">
+							
+								<div class="caption"><i class="icon-table"></i>团队信息</div>
+								
+							</div>
+							
+							<div class="portlet-body">
+									<form action="#" class="form-horizontal">
+									<div class="actions row-fluid">
+									<div class="span4">
 
-						<div class="portlet box blue">
+										<ul class="unstyled">
+	
+											<li><h5><strong>团队编号：</strong> ${team.id}</h5></li>
+	
+											<li><h5><strong>团队名：</strong> ${team.name}</h5></li>
+	
+											<li><h5><strong>负责人：</strong> ${team.leaderName}</h5></li>
+	
+										</ul>
+
+									</div>
+
+									<div class="span4">
+	
+										<ul class="unstyled">
+	
+											<li><h5><strong>人数上限：</strong> ${team.maxNum}</h5></li>
+	
+											<li><h5><strong>当前人数：</strong> ${team.num}</h5></li>
+	
+											<li><h5><strong>开放申请：</strong>
+											<c:if test="${team.applicable==true}">是</c:if>
+											<c:if test="${team.applicable==false}">否</c:if>
+											</h5></li>
+	
+										</ul>
+	
+									</div>
+									</div>
+									</form>
+							</div>
+							
+						</div>
+
+						<div class="portlet box yellow">
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-pencil"></i>${assignment.name}</div>
+								<div class="caption"><i class="icon-cogs"></i>组员信息</div>
 
+								<div class="actions">
+									
+								
+								</div>
+								
 							</div>
 
-							<div class="portlet-body">
+							<div class="portlet-body flip-scroll">
 
-								<table class="table table-hover table-bordered table-striped" id="sample_2">
+								<table class="table-bordered table-striped table-condensed flip-content">
 
-									<thead>
+									<thead class="flip-content">
 
 										<tr>
-											
+
 											<th>学号</th>
 
 											<th>姓名</th>
 
-											<th class="hidden-480">提交日期</th>
+											<th>性别</th>
 
-											<th>已阅</th>
-
-											<th>操作</th>
-
+											<th>委任管理员</th>
+											
 										</tr>
 
 									</thead>
 
 									<tbody>
-										<c:forEach items="${homeworklist }" var="item">
-										
+										<c:forEach items="${members}" var="item">
 										<tr>
-											<td>${studentlist[item.studentId+0].id }</td>
 
-											<td>${studentlist[item.studentId+0].name }</td>
+											<td>${item.id}</td>
 
-											<td>${item.submitTime }</td>
+											<td>${item.name}</td>
 
-											<td><c:if test="${item.score>=0}" ><i class="icon-check"></i></c:if>
+											<td><c:if test="${item.gender==true}">女</c:if><c:if test="${item.gender==false}">男</c:if></td>
 
-											<td><a href="/assignment/correct/${item.id}" class="btn mini yellow"><i class="icon-pencil"></i> 批改</a></td>
 										</tr>
 										</c:forEach>
 									</tbody>
@@ -190,29 +224,98 @@
 
 							</div>
 
+							</div>
+
+						</div>
+						<div class="portlet box purple">
+
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-cogs"></i>申请列表</div>
+
+								<div class="actions">
+									
+								
+								</div>
+								
+
+							</div>
+
+							<div class="portlet-body flip-scroll">
+
+								<table class="table-bordered table-striped table-condensed flip-content">
+
+									<thead class="flip-content">
+
+										<tr>
+
+											<th>学号</th>
+
+											<th>姓名</th>
+
+											<th class="numeric">性别</th>
+
+											<th class="numeric">申请时间</th>
+
+											<th class="numeric">审核</th>
+
+										</tr>
+
+									</thead>
+
+									<tbody>
+										<c:forEach items="${applications}" var="item">
+										<tr>
+
+											<td>13210000</td>
+
+											<td>张三</td>
+
+											<td>男/女</td>
+
+											<td>${item.applyTime}</td>
+
+											<td><div align="center"> <a  class="btn mini blue"><i class="icon-pencil"></i> 同意</a>     <a  class="btn mini black"><i class="icon-trash"></i> 拒绝</a></div></td>
+										
+										</tr>
+										</c:forEach>
+									</tbody>
+
+								</table>
+
+							</div>
+
+							</div>
+
 						</div>
 
 						<!-- END SAMPLE TABLE PORTLET-->
-
+						<div align="center">
+																<a class="btn medium purple" ><i class="icon-edit"></i> <big>关闭申请</big></a>
+																<a class="btn medium black" ><i class="icon-edit"></i> <big>解散</big></a>
+																<a class="btn medium blue" ><i class="icon-edit"></i> <big>加入课程</big></a>
+						</div>
+			
+						<!-- END SAMPLE TABLE PORTLET-->
 					</div>
+				</div>
 
+				<!-- END PAGE CONTENT-->
 
-						<!-- END BORDERED TABLE PORTLET-->
-
-					</div>
+			</div>
 
 			<!-- END PAGE CONTAINER-->
 
 		</div>
 
+
 		<!-- END PAGE -->
 
-	</div>
 
 	<!-- END CONTAINER -->
 
 	<jsp:include page="../include/footer.jsp"></jsp:include>
-	
+
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 
 	<!-- BEGIN CORE PLUGINS -->
@@ -257,7 +360,7 @@
 
 	<script src="/media/js/app.js"></script>  
     
-	<script src="/media/js/table-advanced.js"></script>       
+	<script src="/media/js/table-advanced.js"></script>     
 
 	<script>
 

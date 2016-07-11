@@ -105,7 +105,7 @@
 							</li>
 							<li>
 
-								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
+								<a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
 
 								<!-- 数据库获取该课程名 -->
 
@@ -114,7 +114,14 @@
 							</li>
 							<li>
 
-								<a href="#">资源管理</a>
+								<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources">资源分类</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
+							<li>
+
+								<a href="#">资源列表</a>
 
 							</li>
 
@@ -148,7 +155,7 @@
 
 								<div class="span5">
 
-									<a href="/uploadResource/semester/${semester.id}/course/${course.id}">
+									<a class="btn green" href="/uploadResource/semester/${sessionScope.semesterId}/course/${course.id}/category/${category}">
 										<i class="icon-plus icon-white">添加资源</i>
 									</a>
 
@@ -159,20 +166,30 @@
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<tr>
 										<th>文件名</th>
-										<th>类别</th>
-										<th>操作</th>
+										<th>上传时间</th>
+										<th colspan="2">操作</th>
+									</tr>
+									<tr>
+										<td colspan="4">
+											当前分类：${category}
+										</td>
 									</tr>
 									<c:forEach items="${resources}" var="file">
 										<tr>
 											<td>${fn:getFileName(file.fileUrl)}</td>
-											<td>${file.category}</td>
+											<td>${file.createTime}</td>
 											<td>
 												<a href="${file.fileUrl}" class="btn mini green">
 													<i class="icon-download"></i> 下载
 												</a>
-												<a href="${file.fileUrl}" class="btn mini red">
-													<i class="icon-remove"></i> 删除
-												</a>
+
+											</td>
+											<td>
+												<form action="/semester/${sessionScope.semesterId}/course/${course.id}/deleteResource" method="post">
+													<input type="hidden" name="fileId" value="${file.id}"/>
+													<input type="hidden" name="category" value="${category}" />
+													<button class="btn mini red" type="submit"><i class="icon-remove"> </i>删除</button>
+												</form>
 											</td>
 										</tr>
 									</c:forEach>

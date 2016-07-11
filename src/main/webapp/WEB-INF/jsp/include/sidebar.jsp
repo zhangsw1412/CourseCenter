@@ -25,7 +25,7 @@
                 </a>
 
             </li>
-            <li <c:if test="${func:contains(url, 'userInfo')==false and func:contains(url, 'index')==false}">class="active"</c:if>>
+            <li <c:if test="${func:contains(url, 'team')==false and func:contains(url, 'userInfo')==false and func:contains(url, 'index')==false}">class="active"</c:if>>
                 <a href="javascript:;">
                     <i class="icon-bookmark-empty"></i>
                     <span class="title">课程列表</span>
@@ -41,10 +41,35 @@
                         </li>
                     </c:forEach>
                 </ul>
-                <c:if test="${func:contains(url, 'userInfo')==false and func:contains(url, 'index')==false}">
+                <c:if test="${func:contains(url, 'team')==false and func:contains(url, 'userInfo')==false and func:contains(url, 'index')==false}">
                     <span class="selected"></span>
                 </c:if>
             </li>
+            <c:if test="${sessionScope.user.type==0}">
+ 			<li <c:if test="${func:contains(url, 'team')==true}">class="active"</c:if>>
+                <a href="javascript:;">
+                    <i class="icon-bookmark-empty"></i>
+                    <span class="title">团队管理</span>
+                    <span class="selected"></span>
+                    <span class="arrow open"></span>
+                </a>
+                <ul class="sub-menu">
+                        <li>
+                        <a href="/team/my_teams">
+                        		我的团队
+                        </a>
+                        </li>
+                        <li>
+                        <a href="/team/all_teams">
+                              	所有团队
+                        </a>
+                        </li>
+                </ul>
+                <c:if test="${func:contains(url, 'team')==true}">
+                    <span class="selected"></span>
+                </c:if>
+            </li>
+            </c:if>
             <li <c:if test="${func:contains(url, 'userInfo')}">class="active"</c:if>>
                 <a href="/userInfo"> <i class="icon-file"></i>
                     <span class="title">个人信息</span>
@@ -98,7 +123,7 @@
             </li>
             <li <c:if test="${func:contains(url, 'userList')}">class="active"</c:if>">
                 <a href="/userList"> <i class="icon-file"></i>
-                    <span class="title">基本信息管理</span>
+                    <span class="title">用户信息</span>
                     <c:if test="${func:contains(url, 'userList')}">
                         <span class="selected"></span>
                     </c:if>

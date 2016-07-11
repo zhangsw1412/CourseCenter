@@ -70,7 +70,9 @@ create table `team`(
 	id int not null auto_increment comment '主键',
 	name varchar(20) not null default '' comment '团队名',
 	leader_id int not null default 1 comment '团队负责人，对应用户表中学生的主键',
+	leader_name varchar(10) not null default '' comment '团队负责人姓名',
 	max_num tinyint(2) not null default 0 comment '团队人数上限',
+	num tinyint(2) not null default 0 comment '团队人数',
 	applicable tinyint(1) not null default 1 comment '是否允许申请',
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='团队表';
@@ -97,6 +99,7 @@ create table `resource`(
 	semester_course_id int not null default 1 comment '对应学期-课程中间表中的主键',
 	file_url varchar(255) comment '资源文件存储路径',
 	category varchar(255) not null default '' comment '分类',
+	create_time datetime comment '创建时间'
 	primary key(id)
 )engine=InnoDB default charset=utf8 comment='课程资源表';
 
@@ -146,7 +149,9 @@ create table `team_application`(
   team_id int not null default 0 comment '对应团队表的主键',
   user_id int not null default 0 comment '对应用户表的主键',
   apply_time datetime comment '申请时间',
-  status int not null default 0 comment '申请状态：未处理0/允许1/拒绝2'
+  status int not null default 0 comment '申请状态：未处理0/允许1/拒绝2',
+  student_delete tinyint(1) not null default 0 comment '学生删除记录：删除1',
+  leader_delete tinyint(1) not null default 0 comment '负责人删除记录：删除1'
 )engine=InnoDB default charset=utf8 comment='学生申请加入团队表';
 
 drop table if exists `course_application`;
@@ -157,3 +162,11 @@ create table `course_application`(
   apply_time datetime comment '申请时间',
   status int not null default 0 comment '申请状态：未处理0/允许1/拒绝2'
 )engine=InnoDB default charset=utf8 comment='团队申请加入课程表';
+
+drop table if exists `resource_category`;
+create table `resource_category`(
+  id int not null auto_increment primary key comment '主键',
+  semester_course_id int comment '课程id',
+  category varchar(255) not null default '' comment '分类',
+  create_time datetime comment '创建时间'
+)engine=InnoDB default charset=utf8 comment='资源分类表'

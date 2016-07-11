@@ -7,7 +7,9 @@
 		<id property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="leaderId" column="leader_id" />
+		<result property="leaderName" column="leader_name" />
 		<result property="maxNum" column="max_num" />
+		<result property="num" column="num" />
 		<result property="applicable" column="applicable" />
 	</resultMap>
 	<resultMap id="applicationMap" type="buaa.course.model.TeamApplication">
@@ -17,7 +19,15 @@
 		<result property="applyTime" column="apply_time" />
 		<result property="status" column="status" />
 	</resultMap>
-
+	<resultMap id="teamApplicationMap" type="buaa.course.model.TeamApplication">
+		<id property="id" column="id" />
+		<result property="teamId" column="team_id" />
+		<result property="user_id" column="user_id" />
+		<result property="applyTime" column="apply_time" />
+		<result property="status" column="status" />
+		<result property="studentDelete" column="student_delete" />
+		<result property="leaderDelete" column="student_delete" />
+	</resultMap>
 	<select id="getTeam" parameterType="int" resultMap="teamMap">
 	    <![CDATA[
 	    	select * from team where id = #{0}
@@ -25,7 +35,7 @@
 	</select>
 	<insert id="addTeam" parameterType="buaa.course.model.Team"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
-	    	insert into team(name,leader_id,max_num,applicable) values(#{name},#{leaderId},#{maxNum},#{applicable})
+	    	insert into team(name,leader_id,leader_name,max_num,num,applicable) values(#{name},#{leaderId},#{leaderName},#{maxNum},#{num},#{applicable})
 	    ]]>
 	</insert>
 	<delete id="deleteTeam" parameterType="int">
@@ -35,7 +45,7 @@
 	</delete>
 	<update id="updateTeam" parameterType="buaa.course.model.Team">
 	    <![CDATA[
-	    	update team set name=#{name},leader_id=#{leaderId},max_num=#{maxNum},applicable=#{applicable} where id=#{id}
+	    	update team set name=#{name},leader_id=#{leaderId},leader_name=#{leaderName},max_num=#{maxNum},num=#{num},,applicable=#{applicable} where id=#{id}
 	    ]]>
 	</update>
 	<select id="getAllTeams" resultMap="teamMap">
@@ -55,7 +65,7 @@
 	</select>
 	<select id="getTeamsByStudentId" parameterType="int" resultMap="teamMap">
 		<![CDATA[
-	    	select t.id,name,leader_id,max_num,applicable from team t, team_student ts where ts.student_id = #{0} and ts.team_id = t.id;
+	    	select t.id,name,leader_id,leader_name,max_num,num,applicable from team t, team_student ts where ts.student_id = #{0} and ts.team_id = t.id;
 	    ]]>
 	</select>
 	<select id="isUserFromTeam"  resultType="int">
@@ -70,7 +80,7 @@
 	</insert>
 	<select id="getTeamByApplicationId" parameterType="int" resultMap="teamMap">
 		<![CDATA[
-			select t.id,name,leader_id,max_num,applicable from team t,team_application ta where ta.id = #{0} and ta.team_id = t.id;
+			select t.id,name,leader_id,leader_name,max_num,num,applicable from team t,team_application ta where ta.id = #{0} and ta.team_id = t.id;
 		]]>
 	</select>
 	<select id="getTeamMemberCount" parameterType="int" resultType="int">
@@ -81,6 +91,16 @@
 	<select id="getApplicationsByTeamId" parameterType="int" resultMap="applicationMap">
 		<![CDATA[
 			select * from team_application where team_id=#{0}
+		]]>
+	</select>
+	<select id="getTeamApplicationStatus" resultType="long">
+		<![CDATA[
+			select status from team_application where team_id=#{1} and user_id=#{0}
+		]]>
+	</select>
+	<select id="getTeamApplicationsByStudentId" parameterType="int" resultMap="teamApplicationMap">
+		<![CDATA[
+			select * from team_application where user_id=#{0}
 		]]>
 	</select>
 </mapper>

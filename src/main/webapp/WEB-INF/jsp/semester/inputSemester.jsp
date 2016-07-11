@@ -164,7 +164,7 @@
 
 								<!-- BEGIN FORM-->
 
-								<form action="/saveSemester" method="post" id="form_sample_1"
+								<form action="/saveSemester" method="post" id="inputSemester"
 									class="form-horizontal">
 
 									<div class="alert alert-error hide">

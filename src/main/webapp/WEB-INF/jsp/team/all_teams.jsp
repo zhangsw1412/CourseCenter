@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="/WEB-INF/tld/fileUtil.tld"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 
@@ -14,7 +14,7 @@
 
 	<meta charset="utf-8" />
 
-	<title>资源分类</title>
+	<title>所有团队</title>
 
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
@@ -62,14 +62,13 @@
 
 <body class="page-header-fixed">
 
-<jsp:include page="../include/header.jsp"></jsp:include>
-
+	<jsp:include page="../include/header.jsp"></jsp:include>
 	<!-- BEGIN CONTAINER -->
 
 	<div class="page-container row-fluid">
 
 		<jsp:include page="../include/sidebar.jsp"></jsp:include>
-
+		
 		<!-- BEGIN PAGE -->
 
 		<div class="page-content">
@@ -88,35 +87,26 @@
 
 						<h3 class="page-title">
 
-							资源管理 
+							所有团队 
 
 						</h3>
 
 						<ul class="breadcrumb">
-
 							<li>
 
 								<i class="icon-home"></i>
 
-								<a href="/index">主页</a> 
+								<a href="/index">主页</a>
 
 								<i class="icon-angle-right"></i>
 
 							</li>
 							<li>
 
-								<a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
-
-								<!-- 数据库获取该课程名 -->
-
-								<i class="icon-angle-right"></i>
+								<a href="#">所有团队</a> 
 
 							</li>
-							<li>
-
-								<a href="#">资源管理</a>
-
-							</li>
+							
 
 
 						</ul>
@@ -130,7 +120,7 @@
 				<!-- END PAGE HEADER-->
 
 				<!-- BEGIN PAGE CONTENT--> 
-   									<div class="row-fluid">
+   				<div class="row-fluid">
 
 					<div class="span12">
 
@@ -140,46 +130,50 @@
 
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-edit"></i>资源列表 </div>
+								<div class="caption"><i class="icon-edit"></i>团队列表 </div>
 
 							</div>
 
 							<div class="portlet-body">
-
-								<div class="span5">
-
-									<a class="btn green" href="/semester/${sessionScope.semesterId}/course/${course.id}/resources/addCategory">
-										<i class="icon-plus icon-white">添加类别</i>
-									</a>
-
-								</div>
-                                
-                                <div style="padding:25px"></div>
-
+								<div style="padding:15px"></div>
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-									<tr>
-										<th>类别</th>
-										<th>操作 <span style="color:red">注意：删除分类将删除该分类下的所有文件！</span></th>
-									</tr>
-									<c:forEach items="${categories}" var="category">
+
+									<thead>
+
 										<tr>
-											<td>
-												<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources/category/${category.category}">
-													<i class="icon-folder-close-alt"></i>
-													${category.category}
-												</a>
-											</td>
-											<td>
-												<form action="/semester/${sessionScope.semesterId}/course/${course.id}/resources/deleteCategory" method="post">
-													<input type="hidden" name="category" value="${category.category}"/>
-													<button type="submit" class="btn mini red"><i class="icon-remove"> </i>删除</button>
 
-												</form>
+											<th>团队编号</th>
+											<th>团队名</th>
+											<th>负责人</th>
+											<th>人数</th>
+											<th>状态</th>
 
-												</a>
+										</tr>
+
+									</thead>
+
+									<tbody>
+										<c:forEach items="${teams}" var="item">
+										<tr class="">
+
+											<td>${item.id}</td>
+
+											<td>${item.name}</td>
+											<td>${item.leaderName}</td>
+											<td>${item.num}</td>
+
+											<td>
+											<c:if test="${teamMap[item.id+0]==0}">未处理</c:if>
+											<c:if test="${teamMap[item.id+0]==1}">已加入</c:if>
+											<c:if test="${teamMap[item.id+0]==2}">已拒绝</c:if>
+											<c:if test="${teamMap[item.id+0]==3}">
+											<a href="team/apply_team/${item.id}" class="btn mini green" style="margin-right:10px"><i class="icon-ok-sign"></i>&nbsp;可申请</a>
+											</c:if>
 											</td>
 										</tr>
-									</c:forEach>
+                                     	</c:forEach>
+									</tbody>
+
 								</table>
 
 							</div>
@@ -191,6 +185,8 @@
 					</div>
 
 				</div>
+
+				
 						<!-- END SAMPLE TABLE PORTLET-->
 
 					</div></div>
@@ -243,8 +239,7 @@
 
 	<!-- END CORE PLUGINS -->
 
-	<script src="/media
-	+000/js/app.js"></script>
+	<script src="/media/js/app.js"></script>      
 
 	<script>
 
@@ -258,7 +253,7 @@
 
 	</script>
 
-<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+</body>
 
 <!-- END BODY -->
 

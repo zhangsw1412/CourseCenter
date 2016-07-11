@@ -148,7 +148,7 @@
                         </div>
                     </a>
 
-                    <a href="/semester/${semesterId}/course/${course.id}/resourceList">
+                    <a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources">
                         <div class="tile double-down bg-purple">
                             <div class="tile-body">
                                 <i class="icon-paste"></i>
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="/semester/${semesterId}/course/${course.id}/chat">
+                    <a href="/semester/${sessionScope.semesterId}/course/${course.id}/chat">
                         <div class="tile double-down2 bg-yellow">
                             <div class="tile-body">
                                 <i class="icon-comments-alt" style=" padding-top:75px"></i>
