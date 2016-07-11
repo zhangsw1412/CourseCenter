@@ -126,7 +126,7 @@ public class CourseService {
         return names;
     }
 
-    private List<User> getTeachers(int semesterCourseId) {
+    public List<User> getTeachers(int semesterCourseId) {
         List<User> users = new ArrayList<>();
         for(CourseTeacher courseTeacher : courseTeacherMapper.getCourseTeacherBySemesterCourseId(semesterCourseId)){
             users.add(userMapper.getUserByNum(courseTeacher.getTeacherId()));

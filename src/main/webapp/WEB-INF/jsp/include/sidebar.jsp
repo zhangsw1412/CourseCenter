@@ -128,7 +128,7 @@
             </li>
             <li <c:if test="${func:contains(url, 'userList')}">class="active"</c:if>">
                 <a href="/userList"> <i class="icon-file"></i>
-                    <span class="title">基本信息管理</span>
+                    <span class="title">用户信息</span>
                     <c:if test="${func:contains(url, 'userList')}">
                         <span class="selected"></span>
                     </c:if>
