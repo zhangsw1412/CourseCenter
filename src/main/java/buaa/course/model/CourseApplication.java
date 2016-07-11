@@ -1,6 +1,6 @@
 package buaa.course.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 /**
  * Created by 熊纪元 on 2016/7/10.

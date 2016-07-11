@@ -121,7 +121,7 @@ public class TeamController {
         response.sendRedirect("/teamApplications/{teamId}");
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/handleTeamApplication/{applicationId}/handleType/{handleType}" )
+    @RequestMapping(method = RequestMethod.POST, value = "/deleteTeamApplication/{applicationId}/handleType/{handleType}" )
     public void deleteTeamApplication(@PathVariable Integer applicationId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
         Integer userId = user.getNum();
