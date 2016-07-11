@@ -159,7 +159,7 @@
 
 							</div>
 							<div class="portlet-body">
-								<a  class="btn blue" href="/team/create"  data-toggle="modal"><i class="icon-group"></i>&nbsp;创建团队</a> 
+								<a  class="btn blue" href="#form_modal2"  data-toggle="modal"><i class="icon-group"></i>&nbsp;创建团队</a> 
 								<div style="padding:5px"></div>
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 
@@ -296,7 +296,7 @@
 
 									<div class="modal-body">
 
-										<form action="#" class="form-horizontal">
+										<form action="/team/create_team" id="create_team" class="form-horizontal" method="POST">
                                         
                                         	<div class="control-group">
 
@@ -304,8 +304,7 @@
 
 										<div class="controls">
 
-											<input type="text" class="span2 m-wrap" />
-                                      
+											<input type="text" name="name"/>
 
 										</div>
 
@@ -317,27 +316,23 @@
 
 										<div class="controls">
 
-											<input type="text" class="span2 m-wrap" />
+											<input type="text" name="num"/>
                                             
                                           
 										</div>
 
 									</div>
 
-
-											
-
-										
 										</form>
 
 									</div>
 
 									<div class="modal-footer">
 
+										<button class="btn green btn-primary" data-dismiss="modal" onclick="document:create_team.submit();">创建</button>
+
 										<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-
-										<button class="btn green btn-primary" data-dismiss="modal">创建</button>
-
+									
 									</div>
 
 								</div>
