@@ -13,4 +13,7 @@ public interface ResourceMapper {
 	int countResources();
 	List<Resource> getResourcesByRange(int start,int row);
 	List<Resource> getResourcesByCourse(int semesterCourseId);
+	List<String> getResourcesInCategory(int id);
+	List<Resource> getResourcesByCategory(int id, String category);
+	int deleteResourceByCategory(int id, String category);
 }

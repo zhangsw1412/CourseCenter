@@ -162,6 +162,42 @@ public class CourseController {
         return dir + file.getOriginalFilename();
     }
 
+    @RequestMapping("/semester/{semesterId}/course/{courseId}/resources")
+    public ModelAndView resourcesInCategory(@PathVariable Integer semesterId, @PathVariable Integer courseId, HttpServletRequest request){
+        ModelAndView m = null;
+        User user = (User) request.getSession().getAttribute("user");
+        if (user.getType() == 0) {//学生查看资源列表
+            m = new ModelAndView("course/student_resources_cate");
+        }else if(user.getType() == 1){//教师查看资源列表
+            m = new ModelAndView("course/teacher_resources_cate");
+        }
+        m.addObject("course", courseService.getCourseById(courseId));
+        m.addObject("categories", resourceService.getResourcesInCategory(semesterId, courseId));
+        return m;
+    }
+
+    @RequestMapping("/semester/{semesterId}/course/{courseId}/resources/{category}")
+    public ModelAndView getResourcesInCategory(@PathVariable Integer semesterId, @PathVariable Integer courseId,
+                                            @PathVariable String category, HttpServletRequest request){
+        ModelAndView m = null;
+        User user = (User) request.getSession().getAttribute("user");
+        if (user.getType() == 0) {//学生查看资源列表
+            m = new ModelAndView("course/student_resources");
+        }else if(user.getType() == 1){//教师查看资源列表
+            m = new ModelAndView("course/teacher_resources");
+        }
+        m.addObject("course", courseService.getCourseById(courseId));
+        m.addObject("resources", resourceService.getResourcesByCategory(semesterId, courseId, category));
+        return m;
+    }
+
+    @RequestMapping("/semester/{semesterId}/course/{courseId}/resources/{category}/delete")
+    public void delResourcesCategory(@PathVariable Integer semesterId, @PathVariable Integer courseId,
+                                               @PathVariable String category, HttpServletRequest request){
+        SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
+        resourceService.deleteResourcesByCategory(sc.getId(), category);
+    }
+
 
     /***
      * 读取上传文件中得所有文件并返回

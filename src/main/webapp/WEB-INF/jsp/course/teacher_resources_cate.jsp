@@ -158,20 +158,15 @@
 
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<tr>
-										<th>文件名</th>
 										<th>类别</th>
 										<th>操作</th>
 									</tr>
-									<c:forEach items="${resources}" var="file">
+									<c:forEach items="${categories}" var="category">
 										<tr>
-											<td>${fn:getFileName(file.fileUrl)}</td>
-											<td>${file.category}</td>
+											<td><a href="/semester/${semesterId}/course/${course.id}/resources/${category}">${category}</a></td>
 											<td>
-												<a href="${file.fileUrl}" class="btn mini green">
-													<i class="icon-download"></i> 下载
-												</a>
-												<a href="${file.fileUrl}" class="btn mini red">
-													<i class="icon-remove"></i> 删除
+												<a href="/semester/${semesterId}/course/${course.id}/resources/${category}/delete" class="btn mini red">
+												<i class="icon-remove"></i> 删除
 												</a>
 											</td>
 										</tr>

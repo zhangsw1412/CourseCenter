@@ -25,4 +25,16 @@ public class ResourceService {
     public List<buaa.course.model.Resource> getResourcesByCourse(int semesterId, int courseId) {
         return resourceMapper.getResourcesByCourse(semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId).getId());
     }
+
+    public List<String> getResourcesInCategory(int semesterId, int courseId) {
+        return resourceMapper.getResourcesInCategory(semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId).getId());
+    }
+
+    public List<buaa.course.model.Resource> getResourcesByCategory(int semesterId, int courseId, String category) {
+        return resourceMapper.getResourcesByCategory(semesterCourseMapper.getSemesterCourseByTwoIds(semesterId, courseId).getId(), category);
+    }
+
+    public void deleteResourcesByCategory(int id, String category) {
+        resourceMapper.deleteResourceByCategory(id, category);
+    }
 }

@@ -162,13 +162,13 @@
 											<td>未提交</td><td>未提交</td>
 										</c:if>
 										<c:if test="${currentTime>=item.startTime and currentTime<item.deadline and homeworks[item.id+0] != null}">
-											<td>已提交</td><td>已提交</td>
+											<td>${homework.submitTime}</td><td>已提交</td>
 										</c:if>
 										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] == null}">
 											<td>未提交</td><td>未提交</td>
 										</c:if>
 										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] != null and homeworks[item.id+0].score < 0}">
-											<td>未批改</td><td>未批改</td>
+											<td>${homework.submitTime}</td><td>未批改</td>
 										</c:if>
 										<c:if test="${currentTime>=item.deadline and homeworks[item.id+0] != null and homeworks[item.id+0].score >= 0}">
 											<td>${homeworks[item.id+0].submitTime}</td>

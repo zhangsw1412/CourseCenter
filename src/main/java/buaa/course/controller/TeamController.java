@@ -59,11 +59,21 @@ public class TeamController {
         response.sendRedirect("/team/myTeams");
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/teamApplications/{teamId}")
+    public ModelAndView teamApplications(@PathVariable("teamId") Integer teamId) {
+        ModelAndView m = new ModelAndView("team/teamApplications");
+        Team team = teamService.getTeam(teamId);
+        m.addObject("team", team);
+        m.addObject("applications", teamService.getApplications(team));
+        return m;
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/handleTeamApplication/{applicationId}/handleType/{handleType}" )
     public void handleTeamApplication(@PathVariable Integer applicationId, HttpServletRequest request, HttpServletResponse response, @PathVariable Integer handleType) throws IOException {
         User user = checkUser(request, response);
         Integer userId = user.getNum();
         teamService.handleTeamApplication(userId, applicationId, handleType);
+        response.sendRedirect("/teamApplications/{teamId}");
     }
 
     private User checkUser(HttpServletRequest request, HttpServletResponse response) throws IOException {

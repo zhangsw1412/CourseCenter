@@ -50,4 +50,19 @@
 	    	select * from resource where semester_course_id = #{0}
 	    ]]>
 	</select>
+	<select id="getResourcesInCategory" parameterType="int" resultType="string">
+		<![CDATA[
+	    	select distinct category from resource where semester_course_id = #{0}
+	    ]]>
+	</select>
+	<select id="getResourcesByCategory" resultMap="resourceMap">
+		<![CDATA[
+	    	select * from resource where semester_course_id = #{0} and category = #{1}
+	    ]]>
+	</select>
+	<delete id="deleteResourceByCategory">
+		<![CDATA[
+	    	delete from resource where semester_course_id = #{0} and category = #{1}
+	    ]]>
+	</delete>
 </mapper>
