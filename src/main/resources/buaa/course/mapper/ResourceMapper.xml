@@ -10,6 +10,14 @@
 		<result property="fileUrl" column="file_url" />
 		<result property="category" column="category" />
 	</resultMap>
+
+	<resultMap id="categoryMap" type="buaa.course.model.ResourceCategory">
+		<id property="id" column="id" />
+		<result property="semesterCourseId" column="semester_course_id" />
+		<result property="createTime" column="create_time" />
+		<result property="category" column="category" />
+	</resultMap>
+
 	<select id="getResource" parameterType="int" resultMap="resourceMap">
 	    <![CDATA[
 	    	select * from resource where id = #{0}
@@ -50,9 +58,9 @@
 	    	select * from resource where semester_course_id = #{0}
 	    ]]>
 	</select>
-	<select id="getResourcesInCategory" parameterType="int" resultType="string">
+	<select id="getResourcesInCategory" parameterType="int" resultMap="categoryMap">
 		<![CDATA[
-	    	select distinct category from resource where semester_course_id = #{0}
+	    	select * from resource_category where semester_course_id = #{0}
 	    ]]>
 	</select>
 	<select id="getResourcesByCategory" resultMap="resourceMap">

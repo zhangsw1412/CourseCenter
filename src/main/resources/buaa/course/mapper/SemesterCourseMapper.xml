@@ -6,7 +6,7 @@
 	
 	<resultMap id="SemesterCourseMap" type="buaa.course.model.SemesterCourse">
 		<id property="id" column="id" />
-		<result property="semesterId" column="semester_id" />
+		<result property="semesterCourseId" column="semester_id" />
 		<result property="courseId" column="course_id" />
 	</resultMap>
 	<select id="getSemesterCourse" parameterType="int" resultMap="SemesterCourseMap">
@@ -21,7 +21,7 @@
 	</select>
 	<insert id="addSemesterCourse" parameterType="buaa.course.model.SemesterCourse"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
-	    	insert into semester_course(semester_id,course_id) values(#{semesterId},#{courseId})
+	    	insert into semester_course(semester_id,course_id) values(#{semesterCourseId},#{courseId})
 	    ]]>
 	</insert>
 	<delete id="deleteSemesterCourse" parameterType="int">
@@ -31,7 +31,7 @@
 	</delete>
 	<update id="updateSemesterCourse" parameterType="buaa.course.model.SemesterCourse">
 	    <![CDATA[
-	    	update semester_course set semester_id=#{semesterId},course_id=#{courseId} where id=#{id}
+	    	update semester_course set semester_id=#{semesterCourseId},course_id=#{courseId} where id=#{id}
 	    ]]>
 	</update>
 	<select id="getAllSemesterCourses" resultMap="SemesterCourseMap">

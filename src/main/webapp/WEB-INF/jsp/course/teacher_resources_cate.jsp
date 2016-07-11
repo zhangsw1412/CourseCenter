@@ -105,7 +105,7 @@
 							</li>
 							<li>
 
-								<a href="/semester/${semesterId}/courseDetail/${course.id}">${course.name}</a>
+								<a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
 
 								<!-- 数据库获取该课程名 -->
 
@@ -163,9 +163,9 @@
 									</tr>
 									<c:forEach items="${categories}" var="category">
 										<tr>
-											<td><a href="/semester/${semesterId}/course/${course.id}/resources/${category}">${category}</a></td>
+											<td><a href="/semester/${semesterCourseId}/course/${course.id}/resources/${category}">${category}</a></td>
 											<td>
-												<a href="/semester/${semesterId}/course/${course.id}/resources/${category}/delete" class="btn mini red">
+												<a href="/semester/${semesterCourseId}/course/${course.id}/resources/${category}/delete" class="btn mini red">
 												<i class="icon-remove"></i> 删除
 												</a>
 											</td>
