@@ -5,6 +5,8 @@ public class Team {
 	private String name;
 	private int leaderId;
 	private int maxNum;
+	private boolean applicable = true;
+
 	public Team() {
 		super();
 	}
@@ -38,8 +40,17 @@ public class Team {
 	public void setMaxNum(int maxNum) {
 		this.maxNum = maxNum;
 	}
+
+	public boolean isApplicable() {
+		return applicable;
+	}
+
+	public void setApplicable(boolean applicable) {
+		this.applicable = applicable;
+	}
+
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", name=" + name + ", leaderId=" + leaderId + ", maxNum=" + maxNum + "]";
+		return "Team [id=" + id + ", name=" + name + ", leaderId=" + leaderId + ", maxNum=" + maxNum + ", applicable=" + applicable + "]";
 	}
 }

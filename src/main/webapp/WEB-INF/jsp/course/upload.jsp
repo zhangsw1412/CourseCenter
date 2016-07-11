@@ -197,12 +197,15 @@
 									</div>
 									<div class="control-group">
 										<label class="control-label">资源类别</label>
-										<div class="controls">
-											<select name="category">
-												<option value="课件">课件</option>
-												<option value="视频">视频</option>
-												<option value="文档">文档</option>
-											</select>
+										<div class="controls" id="categoryOpions">
+											<label class="radio">
+												<input type="radio" name="optionsRadios2" value="option1" />
+												Free
+											</label>
+											<label class="radio">
+												<input type="radio" name="optionsRadios2" value="option1" />
+												Free
+											</label>
 										</div>
 									</div>
 
