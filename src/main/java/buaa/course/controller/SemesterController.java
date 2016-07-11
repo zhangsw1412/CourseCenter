@@ -2,11 +2,14 @@ package buaa.course.controller;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import buaa.course.model.SemesterCourse;
+import buaa.course.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,8 +58,11 @@ public class SemesterController
 
 	/**
 	 * 保存学期
-	 * 
-	 * @param semester
+	 * @param schoolYear
+	 * @param season
+	 * @param startDate
+	 * @param endDate
+	 * @param weeks
 	 * @return
 	 */
 	@RequestMapping(value = "/saveSemester", method = RequestMethod.POST)
@@ -139,6 +145,9 @@ public class SemesterController
 		int semesterId = (int) request.getSession().getAttribute("semesterId");
 		map.put("students",
 				semesterService.getCourseStudents(semesterId, courseId));
+		SemesterCourse semesterCourse=courseService.getSemesterCourseBySemesterCourseId(semesterId,courseId);
+		List<User> teachers=courseService.getTeachers(semesterCourse.getId());
+		map.put("teachers",teachers);
 		return "course/admin_courseInfo";
 	}
 }
