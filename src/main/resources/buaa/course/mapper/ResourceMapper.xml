@@ -74,6 +74,11 @@
 	    	delete from resource where semester_course_id = #{0} and category = #{1}
 	    ]]>
 	</delete>
+	<delete id="deleteResourceCategory">
+		<![CDATA[
+	    	delete from resource_category where semester_course_id = #{0} and category = #{1}
+	    ]]>
+	</delete>
 	<insert id="createResourceCategory">
 		<![CDATA[
 	    	insert into resource_category (semester_course_id, create_time, category) values(#{0}, now(), #{1})

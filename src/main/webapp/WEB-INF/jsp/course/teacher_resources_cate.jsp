@@ -159,19 +159,21 @@
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<tr>
 										<th>类别</th>
-										<th>操作</th>
+										<th>操作 <span style="color:red">注意：删除分类将删除该分类下的所有文件！</span></th>
 									</tr>
 									<c:forEach items="${categories}" var="category">
 										<tr>
 											<td>
-												<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources/${category.category}">
+												<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources/category/${category.category}">
 													<i class="icon-folder-close-alt"></i>
 													${category.category}
 												</a>
 											</td>
 											<td>
-												<form action="/semester/${sessionScope.semesterId}/course/${course.id}/resources/${category.category}/delete" method="post">
-													<button type="submit" class="btn mini red">删除</button>
+												<form action="/semester/${sessionScope.semesterId}/course/${course.id}/resources/deleteCategory" method="post">
+													<input type="hidden" name="category" value="${category.category}"/>
+													<button type="submit" class="btn mini red"><i class="icon-remove"> </i>删除</button>
+
 												</form>
 
 												</a>

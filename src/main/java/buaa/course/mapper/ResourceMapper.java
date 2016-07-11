@@ -18,4 +18,5 @@ public interface ResourceMapper {
 	List<Resource> getResourcesByCategory(int id, String category);
 	int deleteResourceByCategory(int id, String category);
 	int createResourceCategory(int id, String category);
+	void deleteResourceCategory(int id, String category);
 }

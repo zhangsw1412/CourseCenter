@@ -133,7 +133,7 @@
 							</li>
 							<li>
 
-								<a href="/semester/${semesterCourseId}/courseDetail/${course.id}">${course.name}</a>
+								<a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
 
 								<!-- 数据库获取该课程名 -->
 
@@ -142,12 +142,18 @@
 							</li>
 							<li>
 
-								<a href="/semester/${semesterCourseId}/course/${course.id}/resourceList">资源管理</a>
+								<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources">资源分类</a>
 
 								<i class="icon-angle-right"></i>
 
 							</li>
+							<li>
 
+								<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources/category/${category}">${category}</a>
+
+								<i class="icon-angle-right"></i>
+
+							</li>
 							<li>
 
 								<a href="#">添加资源</a>
@@ -197,15 +203,9 @@
 									</div>
 									<div class="control-group">
 										<label class="control-label">资源类别</label>
-										<div class="controls" id="categoryOpions">
-											<label class="radio">
-												<input type="radio" name="optionsRadios2" value="option1" />
-												Free
-											</label>
-											<label class="radio">
-												<input type="radio" name="optionsRadios2" value="option1" />
-												Free
-											</label>
+										<div class="controls">
+											<input type="hidden" name="category" value="${category}"/>
+											<span class="text">${category}</span>
 										</div>
 									</div>
 
@@ -213,7 +213,9 @@
 
 										<button type="submit" class="btn blue">上传</button>
 
-										<a href="/semester/${semesterCourseId}/course/${course.id}/resourceList"><button type="button" class="btn">返回</button><a>
+										<a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources/category/${category}">
+											<button type="button" class="btn">返回</button>
+										</a>
 
 									</div>
 

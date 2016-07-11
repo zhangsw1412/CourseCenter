@@ -115,7 +115,14 @@
                         </li>
                         <li>
 
-                            <a href="#">资源管理</a>
+                            <a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources">资源分类</a>
+
+                            <i class="icon-angle-right"></i>
+
+                        </li>
+                        <li>
+
+                            <a href="#">资源列表</a>
 
                         </li>
 
@@ -142,7 +149,7 @@
                         <div class="portlet-title">
 
                             <div class="caption"><i class="icon-edit"></i>资源列表</div>
-                            ${category}
+
                         </div>
 
                         <div class="portlet-body">
@@ -152,6 +159,11 @@
                                     <th>文件名</th>
                                     <th>上传时间</th>
                                     <th>操作</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        当前分类：${category}
+                                    </td>
                                 </tr>
                                 <c:forEach items="${resources}" var="file">
                                     <tr>

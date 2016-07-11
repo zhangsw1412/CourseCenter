@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -91,9 +92,9 @@ public class CourseController {
      * @return
      * @throws IOException
      */
-    @RequestMapping(method = RequestMethod.GET, value = "/uploadResource/semester/{semesterId}/course/{courseId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/uploadResource/semester/{semesterId}/course/{courseId}/category/{category}")
     public ModelAndView uploadResourceGet(@PathVariable Integer semesterId, @PathVariable Integer courseId,
-                                          HttpServletRequest request) {
+                                          HttpServletRequest request, @PathVariable String category) {
         ModelAndView m = new ModelAndView("course/upload");
         if (semesterId != null && courseId != null) {
             Semester semester = semesterService.getSemesterById(semesterId);
@@ -103,6 +104,7 @@ public class CourseController {
         } else {
             m.addObject("message", "找不到课程！");
         }
+        m.addObject("category", category);
         return m;
     }
 
@@ -143,6 +145,7 @@ public class CourseController {
                     r.setFileUrl(serverPath);
                     r.setSemesterCourseId(courseService.getSemesterCourseBySemesterCourseId(semesterId,courseId).getId());
                     r.setCategory(category);
+                    r.setCreateTime(new Timestamp(System.currentTimeMillis()));
                     resourceService.createResource(r);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -154,6 +157,7 @@ public class CourseController {
 
         Course course = courseService.getCourseById(courseId);
         m.addObject("course", course);
+        m.addObject("category", category);
         m.addObject("message", "上传成功！");
         return m;
     }
@@ -177,7 +181,7 @@ public class CourseController {
         return m;
     }
 
-    @RequestMapping("/semester/{semesterId}/course/{courseId}/resources/{category}")
+    @RequestMapping("/semester/{semesterId}/course/{courseId}/resources/category/{category}")
     public ModelAndView getResourcesInCategory(@PathVariable Integer semesterId, @PathVariable Integer courseId,
                                             @PathVariable String category, HttpServletRequest request){
         ModelAndView m = null;
@@ -219,11 +223,33 @@ public class CourseController {
         return m;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/semester/{semesterId}/course/{courseId}/resources/{category}/delete")
+    @RequestMapping(method = RequestMethod.POST, value = "/semester/{semesterId}/course/{courseId}/resources/deleteCategory")
     public void delResourcesCategory(@PathVariable Integer semesterId, @PathVariable Integer courseId,
-                                               @PathVariable String category, HttpServletRequest request){
-        SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
-        resourceService.deleteResourcesByCategory(sc.getId(), category);
+                                               HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String category = request.getParameter("category");
+        if(!StringUtils.isNullOrEmpty(category)){
+            SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
+            resourceService.deleteResourcesByCategory(sc.getId(), category);
+        }
+        response.sendRedirect("/semester/"+semesterId+"/course/"+courseId+"/resources");
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/semester/{semesterId}/course/{courseId}/deleteResource")
+    public void deleteResource(@PathVariable Integer semesterId, @PathVariable Integer courseId,
+                               HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String resourceId = request.getParameter("fileId");
+        String category = request.getParameter("category");
+        if(!StringUtils.isNullOrEmpty(resourceId)){
+            try{
+                resourceService.deleteResourceById(Integer.valueOf(resourceId));
+            }catch (Exception e){
+
+            }
+        }
+        if(StringUtils.isNullOrEmpty(category)){
+            response.sendRedirect("/semester/"+semesterId+"/course/"+courseId+"/resources");
+        }
+        response.sendRedirect("/semester/"+semesterId+"/course/"+courseId+"/resources/"+category);
     }
 
 
