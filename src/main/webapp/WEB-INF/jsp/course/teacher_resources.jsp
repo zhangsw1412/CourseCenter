@@ -148,7 +148,7 @@
 
 								<div class="span5">
 
-									<a href="/uploadResource/semester/${semester.id}/course/${course.id}">
+									<a href="/uploadResource/semester/${sessionScope.semesterId}/course/${course.id}">
 										<i class="icon-plus icon-white">添加资源</i>
 									</a>
 
@@ -159,13 +159,13 @@
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<tr>
 										<th>文件名</th>
-										<th>类别</th>
+										<th>上传时间</th>
 										<th>操作</th>
 									</tr>
 									<c:forEach items="${resources}" var="file">
 										<tr>
 											<td>${fn:getFileName(file.fileUrl)}</td>
-											<td>${file.category}</td>
+											<td>${file.createTime}</td>
 											<td>
 												<a href="${file.fileUrl}" class="btn mini green">
 													<i class="icon-download"></i> 下载

@@ -148,7 +148,7 @@
                         </div>
                     </a>
 
-                    <a href="/semester/${semesterCourseId}/course/${course.id}/resourceList">
+                    <a href="/semester/${semesterCourseId}/course/${course.id}/resources">
                         <div class="tile double-down bg-purple">
                             <div class="tile-body">
                                 <i class="icon-paste"></i>

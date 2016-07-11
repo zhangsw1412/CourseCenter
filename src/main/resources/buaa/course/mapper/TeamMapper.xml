@@ -96,4 +96,9 @@
 			select status from team_application where team_id=#{1} and user_id=#{0}
 		]]>
 	</select>
+	<select id="getTeamApplicationsByStudentId" resultMap="teamApplicationMap">
+		<![CDATA[
+			select * from team_application where user_id=#{0}
+		]]>
+	</select>
 </mapper>

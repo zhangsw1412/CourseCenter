@@ -35,7 +35,7 @@
                 <ul class="sub-menu">
                     <c:forEach items="${courses}" var="c">
                         <li <c:if test="${course.id == c.id}">class="active"</c:if>>
-                        <a href="/semester/${sessionScope.semesterCourseId}/courseDetail/${c.id}">
+                        <a href="/semester/${sessionScope.semesterId}/courseDetail/${c.id}">
                                 ${c.name}
                         </a>
                         </li>

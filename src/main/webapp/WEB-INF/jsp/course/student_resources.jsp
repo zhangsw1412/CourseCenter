@@ -142,7 +142,7 @@
                         <div class="portlet-title">
 
                             <div class="caption"><i class="icon-edit"></i>资源列表</div>
-
+                            ${category}
                         </div>
 
                         <div class="portlet-body">
@@ -150,13 +150,13 @@
                             <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                                 <tr>
                                     <th>文件名</th>
-                                    <th>类别</th>
+                                    <th>上传时间</th>
                                     <th>操作</th>
                                 </tr>
                                 <c:forEach items="${resources}" var="file">
                                     <tr>
                                         <td>${fn:getFileName(file.fileUrl)}</td>
-                                        <td>${file.category}</td>
+                                        <td>${file.createTime}</td>
                                         <td><a href="${file.fileUrl}" class="btn mini green">
                                             <i class="icon-download"></i> 下载</a>
                                         </td>

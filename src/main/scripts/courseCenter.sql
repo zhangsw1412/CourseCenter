@@ -149,7 +149,9 @@ create table `team_application`(
   team_id int not null default 0 comment '对应团队表的主键',
   user_id int not null default 0 comment '对应用户表的主键',
   apply_time datetime comment '申请时间',
-  status int not null default 0 comment '申请状态：未处理0/允许1/拒绝2'
+  status int not null default 0 comment '申请状态：未处理0/允许1/拒绝2',
+  student_delete tinyint(1) not null default 0 comment '学生删除记录：删除1',
+  leader_delete tinyint(1) not null default 0 comment '负责人删除记录：删除1'
 )engine=InnoDB default charset=utf8 comment='学生申请加入团队表';
 
 drop table if exists `course_application`;
