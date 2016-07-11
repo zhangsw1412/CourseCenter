@@ -163,7 +163,7 @@
 											<td>${item.num}</td>
 
 											<td>
-											<c:if test="${teamMap[item.id+0]==0}">未处理</c:if>
+											<c:if test="${teamMap[item.id+0]==0}">已申请</c:if>
 											<c:if test="${teamMap[item.id+0]==1}">已加入</c:if>
 											<c:if test="${teamMap[item.id+0]==2}">已拒绝</c:if>
 											<c:if test="${teamMap[item.id+0]==3}">

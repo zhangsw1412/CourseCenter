@@ -1,27 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="/WEB-INF/tld/fileUtil.tld"%>
 
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 
-<!--[if !IE]><!-->
-<html lang="en"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 
 <!-- BEGIN HEAD -->
 
 <head>
 
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
 
-    <title>source</title>
+    <title>团队课程列表</title>
 
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <meta content="" name="description"/>
+    <meta content="" name="description" />
 
-    <meta content="" name="author"/>
+    <meta content="" name="author" />
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
 
@@ -45,15 +43,13 @@
 
     <!-- BEGIN PAGE LEVEL STYLES -->
 
-    <link rel="stylesheet" href="/media/css/DT_bootstrap.css"/>
+    <link rel="stylesheet" href="/media/css/DT_bootstrap.css" />
 
-    <link href="/media/css/jquery.fancybox.css" rel="stylesheet"/>
-
-    <link href="/media/css/jquery.fileupload-ui.css" rel="stylesheet"/>
+    <link href="/media/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
     <!-- END PAGE LEVEL STYLES -->
 
-    <link rel="shortcut icon" href="/media/image/favicon.ico"/>
+    <link rel="shortcut icon" href="/media/image/favicon.ico" />
 
 </head>
 
@@ -75,6 +71,7 @@
 
     <div class="page-content">
 
+
         <!-- BEGIN PAGE CONTAINER-->
 
         <div class="container-fluid">
@@ -89,7 +86,7 @@
 
                     <h3 class="page-title">
 
-                        资源管理
+                        课程列表 <small>为本团队申请加入课程</small>
 
                     </h3>
 
@@ -99,30 +96,23 @@
 
                             <i class="icon-home"></i>
 
-                            <a href="/index">个人主页</a>
+                            <a href="/index">主页</a>
 
                             <i class="icon-angle-right"></i>
 
                         </li>
+
                         <li>
 
-                            <a href="/semester/${sessionScope.semesterId}/courseDetail/${course.id}">${course.name}</a>
-
-                            <!-- 数据库获取该课程名 -->
+                            <a href="/team/my_teams">团队管理</a>
 
                             <i class="icon-angle-right"></i>
 
                         </li>
+
                         <li>
 
-                            <a href="/semester/${sessionScope.semesterId}/course/${course.id}/resources">资源分类</a>
-
-                            <i class="icon-angle-right"></i>
-
-                        </li>
-                        <li>
-
-                            <a href="#">资源列表</a>
+                            <a href="#">加入课程</a>
 
                         </li>
 
@@ -148,30 +138,47 @@
 
                         <div class="portlet-title">
 
-                            <div class="caption"><i class="icon-edit"></i>资源列表</div>
+                            <div class="caption"><i class="icon-table"></i>课程列表 </div>
 
                         </div>
-
                         <div class="portlet-body">
-                            <div style="padding:15px"></div>
-                            <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                            <table class="table table-striped table-hover table-bordered">
+
                                 <tr>
-                                    <th class="span6">文件名</th>
-                                    <th class="span6">上传时间</th>
-                                    <th class="span6">操作</th>
+
+                                    <th class="span2" style="text-align:center">课程名称</th>
+                                    <th class="span2" style="text-align:center">任课教师</th>
+                                    <th class="span2" style="text-align:center">学时</th>
+                                    <th class="span2" style="text-align:center">学分</th>
+                                    <th class="span4" style="text-align:center">操作</th>
+
                                 </tr>
-                                <tr>
-                                    <td colspan="3">
-                                        当前分类：${category}
-                                    </td>
-                                </tr>
-                                <c:forEach items="${resources}" var="file">
+
+                                <c:forEach items="${team_courses}" var="item">
                                     <tr>
-                                        <td>${fn:getFileName(file.fileUrl)}</td>
-                                        <td>${file.createTime}</td>
-                                        <td><a href="${file.fileUrl}" class="btn mini green">
-                                            <i class="icon-download"></i> 下载</a>
+
+                                        <td style="text-align:center">${item.name}</td>
+                                        <td style="text-align:center">
+                                            <c:forEach items="${teachersMap[item.id+0]}" var="teacherName" varStatus="status">
+                                                    ${teacherName}&nbsp;
+                                            </c:forEach>
                                         </td>
+                                        <td style="text-align:center">${item.period}</td>
+                                        <td style="text-align:center">${item.credit}</td>
+                                        <td style="text-align:center">
+                                            <c:if test="${courseStatusMap[item.id+0]==0}">已申请</c:if>
+                                            <c:if test="${courseStatusMap[item.id+0]==1}">已加入</c:if>
+                                            <c:if test="${courseStatusMap[item.id+0]==2}">已拒绝</c:if>
+                                            <c:if test="${courseStatusMap[item.id+0]==3}">
+                                                <form action="/team/apply_course" method="post">
+                                                    <input type="hidden" name="semesterId" value="${sessionScope.semesterId}"/>
+                                                    <input type="hidden" name="courseId" value="${item.id}"/>
+                                                    <input type="hidden" name="teamId" value="${teamId}"/>
+                                                    <input type="submit" class="btn green " value="可申请"/>
+                                                </form>
+                                            </c:if>
+                                        </td>
+
                                     </tr>
                                 </c:forEach>
 
@@ -186,10 +193,11 @@
                 </div>
 
             </div>
+
+
             <!-- END SAMPLE TABLE PORTLET-->
 
-        </div>
-    </div>
+        </div></div>
 
     <!-- END PAGE CONTENT-->
 
@@ -205,7 +213,29 @@
 
 <!-- END CONTAINER -->
 
-	<jsp:include page="../include/footer.jsp"></jsp:include>
+<!-- BEGIN FOOTER -->
+
+<div class="footer">
+
+    <div class="footer-inner">
+
+        2016 BuaaSoftware Best Group Null
+
+    </div>
+
+    <div class="footer-tools">
+
+			<span class="go-top">
+
+			<i class="icon-angle-up"></i>
+
+			</span>
+
+    </div>
+
+</div>
+
+<!-- END FOOTER -->
 
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 
@@ -235,7 +265,7 @@
 
 <script src="/media/js/jquery.cookie.min.js" type="text/javascript"></script>
 
-<script src="/media/js/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="/media/js/jquery.uniform.min.js" type="text/javascript" ></script>
 
 <!-- END CORE PLUGINS -->
 
@@ -243,7 +273,7 @@
 
 <script>
 
-    jQuery(document).ready(function () {
+    jQuery(document).ready(function() {
 
         // initiate layout and plugins
 
@@ -253,19 +283,6 @@
 
 </script>
 
-<script type="text/javascript">  var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-37564768-1']);
-_gaq.push(['_setDomainName', 'keenthemes.com']);
-_gaq.push(['_setAllowLinker', true]);
-_gaq.push(['_trackPageview']);
-(function () {
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-})();</script>
 </body>
 
 <!-- END BODY -->

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -139,27 +140,42 @@ public class TeamController {
 
     @RequestMapping(method = RequestMethod.GET, value="/semester/{semesterId}/team_courses/{teamId}")
     public ModelAndView teamCourses(@PathVariable("semesterId") Integer semesterId, HttpServletRequest request, HttpServletResponse response, @PathVariable("teamId") Integer teamId) throws IOException {
-        User user = checkUser(request, response);
+        checkUser(request, response);
+        ModelAndView m = new ModelAndView("/team/team_course_list");
         List<Course> courses = courseService.getTeamAvaliableCourses(semesterId);
+        m.addObject("team_courses", courses);
         Map<Long, Long> courseStatusMap = getCourseStatusMap(semesterId, courses, teamId);
-        ModelAndView m = new ModelAndView("/team/teamCourses");
-        m.addObject("courses", courses);
         m.addObject("courseStatusMap", courseStatusMap);
+        m.addObject("teachersMap", courseService.getTeachersName(semesterId, courses));
+        m.addObject("teamId", teamId);
         return m;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value="/team/apply_course")
+    public void applyCourse(@RequestParam Integer semesterId, @RequestParam Integer courseId, @RequestParam Integer teamId,
+                                    HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = checkUser(request, response);
+        Team team = teamService.getTeam(teamId);
+
+        if(team != null && team.getLeaderId() == user.getNum()){
+            SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
+            teamService.applyCourse(sc.getId(), teamId);
+        }
+        response.sendRedirect("/semester/"+semesterId+"/team_courses/"+teamId);
     }
 
     private Map<Long,Long> getCourseStatusMap(int semesterId, List<Course> courses, int teamId) {
         Map<Long, Long> result = new HashMap<>();
         for(Course course : courses){
             SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, course.getId());
-            result.put(Long.valueOf(course.getId()), getCourseStatus(sc.getSemesterId(), teamId));
+            result.put(Long.valueOf(course.getId()), getCourseStatus(sc.getId(), teamId));
         }
         return result;
     }
 
     private Long getCourseStatus(int semesterCourseId, int teamId) {
-        CourseStudent cs = courseService.getCourseByCourseIdAndTeamId(semesterCourseId, teamId);
-        if(cs != null){
+        int csCount = courseService.getCourseByCourseIdAndTeamId(semesterCourseId, teamId);
+        if(csCount > 0){
             return 1L;//已加入
         }
         CourseApplication application = courseService.getCourseApplicationByTeamId(semesterCourseId, teamId);

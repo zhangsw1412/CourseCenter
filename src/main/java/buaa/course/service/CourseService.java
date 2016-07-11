@@ -155,8 +155,8 @@ public class CourseService {
         return courseMapper.getTeamAvaliableCourses(semesterId);
     }
 
-    public CourseStudent getCourseByCourseIdAndTeamId(int id, int teamId) {
-        return courseStudentMapper.getCourseByCourseIdAndTeamId(id, teamId);
+    public int getCourseByCourseIdAndTeamId(int id, int teamId) {
+        return courseStudentMapper.getCourseStudentCountByCourseIdAndTeamId(id, teamId);
     }
 
     public CourseApplication getCourseApplicationByTeamId(int semesterCourseId, int teamId) {
