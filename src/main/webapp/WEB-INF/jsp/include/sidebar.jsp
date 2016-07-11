@@ -11,7 +11,7 @@
         <ul class="page-sidebar-menu">
             <div align="center" class="icon_head">
                 <a href="/userInfo">
-                    <img src="/assets/img/Avatar-${sessionScope.user.num%15}.jpg" alt="头像" style="border-radius:10px;width:50%;margin:5%"/>
+                    <img src="/assets/img/Avatar-${sessionScope.user.num%26}.jpg" alt="头像" style="border-radius:10px;width:50%;margin:5%"/>
                 </a>
                 <h3  style="color:white; font-family:'汉仪粗圆简'">${sessionScope.user.name}</h3>
                  <p style="color:white; font-family:'幼圆'">${sessionScope.user.id}</p>
@@ -85,7 +85,7 @@
         <ul class="page-sidebar-menu">
             <div align="center" class="icon_head">
                 <a href="/userInfo">
-                    <img src="/assets/img/Avatar-${sessionScope.user.num%15}.jpg" alt="头像" style="border-radius:10px;width:50%;margin:5%"/>
+                    <img src="/assets/img/Avatar-${sessionScope.user.num%26}.jpg" alt="头像" style="border-radius:10px;width:50%;margin:5%"/>
                 </a>
                 <h3  style="color:white; font-family:'汉仪粗圆简'">${sessionScope.user.name}</h3>
                 <p style="color:white; font-family:'幼圆'">${sessionScope.user.id}</p>
