@@ -50,9 +50,9 @@ public class TeamController {
         return m;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/teamDetail/{teamId}")
-    public ModelAndView teamDetail(@PathVariable Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ModelAndView m = new ModelAndView("team/teamDetail");
+    @RequestMapping(method = RequestMethod.GET, value = "/team/team_details/{teamId}")
+    public ModelAndView teamDetails(@PathVariable Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ModelAndView m = new ModelAndView("team/team_details");
         m.addObject("team", teamService.getTeam(teamId));
         return m;
     }

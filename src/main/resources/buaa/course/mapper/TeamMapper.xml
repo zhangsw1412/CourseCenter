@@ -22,9 +22,11 @@
 	<resultMap id="teamApplicationMap" type="buaa.course.model.TeamApplication">
 		<id property="id" column="id" />
 		<result property="teamId" column="team_id" />
-		<result property="userId" column="user_id" />
+		<result property="user_id" column="user_id" />
 		<result property="applyTime" column="apply_time" />
 		<result property="status" column="status" />
+		<result property="studentDelete" column="student_delete" />
+		<result property="leaderDelete" column="student_delete" />
 	</resultMap>
 	<select id="getTeam" parameterType="int" resultMap="teamMap">
 	    <![CDATA[
@@ -96,7 +98,7 @@
 			select status from team_application where team_id=#{1} and user_id=#{0}
 		]]>
 	</select>
-	<select id="getTeamApplicationsByStudentId" resultMap="teamApplicationMap">
+	<select id="getTeamApplicationsByStudentId" parameterType="int" resultMap="teamApplicationMap">
 		<![CDATA[
 			select * from team_application where user_id=#{0}
 		]]>
