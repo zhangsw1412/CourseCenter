@@ -128,15 +128,16 @@
 
 								<i class="icon-home"></i>
 
-								<a href="s#">团队管理</a> 
+								<a href="/index">主页</a> 
 
 								<i class="icon-angle-right"></i>
 
 							</li>
-							
-							
+							<li>
 
+								<a href="#">我的团队</a> 
 
+							</li>
 						</ul>
 
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -145,62 +146,54 @@
 
 				</div>
 
-				
-				<!-- BEGIN PAGE CONTENT--> 
-   				<div class="row-fluid">
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="row-fluid">
 					
 					<div class="span12">
 
 
-						<div class="portlet box purple">
+						<div class="portlet box green">
 							<div class="portlet-title">
 
-								<div class="caption"><i class="icon-edit"></i>申请列表 </div>
+								<div class="caption"><i class="icon-edit"></i>我的团队列表 </div>
 
 							</div>
-
 							<div class="portlet-body">
-								<div style="padding:15px"></div>
+								<a  class="btn blue" href="/team/create"  data-toggle="modal"><i class="icon-group"></i>&nbsp;创建团队</a> 
+								<div style="padding:5px"></div>
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 
 									<thead>
 
 										<tr>
 
+											<th>团队编号</th>
+
 											<th>团队名</th>
 
-											<th>组长</th>
+											<th>负责人</th>
 
-											<th>团队人数</th>
-
+											<th>人数</th>
+											
 											<th>团队详情</th>
-
 										</tr>
 
 									</thead>
 
 									<tbody>
-
+										<c:forEach items="${teams}" var="item">
 										<tr class="">
 
-											<td> NULL</a></td>
+											<td>${item.id}</td>
 
-											<td>张三</td>
+											<td>${item.name}</td>
 
-											<td>8</td>
+											<td>${item.leaderName}</td>
 
-											<td><a href="#"  style="margin-right:10px"> 团队详情</a></td>
+											<td>${item.num}</td>
+											<td><a href="team/details" class="btn mini green" style="margin-right:10px">查看</a></td>
 										</tr>
-										<tr class="">
-
-											<td> NULL</a></td>
-
-											<td>张三</td>
-
-											<td>8</td>
-
-											<td><a href="#"  style="margin-right:10px"> 团队详情</a></td>
-										</tr>
+										</c:forEach>
 									</tbody>
 
 								</table>
@@ -215,11 +208,68 @@
 					</div>
 
 				</div>
-				<a  class="btn blue" href="#form_modal2"  data-toggle="modal">
+   				<div class="row-fluid">
+					
+					<div class="span12">
 
-											创建团队 <i class="icon-group"></i>
 
-											</a>  
+						<div class="portlet box purple">
+							<div class="portlet-title">
+
+								<div class="caption"><i class="icon-edit"></i>申请加入团队列表 </div>
+
+							</div>
+
+							<div class="portlet-body">
+								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+
+									<thead>
+										<tr>
+
+											<th>团队编号</th>
+
+											<th>团队名</th>
+
+											<th>负责人</th>
+
+											<th>人数</th>
+											
+											<th>团队详情</th>
+
+										</tr>
+									</thead>
+
+									<tbody>
+
+										<c:forEach items="${teams}" var="item">
+										
+										<tr class="">
+
+											<td> NULL</a></td>
+
+											<td>张三</td>
+
+											<td>8</td>
+
+											<td></td>
+											<td><a href="team/details" class="btn mini green" style="margin-right:10px">查看</a></td>
+										</tr>
+										</c:forEach>
+									</tbody>
+
+								</table>
+
+							</div>
+
+						</div>
+
+
+						<!-- END EXAMPLE TABLE PORTLET-->
+
+					</div>
+
+				</div>
+				
 
 				
 						<!-- END SAMPLE TABLE PORTLET-->

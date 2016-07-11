@@ -4,6 +4,7 @@ public class Team {
 	private int id;
 	private String name;
 	private int leaderId;
+	private String leaderName;
 	private int maxNum;
 	private int num;
 	private boolean applicable = true;
@@ -11,10 +12,11 @@ public class Team {
 	public Team() {
 		super();
 	}
-	public Team(String name, int leaderId, int maxNum, int num, boolean applicable) {
+	public Team(String name, int leaderId, String leaderName, int maxNum, int num, boolean applicable) {
 		super();
 		this.name = name;
 		this.leaderId = leaderId;
+		this.leaderName = leaderName;
 		this.maxNum = maxNum;
 		this.num = num;
 		this.applicable = applicable;
@@ -36,6 +38,12 @@ public class Team {
 	}
 	public void setLeaderId(int leaderId) {
 		this.leaderId = leaderId;
+	}
+	public String getLeaderName() {
+		return leaderName;
+	}
+	public void setLeaderName(String leaderName) {
+		this.leaderName = leaderName;
 	}
 	public int getMaxNum() {
 		return maxNum;
@@ -59,6 +67,6 @@ public class Team {
 
 	@Override
 	public String toString() {
-		return "Team [id=" + id + ", name=" + name + ", leaderId=" + leaderId + ", maxNum=" + maxNum + ", num=" + num + ", applicable=" + applicable + "]";
+		return "Team [id=" + id + ", name=" + name + ", leaderId=" + leaderId + ", leaderName=" + leaderName + ", maxNum=" + maxNum + ", num=" + num + ", applicable=" + applicable + "]";
 	}
 }

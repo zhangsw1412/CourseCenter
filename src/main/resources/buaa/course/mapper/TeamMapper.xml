@@ -7,7 +7,9 @@
 		<id property="id" column="id" />
 		<result property="name" column="name" />
 		<result property="leaderId" column="leader_id" />
+		<result property="leaderName" column="leader_name" />
 		<result property="maxNum" column="max_num" />
+		<result property="num" column="num" />
 		<result property="applicable" column="applicable" />
 	</resultMap>
 	<resultMap id="applicationMap" type="buaa.course.model.TeamApplication">
@@ -31,7 +33,7 @@
 	</select>
 	<insert id="addTeam" parameterType="buaa.course.model.Team"  useGeneratedKeys="true" keyProperty="id">
 	    <![CDATA[
-	    	insert into team(name,leader_id,max_num,num,applicable) values(#{name},#{leaderId},#{maxNum},#{num},#{applicable})
+	    	insert into team(name,leader_id,leader_name,max_num,num,applicable) values(#{name},#{leaderId},#{leaderName},#{maxNum},#{num},#{applicable})
 	    ]]>
 	</insert>
 	<delete id="deleteTeam" parameterType="int">
@@ -41,7 +43,7 @@
 	</delete>
 	<update id="updateTeam" parameterType="buaa.course.model.Team">
 	    <![CDATA[
-	    	update team set name=#{name},leader_id=#{leaderId},max_num=#{maxNum},num=#{num},,applicable=#{applicable} where id=#{id}
+	    	update team set name=#{name},leader_id=#{leaderId},leader_name=#{leaderName},max_num=#{maxNum},num=#{num},,applicable=#{applicable} where id=#{id}
 	    ]]>
 	</update>
 	<select id="getAllTeams" resultMap="teamMap">
@@ -61,7 +63,7 @@
 	</select>
 	<select id="getTeamsByStudentId" parameterType="int" resultMap="teamMap">
 		<![CDATA[
-	    	select t.id,name,leader_id,max_num,applicable from team t, team_student ts where ts.student_id = #{0} and ts.team_id = t.id;
+	    	select t.id,name,leader_id,leader_name,max_num,num,applicable from team t, team_student ts where ts.student_id = #{0} and ts.team_id = t.id;
 	    ]]>
 	</select>
 	<select id="isUserFromTeam"  resultType="int">
@@ -76,7 +78,7 @@
 	</insert>
 	<select id="getTeamByApplicationId" parameterType="int" resultMap="teamMap">
 		<![CDATA[
-			select t.id,name,leader_id,max_num,applicable from team t,team_application ta where ta.id = #{0} and ta.team_id = t.id;
+			select t.id,name,leader_id,leader_name,max_num,num,applicable from team t,team_application ta where ta.id = #{0} and ta.team_id = t.id;
 		]]>
 	</select>
 	<select id="getTeamMemberCount" parameterType="int" resultType="int">

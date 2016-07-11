@@ -1,6 +1,7 @@
 package buaa.course.controller;
 
 import buaa.course.model.Team;
+import buaa.course.model.TeamStudent;
 import buaa.course.model.User;
 import buaa.course.service.TeamService;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,9 @@ public class TeamController {
         User user = checkUser(request, response);
         ModelAndView m = new ModelAndView("team/my_teams");
         List<Team> teams = teamService.getTeamsByStudentId(user.getNum());
+        //List<TeamStudent> teamsApplied = teamService.getTeamsAppliedByStudentId(user.getNum());
         m.addObject("teams", teams);
+        //m.addObject("teamsApplied", teamsApplied);
         return m;
     }
 

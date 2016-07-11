@@ -126,7 +126,7 @@
 
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
 
-						<div class="portlet box purple">
+						<div class="portlet box blue">
 
 							<div class="portlet-title">
 
@@ -143,11 +143,9 @@
 										<tr>
 
 											<th>团队编号</th>
-
 											<th>团队名</th>
-
-											<th>团队人数</th>
-
+											<th>负责人</th>
+											<th>人数</th>
 											<th>状态</th>
 
 										</tr>
@@ -161,7 +159,7 @@
 											<td>${item.id}</td>
 
 											<td>${item.name}</td>
-
+											<td>${item.leaderName}</td>
 											<td>${item.num}</td>
 
 											<td>
@@ -169,7 +167,7 @@
 											<c:if test="${teamMap[item.id+0]==1}">已加入</c:if>
 											<c:if test="${teamMap[item.id+0]==2}">已拒绝</c:if>
 											<c:if test="${teamMap[item.id+0]==3}">
-											<a href="team/apply_team/${item.id}" class="btn mini green" style="margin-right:10px"><i class="icon-ok-sign"></i>申请</a>
+											<a href="team/apply_team/${item.id}" class="btn mini green" style="margin-right:10px"><i class="icon-ok-sign"></i>&nbsp;可申请</a>
 											</c:if>
 											</td>
 										</tr>

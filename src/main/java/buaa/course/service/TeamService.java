@@ -52,7 +52,12 @@ public class TeamService {
     public List<Team> getTeamsByStudentId(int id) {
         return teamMapper.getTeamsByStudentId(id);
     }
-
+    
+    public List<Team> getTeamsAppliedByStudentId(int num) {
+    	// TODO Auto-generated method stub
+    	return null;
+    }
+    
     public boolean isUserFromTeam(int num, Team team) {
         return teamMapper.isUserFromTeam(num, team.getId()) > 0;
     }

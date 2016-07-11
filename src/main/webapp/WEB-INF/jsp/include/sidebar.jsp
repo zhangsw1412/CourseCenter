@@ -45,6 +45,7 @@
                     <span class="selected"></span>
                 </c:if>
             </li>
+            <c:if test="${sessionScope.user.type==0}">
  			<li <c:if test="${func:contains(url, 'team')==true}">class="active"</c:if>>
                 <a href="javascript:;">
                     <i class="icon-bookmark-empty"></i>
@@ -73,6 +74,7 @@
                     <span class="selected"></span>
                 </c:if>
             </li>
+            </c:if>
             <li <c:if test="${func:contains(url, 'userInfo')}">class="active"</c:if>>
                 <a href="/userInfo"> <i class="icon-file"></i>
                     <span class="title">个人信息</span>
