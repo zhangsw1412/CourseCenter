@@ -42,6 +42,7 @@ public class TeamController {
         ModelAndView m = new ModelAndView("team/my_teams");
         List<Team> teams = teamService.getTeamsByStudentId(user.getNum());
         //List<TeamStudent> teamsApplied = teamService.getTeamsAppliedByStudentId(user.getNum());
+        //Map<Long, Long> teamsApplied = get
         m.addObject("teams", teams);
         //m.addObject("teamsApplied", teamsApplied);
         return m;

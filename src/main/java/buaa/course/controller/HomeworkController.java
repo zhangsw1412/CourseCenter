@@ -231,6 +231,8 @@ public class HomeworkController {
 			Map<Long, Homework> homeworks = homeworkService.getHomeworksByAssignments(assignmentlist, user.getNum());
 			m.addObject("homeworks", homeworks);
     		m.addObject("assignmentlist", assignmentlist);
+    		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    		m.addObject("currentTime", currentTime);
     		return m;
     	}
     	String text = request.getParameter("text");
