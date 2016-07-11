@@ -246,7 +246,34 @@
 													<!--/span-->
 
 												</div>
+												<div class="row-fluid">
 
+													<div class="span12 ">
+
+														<div class="control-group">
+
+															<label class="control-label" style=" font-weight:bolder">是否是团队作业</label>
+
+															<div class="controls">
+
+																<span class="text">
+																	<c:if test="${assignment.teamAvaliable==true}">
+																		是
+																	</c:if>
+																	<c:if test="${assignment.teamAvaliable==false}">
+																		否
+																	</c:if>
+																</span>
+
+															</div>
+
+														</div>
+
+													</div>
+
+													<!--/span-->
+
+												</div>
 												<!--/row-->        
 
 												<div class="row-fluid">
@@ -324,6 +351,17 @@
                                                  <div class="row-fluid">
 
 													<div class="span12 ">
+														<c:if test="${homework != null}">
+															<div class="control-group">
+
+																<label class="control-label" style=" font-weight:bolder">提交者</label>
+
+																<div class="controls">
+																	<span class="text">${submitter}</span>
+																</div>
+
+															</div>
+														</c:if>
 													<div class="control-group">
 
 														<label class="control-label" style=" font-weight:bolder">作业</label>
@@ -409,13 +447,21 @@
 												<c:if test="${homework == null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">
 													<input type="submit" class="btn blue" value="确认"/>
 												</c:if>
+
 												<c:if test="${homework != null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">
-													<input type="submit" class="btn red" value="删除"/>
+													<c:if test="${assignment.teamAvaliable == true and sessionScope.user.num == teamLeaderId}">
+														<input type="submit" class="btn red" value="删除"/>
+														<a class="btn yellow" href="/assignment/updateHomework/${homework.id}">修改</a>
+														<span style="color:red">如果点击修改，已上传的作业附件将不能保留，如需保留附件请先在此页面下载上传的附件</span>
+													</c:if>
+													<c:if test="${assignment.teamAvaliable == false}">
+														<input type="submit" class="btn red" value="删除"/>
+														<a class="btn yellow" href="/assignment/updateHomework/${homework.id}">修改</a>
+														<span style="color:red">如果点击修改，已上传的作业附件将不能保留，如需保留附件请先在此页面下载上传的附件</span>
+													</c:if>
 												</c:if>
 												<a href="/assignment/assignments/${semesterCourseId}" class="btn">返回</a>
-												<c:if test="${homework != null and currentTime>=assignment.startTime and currentTime<assignment.deadline}">
-													该项作业已提交，如需修改请删除后重新提交
-												</c:if>
+
 												</div>
 
 											</div>

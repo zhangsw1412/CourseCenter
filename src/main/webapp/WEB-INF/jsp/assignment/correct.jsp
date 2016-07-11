@@ -173,6 +173,14 @@
 
 										<li><strong>结束时间：</strong> ${assignment.deadline }</li>
 
+										<li><strong>是否是团队作业：</strong>
+											<c:if test="${assignment.teamAvaliable==true}">
+												是
+											</c:if>
+											<c:if test="${assignment.teamAvaliable==false}">
+												否
+											</c:if>
+										</li>
 										<li><strong>详细需求：</strong>	 ${assignment.basicRequirement }</li>
 
 									</ul>
@@ -181,7 +189,7 @@
 
 								<div class="span4 invoice-payment">
 
-									<h4>个人信息：</h4>
+									<h4>提交者：</h4>
 
 									<ul class="unstyled">
 

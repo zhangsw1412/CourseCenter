@@ -139,22 +139,28 @@
 							</div>
 							<div class="portlet-body">
 								<table class="table table-striped table-bordered table-advance table-hover">
-									<tr>
+									<tr style="align: center">
 										<th><i class="icon-file-text"></i> 作业名称</th>
 										<th class="hidden-phone"><i class="icon-time"></i> 开始时间</th>
 										<th><i class="icon-bell"></i> 截止时间</th>
+										<th>是否为团队作业</th>
 										<th>上次提交时间</th>
 										<th>得分(最高分)</th>
 										<th>操作</th>
 									</tr>
 									<c:forEach items="${assignmentlist}" var="item">
-									<tr>
+									<tr style="align: center">
 										<td class="highlight">
 											<div class="success"></div>
 											<span>&nbsp;${item.name}</span>
 										</td>
 										<td class="hidden-phone">${item.startTime}</td>
 										<td>${item.deadline}</td>
+										<td>
+											<c:if test="${item.teamAvaliable==true}">
+												<i class="icon-ok-sign"></i>
+											</c:if>
+										</td>
 										<c:if test="${currentTime<item.startTime}">
 											<td>未开始</td><td>未开始</td>
 										</c:if>

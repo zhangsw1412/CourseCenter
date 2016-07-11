@@ -138,6 +138,18 @@
 								<div class="portlet-title line">
 
 									<div class="caption"><i class="icon-comments"></i>讨论</div>
+									<div class="tools">
+
+										<a id="clearMessages" href="javascript:void(0)" style="color:white;font-size:1.5em">
+											清屏
+										</a>
+
+										<a id="toBottom" href="javascript:void(0)" style="color:white;font-size:1.5em">
+											滚动到底部
+										</a>
+
+									</div>
+
 
 								</div>
 
@@ -256,6 +268,7 @@
 	<script src="/media/js/table-advanced.js"></script>     
 
 	<script>
+
 		function preventForm() {
 			$("form").submit(function(e){
 				e.preventDefault();
@@ -296,6 +309,7 @@
 			preventForm();
 			scrollToEnd();
 			longPoll();
+
 			$("#sendMessage").unbind('click').click(function(){
 				$.ajax({
 					url : "/semester/${sessionScope.semesterId}/course/${course.id}/chat/ajax",
@@ -307,6 +321,16 @@
 						}
 					}
 				});
+			});
+
+			$("#clearMessages").unbind('click').click(function(){
+				var lastLi = $("#messageList li:last").prop("outerHTML");
+				$("#messageList").html("");
+				$("#messageList").html(lastLi);
+			});
+
+			$("#toBottom").unbind('click').click(function(){
+				scrollToEnd();
 			});
 		});
 	</script>
