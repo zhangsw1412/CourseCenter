@@ -53,9 +53,8 @@ public class TeamService {
         return teamMapper.getTeamsByStudentId(id);
     }
     
-    public List<Team> getTeamsAppliedByStudentId(int num) {
-    	// TODO Auto-generated method stub
-    	return null;
+    public List<TeamApplication> getTeamApplicationsByStudentId(int id) {
+    	return teamMapper.getTeamApplicationsByStudentId(id);
     }
     
     public boolean isUserFromTeam(int num, Team team) {

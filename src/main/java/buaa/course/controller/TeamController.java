@@ -1,6 +1,7 @@
 package buaa.course.controller;
 
 import buaa.course.model.Team;
+import buaa.course.model.TeamApplication;
 import buaa.course.model.TeamStudent;
 import buaa.course.model.User;
 import buaa.course.service.TeamService;
@@ -41,9 +42,11 @@ public class TeamController {
         User user = checkUser(request, response);
         ModelAndView m = new ModelAndView("team/my_teams");
         List<Team> teams = teamService.getTeamsByStudentId(user.getNum());
-        //List<TeamStudent> teamsApplied = teamService.getTeamsAppliedByStudentId(user.getNum());
+        List<TeamApplication> teamApplications = teamService.getTeamApplicationsByStudentId(user.getNum());
+        Map<Long, Team> teamsApplied = getTeamsAppliedMap(teamApplications);
         m.addObject("teams", teams);
-        //m.addObject("teamsApplied", teamsApplied);
+        m.addObject("teamApplications", teamApplications);
+        m.addObject("teamsApplied", teamsApplied);
         return m;
     }
 
@@ -101,5 +104,11 @@ public class TeamController {
         }
         return result;
     }
-
+    private Map<Long, Team> getTeamsAppliedMap(List<TeamApplication> teamApplications) {
+        Map<Long, Team> result = new HashMap<>();
+        for(TeamApplication teamApplication : teamApplications){
+        	result.put(Long.valueOf(teamApplication.getTeamId()), teamService.getTeam(teamApplication.getTeamId()));
+        }
+        return result;
+    }
 }
