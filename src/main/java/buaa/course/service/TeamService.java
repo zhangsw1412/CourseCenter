@@ -2,6 +2,7 @@
 
  import buaa.course.mapper.TeamMapper;
  import buaa.course.mapper.TeamStudentMapper;
+ import buaa.course.model.SemesterCourse;
  import buaa.course.model.Team;
  import buaa.course.model.TeamApplication;
  import buaa.course.model.TeamStudent;
@@ -95,5 +96,13 @@ public class TeamService {
 
     public List<TeamApplication> getApplications(Team team) {
         return teamMapper.getApplicationsByTeamId(team.getId());
+    }
+
+    public Team getTeamByStudent(int semesterCourseId, int studentId) {
+        return teamMapper.getTeamBySemesterCourseIdAndStudentId(semesterCourseId, studentId);
+    }
+
+    public List<Integer> getTeamMemberIds(Team team) {
+        return teamMapper.getTeamMemberIds(team.getId());
     }
 }

@@ -12,13 +12,7 @@
 		<result property="num" column="num" />
 		<result property="applicable" column="applicable" />
 	</resultMap>
-	<resultMap id="applicationMap" type="buaa.course.model.TeamApplication">
-		<id property="id" column="id" />
-		<result property="teamId" column="team_id" />
-		<result property="semesterCourseId" column="semester_course_id" />
-		<result property="applyTime" column="apply_time" />
-		<result property="status" column="status" />
-	</resultMap>
+
 	<resultMap id="teamApplicationMap" type="buaa.course.model.TeamApplication">
 		<id property="id" column="id" />
 		<result property="teamId" column="team_id" />
@@ -88,7 +82,7 @@
 			select count(*) from team_student where team_id=#{0}
 		]]>
 	</select>
-	<select id="getApplicationsByTeamId" parameterType="int" resultMap="applicationMap">
+	<select id="getApplicationsByTeamId" parameterType="int" resultMap="teamApplicationMap">
 		<![CDATA[
 			select * from team_application where team_id=#{0}
 		]]>
@@ -101,6 +95,16 @@
 	<select id="getTeamApplicationsByStudentId" parameterType="int" resultMap="teamApplicationMap">
 		<![CDATA[
 			select * from team_application where user_id=#{0}
+		]]>
+	</select>
+	<select id="getTeamBySemesterCourseIdAndStudentId" resultMap="teamMap">
+		<![CDATA[
+			select t.id,t.name,t.leader_id,t.max_num,t.applicable  from team t,course_student cs where t.id = cs.team_id and cs.student_id = #{1} and cs.semester_course_id = #{0};
+		]]>
+	</select>
+	<select id="getTeamMemberIds" parameterType="int" resultType="int">
+		<![CDATA[
+			select student_id  from team_student where team_id = #{0};
 		]]>
 	</select>
 </mapper>

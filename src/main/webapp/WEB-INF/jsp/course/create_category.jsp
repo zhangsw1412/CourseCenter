@@ -189,10 +189,8 @@
 										<label class="control-label">类别名称</label>
 										<div class="controls">
 											<input type="text" name="category"  />
-
-											<br/>
-											<span>${message}</span>
 										</div>
+										<span>${message}</span>
 
 									</div>
 
