@@ -181,9 +181,7 @@
 
 											<div class="form-horizontal form-view">
 
-												<h3> ${course.name }: 作业</h3>
-
-												<h3 class="form-section"></h3>
+												<h3 style=" font-weight:bolder">作业要求</h3>
 
 												<div class="row-fluid">
 
@@ -322,7 +320,7 @@
 
 												</div>
                                                 <h3 class="form-section"></h3>
-                                                
+                                                <h3 style=" font-weight:bolder">作业内容</h3>
                                                  <div class="row-fluid">
 
 													<div class="span12 ">
@@ -367,14 +365,14 @@
 													<!--/span-->
 
 												</div>
-                                                <c:if test="${homework.score>=0}"><hr/></c:if>
+                                                <c:if test="${homework.score>=0}"><hr/><h3 style=" font-weight:bolder">作业评价</h3></c:if>
 												<div class="row-fluid">
 													<div class="span12 ">
 														<c:if test="${homework.score>=0}">
 															<div class="control-group">
 																<label class="control-label" style="font-weight: bolder">分数</label>
 																<div class="controls">
-																	${homework.score}
+																	<span class="text">${homework.score}</span>
 																</div>
 															</div>
 														</c:if>
@@ -382,7 +380,7 @@
 															<div class="control-group">
 																<label class="control-label" style="font-weight: bolder">评价</label>
 																<div class="controls">
-																	${homework.comment}
+																	<span class="text">${homework.comment}</span>
 																</div>
 															</div>
 														</c:if>
@@ -390,9 +388,9 @@
 															<div class="control-group">
 																<label class="control-label" style="font-weight: bolder">附件</label>
 																<div class="controls">
-																	<a href="${homework.correctFileUrl}" class="btn green fileinput-button">
+																	<span class="text"><a href="${homework.correctFileUrl}" class="btn green fileinput-button">
 																		<i class="icon-download"></i> <span>${fn:getFileName(homework.correctFileUrl)}</span>
-																	</a>
+																	</a></span>
 																</div>
 															</div>
 														</c:if>

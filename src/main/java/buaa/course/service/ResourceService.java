@@ -35,6 +35,6 @@ public class ResourceService {
     }
 
     public void deleteResourcesByCategory(int id, String category) {
-        return resourceMapper.deleteResourceByCategory(id, category);
+        resourceMapper.deleteResourceByCategory(id, category);
     }
 }
