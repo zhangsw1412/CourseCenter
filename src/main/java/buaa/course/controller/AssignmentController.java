@@ -123,13 +123,13 @@ public class AssignmentController {
     	m.addObject("course",course);
     	m.addObject("semesterCourseId",semesterCourseId);
     	String name = request.getParameter("name");
-    	if(StringUtils.isNullOrEmpty(name)){
+    	if(StringUtils.isEmptyOrWhitespaceOnly(name)){
         	m.addObject("error", "作业名称不能为空");
         	return m;
         }
     	
     	String basicRequirement = request.getParameter("basicrequirement");
-    	if(StringUtils.isNullOrEmpty(basicRequirement)){
+    	if(StringUtils.isEmptyOrWhitespaceOnly(basicRequirement)){
         	m.addObject("error", "请填写作业基本要求");
         	return m;
         }
@@ -170,7 +170,7 @@ public class AssignmentController {
     	teamAvaliable = teamAvaliable_s==null?false:true;
     	String highestScore_s = request.getParameter("highestscore");
     	int highestScore;
-    	if(StringUtils.isNullOrEmpty(highestScore_s)){
+    	if(StringUtils.isEmptyOrWhitespaceOnly(highestScore_s)){
     		highestScore = -1;
     	}
     	else{

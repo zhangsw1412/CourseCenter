@@ -52,8 +52,8 @@ public class BasicController
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 
-		if (StringUtils.isNullOrEmpty(userId)
-				|| StringUtils.isNullOrEmpty(password))
+		if (StringUtils.isEmptyOrWhitespaceOnly(userId)
+				|| StringUtils.isEmptyOrWhitespaceOnly(password))
 		{
 			m.addObject("error", "用户名或密码为空");
 			return m;

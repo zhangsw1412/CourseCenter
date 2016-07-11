@@ -53,7 +53,7 @@ public class ChatController {
         String lastTime = request.getParameter("lastMessageTime");
         ModelAndView m = new ModelAndView("user/chatAjax");
         Timestamp lastMessageTime;
-        if(StringUtils.isNullOrEmpty(lastTime)){
+        if(StringUtils.isEmptyOrWhitespaceOnly(lastTime)){
             lastMessageTime = new Timestamp(0);
         }else{
             lastMessageTime = Timestamp.valueOf(lastTime);
@@ -73,7 +73,7 @@ public class ChatController {
 
     private void createMessage(Integer semesterId, Integer courseId, HttpServletRequest request) {
         String content = request.getParameter("content");
-        if(!StringUtils.isNullOrEmpty(content)){
+        if(!StringUtils.isEmptyOrWhitespaceOnly(content)){
             Message message = new Message();
             User user = (User)request.getSession().getAttribute("user");
             SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);

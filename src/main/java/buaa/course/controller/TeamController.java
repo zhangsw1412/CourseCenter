@@ -60,19 +60,43 @@ public class TeamController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/team/create_team")
-    public void createTeam(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView createTeam(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
-        Integer userId = user.getNum();
-        ModelA
         String name = request.getParameter("name");
-        String num_s = request.getParameter("num");
-        if(StringUtils.isNullOrEmpty(name)||StringUtils.isNullOrEmpty(num_s)){
-        	
+        String maxNum_s = request.getParameter("maxNum");
+        if(StringUtils.isEmptyOrWhitespaceOnly(name)||StringUtils.isEmptyOrWhitespaceOnly(maxNum_s)){
+            ModelAndView m = new ModelAndView("team/my_teams");
+            List<Team> teams = teamService.getTeamsByStudentId(user.getNum());
+            List<TeamApplication> teamApplications = teamService.getTeamApplicationsByStudentId(user.getNum());
+            Map<Long, Team> teamsApplied = getTeamsAppliedMap(teamApplications);
+            m.addObject("teams", teams);
+            m.addObject("teamApplications", teamApplications);
+            m.addObject("teamsApplied", teamsApplied);
+        	return m;
         }
-        response.sendRedirect("/team/myTeams");
+        Team team = new Team();
+        team.setName(name);
+        team.setLeaderId(user.getNum());
+        team.setLeaderName(user.getName());
+        team.setMaxNum(Integer.valueOf(maxNum_s));
+        team.setNum(1);
+        team.setApplicable(true);
+        teamService.createTeam(team);
+        TeamStudent teamStudent = new TeamStudent();
+        teamStudent.setTeamId(team.getId());
+        teamStudent.setStudentId(user.getNum());
+        teamService.createTeamStudent(teamStudent);
+        ModelAndView m = new ModelAndView("team/my_teams");
+        List<Team> teams = teamService.getTeamsByStudentId(user.getNum());
+        List<TeamApplication> teamApplications = teamService.getTeamApplicationsByStudentId(user.getNum());
+        Map<Long, Team> teamsApplied = getTeamsAppliedMap(teamApplications);
+        m.addObject("teams", teams);
+        m.addObject("teamApplications", teamApplications);
+        m.addObject("teamsApplied", teamsApplied);
+        return m;
     }
     
-    @RequestMapping(method = RequestMethod.POST, value = "/applyToTeam/{teamId}")
+    @RequestMapping(method = RequestMethod.POST, value = "/team/apply_team/{teamId}")
     public void applyToTeam(@PathVariable Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = checkUser(request, response);
         Integer userId = user.getNum();

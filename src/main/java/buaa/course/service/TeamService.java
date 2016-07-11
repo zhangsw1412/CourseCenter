@@ -105,4 +105,8 @@ public class TeamService {
     public List<Integer> getTeamMemberIds(Team team) {
         return teamMapper.getTeamMemberIds(team.getId());
     }
+
+	public int createTeamStudent(TeamStudent teamStudent) {
+		return teamStudentMapper.addTeamStudent(teamStudent);
+	}
 }
