@@ -158,8 +158,8 @@
 
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<tr>
-										<th>类别</th>
-										<th>操作 <span style="color:red">注意：删除分类将删除该分类下的所有文件！</span></th>
+										<th class="span6">类别</th>
+										<th class="span6">操作 <span style="color:red">注意：删除分类将删除该分类下的所有文件！</span></th>
 									</tr>
 									<c:forEach items="${categories}" var="category">
 										<tr>

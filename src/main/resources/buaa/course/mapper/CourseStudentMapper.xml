@@ -55,9 +55,9 @@
 	    	select count(*) from course_student where semester_course_id=#{0}
 	    ]]>
 	</select>
-	<select id="getCourseByCourseIdAndTeamId" resultMap="courseStudentMap">
+	<select id="getCourseStudentCountByCourseIdAndTeamId" resultType="int">
 		<![CDATA[
-	    	select * from course_student where semester_course_id=#{0} and team_id=#{1} limit 0,1
+	    	select count(*) from course_student where semester_course_id=#{0} and team_id=#{1}
 	    ]]>
 	</select>
 </mapper>

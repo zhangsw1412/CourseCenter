@@ -126,4 +126,9 @@ public class TeamService {
             application.setStudentDelete(true);
         }
         return teamMapper.updateTeamApplication(application);
-    }}
+    }
+
+    public int applyCourse(int semesterCourseId, int teamId) {
+        return teamMapper.applyCourse(semesterCourseId, teamId);
+    }
+}

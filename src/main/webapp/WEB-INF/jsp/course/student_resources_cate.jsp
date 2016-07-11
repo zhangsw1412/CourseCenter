@@ -149,8 +149,8 @@
                             <div style="padding:15px"></div>
                             <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                                 <tr>
-                                    <th>类别</th>
-                                    <th>创建时间</th>
+                                    <th class="span6">类别</th>
+                                    <th class="span6">创建时间</th>
                                 </tr>
                                 <c:forEach items="${categories}" var="category">
                                     <tr>

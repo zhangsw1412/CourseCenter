@@ -73,6 +73,12 @@
 			values(#{teamId},#{userId},#{applyTime},#{status},#{studentDelete},#{leaderDelete})
 	    ]]>
 	</insert>
+	<insert id="applyCourse">
+		<![CDATA[
+			insert into course_application (semester_course_id, team_id, apply_time)
+			values(#{0},#{1},now())
+	    ]]>
+	</insert>
 	<select id="getTeamByApplicationId" parameterType="int" resultMap="teamMap">
 		<![CDATA[
 			select t.id,name,leader_id,leader_name,max_num,num,applicable from team t,team_application ta where ta.id = #{0} and ta.team_id = t.id;

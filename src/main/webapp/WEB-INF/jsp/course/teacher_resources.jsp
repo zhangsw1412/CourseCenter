@@ -165,9 +165,9 @@
 
 								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
 									<tr>
-										<th>文件名</th>
-										<th>上传时间</th>
-										<th colspan="2">操作</th>
+										<th class="span6">文件名</th>
+										<th class="span6">上传时间</th>
+										<th class="span6" colspan="2">操作</th>
 									</tr>
 									<tr>
 										<td colspan="4">
