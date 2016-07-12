@@ -109,4 +109,9 @@
 	    	apply_time=#{applyTime},status=#{status} where id = #{id}
 	    ]]>
 	</update>
+	<delete id="deleteCourseApplication" parameterType="buaa.course.model.CourseApplication">
+		<![CDATA[
+	    	delete from course_application where id=#{id}
+	    ]]>
+	</delete>
 </mapper>

@@ -249,7 +249,7 @@ public class CourseController {
         if(StringUtils.isEmptyOrWhitespaceOnly(category)){
             response.sendRedirect("/semester/"+semesterId+"/course/"+courseId+"/resources");
         }
-        response.sendRedirect("/semester/"+semesterId+"/course/"+courseId+"/resources/"+category);
+        response.sendRedirect("/semester/"+semesterId+"/course/"+courseId+"/resources");
     }
 
 

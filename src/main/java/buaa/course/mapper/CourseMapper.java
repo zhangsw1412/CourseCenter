@@ -23,4 +23,5 @@ public interface CourseMapper {
 	List<CourseApplication> getHandledApplicationsByCourse(int id);
 	CourseApplication getCourseApplicationById(int applicationId);
 	int updateCourseApplication(CourseApplication application);
+	int deleteCourseApplication(CourseApplication application);
 }

@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -249,26 +250,41 @@ public class TeamController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value="/team/permitCourseApplication")
-    public void applyCourse(@RequestParam Integer applicationId,
+    public void ppermitApplication(@RequestParam Integer applicationId,
                             HttpServletRequest request, HttpServletResponse response) throws IOException {
         CourseApplication application = courseService.getCourseApplicationById(applicationId);
         application.setStatus(1);
         courseService.updateCourseApplication(application);
         Team team = teamService.getTeam(application.getTeamId());
         SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(application.getSemesterCourseId());
+        List<CourseStudent> courseStudents = new ArrayList<>();
         for(Integer studentId : teamService.getTeamMemberIds(team)){
             CourseStudent cs = courseService.getCourseStudentByCourseAndStudent(semesterCourse.getId(), studentId);
-            if(cs != null && cs.getTeamId() == 0){
-                cs.setTeamId(team.getId());
-                courseService.updateCourseStudent(cs);
-            }else{
-                cs = new CourseStudent();
+
+            if(cs != null){
+                courseStudents.add(cs);
+            }
+        }
+        if(courseStudents.size() != 0){
+            for(Integer studentId : teamService.getTeamMemberIds(team)){
+                CourseStudent cs = new CourseStudent();
                 cs.setSemesterCourseId(semesterCourse.getId());
                 cs.setStudentId(studentId);
                 cs.setTeamId(team.getId());
                 courseService.createCourseStudent(cs);
             }
+
         }
+        response.sendRedirect("/semester/"+semesterCourse.getSemesterId()+"/course/"+semesterCourse.getCourseId()+"/applications");
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value="/team/denyCourseApplication")
+    public void denyApplication(@RequestParam Integer applicationId,
+                            HttpServletRequest request, HttpServletResponse response) throws IOException {
+        CourseApplication application = courseService.getCourseApplicationById(applicationId);
+
+        courseService.deleteCourseApplication(application);
+        SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(application.getSemesterCourseId());
         response.sendRedirect("/semester/"+semesterCourse.getSemesterId()+"/course/"+semesterCourse.getCourseId()+"/applications");
     }
 

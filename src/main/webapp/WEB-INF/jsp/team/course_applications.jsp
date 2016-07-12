@@ -208,7 +208,7 @@
 
                         <div class="portlet-title">
 
-                            <div class="caption"><i class="icon-edit"></i>已处理申请 </div>
+                            <div class="caption"><i class="icon-edit"></i>已同意的申请 </div>
 
                         </div>
 
@@ -226,7 +226,6 @@
 
                                     <th>团队人数</th>
 
-                                    <th>审核结果</th>
 
                                 </tr>
 
@@ -243,7 +242,6 @@
 
                                         <td>${teams[app.teamId+0].num}</td>
 
-                                        <td>${app.status}</td>
 
                                     </tr>
                                 </c:forEach>

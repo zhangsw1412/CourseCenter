@@ -194,4 +194,8 @@ public class CourseService {
     public int createCourseStudent(CourseStudent cs) {
         return courseStudentMapper.addCourseStudent(cs);
     }
+
+    public int deleteCourseApplication(CourseApplication application) {
+        return courseMapper.deleteCourseApplication(application);
+    }
 }
