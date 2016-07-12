@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.CourseStudentMapper">
+	
+	<resultMap id="courseStudentMap" type="buaa.course.model.CourseStudent">
+		<id property="id" column="id" />
+		<result property="semesterCourseId" column="semester_course_id" />
+		<result property="studentId" column="student_id" />
+		<result property="teamId" column="team_id" />
+	</resultMap>
+	<select id="getCourseStudent" parameterType="int" resultMap="courseStudentMap">
+	    <![CDATA[
+	    	select * from course_student where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addCourseStudent" parameterType="buaa.course.model.CourseStudent"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into course_student (semester_course_id,student_id,team_id) values(#{semesterCourseId},#{studentId},#{teamId})
+	    ]]>
+	</insert>
+	<delete id="deleteCourseStudent" parameterType="int">
+		<![CDATA[
+			delete from course_student where id=#{id}
+		]]>
+	</delete>
+	<update id="updateCourseStudent" parameterType="buaa.course.model.CourseStudent">
+	    <![CDATA[
+	    	update course_student set semester_course_id=#{semesterCourseId},student_id=#{studentId},team_id=#{teamId} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllCourseStudents" resultMap="courseStudentMap">
+	    <![CDATA[
+	    	select * from course_student
+	    ]]>
+	</select>
+	<select id="countCourseStudents" resultType="int">
+	    <![CDATA[
+	    	select count(*) from course_student
+	    ]]>
+	</select>
+	<select id="getCourseStudentsByRange" resultMap="courseStudentMap">
+	    <![CDATA[
+	    	select * from course_student limit #{0},#{1}
+	    ]]>
+	</select>
+	<select id="getCourseStudentByStudent" parameterType="int" resultMap="courseStudentMap">
+		<![CDATA[
+	    	select * from course_student where student_id=#{0}
+	    ]]>
+	</select>
+	<select id="countStudents" parameterType="int" resultType="int">
+	    <![CDATA[
+	    	select count(*) from course_student where semester_course_id=#{0}
+	    ]]>
+	</select>
+	<select id="getCourseStudentCountByCourseIdAndTeamId" resultType="int">
+		<![CDATA[
+	    	select count(*) from course_student where semester_course_id=#{0} and team_id=#{1}
+	    ]]>
+	</select>
+	<select id="getCourseStudentByCourseAndStudent" resultMap="courseStudentMap">
+		<![CDATA[
+	    	select * from course_student where semester_course_id=#{0} and student_id=#{1}
+	    ]]>
+	</select>
+</mapper>

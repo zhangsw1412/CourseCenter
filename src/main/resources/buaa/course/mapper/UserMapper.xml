@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.UserMapper">
+	
+	<resultMap id="userMap" type="buaa.course.model.User">
+		<id property="num" column="num" />
+		<result property="id" column="id" />
+		<result property="password" column="password" />
+		<result property="name" column="name" />
+		<result property="gender" column="gender" />
+		<result property="type" column="type" />
+		<result property="valid" column="valid" />
+		<result property="lastLoginTime" column="last_login_time" />
+		<result property="lastLoginIp" column="last_login_ip" />
+	</resultMap>
+	<select id="getUser" parameterType="String" resultMap="userMap">
+	<![CDATA[
+	    	select * from user where id = #{0}
+	    ]]>
+	</select>
+	<select id="getUserByNum" parameterType="int" resultMap="userMap">
+		<![CDATA[
+	    	select * from user where num = #{0}
+	    ]]>
+	</select>
+	<insert id="addUser" parameterType="buaa.course.model.User"  useGeneratedKeys="true" keyProperty="num">
+	    <![CDATA[
+	    	insert into user(id,password,name,gender,type,valid,last_login_time,last_login_ip) values(#{id},#{password},#{name},#{gender},#{type},#{valid},#{lastLoginTime},#{lastLoginIp})
+	    ]]>
+	</insert>
+	<delete id="deleteUser" parameterType="int">
+		<![CDATA[
+			delete from user where num=#{num}
+		]]>
+	</delete>
+	<update id="updateUser" parameterType="buaa.course.model.User">
+	    <![CDATA[
+	    	update user set id=#{id},password=#{password},name=#{name},gender=#{gender},type=#{type},valid=#{valid},last_login_time=#{lastLoginTime},last_login_ip=#{lastLoginIp} where num=#{num}
+	    ]]>
+	</update>
+	<select id="getAllUsers" resultMap="userMap">
+	    <![CDATA[
+	    	select * from user
+	    ]]>
+	</select>
+	<select id="countUsers" resultType="int">
+	    <![CDATA[
+	    	select count(*) from user
+	    ]]>
+	</select>
+	<select id="getUsersByRange" resultMap="userMap">
+	    <![CDATA[
+	    	select * from user limit #{0},#{1}
+	    ]]>
+	</select>
+	<select id="getUsersByTeamId" parameterType="int" resultMap="userMap">
+	    <![CDATA[
+	    	select * from user u,team_student ts where ts.team_id=#{0} and u.num=ts.student_id
+	    ]]>
+	</select>
+</mapper>

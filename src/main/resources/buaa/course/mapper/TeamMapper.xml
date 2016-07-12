@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.TeamMapper">
+	<resultMap id="teamMap" type="buaa.course.model.Team">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="leaderId" column="leader_id" />
+		<result property="leaderName" column="leader_name" />
+		<result property="maxNum" column="max_num" />
+		<result property="num" column="num" />
+		<result property="applicable" column="applicable" />
+	</resultMap>
+
+	<resultMap id="teamApplicationMap" type="buaa.course.model.TeamApplication">
+		<id property="id" column="id" />
+		<result property="teamId" column="team_id" />
+		<result property="userId" column="user_id" />
+		<result property="applyTime" column="apply_time" />
+		<result property="status" column="status" />
+		<result property="studentDelete" column="student_delete" />
+		<result property="leaderDelete" column="leader_delete" />
+	</resultMap>
+	<select id="getTeam" parameterType="int" resultMap="teamMap">
+	    <![CDATA[
+	    	select * from team where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addTeam" parameterType="buaa.course.model.Team"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into team(name,leader_id,leader_name,max_num,num,applicable) values(#{name},#{leaderId},#{leaderName},#{maxNum},#{num},#{applicable})
+	    ]]>
+	</insert>
+	<delete id="deleteTeam" parameterType="int">
+		<![CDATA[
+			delete from team where id=#{id}
+		]]>
+	</delete>
+	<update id="updateTeam" parameterType="buaa.course.model.Team">
+	    <![CDATA[
+	    	update team set name=#{name},leader_id=#{leaderId},leader_name=#{leaderName},max_num=#{maxNum},num=#{num},applicable=#{applicable} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllTeams" resultMap="teamMap">
+	    <![CDATA[
+	    	select * from team
+	    ]]>
+	</select>
+	<select id="countTeams" resultType="int">
+	    <![CDATA[
+	    	select count(*) from team
+	    ]]>
+	</select>
+	<select id="getTeamsByRange" resultMap="teamMap">
+	    <![CDATA[
+	    	select * from team limit #{0},#{1}
+	    ]]>
+	</select>
+	<select id="getTeamsByStudentId" parameterType="int" resultMap="teamMap">
+		<![CDATA[
+	    	select t.id,name,leader_id,leader_name,max_num,num,applicable from team t, team_student ts where ts.student_id = #{0} and ts.team_id = t.id;
+	    ]]>
+	</select>
+	<select id="isUserFromTeam"  resultType="int">
+		<![CDATA[
+			select count(*) from team_student where student_id=#{0} and team_id=#{1}
+	    ]]>
+	</select>
+	<insert id="applyToTeam" parameterType="buaa.course.model.TeamApplication">
+		<![CDATA[
+			insert into team_application (team_id, user_id, apply_time, status, student_delete, leader_delete)
+			values(#{teamId},#{userId},#{applyTime},#{status},#{studentDelete},#{leaderDelete})
+	    ]]>
+	</insert>
+	<insert id="applyCourse">
+		<![CDATA[
+			insert into course_application (semester_course_id, team_id, apply_time)
+			values(#{0},#{1},now())
+	    ]]>
+	</insert>
+	<select id="getTeamByApplicationId" parameterType="int" resultMap="teamMap">
+		<![CDATA[
+			select t.id,name,leader_id,leader_name,max_num,num,applicable from team t,team_application ta where ta.id = #{0} and ta.team_id = t.id;
+		]]>
+	</select>
+	<select id="getTeamMemberCount" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from team_student where team_id=#{0}
+		]]>
+	</select>
+	<select id="getApplicationsByTeamId" parameterType="int" resultMap="teamApplicationMap">
+		<![CDATA[
+			select * from team_application where team_id=#{0}
+		]]>
+	</select>
+	<select id="getTeamApplicationStatus" resultType="long">
+		<![CDATA[
+			select status from team_application where team_id=#{1} and user_id=#{0}
+		]]>
+	</select>
+	<select id="getTeamApplicationsByStudentId" parameterType="int" resultMap="teamApplicationMap">
+		<![CDATA[
+			select * from team_application where user_id=#{0}
+		]]>
+	</select>
+	<select id="getTeamBySemesterCourseIdAndStudentId" resultMap="teamMap">
+		<![CDATA[
+			select t.id,t.name,t.leader_id,t.max_num,t.applicable  from team t,course_student cs where t.id = cs.team_id and cs.student_id = #{1} and cs.semester_course_id = #{0};
+		]]>
+	</select>
+	<select id="getTeamMemberIds" parameterType="int" resultType="int">
+		<![CDATA[
+			select student_id  from team_student where team_id = #{0};
+		]]>
+	</select>
+	<select id="getApplicationById" parameterType="int" resultMap="teamApplicationMap">
+		<![CDATA[
+			select * from team_application where id = #{0};
+		]]>
+	</select>
+	<update id="updateTeamApplication" parameterType="buaa.course.model.TeamApplication">
+		<![CDATA[
+			update team_application set team_id=#{teamId},user_id=#{userId},apply_time=#{applyTime},status=#{status},
+			student_delete=#{studentDelete},leader_delete=#{leaderDelete}
+		]]>
+	</update>
+	<select id="getTeamApplicationsByTeamId" parameterType="int" resultMap="teamApplicationMap">
+		<![CDATA[
+			select * from team_application where team_id = #{0};
+		]]>
+	</select>
+	<update id="applicationHandled">
+		<![CDATA[
+			update team_application set status=#{1} where id=#{0}
+		]]>
+	</update>
+	<delete id="deleteTeamApplication" parameterType="int">
+		<![CDATA[
+			delete from team_application where id=#{0}
+		]]>
+	</delete>
+</mapper>

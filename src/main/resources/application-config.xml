@@ -20,7 +20,7 @@
 		        <value>classpath*:jdbc.properties</value>
 		    </list>		
 		</property>
-	</bean> -->
+	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -46,6 +46,6 @@
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="buaa.course.mapper" />
-		<property name="sqlSessionTemplateBeanName" value="sqlSessionFactoryTemplateTetrisAdmin" />
+		<property name="sqlSessionTemplateBeanName" value="sqlSessionFactoryTemplate" />
 	</bean>
 </beans>

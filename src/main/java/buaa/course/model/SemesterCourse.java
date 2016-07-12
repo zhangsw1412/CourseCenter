@@ -4,16 +4,13 @@ public class SemesterCourse {
 	private int id;
 	private int semesterId;
 	private int courseId;
-	private String teacher;
 	public SemesterCourse() {
 		super();
 	}
-	public SemesterCourse(int id, int semesterId, int courseId, String teacher) {
+	public SemesterCourse(int semesterId, int courseId) {
 		super();
-		this.id = id;
 		this.semesterId = semesterId;
 		this.courseId = courseId;
-		this.teacher = teacher;
 	}
 	public int getId() {
 		return id;
@@ -33,16 +30,9 @@ public class SemesterCourse {
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
-	public String getTeacher() {
-		return teacher;
-	}
-	public void setTeacher(String teacher) {
-		this.teacher = teacher;
-	}
 	@Override
 	public String toString() {
-		return "SemesterCourse [id=" + id + ", semesterId=" + semesterId + ", courseId=" + courseId + ", teacher="
-				+ teacher + "]";
+		return "SemesterCourse [id=" + id + ", semesterId=" + semesterId + ", courseId=" + courseId + "]";
 	}
 	
 }

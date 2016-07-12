@@ -1,24 +1,28 @@
 package buaa.course.model;
 
-import java.util.Arrays;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
-public class User {
+public class User implements Serializable{
+	private static final long serialVersionUID = 4545526984155472015L;
 	private int num;
 	private String id;
 	private String password;
 	private String name;
 	private boolean gender;
+	/**
+	 * 用户类型：学生0，教师1，教务2
+	 */
 	private int type;
 	private boolean valid;
-	private long lastLoginTime;
+	private Timestamp lastLoginTime;
 	private String lastLoginIp;
 	public User() {
 		super();
 	}
-	public User(int num, String id, String password, String name, boolean gender, int type, boolean valid,
-			long lastLoginTime, String lastLoginIp) {
+	public User(String id, String password, String name, boolean gender, int type, boolean valid,
+				Timestamp lastLoginTime, String lastLoginIp) {
 		super();
-		this.num = num;
 		this.id = id;
 		this.password = password;
 		this.name = name;
@@ -58,9 +62,15 @@ public class User {
 	public void setGender(boolean gender) {
 		this.gender = gender;
 	}
+	/**
+	 * 用户类型：学生0，教师1，教务2
+	 */
 	public int getType() {
 		return type;
 	}
+	/**
+	 * 用户类型：学生0，教师1，教务2
+	 */
 	public void setType(int type) {
 		this.type = type;
 	}
@@ -70,10 +80,10 @@ public class User {
 	public void setValid(boolean valid) {
 		this.valid = valid;
 	}
-	public long getLastLoginTime() {
+	public Timestamp getLastLoginTime() {
 		return lastLoginTime;
 	}
-	public void setLastLoginTime(long lastLoginTime) {
+	public void setLastLoginTime(Timestamp lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
 	public String getLastLoginIp() {

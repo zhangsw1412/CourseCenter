@@ -9,13 +9,13 @@ public class Course {
 	private int credit;
 	private boolean type;
 	private boolean teamAvaliable;
+
 	public Course() {
 		super();
 	}
-	public Course(int id, String courseCode, String name, int collegeId, int period, int credit, boolean type,
+	public Course(String courseCode, String name, int collegeId, int period, int credit, boolean type,
 			boolean teamAvaliable) {
 		super();
-		this.id = id;
 		this.courseCode = courseCode;
 		this.name = name;
 		this.collegeId = collegeId;

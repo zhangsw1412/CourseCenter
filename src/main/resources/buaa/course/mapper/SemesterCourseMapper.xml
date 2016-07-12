@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.SemesterCourseMapper">
+	
+	<resultMap id="SemesterCourseMap" type="buaa.course.model.SemesterCourse">
+		<id property="id" column="id" />
+		<result property="semesterId" column="semester_id" />
+		<result property="courseId" column="course_id" />
+	</resultMap>
+	<select id="getSemesterCourse" parameterType="int" resultMap="SemesterCourseMap">
+	    <![CDATA[
+	    	select * from semester_course where id = #{0}
+	    ]]>
+	</select>
+	<select id="getSemesterCourseByTwoIds" resultMap="SemesterCourseMap">
+		<![CDATA[
+	    	select * from semester_course where semester_id = #{0} and course_id = #{1}
+	    ]]>
+	</select>
+	<insert id="addSemesterCourse" parameterType="buaa.course.model.SemesterCourse"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into semester_course(semester_id,course_id) values(#{semesterCourseId},#{courseId})
+	    ]]>
+	</insert>
+	<delete id="deleteSemesterCourse" parameterType="int">
+		<![CDATA[
+			delete from semester_course where id=#{id}
+		]]>
+	</delete>
+	<update id="updateSemesterCourse" parameterType="buaa.course.model.SemesterCourse">
+	    <![CDATA[
+	    	update semester_course set semester_id=#{semesterCourseId},course_id=#{courseId} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllSemesterCourses" resultMap="SemesterCourseMap">
+	    <![CDATA[
+	    	select * from semester_course
+	    ]]>
+	</select>
+	<select id="countSemesterCourses" resultType="int">
+	    <![CDATA[
+	    	select count(*) from semester_course
+	    ]]>
+	</select>
+	<select id="getSemesterCoursesByRange" resultMap="SemesterCourseMap">
+	    <![CDATA[
+	    	select * from semester_course limit #{0},#{1}
+	    ]]>
+	</select>
+	<select id="getSemesterCourseBySemesterId" parameterType="int" resultMap="SemesterCourseMap">
+		<![CDATA[
+	    	select * from semester_course where semester_id = #{0}
+	    ]]>
+	</select>
+</mapper>

@@ -1,0 +1,15 @@
+课程
+/courseList
+/courseId/resourceList/pageNo
+
+用户
+/uploadResource
+/createAssignment
+/dohomework
+/myCourses
+/assignmentList
+
+教务
+/updateCourse
+/updateTeacher
+/updateStudent

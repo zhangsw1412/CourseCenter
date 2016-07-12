@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buaa.course.mapper.AssignmentMapper">
+	
+	<resultMap id="assignmentMap" type="buaa.course.model.Assignment">
+		<id property="id" column="id" />
+		<result property="semesterCourseId" column="semester_course_id" />
+		<result property="name" column="name" />
+		<result property="basicRequirement" column="basic_requirement" />
+		<result property="fileUrl" column="file_url" />
+		<result property="startTime" column="start_time" />
+		<result property="deadline" column="deadline" />
+		<result property="teamAvaliable" column="team_avaliable" />
+		<result property="highestScore" column="highest_score" />
+	</resultMap>
+	<select id="getAssignment" parameterType="int" resultMap="assignmentMap">
+	    <![CDATA[
+	    	select * from assignment where id = #{0}
+	    ]]>
+	</select>
+	<insert id="addAssignment" parameterType="buaa.course.model.Assignment"  useGeneratedKeys="true" keyProperty="id">
+	    <![CDATA[
+	    	insert into assignment(semester_course_id,name,basic_requirement,file_url,start_time,deadline,team_avaliable,highest_score) values(#{semesterCourseId},#{name},#{basicRequirement},#{fileUrl},#{startTime},#{deadline},#{teamAvaliable},#{highestScore})
+	    ]]>
+	</insert>
+	<delete id="deleteAssignment" parameterType="int">
+		<![CDATA[
+			delete from assignment where id=#{id}
+		]]>
+	</delete>
+	<update id="updateAssignment" parameterType="buaa.course.model.Assignment">
+	    <![CDATA[
+	    	update assignment set semester_course_id=#{semesterCourseId},name=#{name},basic_requirement=#{basicRequirement},file_url=#{fileUrl},start_time=#{startTime},deadline=#{deadline},team_avaliable=#{teamAvaliable},highest_score=#{highestScore} where id=#{id}
+	    ]]>
+	</update>
+	<select id="getAllAssignments" resultMap="assignmentMap">
+	    <![CDATA[
+	    	select * from assignment
+	    ]]>
+	</select>
+	<select id="countAssignments" resultType="int">
+	    <![CDATA[
+	    	select count(*) from assignment
+	    ]]>
+	</select>
+	<select id="getAssignmentsByRange" resultMap="assignmentMap">
+	    <![CDATA[
+	    	select * from assignment limit #{0},#{1}
+	    ]]>
+	</select>
+	<select id="getAssignmentsBySemesterCourseId" resultMap="assignmentMap">
+	    <![CDATA[
+	    	select * from assignment where semester_course_id=#{semesterCourseId} order by start_time asc
+	    ]]>
+	</select>
+</mapper>
