@@ -83,4 +83,30 @@
 	    	select * from course_application where semester_course_id = #{0} and team_id = #{1}
 	    ]]>
 	</select>
+	<select id="getApplicationsByCourse" parameterType="int" resultMap="applicationMap">
+		<![CDATA[
+	    	select * from course_application where semester_course_id = #{0}
+	    ]]>
+	</select>
+	<select id="getUnHandledApplicationsByCourse" parameterType="int" resultMap="applicationMap">
+		<![CDATA[
+	    	select * from course_application where semester_course_id = #{0} and status ='0'
+	    ]]>
+	</select>
+	<select id="getHandledApplicationsByCourse" parameterType="int" resultMap="applicationMap">
+		<![CDATA[
+	    	select * from course_application where semester_course_id = #{0} and status !='0'
+	    ]]>
+	</select>
+	<select id="getCourseApplicationById" parameterType="int" resultMap="applicationMap">
+		<![CDATA[
+	    	select * from course_application where id=#{0}
+	    ]]>
+	</select>
+	<update id="updateCourseApplication" parameterType="buaa.course.model.CourseApplication">
+		<![CDATA[
+	    	update course_application set team_id=#{teamId},semester_course_id=#{semesterCourseId},
+	    	apply_time=#{applyTime},status=#{status} where id = #{id}
+	    ]]>
+	</update>
 </mapper>

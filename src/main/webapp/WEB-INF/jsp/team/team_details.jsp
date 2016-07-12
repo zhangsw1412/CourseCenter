@@ -313,7 +313,7 @@
 							<a href="/semester/${semesterId}/team_courses/${team.id}" class="btn medium blue" ><i class="icon-signin"></i> <big>加入课程</big></a>&nbsp;&nbsp;&nbsp;
 							<c:if test="${team.applicable==true}"><a href="/team/changeStatus/${team.id}" class="btn medium red"><i class="icon-edit"></i> <big>关闭申请</big></a></c:if>
 							<c:if test="${team.applicable==false and team.maxNum>team.num}"><a href="/team/changeStatus/${team.id}" class="btn medium green"><i class="icon-edit"></i> <big>开放申请</big></a></c:if>
-							<%-- <a href="/team/dissolve/${team.id}" class="btn medium gray" ><i class="icon-trash"></i> <big>解散团队</big></a> --%>
+
 							</c:if>
 							<c:if test="${isInTeam==false and team.applicable==true and isApplied==false}"><a href="/team/applyToTeam/${team.id}" class="btn medium blue" ><i class="icon-signin"></i> <big>申请加入团队</big></a></c:if>
 						</div>

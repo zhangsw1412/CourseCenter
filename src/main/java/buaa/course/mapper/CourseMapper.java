@@ -18,4 +18,9 @@ public interface CourseMapper {
 	List<Course> getCoursesBySemesterIdAndTeacherId(int semesterId, int teacherId);
 	List<Course> getTeamAvaliableCourses(int semesterId);
 	CourseApplication getCourseApplicationByTeamId(int semesterCourseId, int teamId);
+	List<CourseApplication> getApplicationsByCourse(int id);
+	List<CourseApplication> getUnHandledApplicationsByCourse(int id);
+	List<CourseApplication> getHandledApplicationsByCourse(int id);
+	CourseApplication getCourseApplicationById(int applicationId);
+	int updateCourseApplication(CourseApplication application);
 }

@@ -60,7 +60,7 @@ public class TeamController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/team/team_details/{teamId}")
     public ModelAndView teamDetails(@PathVariable Integer teamId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	User user = checkUser(request, response);
+        User user = (User) request.getSession().getAttribute("user");
     	ModelAndView m = new ModelAndView("team/team_details");
         List<User> members = userService.getUsersByTeamId(teamId);
         boolean isInTeam = false;
@@ -144,6 +144,7 @@ public class TeamController {
         if(user.getNum()==teamService.getTeam(teamId).getLeaderId()&&isInTeam){
         	Team team = teamService.getTeam(teamId);
         	team.setLeaderId(studentNum);
+            team.setLeaderName(userService.getUserByNum(studentNum).getName());
         	teamService.updateTeam(team);
         }
         response.sendRedirect("/team/team_details/"+teamId);
@@ -229,6 +230,46 @@ public class TeamController {
             teamService.applyCourse(sc.getId(), teamId);
         }
         response.sendRedirect("/semester/"+semesterId+"/team_courses/"+teamId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/semester/{semesterId}/course/{courseId}/applications")
+    public ModelAndView courseApplications(HttpServletRequest request, HttpServletResponse response, @PathVariable("semesterId") Integer semesterId, @PathVariable("courseId") Integer courseId) throws IOException {
+        ModelAndView m = new ModelAndView("/team/course_applications");
+        SemesterCourse sc = courseService.getSemesterCourseBySemesterCourseId(semesterId, courseId);
+        if(sc != null){
+            m.addObject("unhandledApp", courseService.getUnHandledApplicationsByCourse(sc.getId()));
+            m.addObject("handledApp", courseService.getHandledApplicationsByCourse(sc.getId()));
+            Map<Long, Team> teams = new HashMap<>();
+            for(CourseApplication application : courseService.getApplicationsByCourse(sc.getId())){
+                teams.put(Long.valueOf(application.getTeamId()), teamService.getTeam(application.getTeamId()));
+            }
+            m.addObject("teams", teams);
+        }
+        return m;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value="/team/permitCourseApplication")
+    public void applyCourse(@RequestParam Integer applicationId,
+                            HttpServletRequest request, HttpServletResponse response) throws IOException {
+        CourseApplication application = courseService.getCourseApplicationById(applicationId);
+        application.setStatus(1);
+        courseService.updateCourseApplication(application);
+        Team team = teamService.getTeam(application.getTeamId());
+        SemesterCourse semesterCourse = courseService.getSemesterCourseBySemesterCourseId(application.getSemesterCourseId());
+        for(Integer studentId : teamService.getTeamMemberIds(team)){
+            CourseStudent cs = courseService.getCourseStudentByCourseAndStudent(semesterCourse.getId(), studentId);
+            if(cs != null && cs.getTeamId() == 0){
+                cs.setTeamId(team.getId());
+                courseService.updateCourseStudent(cs);
+            }else{
+                cs = new CourseStudent();
+                cs.setSemesterCourseId(semesterCourse.getId());
+                cs.setStudentId(studentId);
+                cs.setTeamId(team.getId());
+                courseService.createCourseStudent(cs);
+            }
+        }
+        response.sendRedirect("/semester/"+semesterCourse.getSemesterId()+"/course/"+semesterCourse.getCourseId()+"/applications");
     }
 
     private Map<Long,Long> getCourseStatusMap(int semesterId, List<Course> courses, int teamId) {

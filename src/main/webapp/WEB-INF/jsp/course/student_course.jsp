@@ -173,7 +173,9 @@
                         </div>
                     </a>
                 <br>
-
+                <c:if test="${sessionScope.user.type==1}">
+                    <a class="btn green" href="/semester/${sessionScope.semesterId}/course/${course.id}/applications">团队申请记录</a>
+                </c:if>
                 <!-- END PAGE CONTENT-->
 
             </div>

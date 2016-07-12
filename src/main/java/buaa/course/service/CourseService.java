@@ -162,4 +162,36 @@ public class CourseService {
     public CourseApplication getCourseApplicationByTeamId(int semesterCourseId, int teamId) {
         return courseMapper.getCourseApplicationByTeamId(semesterCourseId, teamId);
     }
+
+    public List<CourseApplication> getApplicationsByCourse(int id) {
+        return courseMapper.getApplicationsByCourse(id);
+    }
+
+    public List<CourseApplication> getUnHandledApplicationsByCourse(int id) {
+        return courseMapper.getUnHandledApplicationsByCourse(id);
+    }
+
+    public List<CourseApplication> getHandledApplicationsByCourse(int id) {
+        return courseMapper.getHandledApplicationsByCourse(id);
+    }
+
+    public CourseApplication getCourseApplicationById(int applicationId) {
+        return courseMapper.getCourseApplicationById(applicationId);
+    }
+
+    public int updateCourseApplication(CourseApplication application) {
+        return courseMapper.updateCourseApplication(application);
+    }
+
+    public CourseStudent getCourseStudentByCourseAndStudent(int semesterCourseId, int studentId) {
+        return courseStudentMapper.getCourseStudentByCourseAndStudent(semesterCourseId, studentId);
+    }
+
+    public int updateCourseStudent(CourseStudent cs) {
+        return courseStudentMapper.updateCourseStudent(cs);
+    }
+
+    public int createCourseStudent(CourseStudent cs) {
+        return courseStudentMapper.addCourseStudent(cs);
+    }
 }

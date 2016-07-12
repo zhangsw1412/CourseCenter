@@ -161,7 +161,7 @@
 							<div class="portlet-body">
 								<a  class="btn blue" href="#form_modal2"  data-toggle="modal"><i class="icon-group"></i>&nbsp;创建团队</a> 
 								<div style="padding:5px"></div>
-								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+								<table class="table table-striped table-hover table-bordered" >
 
 									<thead>
 
@@ -221,7 +221,7 @@
 							</div>
 
 							<div class="portlet-body">
-								<table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+								<table class="table table-striped table-hover table-bordered">
 
 									<thead>
 										<tr>
